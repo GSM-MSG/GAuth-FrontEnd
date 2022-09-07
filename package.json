@@ -1,5 +1,5 @@
 {
-  "name": "k",
+  "name": "Gauth-Frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/babel-plugin": "^11.10.2",
     "@emotion/styled": "^11.10.4",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-wavify": "^1.6.1"
   },
   "devDependencies": {
     "@types/node": "18.7.14",

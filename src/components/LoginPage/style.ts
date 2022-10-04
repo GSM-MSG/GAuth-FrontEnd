@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Wave from "react-wavify";
 
 export const Layer = styled.div`
     width: 100vw;
@@ -7,21 +8,42 @@ export const Layer = styled.div`
     left: 0;
     display: flex;
 
-    div{
-        overflow: hidden;
+    > div{
+        width: 100%;
+        height: 100vh;
     }
 `
 
-export const SideWave = styled.img`
-    height: 100vh;
-    @media (max-width: 1800px){
-        margin-left: calc(-1800px + 100vw);
+export const SideWave = styled(Wave)`
+    --width: 100%;
+    position: fixed;
+    transform: rotate(90deg);
+    transform-origin: left bottom;
+    
+    @media (max-width: 1800px) {
+        left: calc(100vw - 1800px);
     }
+
+    &:nth-of-type(1){
+        top: calc((var(--width) + 0px)* -1);
+        height: calc(var(--width) + 0px);
+    }
+    &:nth-of-type(2){
+        top: calc((var(--width) + 0px)* -1);
+        height: calc(var(--width) + 0px);
+    }
+    &:nth-of-type(3){
+        top: calc((var(--width) + 0px)* -1);
+        height: calc(var(--width) + 0px);
+    }
+`
+
+export const Img = styled.img`
+    height: 475px;
 `
 
 export const Title = styled.div`
     position: relative;
-    bottom: 100vh;
     color: #fff;
     text-align: center;
     width: 70%;
@@ -49,11 +71,12 @@ export const Title = styled.div`
 `
 
 export const LoginWrapper = styled.div`
-    width: calc(-909px + 1770px);
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 `
 
 export const LoginContainer = styled.div`
@@ -66,19 +89,17 @@ export const LoginContainer = styled.div`
     h1{
         text-align: center;
         font-size: 60px;
+        font-weight: 100;
+        letter-spacing: 5px;
         margin: 0;
-        color: #24F0B9;
+        color: #2E80CC;
     }
 `
 
 export const InputContainer = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 65px;
-
-    small{
-        color: #929292;
-    }
+    gap: 40px;
 
     input {
        border: none;
@@ -88,6 +109,7 @@ export const InputContainer = styled.div`
        font-size: 27px;
        font-weight: 400;
        outline: none;
+       background-color: transparent;
     }
 
     h2 {
@@ -102,8 +124,29 @@ export const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
+    position: relative;
 `
+
+export const Email = styled.div`
+    position: absolute;
+    top: -5px;
+    left: ${({ left }: { left: number }) => { return left + 40 + "px" }};
+    font-size: 27px;
+`
+
+export const InputName = styled.h3`
+    color: #929292;
+    position: absolute;
+    margin: 0;
+    transition: .5s;
+    ${({ being }: { being: boolean }) => {
+        if (being) {
+            return "transform: translateY(-25px); font-size: 15px;"
+        }
+    }};
+`
+
 export const ButtonContainer = styled.div`
     width: 80%;
     margin: 0 auto;
@@ -121,7 +164,7 @@ export const Submit = styled.button`
     width: 100%;
     height: 60px;
     color: #fff;
-    background: linear-gradient(91.68deg, #24F0B9 17.19%, #24F0EC 100%);
+    background: #2E80CC;
     font-weight: 590;
     font-size: 27px;
     line-height: 32px;
@@ -130,6 +173,7 @@ export const Submit = styled.button`
     border-radius: 30px;
     margin-bottom: 10px;
     cursor: pointer;
+    
 
     &:active{
         box-shadow: rgba(50, 50, 93, 0.15) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;

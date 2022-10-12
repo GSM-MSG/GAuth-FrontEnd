@@ -110,6 +110,7 @@ export const InputContainer = styled.div`
        font-weight: 400;
        outline: none;
        background-color: transparent;
+       z-index: 10;
     }
 
     h2 {

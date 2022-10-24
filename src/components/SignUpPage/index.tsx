@@ -16,10 +16,13 @@ export default function SignUpPage() {
 			-signUpRef.current.offsetWidth + 'px';
 		waveRef.current.children[1].style.left =
 			-signUpRef.current.offsetWidth + 'px';
+		waveRef.current.children[2].style.left =
+			-signUpRef.current.offsetWidth + 'px';
 		window.addEventListener('resize', () => {
 			const width = signUpRef.current.offsetWidth;
 			waveRef.current.children[0].style.left = -width + 'px';
 			waveRef.current.children[1].style.left = -width + 'px';
+			waveRef.current.children[2].style.left = -width + 'px';
 		});
 	}, []);
 
@@ -59,7 +62,23 @@ export default function SignUpPage() {
 							</linearGradient>
 						</defs>
 					</S.SideWave>
-					<S.Title>
+					<S.SideWave
+						fill="url(#gradient3)"
+						options={{
+							height: 60,
+							amplitude: 150,
+							speed: 0.165,
+							points: 2,
+						}}
+					>
+						<defs>
+							<linearGradient id="gradient3" gradientTransform="rotate(180)">
+								<stop offset="0%" stopColor="#000000" />
+								<stop offset="100%" stopColor="#2E80CC" />
+							</linearGradient>
+						</defs>
+					</S.SideWave>
+					{/* <S.Title>
 						<div>
 							<S.WaterDrop>
 								<span></span>
@@ -84,7 +103,7 @@ export default function SignUpPage() {
 							</S.WaterDrop>
 							<SVG.Human2 />
 						</div>
-					</S.Title>
+					</S.Title> */}
 				</S.WaveWrapper>
 				<S.LoginWrapper ref={signUpRef}>
 					<S.LoginContainer>

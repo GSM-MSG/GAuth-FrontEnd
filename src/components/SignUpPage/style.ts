@@ -71,9 +71,14 @@ export const Title = styled.div`
 			height: 7.5px;
 			transform: translateY(-35px) translateX(-5px);
 		}
-		60% {
+		55% {
 			opacity: 1;
-			transform: translateY(-55px) translateX(10px);
+			transform: translateY(-55px) translateX(15px);
+			width: 15px;
+			height: 15px;
+		}
+		75% {
+			transform: translateY(-55px) translateX(15px);
 			width: 15px;
 			height: 15px;
 		}

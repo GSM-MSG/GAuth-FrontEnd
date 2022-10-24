@@ -1,31 +1,19 @@
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import * as S from "./style"
 import { API } from "../../lib/API";
 import SideWave from "./SideWave";
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { ViewWidth } from '../../Atom/Atoms';
 
 
 export default function LoginPage() {
-    const waveRef = useRef<any>();
     const [email, setEmail] = useState<string>("");
     const [pw, setPw] = useState<string>("");
     const [emailCheck, setEmailCheck] = useState<boolean>(false);
     const [pwCheck, setPwCheck] = useState<boolean>(false);
     const [error, setError] = useState<number>(200);
-    const [viewWidth, setViewWidth] = useRecoilState(ViewWidth);
-
-    useEffect(() => {
-        window.addEventListener('resize', (e: any) => {
-            setViewWidth(e.target.innerWidth);
-            if (viewWidth >= 900) {
-                waveRef.current.children[0].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
-                waveRef.current.children[1].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
-                waveRef.current.children[2].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
-            }
-        })
-    }, [viewWidth])
+    const viewWidth = useRecoilValue(ViewWidth);
 
     const SignUp = async () => {
         try {
@@ -49,19 +37,19 @@ export default function LoginPage() {
     }
 
     return (
-        <S.Layer ref={waveRef}>
+        <S.Layer>
             <SideWave />
             {
                 viewWidth >= 900 &&
-                <S.SideWaveContainer>
-                    <S.Title>
+                <S.TitleWrapper>
+                    <S.TitleBox>
                         <S.Img src="/svg/LoginLogo.svg" />
                         <div>
                             <h1>GAUTH</h1>
                             <h2>GSM 통합 계정관리 시스템</h2>
                         </div>
-                    </S.Title>
-                </S.SideWaveContainer>
+                    </S.TitleBox>
+                </S.TitleWrapper>
             }
             <S.LoginWrapper>
                 <S.LoginContainer>
@@ -69,7 +57,7 @@ export default function LoginPage() {
                     <S.InputContainer>
                         <S.InputWrapper>
                             <S.InputName being={emailCheck}>{error === 400 ? "이메일이 일치하지 않습니다" : "이메일을 입력하세요"}</S.InputName>
-                            <input name="email" type="text" maxLength={6} value={email}
+                            <input name="email" type="text" maxLength={6} value={email} autoComplete="off"
                                 onChange={(e: any) => { if (!(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value))) setEmail(e.target.value) }}
                                 onFocus={() => { setEmailCheck(true) }}
                                 onBlur={() => { !email && setEmailCheck(false) }}

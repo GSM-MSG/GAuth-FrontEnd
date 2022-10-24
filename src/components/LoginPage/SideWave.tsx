@@ -1,14 +1,29 @@
 import * as S from './style'
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function SideWave() {
 
-    const viewWidth = useRecoilValue(ViewWidth);
+    const waveRef = useRef<any>();
+    const [viewWidth, setViewWidth] = useRecoilState(ViewWidth);
+
+    useEffect(() => {
+        if (viewWidth === 0) {
+            setViewWidth(window.innerWidth);
+        }
+        window.addEventListener('resize', (e: any) => {
+            setViewWidth(e.target.innerWidth);
+            if (viewWidth >= 900) {
+                waveRef.current.children[0].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
+                waveRef.current.children[1].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
+                waveRef.current.children[2].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
+            }
+        })
+    }, [viewWidth])
 
     return (
-        <>
+        <S.SideWaveBox ref={waveRef}>
             <S.SideWave fill="url(#gradient1)" options={{
                 height: viewWidth > 1200 ? 10 : 50,
                 amplitude: 150,
@@ -48,6 +63,11 @@ export default function SideWave() {
                     </linearGradient>
                 </defs>
             </S.SideWave>
-        </>
+
+            <S.Bubble delay={1.5} />
+            <S.Bubble delay={2} />
+            <S.Bubble delay={2.8} />
+            <S.Bubble delay={3.6} />
+        </S.SideWaveBox>
     )
 }

@@ -192,7 +192,7 @@ export default function SignUpPage() {
 							</S.WaterDrop>
 							<img src="/svg/Human2.svg" />
 						</div>
-					</S.Title>
+					</S.Title> */}
 				</S.WaveWrapper>
 				<S.SignUpWrapper ref={signUpRef}>
 					<S.Container>

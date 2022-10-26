@@ -33,7 +33,7 @@ export default function SignUpPage() {
 					<S.SideWave
 						fill="url(#gradient1)"
 						options={{
-							height: 10,
+							height: 30,
 							amplitude: 150,
 							speed: 0.185,
 							points: 2,
@@ -49,7 +49,7 @@ export default function SignUpPage() {
 					<S.SideWave
 						fill="url(#gradient2)"
 						options={{
-							height: 30,
+							height: 60,
 							amplitude: 150,
 							speed: 0.17,
 							points: 2,
@@ -65,7 +65,7 @@ export default function SignUpPage() {
 					<S.SideWave
 						fill="url(#gradient3)"
 						options={{
-							height: 60,
+							height: 90,
 							amplitude: 150,
 							speed: 0.165,
 							points: 2,
@@ -73,14 +73,14 @@ export default function SignUpPage() {
 					>
 						<defs>
 							<linearGradient id="gradient3" gradientTransform="rotate(180)">
-								<stop offset="0%" stopColor="#000000" />
-								<stop offset="100%" stopColor="#2E80CC" />
+								<stop offset="0%" stopColor="#2E80CC" />
+								<stop offset="100%" stopColor="#7EB2E2" />
 							</linearGradient>
 						</defs>
 					</S.SideWave>
-					{/* <S.Title>
+					<S.Title>
 						<div>
-							<S.WaterDrop>
+							<S.WaterDrop top="100px" left="300px" rotate="30deg">
 								<span></span>
 								<span></span>
 								<span></span>
@@ -88,7 +88,7 @@ export default function SignUpPage() {
 							<SVG.Human1 />
 						</div>
 						<div>
-							<S.WaterDrop>
+							<S.WaterDrop top="50px" left="-20px" rotate="-50deg">
 								<span></span>
 								<span></span>
 								<span></span>
@@ -96,17 +96,17 @@ export default function SignUpPage() {
 							<SVG.SmallPhone />
 						</div>
 						<div>
-							<S.WaterDrop>
+							<S.WaterDrop top="120px" left="250px" rotate="-50deg">
 								<span></span>
 								<span></span>
 								<span></span>
 							</S.WaterDrop>
 							<SVG.Human2 />
 						</div>
-					</S.Title> */}
+					</S.Title>
 				</S.WaveWrapper>
-				<S.LoginWrapper ref={signUpRef}>
-					<S.LoginContainer>
+				<S.SignUpWrapper ref={signUpRef}>
+					<S.SignUpContainer>
 						<h1>SIGNUP</h1>
 						<S.InputContainer>
 							<S.InputWrapper>
@@ -143,16 +143,21 @@ export default function SignUpPage() {
 									}}
 								/>
 							</S.InputWrapper>
+							<S.PrivacyConsent>
+								<input type="checkbox" />
+								<p>개인정보 수집 및 이용에 대한 동의</p>
+								<Link href="/login">자세히 보기</Link>
+							</S.PrivacyConsent>
 						</S.InputContainer>
 						<S.ButtonContainer>
 							<S.Submit>회원가입</S.Submit>
 							<div>
-								<Link href="/register">회원가입</Link> |{' '}
+								<Link href="/register">로그인</Link> |{' '}
 								<Link href="/find">비밀번호 찾기</Link>
 							</div>
 						</S.ButtonContainer>
-					</S.LoginContainer>
-				</S.LoginWrapper>
+					</S.SignUpContainer>
+				</S.SignUpWrapper>
 			</S.Layer>
 		</>
 	);

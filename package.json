@@ -13,10 +13,12 @@
 		"@emotion/css": "^11.10.0",
 		"@emotion/react": "^11.10.4",
 		"@emotion/styled": "^11.10.4",
+		"axios": "^0.27.2",
 		"next": "12.2.5",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
-		"react-wavify": "^1.6.1"
+		"react-wavify": "^1.6.1",
+		"recoil": "^0.7.6"
 	},
 	"devDependencies": {
 		"@types/node": "18.7.14",

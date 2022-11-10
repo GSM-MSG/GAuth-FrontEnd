@@ -173,7 +173,7 @@ export default function SignUpPage() {
 								<span></span>
 								<span></span>
 							</S.WaterDrop>
-							<img src="/svg/Human1.svg" />
+							<S.IMG src="/svg/Human1.svg" />
 						</div>
 						<div>
 							<S.WaterDrop top="50px" left="-20px" rotate="-50deg">
@@ -182,7 +182,7 @@ export default function SignUpPage() {
 								<span></span>
 							</S.WaterDrop>
 
-							<img src="/svg/SmallPhone.svg" />
+							<S.IMG src="/svg/SmallPhone.svg" />
 						</div>
 						<div>
 							<S.WaterDrop top="120px" left="250px" rotate="-50deg">
@@ -190,7 +190,7 @@ export default function SignUpPage() {
 								<span></span>
 								<span></span>
 							</S.WaterDrop>
-							<img src="/svg/Human2.svg" />
+							<S.IMG src="/svg/Human2.svg" />
 						</div>
 					</S.Title>
 				</S.WaveWrapper>

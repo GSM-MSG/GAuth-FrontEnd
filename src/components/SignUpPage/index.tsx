@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
+import * as SVG from '../../SVG';
+import AuthenticationCheck from '../ AuthenticationCheck';
 
 export default function SignUpPage() {
 	const waveRef = useRef<any>();
@@ -159,7 +161,7 @@ export default function SignUpPage() {
 					</S.SignUpContainer>
 				</S.SignUpWrapper>
 			</S.Layer>
-			{/* <AuthenticationCheck /> */}
+			<AuthenticationCheck />
 		</>
 	);
 }

@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import AuthenticationCheck from '../ AuthenticationCheck';
+import { API } from '../../lib/API';
+import PrivacyConsent from './ PrivacyConsent';
 import * as S from './style';
 
 export default function SignUpPage() {
@@ -24,6 +27,19 @@ export default function SignUpPage() {
 			waveRef.current.children[2].style.left = -width + 'px';
 		});
 	}, []);
+
+	const SignUp = async () => {
+		try {
+			await API.post('/signup', {
+				email: email + '@gsm.hs,kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
+				password: pw, // 8자 이상 ~ 72자 이하, 공백 미허용
+			});
+			alert('성공');
+			window.location.replace('/login');
+		} catch (e: any) {
+			alert('다시 시도해주세요');
+		}
+	};
 
 	return (
 		<>
@@ -84,7 +100,7 @@ export default function SignUpPage() {
 								<span></span>
 								<span></span>
 							</S.WaterDrop>
-							<img src="/svg/Human1.svg" />
+							<S.IMG src="/svg/Human1.svg" />
 						</div>
 						<div>
 							<S.WaterDrop top="50px" left="-20px" rotate="-50deg">
@@ -93,7 +109,7 @@ export default function SignUpPage() {
 								<span></span>
 							</S.WaterDrop>
 
-							<img src="/svg/SmallPhone.svg" />
+							<S.IMG src="/svg/SmallPhone.svg" />
 						</div>
 						<div>
 							<S.WaterDrop top="120px" left="250px" rotate="-50deg">
@@ -101,7 +117,7 @@ export default function SignUpPage() {
 								<span></span>
 								<span></span>
 							</S.WaterDrop>
-							<img src="/svg/Human2.svg" />
+							<S.IMG src="/svg/Human2.svg" />
 						</div>
 					</S.Title>
 				</S.WaveWrapper>
@@ -116,7 +132,11 @@ export default function SignUpPage() {
 									type="text"
 									maxLength={6}
 									value={email}
-									onChange={(e: any) => setEmail(e.target.value)}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										!/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value)
+											? setEmail(e.target.value)
+											: '';
+									}}
 									onFocus={() => {
 										setEmailCheck(true);
 									}}
@@ -133,7 +153,6 @@ export default function SignUpPage() {
 								<input
 									name="pw"
 									type="password"
-									maxLength={20}
 									onChange={(e: any) => setPw(e.target.value)}
 									onFocus={() => {
 										setPwCheck(true);
@@ -150,15 +169,27 @@ export default function SignUpPage() {
 							</S.PrivacyConsent>
 						</S.InputContainer>
 						<S.ButtonContainer>
-							<S.Submit>회원가입</S.Submit>
+							<S.Submit
+								onClick={() => {
+									if (pw.length < 8 || pw.length > 72) {
+										alert('암호의 길이는 8자 이상 72자 이하 입니다.');
+									} else if (!email.length || !pw.length) {
+										alert('공백은 허용하지 않습니다.');
+									}
+									console.log('회원가입 성공');
+								}}
+							>
+								회원가입
+							</S.Submit>
 							<div>
-								<Link href="/register">로그인</Link> |{' '}
+								<Link href="/login">로그인</Link> |{' '}
 								<Link href="/find">비밀번호 찾기</Link>
 							</div>
 						</S.ButtonContainer>
 					</S.SignUpContainer>
 				</S.SignUpWrapper>
 			</S.Layer>
+			<PrivacyConsent />
 			{/* <AuthenticationCheck /> */}
 		</>
 	);

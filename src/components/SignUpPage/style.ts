@@ -282,3 +282,7 @@ export const PrivacyConsent = styled.div`
 		text-decoration: underline #929292;
 	}
 `;
+
+export const IMG = styled.img``;
+
+// export const PrivacyConsent = styled.div``;

@@ -12,6 +12,7 @@ export default function SignUpPage() {
 	const [pw, setPw] = useState<string>('');
 	const [emailCheck, setEmailCheck] = useState<boolean>(false);
 	const [pwCheck, setPwCheck] = useState<boolean>(false);
+	const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
 
 	useEffect(() => {
 		waveRef.current.children[0].style.left =
@@ -165,7 +166,7 @@ export default function SignUpPage() {
 							<S.PrivacyConsent>
 								<input type="checkbox" />
 								<p>개인정보 수집 및 이용에 대한 동의</p>
-								<Link href="/login">자세히 보기</Link>
+								<a onClick={() => setPrivacyConsent(true)}>자세히 보기</a>
 							</S.PrivacyConsent>
 						</S.InputContainer>
 						<S.ButtonContainer>
@@ -189,7 +190,9 @@ export default function SignUpPage() {
 					</S.SignUpContainer>
 				</S.SignUpWrapper>
 			</S.Layer>
-			<PrivacyConsent />
+			{privacyConsent && (
+				<PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
+			)}
 			{/* <AuthenticationCheck /> */}
 		</>
 	);

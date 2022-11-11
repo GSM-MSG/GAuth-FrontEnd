@@ -284,5 +284,3 @@ export const PrivacyConsent = styled.div`
 `;
 
 export const IMG = styled.img``;
-
-// export const PrivacyConsent = styled.div``;

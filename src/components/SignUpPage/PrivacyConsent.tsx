@@ -27,7 +27,6 @@ export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
 		box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
 		padding: 0 20px 0 20px;
 		overflow: scroll;
-
 		h1 {
 			margin-top: 50px;
 		}

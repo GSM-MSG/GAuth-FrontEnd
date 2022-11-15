@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import AuthenticationCheck from '../ AuthenticationCheck';
 import { API } from '../../lib/API';
-import PrivacyConsent from './ PrivacyConsent';
+import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 
 export default function SignUpPage() {
@@ -134,7 +133,7 @@ export default function SignUpPage() {
 									maxLength={6}
 									value={email}
 									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-										!/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value)
+										!/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|\s/g.test(e.target.value)
 											? setEmail(e.target.value)
 											: '';
 									}}
@@ -172,12 +171,9 @@ export default function SignUpPage() {
 						<S.ButtonContainer>
 							<S.Submit
 								onClick={() => {
-									if (pw.length < 8 || pw.length > 72) {
+									!/^.{8,72}$/.test(pw) &&
 										alert('암호의 길이는 8자 이상 72자 이하 입니다.');
-									} else if (!email.length || !pw.length) {
-										alert('공백은 허용하지 않습니다.');
-									}
-									console.log('회원가입 성공');
+									/^.{0}$/.test(email) && alert('비밀번호');
 								}}
 							>
 								회원가입

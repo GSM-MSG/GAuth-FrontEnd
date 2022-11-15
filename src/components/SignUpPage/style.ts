@@ -23,6 +23,9 @@ export const WaveWrapper = styled.div`
 	width: 200vw;
 	min-height: 100vh;
 	background: #d1e4f5;
+	@media (max-width: 1200px) {
+		position: absolute;
+	}
 `;
 
 export const SideWave = styled(Wave)`
@@ -30,6 +33,11 @@ export const SideWave = styled(Wave)`
 	bottom: 0;
 	transform-origin: bottom;
 	height: 950px;
+	@media (max-width: 1200px) {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
 `;
 
 export const Title = styled.div`
@@ -54,6 +62,9 @@ export const Title = styled.div`
 			right: 0;
 			animation: humanAnimation 4s linear infinite;
 			animation-delay: 2s;
+			@media (max-width: 1477px) {
+				display: none;
+			}
 		}
 	}
 	@keyframes humanAnimation {
@@ -64,6 +75,9 @@ export const Title = styled.div`
 		50% {
 			transform: translateY(20px);
 		}
+	}
+	@media (max-width: 1200px) {
+		display: none;
 	}
 `;
 
@@ -145,6 +159,11 @@ export const SignUpContainer = styled.div`
 		margin: 0;
 		color: #2e80cc;
 	}
+	@media (max-width: 1200px) {
+		h1 {
+			color: #fff;
+		}
+	}
 `;
 
 export const InputContainer = styled.div`
@@ -176,6 +195,11 @@ export const InputWrapper = styled.div`
 		outline: none;
 		background-color: transparent;
 	}
+	@media (max-width: 1200px) {
+		input {
+			color: #fff;
+		}
+	}
 `;
 
 export const Email = styled.div`
@@ -185,6 +209,9 @@ export const Email = styled.div`
 		return left + 40 + 'px';
 	}};
 	font-size: 27px;
+	@media (max-width: 1200px) {
+		color: #fff;
+	}
 `;
 
 export const InputName = styled.h3`
@@ -197,6 +224,9 @@ export const InputName = styled.h3`
 			return 'transform: translateY(-25px); font-size: 15px;';
 		}
 	}};
+	@media (max-width: 1200px) {
+		color: #fff;
+	}
 `;
 
 export const ButtonContainer = styled.div`
@@ -209,6 +239,9 @@ export const ButtonContainer = styled.div`
 
 	div {
 		color: #929292;
+		@media (max-width: 1200px) {
+			color: #fff;
+		}
 	}
 `;
 
@@ -275,11 +308,18 @@ export const PrivacyConsent = styled.div`
 		margin: 0;
 		font-size: 15px;
 		color: #5e5e5e;
+		@media (max-width: 1200px) {
+			color: #fff;
+		}
 	}
 	a {
 		font-size: 13px;
 		color: #929292;
 		text-decoration: underline #929292;
+		@media (max-width: 1200px) {
+			color: #fff;
+			text-decoration: underline #fff;
+		}
 	}
 `;
 

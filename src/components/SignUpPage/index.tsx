@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import AuthenticationCheck from '../ AuthenticationCheck';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
@@ -12,6 +13,7 @@ export default function SignUpPage() {
 	const [emailCheck, setEmailCheck] = useState<boolean>(false);
 	const [pwCheck, setPwCheck] = useState<boolean>(false);
 	const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
+	const [authCheck, setAuthCheck] = useState(false);
 
 	useEffect(() => {
 		waveRef.current.children[0].style.left =
@@ -171,9 +173,15 @@ export default function SignUpPage() {
 						<S.ButtonContainer>
 							<S.Submit
 								onClick={() => {
-									!/^.{8,72}$/.test(pw) &&
+									if (/^.{0}$/.test(email)) {
+										alert('이메일 입력이 잘못 되었습니다.');
+										document.getElementsByName('email')[0].focus();
+									} else if (!/^.{8,72}$/.test(pw)) {
 										alert('암호의 길이는 8자 이상 72자 이하 입니다.');
-									/^.{0}$/.test(email) && alert('비밀번호');
+										document.getElementsByName('pw')[0].focus();
+									} else if (privacyConsent) {
+										alert('개인정보 수집 및 이용에 대해 동의해 주십시오.');
+									} else setAuthCheck(true);
 								}}
 							>
 								회원가입
@@ -189,7 +197,12 @@ export default function SignUpPage() {
 			{privacyConsent && (
 				<PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
 			)}
-			{/* <AuthenticationCheck /> */}
+			{authCheck && (
+				<AuthenticationCheck
+					authCheck={authCheck}
+					setAuthCheck={setAuthCheck}
+				/>
+			)}
 		</>
 	);
 }

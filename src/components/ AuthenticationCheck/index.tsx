@@ -1,27 +1,9 @@
 import * as S from './style';
 import * as SVG from '../../SVG';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function AuthenticationCheck({
-	authCheck,
-	setAuthCheck,
-}: {
-	authCheck: boolean;
-	setAuthCheck: any;
-}) {
-	//더미데이터
-	const [data, setDate] = useState(false);
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		console.log('로딩시작', data);
-		setTimeout(() => {
-			setDate((prev) => {
-				console.log('로딩끈', !prev);
-				return !prev;
-			});
-		}, 2000);
-	}, []);
+export default function AuthenticationCheck({ data }: any) {
+	const [check, setCheck] = useState(false);
 	const BeforeConsent = () => {
 		return (
 			<>
@@ -30,26 +12,19 @@ export default function AuthenticationCheck({
 					전송된 메일에서 <span>인증 버튼</span>을 눌러 인증을 완료해주세요
 				</p>
 				<SVG.Mail></SVG.Mail>
-				<button
-					type="button"
-					onClick={() => {
-						data
-							? () => {
-									setLoading((prev) => !prev);
-									setInterval(() => {
-										window.location.replace('/login');
-									}, 2000);
-							  }
-							: console.log(data);
-					}}
-				>
-					확인
-				</button>
+				{data.data && (
+					<button type="button" onClick={() => setCheck(true)}>
+						확인
+					</button>
+				)}
 			</>
 		);
 	};
 
 	const AfterConsent = () => {
+		setTimeout(() => {
+			window.location.replace('/login');
+		}, 2500);
 		return (
 			<>
 				<h2>
@@ -61,9 +36,18 @@ export default function AuthenticationCheck({
 			</>
 		);
 	};
+
 	return (
 		<S.Layer>
-			<S.Wrapper>{loading ? <BeforeConsent /> : <AfterConsent />}</S.Wrapper>
+			<S.Wrapper check={check}>
+				{check ? (
+					<AfterConsent />
+				) : data.error ? (
+					<h1>Opps</h1>
+				) : (
+					<BeforeConsent />
+				)}
+			</S.Wrapper>
 		</S.Layer>
 	);
 }

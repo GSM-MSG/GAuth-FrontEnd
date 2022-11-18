@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+type WrapperType = {
+	check: boolean;
+};
+
 export const Layer = styled.div`
 	width: 100%;
 	min-height: 100vh;
@@ -13,9 +17,9 @@ export const Layer = styled.div`
 	z-index: 100;
 `;
 
-export const Wrapper = styled.div`
-	width: 950px;
-	height: 575px;
+export const Wrapper = styled.div<WrapperType>`
+	width: ${(e) => (e.check ? '607px' : '950px')};
+	height: ${(e) => (e.check ? '367px' : '575px')};
 	background: #fafafa;
 	display: flex;
 	justify-content: space-around;

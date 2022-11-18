@@ -13,7 +13,6 @@ export default function SignUpPage() {
 	const [emailCheck, setEmailCheck] = useState<boolean>(false);
 	const [pwCheck, setPwCheck] = useState<boolean>(false);
 	const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
-	const [authCheck, setAuthCheck] = useState(false);
 
 	useEffect(() => {
 		waveRef.current.children[0].style.left =
@@ -40,6 +39,28 @@ export default function SignUpPage() {
 			window.location.replace('/login');
 		} catch (e: any) {
 			alert('다시 시도해주세요');
+		}
+	};
+
+	//더미
+	const [data, setData] = useState({
+		loading: false,
+		data: '',
+		error: '',
+	});
+
+	const ExSignUp = async () => {
+		try {
+			setData((prev) => {
+				return { ...prev, loading: true };
+			});
+			setTimeout(() => {
+				setData((prev) => {
+					return { ...prev, data: 'ok' };
+				});
+			}, 5000);
+		} catch (e: any) {
+			setData({ ...data, error: 'err' });
 		}
 	};
 
@@ -181,7 +202,7 @@ export default function SignUpPage() {
 										document.getElementsByName('pw')[0].focus();
 									} else if (privacyConsent) {
 										alert('개인정보 수집 및 이용에 대해 동의해 주십시오.');
-									} else setAuthCheck(true);
+									} else ExSignUp();
 								}}
 							>
 								회원가입
@@ -197,12 +218,7 @@ export default function SignUpPage() {
 			{privacyConsent && (
 				<PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
 			)}
-			{authCheck && (
-				<AuthenticationCheck
-					authCheck={authCheck}
-					setAuthCheck={setAuthCheck}
-				/>
-			)}
+			{data.loading && <AuthenticationCheck data={data} />}
 		</>
 	);
 }

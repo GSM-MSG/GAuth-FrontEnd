@@ -6,21 +6,18 @@ type WaterDrop = {
 	left: string;
 	rotate: string;
 };
-
 export const Layer = styled.div`
 	width: 100vw;
 	height: 100vh;
-	top: 0;
-	left: 0;
 	display: flex;
-
+	background: #f7f8fc;
 	> div {
 		height: 100vh;
 	}
 `;
 
 export const WaveWrapper = styled.div`
-	width: 200vw;
+	width: 100%;
 	min-height: 100vh;
 	background: #d1e4f5;
 	@media (max-width: 1200px) {
@@ -29,15 +26,11 @@ export const WaveWrapper = styled.div`
 `;
 
 export const SideWave = styled(Wave)`
+	width: 100%;
 	position: fixed;
 	bottom: 0;
 	transform-origin: bottom;
 	height: 950px;
-	@media (max-width: 1200px) {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
 `;
 
 export const Title = styled.div`
@@ -47,17 +40,17 @@ export const Title = styled.div`
 	> div {
 		position: absolute;
 		display: flex;
-		:nth-child(1) {
+		:nth-of-type(1) {
 			top: 220px;
 			animation: humanAnimation 4s linear infinite;
 		}
-		:nth-child(2) {
+		:nth-of-type(2) {
 			top: 250px;
 			left: 450px;
 			animation: humanAnimation 4s linear infinite;
 			animation-delay: 1s;
 		}
-		:nth-child(3) {
+		:nth-of-type(3) {
 			bottom: 0;
 			right: 0;
 			animation: humanAnimation 4s linear infinite;
@@ -94,13 +87,13 @@ export const WaterDrop = styled.div<WaterDrop>`
 		opacity: 0;
 		background: white;
 		animation: Air 5s linear infinite;
-		:nth-child(1) {
+		:nth-of-type(1) {
 			animation-delay: 2s;
 		}
-		:nth-child(2) {
+		:nth-of-type(2) {
 			animation-delay: 3s;
 		}
-		:nth-child(3) {
+		:nth-of-type(3) {
 			animation-delay: 4s;
 		}
 	}
@@ -136,21 +129,33 @@ export const WaterDrop = styled.div<WaterDrop>`
 `;
 
 export const SignUpWrapper = styled.div`
-	width: 100%;
+	width: 60vw;
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 10;
+	@media (max-width: 1200px) {
+		width: 100%;
+	}
+`;
+
+export const Container = styled.div`
+	width: 425px;
+	height: 545px;
+	overflow: hidden;
 `;
 
 export const SignUpContainer = styled.div`
-	width: 425px;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	gap: 80px;
 	justify-content: center;
-
+	align-items: center;
+	transition: 0.5s;
+	transform: ${({ changeForm }: { changeForm: boolean }) =>
+		changeForm ? 'translateY(-100%)' : 'translateY(0%)'};
 	h1 {
 		text-align: center;
 		font-size: 60px;
@@ -304,6 +309,22 @@ export const PrivacyConsent = styled.div`
 			}
 		}
 	}
+	@media (max-width: 1200px) {
+		input[type='checkbox'] {
+			::before {
+				border: 2px solid #fff;
+			}
+			:checked {
+				::before {
+					border: 2px solid #fff;
+				}
+				::after {
+					border-left: 1px solid #fff;
+					border-bottom: 1px solid #fff;
+				}
+			}
+		}
+	}
 	p {
 		margin: 0;
 		font-size: 15px;
@@ -324,3 +345,85 @@ export const PrivacyConsent = styled.div`
 `;
 
 export const IMG = styled.img``;
+
+export const UpLoadProfileContainter = styled.div`
+	position: relative;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 100px;
+	transform: translateY(0px);
+
+	@keyframes profileMountAnimation {
+		0% {
+			transform: translateY(-800px);
+		}
+		100% {
+			transform: translateY(0px);
+		}
+	}
+	@keyframes profileUnmountAnimation {
+		0% {
+			transform: translateY(0px);
+		}
+		100% {
+			transform: translateY(-800px);
+		}
+	}
+`;
+
+export const ProfileSVGWrapper = styled.div`
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	svg {
+		cursor: pointer;
+		:nth-of-type(2) {
+			position: absolute;
+			top: 130px;
+			left: 130px;
+			:hover {
+				path {
+					fill: #868e96;
+				}
+			}
+		}
+	}
+`;
+
+export const ProfileBtnWrapper = styled.div`
+	text-align: center;
+	color: #929292;
+	@media (max-width: 1200px) {
+		color: #fff;
+	}
+	div {
+		display: flex;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+`;
+
+export const ChangeBtn = styled.button`
+	font-family: 'Pretendard';
+	font-size: 27px;
+	font-weight: 600;
+	text-align: center;
+	background: none;
+	border-radius: 10px;
+	cursor: pointer;
+	line-height: 32px;
+	${({ position }: { position: string }) =>
+		`
+			border-top-${position}-radius: 100px;
+			border-bottom-${position}-radius: 100px;
+			color:${position == 'left' ? '#A8CBEB' : '#FFFFFF'};
+			background:${position == 'right' && '#5499D9'};
+			`};
+	border: 2px solid #5499d9;
+	width: 148px;
+	height: 60px;
+`;

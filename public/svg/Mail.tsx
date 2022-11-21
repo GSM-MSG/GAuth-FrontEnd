@@ -1,4 +1,6 @@
-<svg
+export function Mail() {
+	return (
+		<svg
 			width="215"
 			height="175"
 			viewBox="0 0 215 175"
@@ -113,3 +115,5 @@
 				</filter>
 			</defs>
 		</svg>
+	);
+}

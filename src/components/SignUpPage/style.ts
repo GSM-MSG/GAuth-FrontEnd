@@ -31,11 +31,6 @@ export const SideWave = styled(Wave)`
 	bottom: 0;
 	transform-origin: bottom;
 	height: 950px;
-	@media (max-width: 1200px) {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
 `;
 
 export const Title = styled.div`

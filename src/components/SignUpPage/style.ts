@@ -379,15 +379,19 @@ export const ProfileSVGWrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	svg {
+	label {
 		cursor: pointer;
-		:nth-of-type(2) {
+		i {
 			position: absolute;
 			top: 130px;
 			left: 130px;
-			:hover {
-				path {
-					fill: #868e96;
+		}
+		:hover {
+			i {
+				svg {
+					path {
+						fill: #868e96;
+					}
 				}
 			}
 		}
@@ -426,4 +430,16 @@ export const ChangeBtn = styled.button`
 	border: 2px solid #5499d9;
 	width: 148px;
 	height: 60px;
+`;
+
+export const Profile = styled.img`
+	margin: 0;
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	object-fit: cover;
+	background: #fff;
 `;

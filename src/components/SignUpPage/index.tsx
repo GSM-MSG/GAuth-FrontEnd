@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AuthenticationCheck from '../ AuthenticationCheck';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
@@ -9,13 +9,59 @@ import * as SVG from '../../../public/svg';
 export default function SignUpPage() {
 	const waveRef = useRef<any>();
 	const signUpRef = useRef<any>();
+	const uploadBoxRef = useRef<any>();
+	const imgInput = useRef<any>();
+
 	const [email, setEmail] = useState<string>('');
 	const [pw, setPw] = useState<string>('');
 	const [emailCheck, setEmailCheck] = useState<boolean>(false);
 	const [pwCheck, setPwCheck] = useState<boolean>(false);
+	const [privacyCheck, setPrivacyCheck] = useState(false);
 	const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
 	const [changeForm, setChangeForm] = useState(false);
 	const [waveWidth, setWaveWidth] = useState(0);
+	const [profileImg, setImg] = useState('');
+
+	useEffect(() => {
+		const uploadBox = uploadBoxRef.current;
+		const input = imgInput.current;
+
+		const handleFiles = (files: any) => {
+			if (files[0].type.startsWith('image/')) {
+				const reader = new FileReader();
+				reader.onloadend = (e: any) => {
+					console.log(e);
+					const result = e.target.result;
+					if (result) {
+						setImg(result);
+					}
+				};
+				reader.readAsDataURL(files[0]);
+			}
+		};
+
+		const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+			const file = event.target.files;
+			handleFiles(file);
+		};
+
+		const dropHandler = (event: React.DragEvent<HTMLInputElement>) => {
+			event.preventDefault();
+			event.stopPropagation();
+			const file = event.dataTransfer.files;
+			handleFiles(file);
+		};
+
+		const dragOverHandler = (event: React.DragEvent) => {
+			event.preventDefault();
+			event.stopPropagation();
+		};
+
+		uploadBox.addEventListener('drop', dropHandler);
+		uploadBox.addEventListener('dragover', dragOverHandler);
+		input.addEventListener('change', changeHandler);
+	}, []);
+
 	useEffect(() => {
 		if (window.innerWidth < 1200) {
 			setWaveWidth(0);
@@ -75,7 +121,7 @@ export default function SignUpPage() {
 						options={{
 							height: 30,
 							amplitude: 150,
-							speed: 0.175,
+							speed: 0.15,
 							points: 1,
 						}}
 						style={{ left: waveWidth }}
@@ -108,7 +154,7 @@ export default function SignUpPage() {
 						fill="url(#gradient3)"
 						options={{
 							amplitude: 250,
-							speed: 0.17,
+							speed: 0.19,
 							points: 1,
 						}}
 						style={{ left: waveWidth }}
@@ -191,7 +237,12 @@ export default function SignUpPage() {
 									/>
 								</S.InputWrapper>
 								<S.PrivacyConsent>
-									<input type="checkbox" />
+									<input
+										type="checkbox"
+										onClick={() => {
+											setPrivacyCheck((prev) => !prev);
+										}}
+									/>
 									<p>개인정보 수집 및 이용에 대한 동의</p>
 									<a onClick={() => setPrivacyConsent(true)}>자세히 보기</a>
 								</S.PrivacyConsent>
@@ -205,7 +256,7 @@ export default function SignUpPage() {
 										} else if (!/^.{8,72}$/.test(pw)) {
 											alert('암호의 길이는 8자 이상 72자 이하 입니다.');
 											document.getElementsByName('pw')[0].focus();
-										} else if (privacyConsent) {
+										} else if (!privacyCheck) {
 											alert('개인정보 수집 및 이용에 대해 동의해 주십시오.');
 										} else setChangeForm(true);
 									}}
@@ -222,8 +273,24 @@ export default function SignUpPage() {
 							<h1>PROFILE</h1>
 							<S.UpLoadProfileContainter>
 								<S.ProfileSVGWrapper>
-									<SVG.ProfileFace />
-									<SVG.PlusBtn />
+									<label htmlFor="profile" ref={uploadBoxRef}>
+										{profileImg ? (
+											<S.Profile src={profileImg} />
+										) : (
+											<SVG.ProfileFace />
+										)}
+										<i>
+											<SVG.PlusBtn />
+										</i>
+									</label>
+									<input
+										type="file"
+										multiple
+										accept="image/*"
+										id="profile"
+										style={{ display: 'none' }}
+										ref={imgInput}
+									/>
 								</S.ProfileSVGWrapper>
 								<S.ProfileBtnWrapper>
 									<div>

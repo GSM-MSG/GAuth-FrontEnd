@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
-	const Layer = styled.div`
+	const Bg = styled.div`
 		width: 100%;
 		min-height: 100vh;
 		position: fixed;
@@ -15,6 +15,10 @@ export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
 	`;
 
 	const Wrapper = styled.div`
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		width: 600px;
 		height: 775px;
 		background: #fafafa;
@@ -23,13 +27,15 @@ export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
 		box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
 		padding: 0 20px 0 20px;
 		overflow: scroll;
+
 		h1 {
 			margin-top: 50px;
 		}
 	`;
 
 	return (
-		<Layer onClick={closeHandle}>
+		<>
+			<Bg onClick={closeHandle} />
 			<Wrapper>
 				<h1>1. 개인정보 수집 항목 및 방법</h1>
 				<p>
@@ -194,6 +200,6 @@ export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
 					변경사항의 시행일의 7일 전부터 {}을 통하여 고지할 것입니다.
 				</p>
 			</Wrapper>
-		</Layer>
+		</>
 	);
 }

@@ -5,6 +5,7 @@ import { API } from "../../lib/API";
 import SideWave from "./SideWave";
 import { useRecoilValue } from 'recoil'
 import { ViewWidth } from '../../Atom/Atoms';
+import { LoginLogo } from "../../../public/svg";
 
 
 export default function LoginPage() {
@@ -43,7 +44,7 @@ export default function LoginPage() {
                 viewWidth >= 900 &&
                 <S.TitleWrapper>
                     <S.TitleBox>
-                        <S.Img src="/svg/LoginLogo.svg" />
+                        <LoginLogo />
                         <div>
                             <h1>GAUTH</h1>
                             <h2>GSM 통합 계정관리 시스템</h2>

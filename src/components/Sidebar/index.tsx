@@ -9,10 +9,10 @@ export default function Sidebar() {
                 <S.MenuContainer>
                     <S.MenuList>
                         <S.MenuWrapper>
-                            <Link href="/servicelist/all"><><SVG.ServiceList /></></Link>
+                            <Link href="/servicelist"><><SVG.ServiceList /></></Link>
                         </S.MenuWrapper>
                         <S.MenuWrapper>
-                            <Link href="/registerservice"><><SVG.AddService /></></Link>
+                            <Link href="/newservice"><><SVG.AddService /></></Link>
                         </S.MenuWrapper>
                         <S.MenuWrapper>
                             <Link href="/makeService"><><SVG.My /></></Link>

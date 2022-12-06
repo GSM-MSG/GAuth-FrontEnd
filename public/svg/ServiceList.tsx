@@ -1,4 +1,4 @@
-export default function ServiceList() {
+export function ServiceList() {
     return (
         <i>
             <svg width="45" height="55" viewBox="0 0 45 55" fill="blue" xmlns="http://www.w3.org/2000/svg">

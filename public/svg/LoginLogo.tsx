@@ -1,4 +1,4 @@
-export default function LoginLogo() {
+export function LoginLogo() {
     return (
         <svg width="372" height="503" viewBox="0 0 372 503" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <rect x="9.18103" y="5.30067" width="248.716" height="434.088" rx="22.5" transform="matrix(0.965797 -0.259299 0.25834 0.966054 -0.60321 71.0786)" stroke="white" strokeWidth="15" />

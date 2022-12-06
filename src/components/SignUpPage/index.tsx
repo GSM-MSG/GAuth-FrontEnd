@@ -90,7 +90,7 @@ export default function SignUpPage() {
 		}
 	};
 
-	//더미
+	//dummy data
 	const [data, setData] = useState({
 		loading: false,
 		data: '',
@@ -104,7 +104,7 @@ export default function SignUpPage() {
 			});
 			setTimeout(() => {
 				setData((prev) => {
-					return { ...prev, data: 'ok' };
+					return { ...prev, error: 'err' };
 				});
 			}, 5000);
 		} catch (e: any) {

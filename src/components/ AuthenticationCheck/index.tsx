@@ -28,10 +28,10 @@ export default function AuthenticationCheck({ data }: any) {
 		return (
 			<>
 				<h2>
-					인증이 완려되었습니다!
+					인증이 완료되었습니다!
 					<br />
 					<br />
-					과리자 승인을 기다려 주세요
+					관리자 승인을 기다려 주세요!
 				</h2>
 			</>
 		);

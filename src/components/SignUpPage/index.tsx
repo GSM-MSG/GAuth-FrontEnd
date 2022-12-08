@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import AuthenticationCheck from '../ AuthenticationCheck';
+import AuthenticationCheck from '../AuthenticationCheck';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';

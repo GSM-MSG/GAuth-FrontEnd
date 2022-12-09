@@ -1,46 +1,14 @@
-import styled from '@emotion/styled';
+import * as S from './style';
 
 export default function PrivacyConsent({
 	closeHandle,
 }: {
 	closeHandle: () => void;
 }) {
-	const Bg = styled.div`
-		width: 100%;
-		min-height: 100vh;
-		position: fixed;
-		top: 0;
-		left: 0;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background: rgba(1, 1, 1, 0.2);
-		z-index: 100;
-	`;
-
-	const Wrapper = styled.div`
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 600px;
-		height: 775px;
-		background: #fafafa;
-		z-index: 200;
-		border-radius: 20px;
-		box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
-		padding: 0 20px 0 20px;
-		overflow: scroll;
-
-		h1 {
-			margin-top: 50px;
-		}
-	`;
-
 	return (
 		<>
-			<Bg onClick={closeHandle} />
-			<Wrapper>
+			<S.PrivacyConsentBg onClick={closeHandle} />
+			<S.PrivacyConsentWrapper>
 				<h1>1. 개인정보 수집 항목 및 방법</h1>
 				<p>
 					GAuth는 회원가입, 서비스 이용 등을 위해 아래와 같은 개인정보를
@@ -203,7 +171,7 @@ export default function PrivacyConsent({
 					보안기술의 변경에 따라 내용의 추가, 삭제 및 수정이 있을 시에는
 					변경사항의 시행일의 7일 전부터 {}을 통하여 고지할 것입니다.
 				</p>
-			</Wrapper>
+			</S.PrivacyConsentWrapper>
 		</>
 	);
 }

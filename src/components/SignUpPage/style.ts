@@ -448,3 +448,35 @@ export const Profile = styled.img`
 	object-fit: cover;
 	background: #fff;
 `;
+
+export const PrivacyConsentBg = styled.div`
+	width: 100%;
+	min-height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(1, 1, 1, 0.2);
+	z-index: 100;
+`;
+
+export const PrivacyConsentWrapper = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 600px;
+	height: 775px;
+	background: #fafafa;
+	z-index: 200;
+	border-radius: 20px;
+	box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
+	padding: 0 20px 0 20px;
+	overflow: scroll;
+
+	h1 {
+		margin-top: 50px;
+	}
+`;

@@ -5,9 +5,9 @@ import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
+import WaveWrapper from './WaveWrapper';
 
 export default function SignUpPage() {
-	const waveRef = useRef<HTMLDivElement>(null);
 	const signUpRef = useRef<HTMLDivElement>(null);
 
 	const [email, setEmail] = useState<string>('');
@@ -17,7 +17,6 @@ export default function SignUpPage() {
 	const [privacyCheck, setPrivacyCheck] = useState(false);
 	const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
 	const [changeForm, setChangeForm] = useState(false);
-	const [waveWidth, setWaveWidth] = useState(0);
 	const [profileImg, setImg] = useState('');
 
 	//프로필 추가 함수
@@ -49,21 +48,6 @@ export default function SignUpPage() {
 		event.preventDefault();
 		event.stopPropagation();
 	};
-
-	useEffect(() => {
-		if (window.innerWidth < 1200) {
-			setWaveWidth(0);
-		} else {
-			if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);
-		}
-		window.addEventListener('resize', () => {
-			if (window.innerWidth < 1200) {
-				setWaveWidth(0);
-			} else {
-				if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);
-			}
-		});
-	}, []);
 
 	const SignUp = async () => {
 		try {
@@ -103,84 +87,7 @@ export default function SignUpPage() {
 	return (
 		<>
 			<S.Layer>
-				<S.WaveWrapper ref={waveRef}>
-					<S.SideWave
-						fill="url(#gradient1)"
-						options={{
-							height: 30,
-							amplitude: 150,
-							speed: 0.15,
-							points: 1,
-						}}
-						style={{ left: waveWidth }}
-					>
-						<defs>
-							<linearGradient id="gradient1" gradientTransform={'rotate(67.5)'}>
-								<stop offset="0%" stopColor="#7EB2E2" />
-								<stop offset="100%" stopColor="#5499D9" />
-							</linearGradient>
-						</defs>
-					</S.SideWave>
-					<S.SideWave
-						fill="url(#gradient2)"
-						options={{
-							height: 60,
-							amplitude: 200,
-							speed: 0.17,
-							points: 1,
-						}}
-						style={{ left: waveWidth }}
-					>
-						<defs>
-							<linearGradient id="gradient2" gradientTransform={'rotate(67.5)'}>
-								<stop offset="0%" stopColor="#5499D9" />
-								<stop offset="100%" stopColor="#2E80CC" />
-							</linearGradient>
-						</defs>
-					</S.SideWave>
-					<S.SideWave
-						fill="url(#gradient3)"
-						options={{
-							amplitude: 250,
-							speed: 0.19,
-							points: 1,
-						}}
-						style={{ left: waveWidth }}
-					>
-						<defs>
-							<linearGradient id="gradient3" gradientTransform={'rotate(67.5)'}>
-								<stop offset="11.3%" stopColor="#2E80CC" />
-								<stop offset="100%" stopColor="#2566A2" />
-							</linearGradient>
-						</defs>
-					</S.SideWave>
-					<S.Title>
-						<div>
-							<S.WaterDrop top="100px" left="300px" rotate="30deg">
-								<span></span>
-								<span></span>
-								<span></span>
-							</S.WaterDrop>
-							<SVG.Human1 />
-						</div>
-						<div>
-							<S.WaterDrop top="50px" left="-20px" rotate="-50deg">
-								<span></span>
-								<span></span>
-								<span></span>
-							</S.WaterDrop>
-							<SVG.SmallPhone />
-						</div>
-						<div>
-							<S.WaterDrop top="120px" left="250px" rotate="-50deg">
-								<span></span>
-								<span></span>
-								<span></span>
-							</S.WaterDrop>
-							<SVG.Human2 />
-						</div>
-					</S.Title>
-				</S.WaveWrapper>
+				<WaveWrapper signUpRef={signUpRef} />
 				<S.SignUpWrapper ref={signUpRef}>
 					<S.Container>
 						<S.SignUpContainer changeForm={changeForm}>

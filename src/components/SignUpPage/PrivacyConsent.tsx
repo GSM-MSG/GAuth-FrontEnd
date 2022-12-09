@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
-export default function PrivacyConsent({ closeHandle }: { closeHandle: any }) {
+export default function PrivacyConsent({
+	closeHandle,
+}: {
+	closeHandle: () => void;
+}) {
 	const Bg = styled.div`
 		width: 100%;
 		min-height: 100vh;

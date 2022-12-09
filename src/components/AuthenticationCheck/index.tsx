@@ -1,8 +1,14 @@
 import * as S from './style';
-import * as SVG from '../../SVG';
+import * as SVG from '../../../public/svg';
 import { useState } from 'react';
 
-export default function AuthenticationCheck({ data }: any) {
+type data = {
+	loading: boolean;
+	data: string;
+	error: string;
+};
+
+export default function AuthenticationCheck({ data }: { data: data }) {
 	const [check, setCheck] = useState(false);
 	const BeforeConsent = () => {
 		return (

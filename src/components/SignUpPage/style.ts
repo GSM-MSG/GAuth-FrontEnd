@@ -164,8 +164,13 @@ export const SignUpContainer = styled.div`
 		margin: 0;
 		color: #2e80cc;
 	}
+
 	@media (max-width: 1200px) {
 		h1 {
+			color: #fff;
+		}
+
+		a {
 			color: #fff;
 		}
 	}

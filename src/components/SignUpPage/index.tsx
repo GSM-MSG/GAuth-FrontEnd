@@ -7,10 +7,8 @@ import * as S from './style';
 import * as SVG from '../../../public/svg';
 
 export default function SignUpPage() {
-	const waveRef = useRef<any>();
-	const signUpRef = useRef<any>();
-	const uploadBoxRef = useRef<any>();
-	const imgInput = useRef<any>();
+	const waveRef = useRef<HTMLDivElement>(null);
+	const signUpRef = useRef<HTMLDivElement>(null);
 
 	const [email, setEmail] = useState<string>('');
 	const [pw, setPw] = useState<string>('');
@@ -22,57 +20,47 @@ export default function SignUpPage() {
 	const [waveWidth, setWaveWidth] = useState(0);
 	const [profileImg, setImg] = useState('');
 
-	useEffect(() => {
-		const uploadBox = uploadBoxRef.current;
-		const input = imgInput.current;
+	//프로필 추가 함수
 
-		const handleFiles = (files: any) => {
-			if (files[0].type.startsWith('image/')) {
-				const reader = new FileReader();
-				reader.onloadend = (e: any) => {
-					console.log(e);
-					const result = e.target.result;
-					if (result) {
-						setImg(result);
-					}
-				};
-				reader.readAsDataURL(files[0]);
-			}
-		};
+	const handleFiles = (files: File) => {
+		if (files.type.startsWith('image/')) {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const { result } = reader;
+				if (result) {
+					setImg(result as string);
+				}
+			};
+			reader.readAsDataURL(files);
+		}
+	};
 
-		const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-			const file = event.target.files;
-			handleFiles(file);
-		};
+	const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		handleFiles(event.target.files![0]);
+	};
 
-		const dropHandler = (event: React.DragEvent<HTMLInputElement>) => {
-			event.preventDefault();
-			event.stopPropagation();
-			const file = event.dataTransfer.files;
-			handleFiles(file);
-		};
+	const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
+		handleFiles(event.dataTransfer.files[0]);
+	};
 
-		const dragOverHandler = (event: React.DragEvent) => {
-			event.preventDefault();
-			event.stopPropagation();
-		};
-
-		uploadBox.addEventListener('drop', dropHandler);
-		uploadBox.addEventListener('dragover', dragOverHandler);
-		input.addEventListener('change', changeHandler);
-	}, []);
+	const dragOverHandler = (event: React.DragEvent<HTMLLabelElement>) => {
+		event.preventDefault();
+		event.stopPropagation();
+	};
 
 	useEffect(() => {
 		if (window.innerWidth < 1200) {
 			setWaveWidth(0);
 		} else {
-			setWaveWidth(-signUpRef.current.offsetWidth);
+			if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);
 		}
-		window.addEventListener('resize', (e: any) => {
-			if (e.target.innerWidth < 1200) {
+		window.addEventListener('resize', () => {
+			if (window.innerWidth < 1200) {
 				setWaveWidth(0);
 			} else {
-				setWaveWidth(-signUpRef.current.offsetWidth);
+				if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);
 			}
 		});
 	}, []);
@@ -85,7 +73,7 @@ export default function SignUpPage() {
 			});
 			alert('성공');
 			window.location.replace('/login');
-		} catch (e: any) {
+		} catch (e) {
 			alert('다시 시도해주세요');
 		}
 	};
@@ -107,7 +95,7 @@ export default function SignUpPage() {
 					return { ...prev, error: 'err' };
 				});
 			}, 5000);
-		} catch (e: any) {
+		} catch (e) {
 			setData({ ...data, error: 'err' });
 		}
 	};
@@ -226,7 +214,9 @@ export default function SignUpPage() {
 									<input
 										name="pw"
 										type="password"
-										onChange={(e: any) => setPw(e.target.value)}
+										onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+											setPw(e.target.value)
+										}
 										value={pw}
 										onFocus={() => {
 											setPwCheck(true);
@@ -273,7 +263,11 @@ export default function SignUpPage() {
 							<h1>PROFILE</h1>
 							<S.UpLoadProfileContainter>
 								<S.ProfileSVGWrapper>
-									<label htmlFor="profile" ref={uploadBoxRef}>
+									<label
+										htmlFor="profile"
+										onDrop={(e) => dropHandler(e)}
+										onDragOver={(e) => dragOverHandler(e)}
+									>
 										{profileImg ? (
 											<S.Profile src={profileImg} />
 										) : (
@@ -289,7 +283,7 @@ export default function SignUpPage() {
 										accept="image/*"
 										id="profile"
 										style={{ display: 'none' }}
-										ref={imgInput}
+										onChange={(e) => changeHandler(e)}
 									/>
 								</S.ProfileSVGWrapper>
 								<S.ProfileBtnWrapper>

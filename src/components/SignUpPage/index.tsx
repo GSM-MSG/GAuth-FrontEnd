@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import AuthenticationCheck from '../AuthenticationCheck';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
@@ -76,7 +76,7 @@ export default function SignUpPage() {
 			});
 			setTimeout(() => {
 				setData((prev) => {
-					return { ...prev, error: 'err' };
+					return { ...prev, data: 'data' };
 				});
 			}, 5000);
 		} catch (e) {

@@ -455,9 +455,6 @@ export const PrivacyConsentBg = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background: rgba(1, 1, 1, 0.2);
 	z-index: 100;
 `;
@@ -475,7 +472,16 @@ export const PrivacyConsentWrapper = styled.div`
 	box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
 	padding: 0 20px 0 20px;
 	overflow: scroll;
-
+	overflow-x: hidden;
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: #2f3542;
+		border-radius: 10px;
+		background-clip: padding-box;
+		border: 2px solid transparent;
+	}
 	h1 {
 		margin-top: 50px;
 	}

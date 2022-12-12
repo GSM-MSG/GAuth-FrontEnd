@@ -35,12 +35,12 @@ export default function WaveWrapper({
 				}}
 				style={{ left: waveWidth }}
 			>
-				{/* <defs> */}
-				<linearGradient id="gradient1" gradientTransform={'rotate(67.5)'}>
-					<stop offset="0%" stopColor="#7EB2E2" />
-					<stop offset="100%" stopColor="#5499D9" />
-				</linearGradient>
-				{/* </defs> */}
+				<defs>
+					<linearGradient id="gradient1" gradientTransform={'rotate(67.5)'}>
+						<stop offset="0%" stopColor="#7EB2E2" />
+						<stop offset="100%" stopColor="#5499D9" />
+					</linearGradient>
+				</defs>
 			</S.SideWave>
 			<S.SideWave
 				fill="url(#gradient2)"
@@ -52,12 +52,12 @@ export default function WaveWrapper({
 				}}
 				style={{ left: waveWidth }}
 			>
-				{/* <defs> */}
-				<linearGradient id="gradient2" gradientTransform={'rotate(67.5)'}>
-					<stop offset="0%" stopColor="#5499D9" />
-					<stop offset="100%" stopColor="#2E80CC" />
-				</linearGradient>
-				{/* </defs> */}
+				<defs>
+					<linearGradient id="gradient2" gradientTransform={'rotate(67.5)'}>
+						<stop offset="0%" stopColor="#5499D9" />
+						<stop offset="100%" stopColor="#2E80CC" />
+					</linearGradient>
+				</defs>
 			</S.SideWave>
 			<S.SideWave
 				fill="url(#gradient3)"
@@ -68,12 +68,12 @@ export default function WaveWrapper({
 				}}
 				style={{ left: waveWidth }}
 			>
-				{/* <defs> */}
-				<linearGradient id="gradient3" gradientTransform={'rotate(67.5)'}>
-					<stop offset="11.3%" stopColor="#2E80CC" />
-					<stop offset="100%" stopColor="#2566A2" />
-				</linearGradient>
-				{/* </defs> */}
+				<defs>
+					<linearGradient id="gradient3" gradientTransform={'rotate(67.5)'}>
+						<stop offset="11.3%" stopColor="#2E80CC" />
+						<stop offset="100%" stopColor="#2566A2" />
+					</linearGradient>
+				</defs>
 			</S.SideWave>
 			<S.Title>
 				<div>

@@ -14,6 +14,7 @@ export default function SideWave() {
 
     useEffect(() => {
         window.addEventListener('resize', () => {
+            setViewWidth(window.innerWidth)
             if (viewWidth >= 900 && waveRef.current) {
                 const waves: HTMLCollection = waveRef.current.children
                 Array.prototype.map.call(waves, (e: HTMLDivElement, idx: number) => {
@@ -64,11 +65,14 @@ export default function SideWave() {
                     </linearGradient>
                 </defs>
             </S.SideWave>
-
-            <S.Bubble delay={1.5} />
-            <S.Bubble delay={2} />
-            <S.Bubble delay={2.8} />
-            <S.Bubble delay={3.6} />
+            {viewWidth >= 1200 &&
+                <>
+                    <S.Bubble delay={1.5} />
+                    <S.Bubble delay={2} />
+                    <S.Bubble delay={2.8} />
+                    <S.Bubble delay={3.6} />
+                </>
+            }
         </S.SideWaveBox>
     )
 }

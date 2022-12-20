@@ -34,6 +34,8 @@ export default function LoginPage() {
                     alert("비밀번호가 일치하지 않습니다.");
                 } else if (e.response!.status === 404) {
                     alert("이메일이 일치하지 않습니다.");
+                } else if (e.response!.status === 403) {
+                    alert("관리자 승인이 될 때까지 기다려주세요.")
                 }
                 setError(e.response!.status);
             }
@@ -60,7 +62,7 @@ export default function LoginPage() {
                     <h1>LOGIN</h1>
                     <S.InputContainer>
                         <S.InputWrapper>
-                            <S.InputName being={emailCheck}>{error === 400 ? "이메일이 일치하지 않습니다" : "이메일을 입력하세요"}</S.InputName>
+                            <S.InputName being={emailCheck} error={error} >{error === 404 ? "이메일이 일치하지 않습니다" : "이메일"}</S.InputName>
                             <input name="email" type="text" maxLength={6} value={email} autoComplete="off"
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => { if (!(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value))) return setEmail(e.target.value) }}
                                 onFocus={() => { setEmailCheck(true) }}
@@ -69,7 +71,7 @@ export default function LoginPage() {
                             {email && <S.Email left={email.length * 13.5}>@gsm.hs.kr</S.Email>}
                         </S.InputWrapper>
                         <S.InputWrapper>
-                            <S.InputName being={pwCheck}>{error === 400 ? "비밀번호가 일치하지 않습니다" : "비밀번호를 입력하세요"}</S.InputName>
+                            <S.InputName being={pwCheck} error={error} >{error === 400 ? "비밀번호가 일치하지 않습니다" : "비밀번호"}</S.InputName>
                             <input name="pw" type="password" maxLength={72} value={pw}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => { setPw(e.target.value) }}
                                 onFocus={() => { setPwCheck(true) }}
@@ -79,7 +81,7 @@ export default function LoginPage() {
                     <S.ButtonContainer>
                         <S.Submit onClick={SignUp}>로그인</S.Submit>
                         <div>
-                            <Link href="/register">회원가입</Link> | <Link href="/find">비밀번호 찾기</Link>
+                            <Link href="/register">회원가입</Link> <span>l</span> <Link href="/find">비밀번호 찾기</Link>
                         </div>
                     </S.ButtonContainer>
                 </S.LoginContainer >

@@ -1,12 +1,23 @@
 import styled from "@emotion/styled";
 import Wave from "react-wavify";
 
+interface InputProps {
+    being: boolean,
+    error: number
+}
+
 export const Layer = styled.div`
     width: 100vw;
     height: 100vh;
+    position: fixed;
     top: 0;
     left: 0;
     display: flex;
+    
+    @media (max-width: 1200px) {
+        margin-top: 5%;
+        height: 95%;
+    }
 `
 
 export const SideWaveBox = styled.div`
@@ -38,9 +49,13 @@ export const Bubble = styled.span`
     width: 0;
     height: 0;
     border-radius: 100%;
-    top: 210px;
+    top: 180px;
     left: 12vw;
     animation: bubbleAnimate 2.5s linear ${({ delay }: { delay: number }) => delay + 's'} infinite;
+
+    @media (min-height: 962px) {
+        top: 250px;
+    }
 
     @keyframes bubbleAnimate {
         0%,
@@ -79,6 +94,8 @@ export const TitleWrapper = styled.div`
     width: 100%;
     height: 100vh;
     min-width: 650px;
+    display: flex;
+    align-items: center;
 
     @media (max-width: 1200px) {
         min-width: 0;
@@ -94,12 +111,11 @@ export const TitleBox = styled.div`
     color: #fff;
     text-align: center;
     width: 70%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 60px;
-    justify-content: center;
-    padding-top: 100px;
+    align-items: center;
+    padding-left: 30px;
 
     @media (max-width: 1200px) {
         width: 100%;
@@ -166,13 +182,14 @@ export const InputContainer = styled.div`
     input {
        border: none;
        border-bottom: 3px solid black;
-       width: 100%;
+       width: calc(100% - 60px);
        padding: 0 30px 10px 30px;
        font-size: 27px;
        font-weight: 400;
        outline: none;
        background-color: transparent;
        z-index: 10;
+       cursor: pointer;
 
        @media (max-width: 1200px) {
             color: #fff;
@@ -208,12 +225,12 @@ export const Email = styled.div`
     }
 `
 
-export const InputName = styled.h3`
+export const InputName = styled.h3<InputProps>`
     color: #929292;
     position: absolute;
     margin: 0;
     transition: all .5s, color 0s;
-    ${({ being }: { being: boolean }) => {
+    ${({ being }) => {
         if (being) {
             return "transform: translateY(-25px); font-size: 15px;"
         }
@@ -222,8 +239,7 @@ export const InputName = styled.h3`
     @media (max-width: 1200px){
         color: #fff;
         font-size: 18px;
-
-        ${({ being }: { being: boolean }) => {
+        ${({ being }) => {
         if (being) {
             return "transform: translateY(-25px); font-size: 14px;"
         }
@@ -239,11 +255,14 @@ export const ButtonContainer = styled.div`
     font-size: 18px;
     line-height: 21px;
 
-    div{
+    div > *{
         color: #929292;
         @media (max-width: 1200px) {
             color: #fff;
         }
+    }
+    a {
+        text-decoration: none;
     }
 `
 

@@ -1,11 +1,12 @@
 import Link from "next/link"
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import * as S from "./style"
 import { API } from "../../lib/API";
 import SideWave from "./SideWave";
 import { useRecoilValue } from 'recoil'
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from "../../../public/svg";
+import { AxiosError } from "axios";
 
 
 export default function LoginPage() {
@@ -27,13 +28,15 @@ export default function LoginPage() {
             localStorage.setItem('Gauth-refreshToken', data.refreshToken);
             alert("성공");
 
-        } catch (e: any) {
-            if (e.response.status === 400) {
-                alert("비밀번호가 일치하지 않습니다.");
-            } else if (e.response.status === 404) {
-                alert("이메일이 일치하지 않습니다.");
+        } catch (e) {
+            if (e instanceof AxiosError) {
+                if (e.response!.status === 400) {
+                    alert("비밀번호가 일치하지 않습니다.");
+                } else if (e.response!.status === 404) {
+                    alert("이메일이 일치하지 않습니다.");
+                }
+                setError(e.response!.status);
             }
-            setError(e.response.status);
         }
     }
 
@@ -59,7 +62,7 @@ export default function LoginPage() {
                         <S.InputWrapper>
                             <S.InputName being={emailCheck}>{error === 400 ? "이메일이 일치하지 않습니다" : "이메일을 입력하세요"}</S.InputName>
                             <input name="email" type="text" maxLength={6} value={email} autoComplete="off"
-                                onChange={(e: any) => { if (!(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value))) setEmail(e.target.value) }}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => { if (!(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(e.target.value))) return setEmail(e.target.value) }}
                                 onFocus={() => { setEmailCheck(true) }}
                                 onBlur={() => { !email && setEmailCheck(false) }}
                             />
@@ -68,7 +71,7 @@ export default function LoginPage() {
                         <S.InputWrapper>
                             <S.InputName being={pwCheck}>{error === 400 ? "비밀번호가 일치하지 않습니다" : "비밀번호를 입력하세요"}</S.InputName>
                             <input name="pw" type="password" maxLength={72} value={pw}
-                                onChange={(e: any) => { setPw(e.target.value) }}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => { setPw(e.target.value) }}
                                 onFocus={() => { setPwCheck(true) }}
                                 onBlur={() => { !pw && setPwCheck(false) }} />
                         </S.InputWrapper>

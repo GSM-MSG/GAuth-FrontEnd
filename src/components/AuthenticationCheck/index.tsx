@@ -1,15 +1,47 @@
 import * as S from './style';
 import * as SVG from '../../../public/svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { API } from '../../lib/API';
 
-type dataType = {
-  loading: boolean;
-  data: string;
-  error: string;
-};
+export default function AuthenticationCheck({
+  email,
+  pw,
+}: {
+  email: string;
+  pw: string;
+}) {
+  const [checkEmail, setCheckEmail] = useState(false);
 
-export default function AuthenticationCheck({ data }: { data: dataType }) {
-  const [check, setCheck] = useState(false);
+  useEffect(() => {
+    const SingUp = async () => {
+      try {
+        const { request } = await API.post('/auth/signup', {
+          email: email + '@gsm.hs.kr',
+          password: pw,
+        });
+        if (request.status == 201) {
+          setTimeout(() => {
+            window.location.replace('/login');
+          }, 2500);
+        }
+      } catch (e) {
+        alert('다시 시도해주세요');
+      }
+    };
+    if (checkEmail) SingUp();
+  }, [checkEmail, email, pw]);
+
+  const CheckEmail = async () => {
+    try {
+      const { request } = await API.get('/email', {
+        params: { email: email + '@gsm.hs.kr' },
+      });
+      setCheckEmail(request.status == 200 ? true : false);
+    } catch (e) {
+      alert('다시 시도해주세요');
+    }
+  };
+
   const BeforeConsent = () => {
     return (
       <>
@@ -18,19 +50,14 @@ export default function AuthenticationCheck({ data }: { data: dataType }) {
           전송된 메일에서 <span>인증 버튼</span>을 눌러 인증을 완료해주세요
         </p>
         <SVG.Mail></SVG.Mail>
-        {data.data && (
-          <button type="button" onClick={() => setCheck(true)}>
-            확인
-          </button>
-        )}
+        <button type="button" onClick={() => CheckEmail()}>
+          확인
+        </button>
       </>
     );
   };
 
   const AfterConsent = () => {
-    setTimeout(() => {
-      window.location.replace('/login');
-    }, 2500);
     return (
       <>
         <h2>
@@ -45,14 +72,8 @@ export default function AuthenticationCheck({ data }: { data: dataType }) {
 
   return (
     <S.Layer>
-      <S.Wrapper check={check}>
-        {check ? (
-          <AfterConsent />
-        ) : data.error ? (
-          <h1>Opps</h1>
-        ) : (
-          <BeforeConsent />
-        )}
+      <S.Wrapper check={checkEmail}>
+        {checkEmail ? <AfterConsent /> : <BeforeConsent />}
       </S.Wrapper>
     </S.Layer>
   );

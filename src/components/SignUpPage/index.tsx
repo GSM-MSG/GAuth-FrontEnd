@@ -18,6 +18,7 @@ export default function SignUpPage() {
   const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
   const [changeForm, setChangeForm] = useState(false);
   const [profileImg, setImg] = useState('');
+  const [data, setData] = useState(false);
 
   //프로필 추가 함수
 
@@ -49,38 +50,16 @@ export default function SignUpPage() {
     event.stopPropagation();
   };
 
-  const SignUp = async () => {
+  const RequsetEmail = async () => {
     try {
-      await API.post('/signup', {
-        email: email + '@gsm.hs,kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
-        password: pw, // 8자 이상 ~ 72자 이하, 공백 미허용
+      const { request } = await API.post('/email', {
+        email: email + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
       });
-      alert('성공');
-      window.location.replace('/login');
+      if (request.status) {
+        setData(true);
+      }
     } catch (e) {
       alert('다시 시도해주세요');
-    }
-  };
-
-  //dummy data
-  const [data, setData] = useState({
-    loading: false,
-    data: '',
-    error: '',
-  });
-
-  const ExSignUp = async () => {
-    try {
-      setData((prev) => {
-        return { ...prev, loading: true };
-      });
-      setTimeout(() => {
-        setData((prev) => {
-          return { ...prev, data: 'data' };
-        });
-      }, 5000);
-    } catch (e) {
-      setData({ ...data, error: 'err' });
     }
   };
 
@@ -204,7 +183,7 @@ export default function SignUpPage() {
                     <S.ChangeBtn
                       position="right"
                       onClick={() => {
-                        ExSignUp();
+                        RequsetEmail();
                       }}
                     >
                       다음
@@ -221,7 +200,7 @@ export default function SignUpPage() {
       {privacyConsent && (
         <PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
       )}
-      {data.loading && <AuthenticationCheck data={data} />}
+      {data && <AuthenticationCheck email={email} pw={pw} />}
     </>
   );
 }

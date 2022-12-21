@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import AuthenticationCheck from '../AuthenticationCheck';
+import React, { useRef, useState } from 'react';
+import SendVerifyEmail from '../SendVerifyEmail';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
@@ -9,7 +9,6 @@ import WaveWrapper from './WaveWrapper';
 
 export default function SignUpPage() {
   const signUpRef = useRef<HTMLDivElement>(null);
-
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const [emailCheck, setEmailCheck] = useState<boolean>(false);
@@ -200,7 +199,7 @@ export default function SignUpPage() {
         <PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
       )}
       {data && (
-        <AuthenticationCheck email={email} pw={pw} profileImg={profileImg} />
+        <SendVerifyEmail email={email} pw={pw} profileImg={profileImg} />
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const API = axios.create({
-  baseURL: 'http://10.82.18.111:8080/',
+  baseURL: process.env.NEXT_PUBLIC_ENV_DATA,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,PATCH,DELETE,OPTIONS',

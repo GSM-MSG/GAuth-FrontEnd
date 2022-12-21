@@ -11,3 +11,4 @@ export * from './AddServiceForm';
 export * from './Instruction';
 export * from './Logout';
 export * from './ServiceList';
+export * from './OopsIcon';

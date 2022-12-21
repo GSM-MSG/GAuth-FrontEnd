@@ -4,11 +4,9 @@ import * as SVG from '../../../public/svg';
 
 export default function MyProfilePage() {
 	const [img, setImg] = useState('');
-	const [profileImg, setProfileImg] = useState<FileList>();
 
 	const handleFiles = (files: FileList) => {
 		if (files[0].type.startsWith('image/')) {
-			setProfileImg(files);
 			const reader = new FileReader();
 			reader.onloadend = () => {
 				const { result } = reader;

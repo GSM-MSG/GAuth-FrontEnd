@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
 import SideWave from './SideWave';
+import { accessToken, refreshToken } from '../../lib/Tokken';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');
@@ -22,8 +23,8 @@ export default function LoginPage() {
         password: pw,
       });
 
-      localStorage.setItem('Gauth-accessToken', data.accessToken);
-      localStorage.setItem('Gauth-refreshToken', data.refreshToken);
+      localStorage.setItem(accessToken, data.accessToken);
+      localStorage.setItem(refreshToken, data.refreshToken);
       alert('성공');
     } catch (e: any) {
       if (e.response.status === 400) {

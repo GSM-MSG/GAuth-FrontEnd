@@ -54,3 +54,15 @@ export const Wrapper = styled.div<WrapperType>`
     cursor: pointer;
   }
 `;
+
+export const Profile = styled.img`
+  margin: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: cover;
+  background: #fff;
+`;

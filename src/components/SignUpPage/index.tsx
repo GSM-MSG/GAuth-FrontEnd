@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AuthenticationCheck from '../AuthenticationCheck';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
@@ -17,13 +17,15 @@ export default function SignUpPage() {
   const [privacyCheck, setPrivacyCheck] = useState(false);
   const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
   const [changeForm, setChangeForm] = useState(false);
-  const [profileImg, setImg] = useState('');
+  const [img, setImg] = useState('');
+  const [profileImg, setProfileImg] = useState<FileList>();
   const [data, setData] = useState(false);
 
   //프로필 추가 함수
 
-  const handleFiles = (files: File) => {
-    if (files.type.startsWith('image/')) {
+  const handleFiles = (files: FileList) => {
+    if (files[0].type.startsWith('image/')) {
+      setProfileImg(files);
       const reader = new FileReader();
       reader.onloadend = () => {
         const { result } = reader;
@@ -31,18 +33,19 @@ export default function SignUpPage() {
           setImg(result as string);
         }
       };
-      reader.readAsDataURL(files);
+      reader.readAsDataURL(files[0]);
     }
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleFiles(event.target.files![0]);
+    handleFiles(event.target.files!);
   };
 
   const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    handleFiles(event.dataTransfer.files[0]);
+
+    handleFiles(event.dataTransfer.files);
   };
 
   const dragOverHandler = (event: React.DragEvent<HTMLLabelElement>) => {
@@ -154,11 +157,7 @@ export default function SignUpPage() {
                     onDrop={(e) => dropHandler(e)}
                     onDragOver={(e) => dragOverHandler(e)}
                   >
-                    {profileImg ? (
-                      <S.Profile src={profileImg} />
-                    ) : (
-                      <SVG.ProfileFace />
-                    )}
+                    {img ? <S.Profile src={img} /> : <SVG.ProfileFace />}
                     <i>
                       <SVG.PlusBtn />
                     </i>
@@ -200,7 +199,9 @@ export default function SignUpPage() {
       {privacyConsent && (
         <PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
       )}
-      {data && <AuthenticationCheck email={email} pw={pw} />}
+      {data && (
+        <AuthenticationCheck email={email} pw={pw} profileImg={profileImg} />
+      )}
     </>
   );
 }

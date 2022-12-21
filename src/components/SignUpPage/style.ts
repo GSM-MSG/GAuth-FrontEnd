@@ -198,7 +198,6 @@ export const InputWrapper = styled.div`
   input {
     border: none;
     border-bottom: 3px solid black;
-    width: 100%;
     padding: 0 30px 10px 30px;
     font-size: 27px;
     font-weight: 400;
@@ -438,7 +437,8 @@ export const ChangeBtn = styled.button`
 `;
 
 export const Profile = styled.img`
-  margin: 0;
+  margin: 0px;
+  padding: 2px;
   width: 200px;
   height: 200px;
   border-radius: 50%;

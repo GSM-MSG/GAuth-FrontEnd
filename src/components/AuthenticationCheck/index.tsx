@@ -6,18 +6,21 @@ import { API } from '../../lib/API';
 export default function AuthenticationCheck({
   email,
   pw,
+  profileImg = '',
 }: {
   email: string;
   pw: string;
+  profileImg?: FileList | string;
 }) {
   const [checkEmail, setCheckEmail] = useState(false);
 
   useEffect(() => {
-    const SingUp = async () => {
+    const SingUp = async (data?: string) => {
       try {
         const { request } = await API.post('/auth/signup', {
           email: email + '@gsm.hs.kr',
           password: pw,
+          profileUrl: typeof data == 'string' ? data : '',
         });
         if (request.status == 201) {
           setTimeout(() => {
@@ -28,8 +31,24 @@ export default function AuthenticationCheck({
         alert('다시 시도해주세요');
       }
     };
-    if (checkEmail) SingUp();
-  }, [checkEmail, email, pw]);
+
+    const GetImgURL = async () => {
+      try {
+        const formData = new FormData();
+        formData.append('image', profileImg[0]);
+        formData.append('email', email + '@gsm.hs.kr');
+        const { data } = await API.patch('/auth/image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        SingUp(data.imageUrl);
+      } catch (e) {
+        alert('다시 시도해주세요');
+      }
+    };
+    if (checkEmail) typeof profileImg === 'string' ? SingUp() : GetImgURL();
+  }, [checkEmail, email, pw, profileImg]);
 
   const CheckEmail = async () => {
     try {

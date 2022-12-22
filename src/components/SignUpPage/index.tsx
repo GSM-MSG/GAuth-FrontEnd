@@ -85,9 +85,7 @@ export default function SignUpPage() {
                     maxLength={6}
                     value={email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|\s/g.test(e.target.value)
-                        ? setEmail(e.target.value)
-                        : '';
+                      setEmail(e.target.value.replace(/[^a-zA-Z\d]/gi, ''));
                     }}
                     onFocus={() => {
                       setEmailCheck(true);
@@ -106,6 +104,7 @@ export default function SignUpPage() {
                     ref={pwRef}
                     name="pw"
                     type="password"
+                    maxLength={72}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setPw(e.target.value)
                     }

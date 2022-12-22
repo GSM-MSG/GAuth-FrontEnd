@@ -170,7 +170,7 @@ export default function SignUpPage() {
                     accept="image/*"
                     id="profile"
                     style={{ display: 'none' }}
-                    onChange={(e) => changeHandler(e)}
+                    onChange={changeHandler}
                   />
                 </S.ProfileSVGWrapper>
                 <S.ProfileBtnWrapper>

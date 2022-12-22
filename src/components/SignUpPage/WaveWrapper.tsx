@@ -10,13 +10,13 @@ export default function WaveWrapper({
   const waveRef = useRef<HTMLDivElement>(null);
   const [waveWidth, setWaveWidth] = useState(0);
   useEffect(() => {
-    if (window.innerWidth < 1200) {
+    if (window.innerWidth <= 1200) {
       setWaveWidth(0);
     } else {
       if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);
     }
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 1200) {
+      if (window.innerWidth <= 1200) {
         setWaveWidth(0);
       } else {
         if (signUpRef.current) setWaveWidth(-signUpRef.current.offsetWidth);

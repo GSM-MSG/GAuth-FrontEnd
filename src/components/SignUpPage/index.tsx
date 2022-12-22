@@ -156,8 +156,8 @@ export default function SignUpPage() {
                 <S.ProfileSVGWrapper>
                   <label
                     htmlFor="profile"
-                    onDrop={(e) => dropHandler(e)}
-                    onDragOver={(e) => dragOverHandler(e)}
+                    onDrop={dropHandler}
+                    onDragOver={dragOverHandler}
                   >
                     {img ? <S.Profile src={img} /> : <SVG.ProfileFace />}
                     <i>

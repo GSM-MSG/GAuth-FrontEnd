@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
-import SendVerifyEmail from '../SendVerifyEmail';
+import VerifyEmail from '../VerifyEmail';
 import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
@@ -198,9 +198,7 @@ export default function SignUpPage() {
       {privacyConsent && (
         <PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
       )}
-      {data && (
-        <SendVerifyEmail email={email} pw={pw} profileImg={profileImg} />
-      )}
+      {data && <VerifyEmail email={email} pw={pw} profileImg={profileImg} />}
     </>
   );
 }

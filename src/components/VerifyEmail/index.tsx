@@ -6,7 +6,7 @@ import ApproveEmailModal from './ApproveEmailModal';
 import SuccessEmailCheckModal from './SuccessEmailCheckModal';
 import FailEmailCheckModal from './FailEmailCheckModal';
 
-export default function SendVerifyEmail({
+export default function VerifyEmail({
   email,
   pw,
   profileImg,
@@ -30,7 +30,7 @@ export default function SendVerifyEmail({
         if (request.status == 201) {
           setTimeout(() => {
             router.push('/login');
-          }, 2500);
+          }, 1500);
         }
       } catch (e) {
         alert('다시 시도해주세요');

@@ -9,6 +9,8 @@ import WaveWrapper from './WaveWrapper';
 
 export default function SignUpPage() {
   const signUpRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const pwRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState<string>('');
   const [pw, setPw] = useState<string>('');
   const [emailCheck, setEmailCheck] = useState<boolean>(false);
@@ -77,6 +79,7 @@ export default function SignUpPage() {
                 <S.InputWrapper>
                   <S.InputName being={emailCheck}>이메일</S.InputName>
                   <input
+                    ref={emailRef}
                     name="email"
                     type="text"
                     maxLength={6}
@@ -100,6 +103,7 @@ export default function SignUpPage() {
                 <S.InputWrapper>
                   <S.InputName being={pwCheck}>비밀번호</S.InputName>
                   <input
+                    ref={pwRef}
                     name="pw"
                     type="password"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -130,10 +134,10 @@ export default function SignUpPage() {
                   onClick={() => {
                     if (/^.{0}$/.test(email)) {
                       alert('이메일 입력이 잘못 되었습니다.');
-                      document.getElementsByName('email')[0].focus();
+                      emailRef.current?.focus();
                     } else if (!/^.{8,72}$/.test(pw)) {
                       alert('암호의 길이는 8자 이상 72자 이하 입니다.');
-                      document.getElementsByName('pw')[0].focus();
+                      pwRef.current?.focus();
                     } else if (!privacyCheck) {
                       alert('개인정보 수집 및 이용에 대해 동의해 주십시오.');
                     } else setChangeForm(true);

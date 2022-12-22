@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_ENV_DATA,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,PATCH,DELETE,OPTIONS',

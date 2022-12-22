@@ -1,8 +1,10 @@
 import * as S from './style';
-import * as SVG from '../../../public/svg';
 import { useEffect, useState } from 'react';
 import { API } from '../../lib/API';
 import { useRouter } from 'next/router';
+import ApproveEmailModal from './ApproveEmailModal';
+import SuccessEmailCheckModal from './SuccessEmailCheckModal';
+import FailEmailCheckModal from './FailEmailCheckModal';
 
 export default function SendVerifyEmail({
   email,
@@ -69,30 +71,13 @@ export default function SendVerifyEmail({
     <S.Layer>
       <S.Wrapper check={checkEmail}>
         {checkEmail ? (
-          <>
-            <h2>
-              회원가입이 완료되었습니다!
-              <br />
-              <br />
-              관리자 승인을 기다려 주세요!
-            </h2>
-          </>
+          <ApproveEmailModal />
         ) : (
           <>
             {emailErrorCheck ? (
-              <>
-                <h2>인증 메일이 전송되었습니다!</h2>
-                <p>
-                  전송된 메일에서 <span>인증 버튼</span>을 눌러
-                  <br /> 인증을 완료해주세요
-                </p>
-                <SVG.Mail />
-              </>
+              <SuccessEmailCheckModal />
             ) : (
-              <>
-                <h2>인증 버튼을 확인해주세요</h2>
-                <SVG.OopsIcon />
-              </>
+              <FailEmailCheckModal />
             )}
             <button type="button" onClick={() => CheckEmail()}>
               확인

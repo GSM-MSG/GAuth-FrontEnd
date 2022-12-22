@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
 import SideWave from './SideWave';
-import { accessToken, refreshToken } from '../../lib/Tokken';
+import { accessToken, refreshToken } from '../../lib/Token';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>('');

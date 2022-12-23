@@ -5,22 +5,24 @@ import React, { useEffect, useRef } from 'react';
 
 export default function SideWave() {
 
-  const waveRef = useRef<any>();
+  const waveRef = useRef<HTMLDivElement>(null);
   const [viewWidth, setViewWidth] = useRecoilState(ViewWidth);
 
   useEffect(() => {
-    if (viewWidth === 0) {
-      setViewWidth(window.innerWidth);
-    }
-    window.addEventListener('resize', (e: any) => {
-      setViewWidth(e.target.innerWidth);
-      if (viewWidth >= 900) {
-        waveRef.current.children[0].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
-        waveRef.current.children[1].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
-        waveRef.current.children[2].style.width = e.target.innerWidth > 1200 ? "100vh" : "100vw";
+    setViewWidth(window.innerWidth);
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setViewWidth(window.innerWidth)
+      if (viewWidth >= 900 && waveRef.current) {
+        const waves: HTMLCollection = waveRef.current.children
+        Array.prototype.map.call(waves, (e: HTMLDivElement, idx: number) => {
+          if (idx <= 2) e.style.width = window.innerWidth > 1200 ? "100vh" : "100vw"
+        })
       }
     })
-  }, [viewWidth])
+  }, [viewWidth, setViewWidth])
 
   return (
     <S.SideWaveBox ref={waveRef}>
@@ -63,11 +65,14 @@ export default function SideWave() {
           </linearGradient>
         </defs>
       </S.SideWave>
-
-      <S.Bubble delay={1.5} />
-      <S.Bubble delay={2} />
-      <S.Bubble delay={2.8} />
-      <S.Bubble delay={3.6} />
+      {viewWidth >= 1200 &&
+        <>
+          <S.Bubble delay={1.5} />
+          <S.Bubble delay={2} />
+          <S.Bubble delay={2.8} />
+          <S.Bubble delay={3.6} />
+        </>
+      }
     </S.SideWaveBox>
   )
 }

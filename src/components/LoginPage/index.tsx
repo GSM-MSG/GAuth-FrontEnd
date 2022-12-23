@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import * as S from "./style"
 import { API } from "../../lib/API";
 import SideWave from "./SideWave";
+import { accessToken, refreshToken } from "../../lib/Token";
 import { useRecoilValue } from 'recoil'
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from "../../../public/svg";
@@ -61,8 +62,8 @@ export default function LoginPage() {
             alert("로그인에 성공했습니다.")
 
             if (checkOauth) {
-                localStorage.setItem('Gauth-accessToken', data.accessToken);
-                localStorage.setItem('Gauth-refreshToken', data.refreshToken);
+                localStorage.setItem(accessToken, data.accessToken);
+                localStorage.setItem(refreshToken, data.refreshToken);
                 API.defaults.headers.common["Authorization"] = "Bearer " + data.accessToken
                 router.replace("/");
             } else {

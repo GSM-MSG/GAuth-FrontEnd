@@ -159,17 +159,35 @@ export const LoginContainer = styled.div`
     gap: 80px;
     justify-content: center;
     
-    h1{
+    > h1{
         text-align: center;
         font-size: 60px;
         font-weight: 100;
         letter-spacing: 5px;
-        margin: 0;
         color: #2E80CC;
-
+        
         @media (max-width: 1200px) {
             color: #fff;
             font-size: 55px;
+        }
+    }
+`
+
+export const LoginName = styled.h2`
+    text-align: center;
+    font-size: 50px;
+    max-height: 150px;
+    white-space : nowrap;
+
+    @media (max-width: 1200px) {
+        color: #fff;
+        font-size: 45px;
+    }
+    
+    span:nth-of-type(1){
+        color: #2E80CC;
+        @media (max-width: 1200px) {
+            color: #8cf;
         }
     }
 `
@@ -215,10 +233,11 @@ export const InputWrapper = styled.div`
 `
 
 export const Email = styled.div`
-    position: absolute;
-    top: -5px;
+    position: relative;
+    top: -60px;
     left: ${({ left }: { left: number }) => { return left + 40 + "px" }};
     font-size: 27px;
+    z-index: 100;
 
     @media (max-width: 1200px) {
         color: #fff;
@@ -279,7 +298,6 @@ export const Submit = styled.button`
     border-radius: 30px;
     margin-bottom: 10px;
     cursor: pointer;
-    
 
     &:active{
         box-shadow: rgba(50, 50, 93, 0.15) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;

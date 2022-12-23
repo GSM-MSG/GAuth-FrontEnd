@@ -59,34 +59,34 @@ export const Bubble = styled.span`
 
     @keyframes bubbleAnimate {
         0%,
-		100% {
-			opacity: 0;
-			transform: translateY(0);
-		}
-		10% {
-			transform: translateY(-25px) translateX(-5px);
+        100% {
+            opacity: 0;
+            transform: translateY(0);
+        }
+        10% {
+            transform: translateY(-25px) translateX(-5px);
             width: 5px;
             height: 5px;
-		}
+        }
         20% {
-			transform: translateY(-45px) translateX(-15px);
+            transform: translateY(-45px) translateX(-15px);
             width: 12px;
             height: 12px;
-		}
-		35% {
-			width: 19px;
-			height: 19px;
-			transform: translateY(-65px) translateX(-30px);
-		}
-		60% {
-			opacity: 1;
-			transform: translateY(-125px) translateX(-15px);
-			width: 30px;
-			height: 30px;
-		}
-		60.1% {
-			opacity: 0;
-		}
+        }
+        35% {
+        	width: 19px;
+        	height: 19px;
+        	transform: translateY(-65px) translateX(-30px);
+        }
+        60% {
+        	opacity: 1;
+        	transform: translateY(-125px) translateX(-15px);
+        	width: 30px;
+        	height: 30px;
+        }
+        60.1% {
+        	opacity: 0;
+        }
     }
 `
 

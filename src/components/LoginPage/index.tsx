@@ -20,12 +20,12 @@ export default function LoginPage() {
     const viewWidth = useRecoilValue(ViewWidth);
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement[]>([]);
-    const checkOauth = router.query.client_id === undefined && router.query.redirect_uri === undefined;
     const ref = useRef<HTMLSpanElement>(null);
+    const checkOauth = router.query.client_id === undefined && router.query.redirect_uri === undefined;
 
     useEffect(() => {
         if (!router.isReady) return
-        titleNaming()
+        !checkOauth && titleNaming()
     }, [router.isReady])
 
     const titleNaming = async () => {
@@ -106,7 +106,7 @@ export default function LoginPage() {
                             :
                             <S.LoginName>
                                 <span >GAuth</span> 계정으로<br />
-                                <span ref={ref}>{serviceName}fdsa에 로그인</span>
+                                <span ref={ref}>{serviceName}에 로그인</span>
                             </S.LoginName>
                     }
                     <S.InputContainer>
@@ -114,13 +114,15 @@ export default function LoginPage() {
                             <S.InputName being={emailCheck} error={error}>
                                 {error === 404 ? "이메일이 일치하지 않습니다" : "이메일"}
                             </S.InputName>
-                            <input name="이메일" type="text" maxLength={6} value={email}
-                                ref={(e: HTMLInputElement) => inputRef.current[0] = e}
-                                onChange={(e: ChangeEvent<HTMLInputElement>) => { setEmail(e.target.value.replace(/[^a-zA-Z\d]/gi, '')); }}
-                                onFocus={() => { setEmailCheck(true) }}
-                                onBlur={() => { !email && setEmailCheck(false); console.log(!email) }}
-                            />
-                            {email && <S.Email left={email.length * 13.5}>@gsm.hs.kr</S.Email>}
+                            <div>
+                                <input name="이메일" type="text" maxLength={6} value={email}
+                                    ref={(e: HTMLInputElement) => inputRef.current[0] = e}
+                                    onChange={(e: ChangeEvent<HTMLInputElement>) => { setEmail(e.target.value.replace(/[^a-zA-Z\d]/gi, '')); }}
+                                    onFocus={() => { setEmailCheck(true) }}
+                                    onBlur={() => { !email && setEmailCheck(false) }}
+                                />
+                                <S.Email>@gsm.hs.kr</S.Email>
+                            </div>
                         </S.InputWrapper>
                         <S.InputWrapper>
                             <S.InputName being={pwCheck} error={error}>{error === 400 ? "비밀번호가 일치하지 않습니다" : "비밀번호"}</S.InputName>
@@ -136,7 +138,7 @@ export default function LoginPage() {
                     <S.ButtonContainer>
                         <S.Submit onClick={onLogin}>로그인</S.Submit>
                         <div>
-                            <Link href="/regist">회원가입</Link> <span>l</span> <Link href="/find">비밀번호 찾기</Link>
+                            <Link href="/signUp">회원가입</Link> <span>l</span> <Link href="/initPassword">비밀번호 찾기</Link>
                         </div>
                     </S.ButtonContainer>
                 </S.LoginContainer >

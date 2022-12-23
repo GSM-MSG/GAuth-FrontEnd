@@ -197,6 +197,25 @@ export const InputContainer = styled.div`
     flex-direction: column;
     gap: 40px;
 
+    h2 {
+        position: relative;
+        margin: 0px auto -60px auto;
+        font-size: 27px;
+        font-weight: 400;
+    }
+`
+
+export const InputWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    position: relative;
+
+    > div{
+        max-height: 44px;
+    }
+
     input {
        border: none;
        border-bottom: 3px solid black;
@@ -208,34 +227,20 @@ export const InputContainer = styled.div`
        background-color: transparent;
        z-index: 10;
        cursor: pointer;
+       ime-mode: inactive;
 
        @media (max-width: 1200px) {
             color: #fff;
        }
     }
 
-    h2 {
-        position: relative;
-        margin: 0px auto -60px auto;
-        font-size: 27px;
-        font-weight: 400;
-
-        
-    }
-`
-
-export const InputWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
-    position: relative;
 `
 
 export const Email = styled.div`
     position: relative;
-    top: -60px;
-    left: ${({ left }: { left: number }) => { return left + 40 + "px" }};
+    display: inline;
+    top: -50px;
+    left: 60%;
     font-size: 27px;
     z-index: 100;
 

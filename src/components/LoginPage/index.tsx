@@ -1,14 +1,14 @@
-import Link from "next/link"
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-import * as S from "./style"
-import { API } from "../../lib/API";
-import SideWave from "./SideWave";
-import { accessToken, refreshToken } from "../../lib/Token";
+import Link from 'next/link'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import * as S from './style'
+import { API } from '../../lib/API'
+import SideWave from './SideWave'
+import { accessToken, refreshToken } from '../../lib/Token'
 import { useRecoilValue } from 'recoil'
-import { ViewWidth } from '../../Atom/Atoms';
-import { LoginLogo } from "../../../public/svg";
-import { AxiosError } from "axios";
-import { useRouter } from "next/router";
+import { ViewWidth } from '../../Atom/Atoms'
+import { LoginLogo } from '../../../public/svg'
+import { AxiosError } from 'axios'
+import { useRouter } from 'next/router'
 
 export default function LoginPage() {
     const [serviceName, setServiceName] = useState<string>("");

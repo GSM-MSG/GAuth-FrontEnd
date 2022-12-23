@@ -31,17 +31,19 @@ export default function SignUpPage() {
       reader.onloadend = () => {
         const { result } = reader;
         if (!result) return reader.readAsDataURL(files[0]);
-
-        if (typeof result == 'string') setImg(result);
-
-        if (typeof result != 'string') {
-          const arrayBuffer = new Uint16Array(result);
-          setImg(String.fromCharCode.apply(null, Array.from(arrayBuffer)));
-        }
+        imgUpload(result);
       };
     }
   };
 
+  const imgUpload = (result: string | ArrayBuffer) => {
+    if (typeof result == 'string') setImg(result);
+
+    if (typeof result != 'string') {
+      const arrayBuffer = new Uint16Array(result);
+      setImg(String.fromCharCode.apply(null, Array.from(arrayBuffer)));
+    }
+  };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleFiles(event.target.files!);
   };

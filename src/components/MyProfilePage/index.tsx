@@ -12,11 +12,18 @@ export default function MyProfilePage() {
       const reader = new FileReader();
       reader.onloadend = () => {
         const { result } = reader;
-        if (result) {
-          setImg(result as string);
-        }
+        if (!result) return reader.readAsDataURL(files[0]);
+        imgUpload(result);
       };
-      reader.readAsDataURL(files[0]);
+    }
+  };
+
+  const imgUpload = (result: string | ArrayBuffer) => {
+    if (typeof result == 'string') setImg(result);
+
+    if (typeof result != 'string') {
+      const arrayBuffer = new Uint16Array(result);
+      setImg(String.fromCharCode.apply(null, Array.from(arrayBuffer)));
     }
   };
 

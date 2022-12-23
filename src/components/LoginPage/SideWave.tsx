@@ -22,7 +22,7 @@ export default function SideWave() {
           e.target.innerWidth > 1200 ? '100vh' : '100vw';
       }
     });
-  }, [viewWidth]);
+  }, [viewWidth, setViewWidth]);
 
   return (
     <S.SideWaveBox ref={waveRef}>

@@ -1,31 +1,31 @@
 {
-	"name": "Gauth-Frontend",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
-	},
-	"dependencies": {
-		"@emotion/babel-plugin": "^11.10.2",
-		"@emotion/css": "^11.10.0",
-		"@emotion/react": "^11.10.4",
-		"@emotion/styled": "^11.10.4",
-		"axios": "^0.27.2",
-		"next": "12.2.5",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"react-wavify": "^1.6.1",
-		"recoil": "^0.7.6"
-	},
-	"devDependencies": {
-		"@types/node": "18.7.14",
-		"@types/react": "18.0.18",
-		"@types/react-dom": "18.0.6",
-		"eslint": "8.23.0",
-		"eslint-config-next": "12.2.5",
-		"typescript": "4.8.2"
-	}
+  "name": "Gauth-Frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/babel-plugin": "^11.10.2",
+    "@emotion/css": "^11.10.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "axios": "^0.27.2",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-wavify": "^1.6.1",
+    "recoil": "^0.7.6"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.14",
+    "@types/react": "18.0.18",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.23.0",
+    "eslint-config-next": "12.2.5",
+    "typescript": "4.8.2"
+  }
 }

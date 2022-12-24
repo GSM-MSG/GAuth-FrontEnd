@@ -7,17 +7,17 @@ interface InputProps {
 }
 
 export const Layer = styled.div`
-  width: 100vw;
-  height: 100vh;
+    width: 100vw;
+    height: 100vh;
     position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-    
-    @media (max-width: 1200px) {
-        margin-top: 5%;
-        height: 95%;
-    }
+    top: 0;
+    left: 0;
+    display: flex;
+
+        @media (max-width: 1200px) {
+            margin-top: 5%;
+            height: 95%;
+        }
 `;
 
 export const SideWaveBox = styled.div`

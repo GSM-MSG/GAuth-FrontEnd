@@ -21,11 +21,11 @@ export default function LoginPage() {
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement[]>([]);
     const serviceNameRef = useRef<HTMLSpanElement>(null);
-    const checkOauth = router.query.client_id === undefined && router.query.redirect_uri === undefined;
+    const isQuery = router.query.client_id === undefined && router.query.redirect_uri === undefined;
 
     useEffect(() => {
         if (!router.isReady) return
-        !checkOauth && titleNaming()
+        !isQuery && titleNaming()
     }, [router.isReady])
 
     const titleNaming = async () => {
@@ -53,7 +53,7 @@ export default function LoginPage() {
 
         try {
             const { data } = await API.post(
-                checkOauth ? "/auth" : "/oauth/code",
+                isQuery ? "/auth" : "/oauth/code",
                 {
                     email: email + "@gsm.hs.kr",
                     password: pw
@@ -61,7 +61,7 @@ export default function LoginPage() {
             );
             alert("로그인에 성공했습니다.")
 
-            if (checkOauth) {
+            if (isQuery) {
                 localStorage.setItem(accessToken, data.accessToken);
                 localStorage.setItem(refreshToken, data.refreshToken);
                 API.defaults.headers.common["Authorization"] = "Bearer " + data.accessToken
@@ -105,7 +105,7 @@ export default function LoginPage() {
                             <h1>Login</h1>
                             :
                             <S.LoginName>
-                                <span >GAuth</span> 계정으로<br />
+                                <span>GAuth</span> 계정으로<br />
                                 <span ref={serviceNameRef}>{serviceName}에 로그인</span>
                             </S.LoginName>
                     }

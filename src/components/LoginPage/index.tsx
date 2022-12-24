@@ -20,7 +20,7 @@ export default function LoginPage() {
     const viewWidth = useRecoilValue(ViewWidth);
     const router = useRouter();
     const inputRef = useRef<HTMLInputElement[]>([]);
-    const ref = useRef<HTMLSpanElement>(null);
+    const serviceNameRef = useRef<HTMLSpanElement>(null);
     const checkOauth = router.query.client_id === undefined && router.query.redirect_uri === undefined;
 
     useEffect(() => {
@@ -106,7 +106,7 @@ export default function LoginPage() {
                             :
                             <S.LoginName>
                                 <span >GAuth</span> 계정으로<br />
-                                <span ref={ref}>{serviceName}에 로그인</span>
+                                <span ref={serviceNameRef}>{serviceName}에 로그인</span>
                             </S.LoginName>
                     }
                     <S.InputContainer>

@@ -10,28 +10,38 @@ export default function Sidebar() {
           <S.MenuList>
             <S.MenuWrapper>
               <Link href="/servicelist">
-                <SVG.ServiceList />
+                <a>
+                  <SVG.ServiceList />
+                </a>
               </Link>
             </S.MenuWrapper>
             <S.MenuWrapper>
               <Link href="/newservice">
-                <SVG.AddService />
+                <a>
+                  <SVG.AddService />
+                </a>
               </Link>
             </S.MenuWrapper>
             <S.MenuWrapper>
               <Link href="/makeService">
-                <SVG.My />
+                <a>
+                  <SVG.My />
+                </a>
               </Link>
             </S.MenuWrapper>
             <S.MenuWrapper>
               <Link href="/my">
-                <SVG.Intruction />
+                <a>
+                  <SVG.Intruction />
+                </a>
               </Link>
             </S.MenuWrapper>
           </S.MenuList>
           <S.LogoutWrapper>
             <S.MenuWrapper>
-              <SVG.Logout />
+              <a>
+                <SVG.Logout />
+              </a>
             </S.MenuWrapper>
           </S.LogoutWrapper>
         </S.MenuContainer>

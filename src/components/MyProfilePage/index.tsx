@@ -8,15 +8,14 @@ export default function MyProfilePage() {
   const [profileImg, setProfileImg] = useState<FileList>();
 
   const handleFiles = (files: FileList) => {
-    if (files[0].type.startsWith('image/')) {
-      setProfileImg(files);
-      const reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-      reader.onloadend = () => {
-        const { result } = reader;
-        setImg(new Util.ImgUpload(result!).checkImgType());
-      };
-    }
+    if (!files[0].type.startsWith('image/')) return
+    setProfileImg(files);
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onloadend = () => {
+      const { result } = reader;
+      setImg(new Util.ImgUpload(result!).checkImgType());
+    };
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

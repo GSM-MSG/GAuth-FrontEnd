@@ -1,1 +1,1 @@
-export * from './ImgUpload';
+export * from './B64Data';

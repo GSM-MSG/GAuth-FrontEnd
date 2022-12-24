@@ -1,10 +1,10 @@
-export class ImgUpload {
+export class B64Data {
   result: string | ArrayBuffer;
   constructor(result: string | ArrayBuffer) {
     this.result = result;
   }
 
-  checkImgType() {
+  setB64DataToString() {
     if (typeof this.result === 'string') return this.result;
     else {
       const arrayBuffer = new Uint16Array(this.result);

@@ -29,11 +29,11 @@ export default function SignUpPage() {
     if (!files[0] || !files[0].type.startsWith('image/')) return;
     setProfileImg(files);
     const reader = new FileReader();
-    reader.readAsDataURL(files[0]);
     reader.onloadend = () => {
       const { result } = reader;
-      setImg(new Util.ImgUpload(result!).checkImgType());
+      if (result) setImg(new Util.B64Data(result).setB64DataToString());
     };
+    reader.readAsDataURL(files[0]);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
-import * as Util from '../../Util';
+import * as Util from '../../util';
 
 export default function MyProfilePage() {
   const [img, setImg] = useState('');

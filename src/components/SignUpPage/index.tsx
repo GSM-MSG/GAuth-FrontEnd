@@ -6,7 +6,7 @@ import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import WaveWrapper from './WaveWrapper';
-import * as Util from '../../Util';
+import * as Util from '../../util';
 
 export default function SignUpPage() {
   const signUpRef = useRef<HTMLDivElement>(null);

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
+import * as Util from '../../Util';
 
 export default function MyProfilePage() {
   const [img, setImg] = useState('');
@@ -10,20 +11,11 @@ export default function MyProfilePage() {
     if (files[0].type.startsWith('image/')) {
       setProfileImg(files);
       const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
         const { result } = reader;
-        if (!result) return reader.readAsDataURL(files[0]);
-        imgUpload(result);
+        setImg(new Util.ImgUpload(result!).checkImgType());
       };
-    }
-  };
-
-  const imgUpload = (result: string | ArrayBuffer) => {
-    if (typeof result == 'string') setImg(result);
-
-    if (typeof result != 'string') {
-      const arrayBuffer = new Uint16Array(result);
-      setImg(String.fromCharCode.apply(null, Array.from(arrayBuffer)));
     }
   };
 

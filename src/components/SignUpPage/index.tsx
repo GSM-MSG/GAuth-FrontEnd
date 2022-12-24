@@ -6,6 +6,7 @@ import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import WaveWrapper from './WaveWrapper';
+import * as Util from '../../Util';
 
 export default function SignUpPage() {
   const signUpRef = useRef<HTMLDivElement>(null);
@@ -28,22 +29,14 @@ export default function SignUpPage() {
     if (files[0].type.startsWith('image/')) {
       setProfileImg(files);
       const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
         const { result } = reader;
-        if (!result) return reader.readAsDataURL(files[0]);
-        imgUpload(result);
+        setImg(new Util.ImgUpload(result!).checkImgType());
       };
     }
   };
 
-  const imgUpload = (result: string | ArrayBuffer) => {
-    if (typeof result == 'string') setImg(result);
-
-    if (typeof result != 'string') {
-      const arrayBuffer = new Uint16Array(result);
-      setImg(String.fromCharCode.apply(null, Array.from(arrayBuffer)));
-    }
-  };
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleFiles(event.target.files!);
   };
@@ -51,7 +44,6 @@ export default function SignUpPage() {
   const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
-
     handleFiles(event.dataTransfer.files);
   };
 

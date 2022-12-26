@@ -32,7 +32,7 @@ export default function LoginPage() {
 
   const titleNaming = async () => {
     try {
-      const { data } = await API.get('/oauth/' + router.query.client_id);
+      const { data } = await API.get(`/oauth/${router.query.client_id}`);
       setServiceName(data.serviceName);
     } catch (e) {
       if (e instanceof AxiosError && e.response!.status === 404) {

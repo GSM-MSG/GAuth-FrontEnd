@@ -1,59 +1,30 @@
-import { useEffect, useState } from 'react';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import { API } from '../../lib/API';
+import { accessToken } from '../../lib/Token';
+import { useUser } from '../../hooks/useUser';
 
 export default function MyProfilePage() {
-  type User = {
-    email: string;
-    name: string;
-    grade: number;
-    classNum: number;
-    number: number;
-    profileUrl: string | null;
-  };
-  const [user, setUser] = useState<User>({
-    email: '',
-    name: '',
-    grade: 0,
-    classNum: 0,
-    number: 0,
-    profileUrl: null,
-  });
-  const [profileImg, setProfileImg] = useState<FileList>();
+  const { user, getUser } = useUser();
 
-  const getMyProfile = async () => {
+  const updateMyProfileImg = async (files: FileList) => {
     try {
-      const { data } = await API.get('/user');
-      setUser({
-        email: data.email,
-        name: data.name,
-        grade: data.grade,
-        classNum: data.classNum,
-        number: data.number,
-        profileUrl: data.profileUrl,
+      const formData = new FormData();
+      if (files) formData.append('image', files[0]);
+      const { request } = await API.patch('/user/image', formData, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem(accessToken),
+        },
       });
+      if (request.status == 204) getUser();
     } catch (e) {
       console.log(e);
     }
   };
-  useEffect(() => {
-    const updateMyProfileImg = async () => {
-      try {
-        const formData = new FormData();
-        if (profileImg) formData.append('image', profileImg[0]);
-        const { request } = await API.patch('/user/image', formData);
-        if (request.status == 204) getMyProfile();
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    if (profileImg) updateMyProfileImg();
-  }, [profileImg]);
 
   const handleFiles = (files: FileList) => {
     if (!files[0] || !files[0].type.startsWith('image/')) return;
-    setProfileImg(files);
+    updateMyProfileImg(files);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,11 +41,6 @@ export default function MyProfilePage() {
     event.preventDefault();
     event.stopPropagation();
   };
-
-  useEffect(() => {
-    getMyProfile();
-  }, []);
-
   return (
     <S.Positioner>
       <S.Layer>

@@ -1,21 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
-import * as Util from '../../util';
+import { API } from '../../lib/API';
 
 export default function MyProfilePage() {
-  const [img, setImg] = useState('');
+  type User = {
+    email: string;
+    name: string;
+    grade: number;
+    classNum: number;
+    number: number;
+    profileUrl: string | null;
+  };
+  const [user, setUser] = useState<User>({
+    email: '',
+    name: '',
+    grade: 0,
+    classNum: 0,
+    number: 0,
+    profileUrl: null,
+  });
   const [profileImg, setProfileImg] = useState<FileList>();
+
+  const getMyProfile = async () => {
+    try {
+      const { data } = await API.get('/user');
+      setUser({
+        email: data.email,
+        name: data.name,
+        grade: data.grade,
+        classNum: data.classNum,
+        number: data.number,
+        profileUrl: data.profileUrl,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    const updateMyProfileImg = async () => {
+      try {
+        const formData = new FormData();
+        if (profileImg) formData.append('image', profileImg[0]);
+        const { request } = await API.patch('/user/image', formData);
+        if (request.status == 204) getMyProfile();
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (profileImg) updateMyProfileImg();
+  }, [profileImg]);
 
   const handleFiles = (files: FileList) => {
     if (!files[0] || !files[0].type.startsWith('image/')) return;
     setProfileImg(files);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const { result } = reader;
-      if (result) setImg(new Util.B64Data(result).setB64DataToString());
-    };
-    reader.readAsDataURL(files[0]);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +70,11 @@ export default function MyProfilePage() {
     event.preventDefault();
     event.stopPropagation();
   };
+
+  useEffect(() => {
+    getMyProfile();
+  }, []);
+
   return (
     <S.Positioner>
       <S.Layer>
@@ -47,7 +90,11 @@ export default function MyProfilePage() {
                 onDrop={dropHandler}
                 onDragOver={dragOverHandler}
               >
-                {img ? <S.Profile src={img} /> : <SVG.ProfileSmallFace />}
+                {user.profileUrl ? (
+                  <S.Profile src={user.profileUrl} />
+                ) : (
+                  <SVG.ProfileSmallFace />
+                )}
                 <i>
                   <SVG.ModifyProfile />
                 </i>
@@ -63,10 +110,17 @@ export default function MyProfilePage() {
             </S.ProfileSVGWrapper>
             <S.PrivacySection>
               <div>
-                <h1>홍길동</h1>
-                <p>1학년 2반 18번</p>
+                <h1>{user.name}</h1>
+                <p>
+                  {user.grade +
+                    '학년 ' +
+                    user.classNum +
+                    '반 ' +
+                    user.number +
+                    '번'}
+                </p>
               </div>
-              <h3>s21073@gsm.hs.kr</h3>
+              <h3>{user.email}</h3>
             </S.PrivacySection>
           </S.UpLoadProfileContainter>
         </S.ProfileSection>

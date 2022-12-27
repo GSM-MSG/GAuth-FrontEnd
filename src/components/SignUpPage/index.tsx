@@ -7,6 +7,8 @@ import * as S from './style';
 import * as SVG from '../../../public/svg';
 import WaveWrapper from './WaveWrapper';
 import * as Util from '../../util';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 export default function SignUpPage() {
   const signUpRef = useRef<HTMLDivElement>(null);
@@ -53,11 +55,15 @@ export default function SignUpPage() {
       const { request } = await API.post('/email', {
         email: email + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
       });
-      if (request.status) {
-        setData(true);
-      }
+      if (request.status !== 204) return toast.error('다시 시도해 주세요');
+      setData(true);
     } catch (e) {
-      alert('다시 시도해주세요');
+      if (e instanceof AxiosError) {
+        if (e.response?.status === 429)
+          return toast.error('15분 동안 최대 3번 요청 가능합니다.');
+        if (e.response?.status === 500) return toast.error('error');
+        return toast.error('error');
+      }
     }
   };
 

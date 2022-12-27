@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import ApproveEmailModal from './ApproveEmailModal';
 import SuccessEmailCheckModal from './SuccessEmailCheckModal';
 import FailEmailCheckModal from './FailEmailCheckModal';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 export default function VerifyEmail({
   email,
@@ -15,8 +17,9 @@ export default function VerifyEmail({
   pw: string;
   profileImg?: FileList;
 }) {
-  const [checkEmail, setCheckEmail] = useState(false);
-  const [emailErrorCheck, setEmailErrorCheck] = useState(true);
+  const [emailApprove, setEmailApprove] = useState(false);
+  const [signUpCheck, setSignUpCheck] = useState(false);
+  const [approveRequestCount, setApproveRequestCount] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,13 +30,20 @@ export default function VerifyEmail({
           password: pw,
           profileUrl: typeof data == 'string' ? data : null,
         });
-        if (request.status == 201) {
-          setTimeout(() => {
-            router.push('/login');
-          }, 1500);
-        }
+        if (request.status !== 201) return toast.error('error');
+        setSignUpCheck(true);
+        setTimeout(() => {
+          router.push('/login');
+        }, 1500);
       } catch (e) {
-        alert('다시 시도해주세요');
+        if (e instanceof AxiosError) {
+          if (e.response?.status === 409) toast.error('이미 가입한 계정입니다');
+          if (e.response?.status === 400)
+            toast.error('이메일,비밀번호가 바르지 않습니다');
+        }
+        setTimeout(() => {
+          router.reload();
+        }, 3000);
       }
     };
 
@@ -49,33 +59,38 @@ export default function VerifyEmail({
         });
         SingUp(data.imageUrl);
       } catch (e) {
-        alert('다시 시도해주세요');
+        toast.error('이미지 요청 실패');
       }
     };
-    if (checkEmail) profileImg ? GetImgURL() : SingUp();
-  }, [checkEmail, email, pw, profileImg, router]);
+    if (emailApprove) profileImg ? GetImgURL() : SingUp();
+  }, [emailApprove, email, pw, profileImg, router]);
 
   const CheckEmail = async () => {
     try {
       const { request } = await API.get('/email', {
         params: { email: email + '@gsm.hs.kr' },
       });
-      if (request.status == 200) setCheckEmail(true);
-      else setEmailErrorCheck(request.status);
+      if (request.status !== 200) setApproveRequestCount((prev) => ++prev);
+      setEmailApprove(true);
     } catch (e) {
-      setEmailErrorCheck(false);
+      setApproveRequestCount((prev) => ++prev);
+      toast.error('이메일을 확인해 주세요');
     }
   };
 
   return (
     <S.Layer>
-      <S.Wrapper check={checkEmail}>
-        {checkEmail ? (
-          <ApproveEmailModal />
+      <S.Wrapper check={emailApprove}>
+        {emailApprove ? (
+          signUpCheck ? (
+            <SuccessEmailCheckModal />
+          ) : (
+            <p>회원가입 실패</p>
+          )
         ) : (
           <>
-            {emailErrorCheck ? (
-              <SuccessEmailCheckModal />
+            {approveRequestCount === 0 ? (
+              <ApproveEmailModal />
             ) : (
               <FailEmailCheckModal />
             )}

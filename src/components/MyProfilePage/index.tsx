@@ -3,6 +3,7 @@ import * as SVG from '../../../public/svg';
 import { API } from '../../lib/API';
 import { accessToken } from '../../lib/Token';
 import { useUser } from '../../hooks/useUser';
+import { toast } from 'react-toastify';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
@@ -16,9 +17,11 @@ export default function MyProfilePage() {
           Authorization: 'Bearer ' + localStorage.getItem(accessToken),
         },
       });
-      if (request.status == 204) getUser();
+      if (request.status != 204)
+        return toast.error('이미지 업로드를 실패하였습니다.');
+      getUser();
     } catch (e) {
-      console.log(e);
+      toast.error('이미지 업로드를 실패하였습니다.');
     }
   };
 

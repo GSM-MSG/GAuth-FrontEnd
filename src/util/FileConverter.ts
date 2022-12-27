@@ -1,4 +1,4 @@
-export class B64Data {
+export class FileConverter {
   b64Data: string;
   constructor() {
     this.b64Data = '';
@@ -10,7 +10,7 @@ export class B64Data {
       const arrayBuffer = new Uint16Array(result);
       this.b64Data = String.fromCharCode.apply(null, Array.from(arrayBuffer));
     }
-    this.onreadend();
+    this.onReadEnd();
   }
 
   readFiles(files: FileList) {
@@ -22,5 +22,5 @@ export class B64Data {
       this.setB64DataToString(result);
     };
   }
-  onreadend() {}
+  onReadEnd() {}
 }

@@ -28,8 +28,8 @@ export default function SignUpPage() {
   const handleFiles = (files: FileList) => {
     if (!files[0] || !files[0].type.startsWith('image/')) return;
     setProfileImg(files);
-    const getB64Data = new Util.B64Data();
-    getB64Data.onreadend = () => setImg(getB64Data.b64Data);
+    const getB64Data = new Util.FileConverter();
+    getB64Data.onReadEnd = () => setImg(getB64Data.b64Data);
     getB64Data.readFiles(files);
   };
 

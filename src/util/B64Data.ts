@@ -1,21 +1,26 @@
 export class B64Data {
-  setB64DataToString(result: string | ArrayBuffer) {
-    if (typeof result === 'string') return result;
-    else {
-      const arrayBuffer = new Uint16Array(result);
-      return String.fromCharCode.apply(null, Array.from(arrayBuffer));
-    }
+  b64Data: string;
+  constructor() {
+    this.b64Data = '';
   }
 
-  readFiles(
-    files: FileList,
-    getB64Data: React.Dispatch<React.SetStateAction<string>>
-  ) {
+  setB64DataToString(result: string | ArrayBuffer) {
+    if (typeof result === 'string') this.b64Data = result;
+    if (typeof result !== 'string') {
+      const arrayBuffer = new Uint16Array(result);
+      this.b64Data = String.fromCharCode.apply(null, Array.from(arrayBuffer));
+    }
+    this.onreadend();
+  }
+
+  readFiles(files: FileList) {
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onloadend = () => {
       const { result } = reader;
-      if (result) getB64Data(this.setB64DataToString(result));
+      if (!result) return;
+      this.setB64DataToString(result);
     };
   }
+  onreadend() {}
 }

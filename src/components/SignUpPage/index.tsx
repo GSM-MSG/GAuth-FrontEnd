@@ -28,7 +28,9 @@ export default function SignUpPage() {
   const handleFiles = (files: FileList) => {
     if (!files[0] || !files[0].type.startsWith('image/')) return;
     setProfileImg(files);
-    new Util.B64Data().readFiles(files, setImg);
+    const getB64Data = new Util.B64Data();
+    getB64Data.onreadend = () => setImg(getB64Data.b64Data);
+    getB64Data.readFiles(files);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

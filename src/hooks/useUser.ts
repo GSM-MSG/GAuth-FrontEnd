@@ -24,13 +24,7 @@ export const useUser = (): [ClientInform, () => void] => {
       });
       if (request.status != 200) return;
       setUser({
-        email: data.email,
-        name: data.name,
-        grade: data.grade,
-        classNum: data.classNum,
-        number: data.number,
-        profileUrl: data.profileUrl,
-        clientList: data.clientList,
+        ...data,
       });
     } catch (e) {
       toast.error('error');

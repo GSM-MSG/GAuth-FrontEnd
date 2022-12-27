@@ -5,7 +5,7 @@ import { accessToken } from '../../lib/Token';
 import { useUser } from '../../hooks/useUser';
 
 export default function MyProfilePage() {
-  const { user, getUser } = useUser();
+  const [user, getUser] = useUser();
 
   const updateMyProfileImg = async (files: FileList) => {
     try {

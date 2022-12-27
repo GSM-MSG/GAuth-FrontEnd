@@ -31,7 +31,7 @@ export default function MyProfilePage() {
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    handleFiles(event.target.files!);
+    if (event.target.files) handleFiles(event.target.files);
   };
 
   const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {

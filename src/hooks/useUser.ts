@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react';
 import { API } from '../lib/API';
 import { accessToken } from '../lib/Token';
+import { ClientInform } from '../types';
 
-type UserType = {
-  email: string;
-  name: string;
-  grade: number | null;
-  classNum: number | null;
-  number: number | null;
-  profileUrl: string | null;
-  clientList: ClientListType[];
-};
-
-interface ClientListType {
-  id: number;
-  clientId: String;
-  serviceName: String;
-  serviceUri: String;
-}
-
-export const useUser = (): [UserType, () => void] => {
-  const [user, setUser] = useState<UserType>({
+export const useUser = (): [ClientInform, () => void] => {
+  const [user, setUser] = useState<ClientInform>({
     email: '',
     name: '',
     grade: 0,

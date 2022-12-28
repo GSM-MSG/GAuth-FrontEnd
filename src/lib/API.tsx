@@ -1,41 +1,76 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import Router from 'next/router';
+import { accessToken, refreshToken } from './Token';
 
 export const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
   headers: {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,PATCH,DELETE,OPTIONS',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,PATCH,DELETE,OPTIONS,REQUEST',
     'Access-Control-Allow-Headers':
       'x-access-token, Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Alllow-Credentials': true,
+    'Access-Control-Allow-Credentials': true,
   },
 });
 
-// API.interceptors.request.use(
-//   async (config: AxiosRequestConfig) => {
-//     if (config.headers) {
-//       try {
-//         const { data } = await API.patch('/auth', {
-//           headers: { RefreshToken: localStorage.getItem('Gauth-refreshToken') },
-//         });
+API.interceptors.request.use(
+  (config: AxiosRequestConfig) => {
+    const access_token: string | null = localStorage.getItem(accessToken);
+    const refresh_token: string | null = localStorage.getItem(refreshToken);
 
-//         config.headers['Authorization'] = 'Bearer ' + data.accessToken;
-//         localStorage.setItem('Gauth-accessToken', data.accessToken);
-//         localStorage.setItem('Gauth-refreshToken', data.refreshToken);
-//       } catch (error: any) {
-//         if (
-//           error.message === 'Request failed with status code 401' ||
-//           error.message === 'Request failed with status code 404'
-//         ) {
-//           localStorage.removeItem('Gauth-accessToken');
-//           localStorage.removeItem('Gauth-refreshToken');
-//           window.location.replace('/login');
-//         }
-//       }
-//     }
-//     return config;
-//   },
-//   async (error: AxiosError) => {
-//     return Promise.reject(error);
-//   }
-// );
+    if (config.headers) {
+      config.headers['Authorization'] = access_token
+        ? `Bearer ${access_token}`
+        : '';
+
+      config.headers['refreshToken'] = refresh_token
+        ? `Bearer ${refresh_token}`
+        : '';
+    }
+    return config;
+  },
+
+  (err: AxiosError) => {
+    return Promise.reject(err);
+  }
+);
+
+API.interceptors.response.use(
+  (res: AxiosResponse) => {
+    return res;
+  },
+
+  async (err: AxiosError) => {
+    if (
+      err.config.headers &&
+      err.response &&
+      (err.response.status === 401 || err.response.status === 401)
+    ) {
+      const refresh_token: string | null =
+        localStorage.getItem(refreshToken) ?? '';
+      try {
+        const { data } = await axios.patch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/auth`,
+          {},
+          {
+            headers: {
+              RefreshToken: `Bearer ${refresh_token}`,
+            },
+          }
+        );
+
+        axios.defaults.headers.common['Authorization'] = `${data.accessToken}`;
+        localStorage.setItem(accessToken, data.accessToken);
+        localStorage.setItem(refreshToken, data.refreshToken);
+        return await API.request(err.config);
+      } catch (err) {
+        localStorage.removeItem(accessToken);
+        localStorage.removeItem(refreshToken);
+        Router.replace('/login');
+        return Promise.reject(err);
+      }
+    }
+    return Promise.reject(err);
+  }
+);

@@ -27,7 +27,6 @@ export default function VerifyEmail({
   const router = useRouter();
   const { emailApprove, signUpCheck, approveRequestCount } = state;
 
-  console.log(state);
   useEffect(() => {
     const SingUp = async (data?: string) => {
       try {
@@ -45,17 +44,16 @@ export default function VerifyEmail({
           router.push('/login');
         }, 1500);
       } catch (e) {
-        if (e instanceof AxiosError) {
-          if (e.response?.status === 409) toast.error('이미 가입한 계정입니다');
-          if (e.response?.status === 400)
-            toast.error('이메일,비밀번호가 바르지 않습니다');
-          resetStateHandler();
-          setState({
-            emailApprove: false,
-            signUpCheck: false,
-            approveRequestCount: 0,
-          });
-        }
+        if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
+        if (e.response?.status === 409) toast.error('이미 가입한 계정입니다');
+        if (e.response?.status === 400)
+          toast.error('이메일,비밀번호가 바르지 않습니다');
+        resetStateHandler();
+        setState({
+          emailApprove: false,
+          signUpCheck: false,
+          approveRequestCount: 0,
+        });
       }
     };
 

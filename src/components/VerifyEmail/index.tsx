@@ -12,16 +12,22 @@ export default function VerifyEmail({
   email,
   pw,
   profileImg,
+  resetStateHandler,
 }: {
   email: string;
   pw: string;
   profileImg?: FileList;
+  resetStateHandler: () => void;
 }) {
-  const [emailApprove, setEmailApprove] = useState(false);
-  const [signUpCheck, setSignUpCheck] = useState(false);
-  const [approveRequestCount, setApproveRequestCount] = useState(0);
+  const [state, setState] = useState({
+    emailApprove: false,
+    signUpCheck: false,
+    approveRequestCount: 0,
+  });
   const router = useRouter();
+  const { emailApprove, signUpCheck, approveRequestCount } = state;
 
+  console.log(state);
   useEffect(() => {
     const SingUp = async (data?: string) => {
       try {
@@ -31,7 +37,10 @@ export default function VerifyEmail({
           profileUrl: typeof data == 'string' ? data : null,
         });
         if (request.status !== 201) return toast.error('error');
-        setSignUpCheck(true);
+        setState((prev) => ({
+          ...prev,
+          signUpCheck: !signUpCheck,
+        }));
         setTimeout(() => {
           router.push('/login');
         }, 1500);
@@ -40,10 +49,13 @@ export default function VerifyEmail({
           if (e.response?.status === 409) toast.error('이미 가입한 계정입니다');
           if (e.response?.status === 400)
             toast.error('이메일,비밀번호가 바르지 않습니다');
+          resetStateHandler();
+          setState({
+            emailApprove: false,
+            signUpCheck: false,
+            approveRequestCount: 0,
+          });
         }
-        setTimeout(() => {
-          router.reload();
-        }, 3000);
       }
     };
 
@@ -63,17 +75,36 @@ export default function VerifyEmail({
       }
     };
     if (emailApprove) profileImg ? GetImgURL() : SingUp();
-  }, [emailApprove, email, pw, profileImg, router]);
+  }, [
+    emailApprove,
+    email,
+    pw,
+    profileImg,
+    router,
+    signUpCheck,
+    setState,
+    resetStateHandler,
+  ]);
 
   const CheckEmail = async () => {
     try {
       const { request } = await API.get('/email', {
         params: { email: email + '@gsm.hs.kr' },
       });
-      if (request.status !== 200) setApproveRequestCount((prev) => ++prev);
-      setEmailApprove(true);
+      if (request.status !== 200)
+        setState((prev) => ({
+          ...prev,
+          approveRequestCount: ++prev.approveRequestCount,
+        }));
+      setState((prev) => ({
+        ...prev,
+        emailApprove: !emailApprove,
+      }));
     } catch (e) {
-      setApproveRequestCount((prev) => ++prev);
+      setState((prev) => ({
+        ...prev,
+        approveRequestCount: ++prev.approveRequestCount,
+      }));
       toast.error('이메일을 확인해 주세요');
     }
   };

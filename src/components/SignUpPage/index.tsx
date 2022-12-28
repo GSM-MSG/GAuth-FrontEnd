@@ -6,36 +6,40 @@ import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import WaveWrapper from './WaveWrapper';
+import * as Util from '../../util';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
+import { useForm } from 'react-hook-form';
 
 export default function SignUpPage() {
-  const signUpRef = useRef<HTMLDivElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const pwRef = useRef<HTMLInputElement>(null);
-  const [email, setEmail] = useState<string>('');
-  const [pw, setPw] = useState<string>('');
-  const [emailCheck, setEmailCheck] = useState<boolean>(false);
-  const [pwCheck, setPwCheck] = useState<boolean>(false);
-  const [privacyCheck, setPrivacyCheck] = useState(false);
-  const [privacyConsent, setPrivacyConsent] = useState<boolean>(false);
-  const [changeForm, setChangeForm] = useState(false);
-  const [img, setImg] = useState('');
-  const [profileImg, setProfileImg] = useState<FileList>();
-  const [data, setData] = useState(false);
+  const formDefaultValues = {
+    email: '',
+    pw: '',
+    emailCheck: false,
+    pwCheck: false,
+    privacyCheck: false,
+    privacyConsent: false,
+    changeForm: false,
+    img: '',
+    verifyEmail: false,
+  };
 
-  //프로필 추가 함수
+  const signUpRef = useRef<HTMLDivElement>(null);
+  const [profileImg, setProfileImg] = useState<FileList>();
+  const { register, watch, setValue, setFocus, reset } = useForm({
+    defaultValues: formDefaultValues,
+  });
+
+  const resetStateHandler = () => {
+    reset(formDefaultValues);
+  };
 
   const handleFiles = (files: FileList) => {
-    if (files[0].type.startsWith('image/')) {
-      setProfileImg(files);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const { result } = reader;
-        if (result) {
-          setImg(result as string);
-        }
-      };
-      reader.readAsDataURL(files[0]);
-    }
+    if (!files[0] || !files[0].type.startsWith('image/')) return;
+    setProfileImg(files);
+    const getB64Data = new Util.FileConverter();
+    getB64Data.onReadEnd = () => setValue('img', getB64Data.b64Data);
+    getB64Data.readFiles(files);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +49,6 @@ export default function SignUpPage() {
   const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
-
     handleFiles(event.dataTransfer.files);
   };
 
@@ -57,13 +60,15 @@ export default function SignUpPage() {
   const RequsetEmail = async () => {
     try {
       const { request } = await API.post('/email', {
-        email: email + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
+        email: watch('email') + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
       });
-      if (request.status) {
-        setData(true);
-      }
+      if (request.status !== 204) return toast.error('다시 시도해 주세요');
+      setValue('verifyEmail', true);
     } catch (e) {
-      alert('다시 시도해주세요');
+      if (!(e instanceof AxiosError)) return toast.error('unknown error');
+      if (e.response?.status === 429)
+        return toast.error('15분 동안 최대 3번 요청 가능합니다.');
+      if (e.response?.status === 500) return toast.error('error');
     }
   };
 
@@ -73,73 +78,71 @@ export default function SignUpPage() {
         <WaveWrapper signUpRef={signUpRef} />
         <S.SignUpWrapper ref={signUpRef}>
           <S.Container>
-            <S.SignUpContainer changeForm={changeForm}>
+            <S.SignUpContainer changeForm={watch('changeForm')}>
               <h1>SIGNUP</h1>
               <S.InputContainer>
                 <S.InputWrapper>
-                  <S.InputName being={emailCheck}>이메일</S.InputName>
+                  <S.InputName being={watch('emailCheck')}>이메일</S.InputName>
                   <input
-                    ref={emailRef}
-                    name="email"
-                    type="text"
                     maxLength={6}
-                    value={email}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setEmail(e.target.value.replace(/[^a-zA-Z\d]/gi, ''));
-                    }}
+                    {...register('email', {
+                      onChange(e) {
+                        setValue(
+                          'email',
+                          e.target.value.replace(/[^a-zA-Z\d]/gi, '')
+                        );
+                      },
+                      onBlur(e) {
+                        !e.target.value && setValue('emailCheck', false);
+                      },
+                    })}
                     onFocus={() => {
-                      setEmailCheck(true);
-                    }}
-                    onBlur={() => {
-                      !email && setEmailCheck(false);
+                      setValue('emailCheck', true);
                     }}
                   />
-                  {email && (
-                    <S.Email left={email.length * 13.5}>@gsm.hs.kr</S.Email>
-                  )}
+                  <S.Email>@gsm.hs.kr</S.Email>
                 </S.InputWrapper>
                 <S.InputWrapper>
-                  <S.InputName being={pwCheck}>비밀번호</S.InputName>
+                  <S.InputName being={watch('pwCheck')}>비밀번호</S.InputName>
                   <input
-                    ref={pwRef}
-                    name="pw"
                     type="password"
                     maxLength={72}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setPw(e.target.value)
-                    }
-                    value={pw}
-                    onFocus={() => {
-                      setPwCheck(true);
-                    }}
-                    onBlur={() => {
-                      !pw && setPwCheck(false);
-                    }}
+                    {...register('pw', {
+                      onBlur(e) {
+                        !e.target.value && setValue('pwCheck', false);
+                      },
+                    })}
+                    onFocus={() => [setValue('pwCheck', true)]}
                   />
                 </S.InputWrapper>
                 <S.PrivacyConsent>
                   <input
                     type="checkbox"
-                    onClick={() => {
-                      setPrivacyCheck((prev) => !prev);
+                    checked={watch('privacyCheck')}
+                    onChange={() => {
+                      setValue('privacyCheck', !watch('privacyCheck'));
                     }}
                   />
                   <p>개인정보 수집 및 이용에 대한 동의</p>
-                  <a onClick={() => setPrivacyConsent(true)}>자세히 보기</a>
+                  <a onClick={() => setValue('privacyConsent', true)}>
+                    자세히 보기
+                  </a>
                 </S.PrivacyConsent>
               </S.InputContainer>
               <S.ButtonContainer>
                 <S.Submit
                   onClick={() => {
-                    if (/^.{0}$/.test(email)) {
-                      alert('이메일 입력이 잘못 되었습니다.');
-                      emailRef.current?.focus();
-                    } else if (!/^.{8,72}$/.test(pw)) {
-                      alert('암호의 길이는 8자 이상 72자 이하 입니다.');
-                      pwRef.current?.focus();
-                    } else if (!privacyCheck) {
-                      alert('개인정보 수집 및 이용에 대해 동의해 주십시오.');
-                    } else setChangeForm(true);
+                    if (/^.{0}$/.test(watch('email'))) {
+                      toast.error('이메일 입력을 확인해주세요.');
+                      setFocus('email');
+                    } else if (!/^.{8,72}$/.test(watch('pw'))) {
+                      toast.error('암호의 길이는 8자 이상 72자 이하 입니다.');
+                      setFocus('pw');
+                    } else if (!watch('privacyCheck')) {
+                      toast.error(
+                        '개인정보 수집 및 이용에 대해 동의해 주십시오.'
+                      );
+                    } else setValue('changeForm', true);
                   }}
                 >
                   다음
@@ -150,7 +153,7 @@ export default function SignUpPage() {
                 </div>
               </S.ButtonContainer>
             </S.SignUpContainer>
-            <S.SignUpContainer changeForm={changeForm}>
+            <S.SignUpContainer changeForm={watch('changeForm')}>
               <h1>PROFILE</h1>
               <S.UpLoadProfileContainter>
                 <S.ProfileSVGWrapper>
@@ -159,7 +162,11 @@ export default function SignUpPage() {
                     onDrop={dropHandler}
                     onDragOver={dragOverHandler}
                   >
-                    {img ? <S.Profile src={img} /> : <SVG.ProfileFace />}
+                    {watch('img') ? (
+                      <S.Profile src={watch('img')} />
+                    ) : (
+                      <SVG.ProfileFace />
+                    )}
                     <i>
                       <SVG.PlusBtn />
                     </i>
@@ -177,7 +184,7 @@ export default function SignUpPage() {
                   <div>
                     <S.ChangeBtn
                       position="left"
-                      onClick={() => setChangeForm(false)}
+                      onClick={() => setValue('changeForm', false)}
                     >
                       이전
                     </S.ChangeBtn>
@@ -198,10 +205,17 @@ export default function SignUpPage() {
           </S.Container>
         </S.SignUpWrapper>
       </S.Layer>
-      {privacyConsent && (
-        <PrivacyConsent closeHandle={() => setPrivacyConsent(false)} />
+      {watch('privacyConsent') && (
+        <PrivacyConsent closeHandle={() => setValue('privacyConsent', false)} />
       )}
-      {data && <VerifyEmail email={email} pw={pw} profileImg={profileImg} />}
+      {watch('verifyEmail') && (
+        <VerifyEmail
+          email={watch('email')}
+          pw={watch('pw')}
+          profileImg={profileImg}
+          resetStateHandler={() => resetStateHandler()}
+        />
+      )}
     </>
   );
 }

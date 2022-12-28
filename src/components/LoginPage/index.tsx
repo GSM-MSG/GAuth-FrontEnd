@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import { API } from '../../lib/API';
 import SideWave from './SideWave';
-import { accessToken, refreshToken } from '../../lib/Token';
+import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { useRecoilValue } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
@@ -62,6 +62,7 @@ export default function LoginPage() {
       if (isQuery) {
         localStorage.setItem(accessToken, data.accessToken);
         localStorage.setItem(refreshToken, data.refreshToken);
+        localStorage.setItem(expiredAt, data.expiresAt);
         API.defaults.headers.common['Authorization'] =
           'Bearer ' + data.accessToken;
         router.replace('/');

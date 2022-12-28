@@ -100,11 +100,7 @@ export default function SignUpPage() {
                       setValue('emailCheck', true);
                     }}
                   />
-                  {watch('email') && (
-                    <S.Email left={watch('email').length * 13.5}>
-                      @gsm.hs.kr
-                    </S.Email>
-                  )}
+                  <S.Email>@gsm.hs.kr</S.Email>
                 </S.InputWrapper>
                 <S.InputWrapper>
                   <S.InputName being={watch('pwCheck')}>비밀번호</S.InputName>

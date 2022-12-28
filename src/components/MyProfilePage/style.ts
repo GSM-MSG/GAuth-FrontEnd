@@ -105,5 +105,3 @@ export const PrivacySection = styled.div`
     color: #929292;
   }
 `;
-
-export const Section = styled.div``;

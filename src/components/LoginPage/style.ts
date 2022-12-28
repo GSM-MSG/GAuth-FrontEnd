@@ -1,10 +1,6 @@
 import styled from '@emotion/styled';
 import Wave from 'react-wavify';
-
-interface InputProps {
-  being: boolean;
-  error: number;
-}
+import { LoginInputProps } from '../../types';
 
 export const Layer = styled.div`
   width: 100vw;
@@ -247,7 +243,7 @@ export const Email = styled.div`
   }
 `;
 
-export const InputName = styled.h3<InputProps>`
+export const InputName = styled.h3<LoginInputProps>`
   color: #929292;
   position: absolute;
   margin: 0;

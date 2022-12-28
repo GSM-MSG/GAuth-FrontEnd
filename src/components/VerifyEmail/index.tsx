@@ -33,7 +33,7 @@ export default function VerifyEmail({
         const { request } = await API.post('/auth/signup', {
           email: email + '@gsm.hs.kr',
           password: pw,
-          profileUrl: typeof data == 'string' ? data : null,
+          profileUrl: data ?? null,
         });
         if (request.status !== 201) return toast.error('error');
         setState((prev) => ({

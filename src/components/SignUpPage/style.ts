@@ -214,9 +214,7 @@ export const InputWrapper = styled.div`
 export const Email = styled.div`
   position: absolute;
   top: -5px;
-  left: ${({ left }: { left: number }) => {
-    return left + 40 + 'px';
-  }};
+  right: 0;
   font-size: 27px;
   @media (max-width: 1200px) {
     color: #fff;

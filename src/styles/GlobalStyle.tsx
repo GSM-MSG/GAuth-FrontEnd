@@ -1,5 +1,6 @@
 import React from 'react';
 import { Global, css } from '@emotion/react';
+import 'react-toastify/dist/ReactToastify.css';
 
 const style = css`
   * {

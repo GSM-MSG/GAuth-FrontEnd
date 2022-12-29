@@ -113,7 +113,7 @@ export default function LoginPage() {
           <S.InputContainer>
             <S.InputWrapper>
               <S.InputName being={emailCheck} error={error}>
-                {error === 404 ? '이메일이 일치하지 않습니다' : '이메일'}
+                이메일
               </S.InputName>
               <div>
                 <input
@@ -137,7 +137,7 @@ export default function LoginPage() {
             </S.InputWrapper>
             <S.InputWrapper>
               <S.InputName being={pwCheck} error={error}>
-                {error === 400 ? '비밀번호가 일치하지 않습니다' : '비밀번호'}
+                비밀번호
               </S.InputName>
               <input
                 name="비밀번호"

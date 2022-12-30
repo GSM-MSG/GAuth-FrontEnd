@@ -46,7 +46,6 @@ API.interceptors.response.use(
 
   async (err: AxiosError) => {
     if (
-      err.config.headers &&
       err.response &&
       (err.response.status === 401 || err.response.status === 404)
     ) {

@@ -73,16 +73,12 @@ export default function LoginPage() {
         );
       }
     } catch (e) {
-      if (e instanceof AxiosError) {
-        if (e.response!.status === 400 || e.response!.status === 404) {
-          toast.warn('이메일 또는 비밀번호가 틀렸습니다.');
-        } else if (e.response!.status === 403) {
-          toast.info('관리자의 승인이 필요합니다');
-        } else {
-          toast.error('예기치 못한 오류가 발생하였습니다.');
-        }
-        setError(e.response!.status);
-      }
+      if (!(e instanceof AxiosError))
+        return toast.error('예기치 못한 오류가 발생하였습니다.');
+      if (e.response?.status === 400 || e.response?.status === 404)
+        toast.warn('이메일 또는 비밀번호가 틀렸습니다.');
+      if (e.response!.status === 403) toast.info('관리자의 승인이 필요합니다');
+      setError(e.response!.status);
     }
   };
 

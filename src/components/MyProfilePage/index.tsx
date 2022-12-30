@@ -4,6 +4,7 @@ import { API } from '../../lib/API';
 import { accessToken } from '../../lib/Token';
 import { useUser } from '../../hooks/useUser';
 import { toast } from 'react-toastify';
+import MyServiceList from '../MyServiceList';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
@@ -93,6 +94,7 @@ export default function MyProfilePage() {
             </S.PrivacySection>
           </S.UpLoadProfileContainter>
         </S.ProfileSection>
+        <MyServiceList />
       </S.Layer>
     </S.Positioner>
   );

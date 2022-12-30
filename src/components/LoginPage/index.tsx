@@ -9,6 +9,7 @@ import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const [serviceName, setServiceName] = useState<string>('');
@@ -36,10 +37,10 @@ export default function LoginPage() {
       setServiceName(data.serviceName);
     } catch (e) {
       if (e instanceof AxiosError && e.response!.status === 404) {
-        alert('해당하는 서비스가 없습니다.');
+        toast.error('해당하는 서비스가 없습니다.');
         router.back();
       } else {
-        alert('예기치 못한 오류가 발생하였습니다.');
+        toast.error('예기치 못한 오류가 발생하였습니다.');
       }
     }
   };
@@ -47,7 +48,7 @@ export default function LoginPage() {
   const onLogin = async () => {
     for (let i = 0; i < inputRef.current.length; i++) {
       if (inputRef.current[i].value === '') {
-        alert(inputRef.current[i].name + '을(를) 입력하지 않았습니다.');
+        toast.warn(inputRef.current[i].name + '을(를) 입력하지 않았습니다.');
         return inputRef.current[i].focus();
       }
     }
@@ -57,7 +58,7 @@ export default function LoginPage() {
         email: email + '@gsm.hs.kr',
         password: pw,
       });
-      alert('로그인에 성공했습니다.');
+      toast.success('로그인에 성공했습니다.');
 
       if (isQuery) {
         localStorage.setItem(accessToken, data.accessToken);
@@ -74,11 +75,11 @@ export default function LoginPage() {
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response!.status === 400 || e.response!.status === 404) {
-          alert('이메일 또는 비밀번호가 틀렸습니다.');
+          toast.warn('이메일 또는 비밀번호가 틀렸습니다.');
         } else if (e.response!.status === 403) {
-          alert('관리자 승인이 될 때까지 기다려주세요.');
+          toast.info('관리자의 승인이 필요합니다');
         } else {
-          alert('예기치 못한 오류가 발생하였습니다.');
+          toast.error('예기치 못한 오류가 발생하였습니다.');
         }
         setError(e.response!.status);
       }

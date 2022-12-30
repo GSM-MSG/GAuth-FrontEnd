@@ -60,18 +60,15 @@ export default function LoginPage() {
       });
       toast.success('로그인에 성공했습니다.');
 
-      if (isQuery) {
-        localStorage.setItem(accessToken, data.accessToken);
-        localStorage.setItem(refreshToken, data.refreshToken);
-        localStorage.setItem(expiredAt, data.expiresAt);
-        API.defaults.headers.common['Authorization'] =
-          'Bearer ' + data.accessToken;
-        router.replace('/');
-      } else {
-        router.replace(
-          (router.query.redirect_uri as string) + '?code=' + data.code
-        );
-      }
+      if (isQuery)
+        return router.replace(`${router.query.redirect_uri}?code=${data.code}`);
+
+      localStorage.setItem(accessToken, data.accessToken);
+      localStorage.setItem(refreshToken, data.refreshToken);
+      localStorage.setItem(expiredAt, data.expiresAt);
+      API.defaults.headers.common['Authorization'] =
+        'Bearer ' + data.accessToken;
+      router.replace('/');
     } catch (e) {
       if (!(e instanceof AxiosError))
         return toast.error('예기치 못한 오류가 발생하였습니다.');

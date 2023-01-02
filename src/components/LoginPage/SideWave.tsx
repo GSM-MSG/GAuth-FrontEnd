@@ -1,7 +1,7 @@
 import * as S from './style';
 import { useRecoilState } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function SideWave() {
   const waveRef = useRef<HTMLDivElement>(null);

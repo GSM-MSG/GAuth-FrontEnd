@@ -94,7 +94,7 @@ export default function MyProfilePage() {
             </S.PrivacySection>
           </S.UpLoadProfileContainter>
         </S.ProfileSection>
-        <MyServiceList />
+        <MyServiceList serviceList={user.clientList} />
       </S.Layer>
     </S.Positioner>
   );

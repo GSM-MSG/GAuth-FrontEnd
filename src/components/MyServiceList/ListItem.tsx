@@ -1,15 +1,27 @@
 import Link from 'next/link';
+import { ClientListType } from '../../types';
 import * as S from './style';
 
-export default function ListItem() {
+export default function ListItem({
+  listData,
+  setModifyItem,
+}: {
+  listData: ClientListType;
+  setModifyItem: () => void;
+}) {
+  const { serviceName, serviceUri } = listData;
   return (
     <S.ListItemLayer>
-      <S.PreviewImg src="https://www.next-t.co.kr/public/uploads/7b7f7e2138e29e598cd0cdf2c85ea08d.jpg" />
-      <S.ServiceTitle>GRIG</S.ServiceTitle>
-      <Link href="https://dotori-gsm.com/home">
-        <a>https://grig.com</a>
+      <S.PreviewImg src={serviceUri} />
+      <S.ServiceTitle>{serviceName}</S.ServiceTitle>
+      <Link href={serviceUri}>
+        <a>
+          {serviceUri.length >= 20
+            ? serviceUri.slice(0, 20) + '...'
+            : serviceUri}
+        </a>
       </Link>
-      <S.ServiceFixBtn>수정</S.ServiceFixBtn>
+      <S.ServiceFixBtn onClick={() => setModifyItem()}>수정</S.ServiceFixBtn>
     </S.ListItemLayer>
   );
 }

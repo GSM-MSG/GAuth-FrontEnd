@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Layer = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 100px;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,5 +160,31 @@ export const ModifyModalLayer = styled.div`
     font-size: 30px;
     text-align: center;
     color: #f7f8fc;
+  }
+`;
+
+export const EmptyLisyLayer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+  transition: ease 0.2s;
+  box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
+  color: #929292;
+  h1 {
+    transition: all 0.2s;
+    font-size: 20px;
+  }
+  :hover {
+    box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
+    color: #111111;
+    h1 {
+      font-size: 40px;
+    }
   }
 `;

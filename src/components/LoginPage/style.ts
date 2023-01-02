@@ -153,6 +153,12 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   gap: 80px;
   justify-content: center;
+  overflow: hidden;
+
+  @media (max-width: 600px) {
+    width: 80%;
+    gap: 50px;
+  }
 
   > h1 {
     text-align: center;
@@ -164,6 +170,10 @@ export const LoginContainer = styled.div`
     @media (max-width: 1200px) {
       color: #fff;
       font-size: 55px;
+    }
+    @media (max-width: 600px) {
+      font-size: 50px;
+      width: 100%;
     }
   }
 `;
@@ -209,12 +219,13 @@ export const InputWrapper = styled.div`
 
   > div {
     max-height: 44px;
+    max-width: 100%;
   }
 
   input {
     border: none;
     border-bottom: 3px solid black;
-    width: calc(100% - 60px);
+    width: 85%;
     padding: 0 30px 10px 30px;
     font-size: 27px;
     font-weight: 400;
@@ -226,6 +237,11 @@ export const InputWrapper = styled.div`
 
     @media (max-width: 1200px) {
       color: #fff;
+    }
+    @media (max-width: 600px) {
+      padding: 0 0 10px 20px;
+      width: 90%;
+      font-size: 20px;
     }
   }
 `;
@@ -240,6 +256,11 @@ export const Email = styled.div`
 
   @media (max-width: 1200px) {
     color: #fff;
+  }
+  @media (max-width: 600px) {
+    font-size: 20px;
+    left: calc(100% - 120px);
+    top: -42px;
   }
 `;
 
@@ -270,13 +291,15 @@ export const ButtonContainer = styled.div`
   margin: 0 auto;
   text-align: center;
   font-size: 20px;
-  font-size: 18px;
   line-height: 21px;
 
   div > * {
     color: #929292;
     @media (max-width: 1200px) {
       color: #fff;
+    }
+    @media (max-width: 600px) {
+      font-size: 14px;
     }
   }
   a {
@@ -301,5 +324,12 @@ export const Submit = styled.button`
   &:active {
     box-shadow: rgba(50, 50, 93, 0.15) 0px 30px 60px -12px inset,
       rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;
+  }
+
+  @media (max-width: 600px) {
+    width: 80%;
+    min-width: 160px;
+    height: 48px;
+    font-size: 20px;
   }
 `;

@@ -112,7 +112,7 @@ export default function LoginPage() {
               <div>
                 <input
                   name="이메일"
-                  type="text"
+                  type="email"
                   maxLength={6}
                   value={email}
                   ref={(e: HTMLInputElement) => (inputRef.current[0] = e)}

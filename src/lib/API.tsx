@@ -6,11 +6,10 @@ export const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
   headers: {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_GAUTH_SERVER_URL!,
     'Access-Control-Allow-Methods': 'GET,PUT,POST,PATCH,DELETE,OPTIONS,REQUEST',
     'Access-Control-Allow-Headers':
       'x-access-token, Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Allow-Credentials': true,
   },
 });
 
@@ -45,10 +44,7 @@ API.interceptors.response.use(
   },
 
   async (err: AxiosError) => {
-    if (
-      err.response &&
-      (err.response.status === 401 || err.response.status === 404)
-    ) {
+    if (err.response && err.response.status === 401) {
       const refresh_token: string | null =
         localStorage.getItem(refreshToken) ?? '';
       try {

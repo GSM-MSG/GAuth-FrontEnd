@@ -13,22 +13,52 @@ export const API = axios.create({
   },
 });
 
+const refreshApi = async (err: AxiosError | null) => {
+  const refresh_token = localStorage.getItem(refreshToken) ?? '';
+
+  try {
+    const { data } = await axios.patch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/auth`,
+      {},
+      {
+        headers: {
+          RefreshToken: `Bearer ${refresh_token}`,
+        },
+      }
+    );
+
+    localStorage.setItem(accessToken, data.accessToken);
+    localStorage.setItem(refreshToken, data.refreshToken);
+    localStorage.setItem(expiredAt, data.expiresAt);
+
+    if (err) return await API.request(err.config);
+  } catch (e) {
+    localStorage.removeItem(accessToken);
+    localStorage.removeItem(refreshToken);
+    localStorage.removeItem(expiredAt);
+
+    Router.replace('/login');
+    return Promise.reject(err);
+  }
+};
+
 API.interceptors.request.use(
-  (config: AxiosRequestConfig) => {
-    const access_token: string | null = localStorage.getItem(accessToken);
-    const refresh_token: string | null = localStorage.getItem(refreshToken);
-    const token_expiredAt: string = localStorage.getItem(expiredAt) ?? '';
+  async (config: AxiosRequestConfig) => {
+    const access_token = localStorage.getItem(accessToken);
+    const token_expiredAt = localStorage.getItem(expiredAt) ?? '';
 
-    if (config.headers) {
-      config.headers['Authorization'] =
-        access_token &&
-        new Date(token_expiredAt).getTime() - new Date().getTime() > 30000
-          ? `Bearer ${access_token}`
-          : '';
+    console.log(
+      access_token && new Date(token_expiredAt).getTime() - new Date().getTime()
+    );
 
-      config.headers['refreshToken'] = refresh_token
-        ? `Bearer ${refresh_token}`
-        : '';
+    if (!config.headers) return;
+    if (
+      access_token &&
+      new Date(token_expiredAt).getTime() - new Date().getTime() > 30000
+    )
+      config.headers['Authorization'] = `Bearer ${access_token}`;
+    else {
+      await refreshApi;
     }
     return config;
   },
@@ -45,31 +75,7 @@ API.interceptors.response.use(
 
   async (err: AxiosError) => {
     if (err.response && err.response.status === 401) {
-      const refresh_token: string | null =
-        localStorage.getItem(refreshToken) ?? '';
-      try {
-        const { data } = await axios.patch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/auth`,
-          {},
-          {
-            headers: {
-              RefreshToken: `Bearer ${refresh_token}`,
-            },
-          }
-        );
-
-        localStorage.setItem(accessToken, data.accessToken);
-        localStorage.setItem(refreshToken, data.refreshToken);
-        localStorage.setItem(expiredAt, data.expiresAt);
-        return await API.request(err.config);
-      } catch (err) {
-        localStorage.removeItem(accessToken);
-        localStorage.removeItem(refreshToken);
-        localStorage.removeItem(expiredAt);
-        Router.replace('/login');
-        return Promise.reject(err);
-      }
+      await refreshApi(err);
     }
-    return Promise.reject(err);
   }
 );

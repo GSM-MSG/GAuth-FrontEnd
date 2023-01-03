@@ -110,7 +110,7 @@ export const ModifyModalBackGround = styled.div`
 
 export const ModifyModalLayer = styled.div`
   width: 1140px;
-  height: 680px;
+  left: calc(50% - 1140px / 2);
   background: #ffffff;
   border-radius: 25px;
   padding: 40px 56px;
@@ -126,25 +126,44 @@ export const ModifyModalLayer = styled.div`
     color: #000000;
   }
   form {
-    margin-top: 32px;
+    margin-top: 9px;
     width: 100%;
     height: auto;
     display: flex;
+    gap: 12px;
     flex-direction: column;
     align-items: center;
-    input {
-      width: 640px;
-      height: 64px;
-      background: #ffffff;
-      border: 2px solid rgba(146, 146, 146, 0.5);
-      border-radius: 15px;
-      margin-bottom: 16px;
-      font-family: 'Pretendard';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 28px;
-      color: #929292;
-      padding: 20px;
+    label {
+      width: 512px;
+      height: auto;
+
+      h3 {
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        color: #000000;
+        margin-bottom: 4px;
+      }
+      div {
+        position: relative;
+        i {
+          position: absolute;
+          right: 16px;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 100;
+        }
+      }
+      input {
+        width: 512px;
+        height: 52px;
+        border-radius: 12px;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+      }
     }
   }
 
@@ -152,6 +171,7 @@ export const ModifyModalLayer = styled.div`
     width: 343px;
     height: 80px;
     margin-top: 29px;
+    margin-bottom: 56px;
     background: #2e80cc;
     border-radius: 40px;
     font-family: 'Pretendard';
@@ -161,6 +181,19 @@ export const ModifyModalLayer = styled.div`
     text-align: center;
     color: #f7f8fc;
   }
+`;
+
+export const ModifyInput = styled.input`
+  background: #ffffff;
+  border: 2px solid #5499d9;
+  color: #929292;
+  padding: 20px;
+`;
+
+export const CopyInput = styled.input`
+  background: #929292;
+  color: #f7f8fc;
+  padding: 0 50px 0 20px;
 `;
 
 export const EmptyLisyLayer = styled.div`

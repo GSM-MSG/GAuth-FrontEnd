@@ -5,9 +5,16 @@ import { accessToken } from '../../lib/Token';
 import { useUser } from '../../hooks/useUser';
 import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
+import { useSetRecoilState } from 'recoil';
+import { UserLists } from '../../Atom/Atoms';
+import { useEffect } from 'react';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
+  const setUserLists = useSetRecoilState(UserLists);
+  useEffect(() => {
+    setUserLists(user.clientList);
+  }, [user, setUserLists]);
 
   const updateMyProfileImg = async (files: FileList) => {
     try {
@@ -94,7 +101,7 @@ export default function MyProfilePage() {
             </S.PrivacySection>
           </S.UpLoadProfileContainter>
         </S.ProfileSection>
-        <MyServiceList serviceList={user.clientList} />
+        <MyServiceList />
       </S.Layer>
     </S.Positioner>
   );

@@ -1,10 +1,8 @@
 import mql from '@microlink/mql';
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
 
 export const usePreview = (uri: string) => {
   const [img, setImg] = useState('');
-
   useEffect(() => {
     const getOpenGraphData = async () => {
       try {
@@ -12,7 +10,7 @@ export const usePreview = (uri: string) => {
         if (!data.image) return;
         setImg(data.image.url);
       } catch (e) {
-        toast.error('error');
+        return;
       }
     };
     getOpenGraphData();

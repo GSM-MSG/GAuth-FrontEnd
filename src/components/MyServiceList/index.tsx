@@ -4,20 +4,20 @@ import { ClientListType } from '../../types';
 import * as S from './style';
 import EmptyList from './EmptyList';
 import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { UserLists } from '../../Atom/Atoms';
 
-export default function MyServiceList({
-  serviceList,
-}: {
-  serviceList: ClientListType[];
-}) {
+export default function MyServiceList() {
   const [modifyItem, setModifyItem] = useState<ClientListType | null>(null);
+  const userList = useRecoilValue(UserLists);
+
   return (
     <S.Layer>
       <S.Title>내가 등록한 서비스</S.Title>
       <S.ListWrapper>
-        {serviceList.length !== 0 ? (
+        {userList.length !== 0 ? (
           <>
-            {serviceList.map((listItem, index) => {
+            {userList.map((listItem, index) => {
               return (
                 <ListItem
                   key={index}

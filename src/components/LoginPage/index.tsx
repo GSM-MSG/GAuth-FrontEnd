@@ -23,7 +23,7 @@ export default function LoginPage() {
   const inputRef = useRef<HTMLInputElement[]>([]);
   const serviceNameRef = useRef<HTMLSpanElement>(null);
   const isQuery =
-    router.query.client_id === undefined &&
+    router.query.client_id === undefined ||
     router.query.redirect_uri === undefined;
 
   useEffect(() => {
@@ -58,9 +58,8 @@ export default function LoginPage() {
         email: email + '@gsm.hs.kr',
         password: pw,
       });
-      toast.success('로그인에 성공했습니다.');
 
-      if (isQuery)
+      if (!isQuery)
         return router.replace(`${router.query.redirect_uri}?code=${data.code}`);
 
       localStorage.setItem(accessToken, data.accessToken);

@@ -1,4 +1,4 @@
-export interface ResAfterAddService {
+export interface ResAddService {
   clientId: string;
   clientSecret: string;
   redirectUri: string;

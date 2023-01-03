@@ -12,7 +12,7 @@ export default function EmptyList() {
       >
         <h1>
           {showMessage
-            ? '서비스 등록하로 가기'
+            ? '서비스 등록하러 가기'
             : '아직 등록된 서비스가 없습니다'}
           .
         </h1>

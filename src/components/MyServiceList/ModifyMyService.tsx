@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { ClientListType } from '../../types';
 import * as S from './style';
 
@@ -9,6 +10,7 @@ export default function ModifyMyService({
   modifyItem: ClientListType;
   setModifyItem: () => void;
 }) {
+  const { register, watch } = useForm({ defaultValues: modifyItem });
   useEffect(() => {
     const scrollY = window.scrollY;
     document.body.style.cssText = `
@@ -28,7 +30,7 @@ export default function ModifyMyService({
         <S.ModifyModalLayer>
           <h1>서비스 정보 수정</h1>
           <form>
-            <input type="text" />
+            <input type="text" {...register('serviceName')} />
             <input type="text" />
             <input type="text" />
             <input type="text" />

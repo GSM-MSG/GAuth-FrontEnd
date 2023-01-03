@@ -23,12 +23,12 @@ export default function LoginPage() {
   const inputRef = useRef<HTMLInputElement[]>([]);
   const serviceNameRef = useRef<HTMLSpanElement>(null);
   const isQuery =
-    router.query.client_id === undefined ||
-    router.query.redirect_uri === undefined;
+    router.query.client_id !== undefined &&
+    router.query.redirect_uri !== undefined;
 
   useEffect(() => {
     if (!router.isReady) return;
-    !isQuery && titleNaming();
+    isQuery && titleNaming();
   }, [router.isReady]);
 
   const titleNaming = async () => {
@@ -54,12 +54,12 @@ export default function LoginPage() {
     }
 
     try {
-      const { data } = await API.post(isQuery ? '/auth' : '/oauth/code', {
+      const { data } = await API.post(isQuery ? '/oauth/code' : '/auth', {
         email: email + '@gsm.hs.kr',
         password: pw,
       });
 
-      if (!isQuery)
+      if (isQuery)
         return router.replace(`${router.query.redirect_uri}?code=${data.code}`);
 
       localStorage.setItem(accessToken, data.accessToken);

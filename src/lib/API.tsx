@@ -47,10 +47,6 @@ API.interceptors.request.use(
     const access_token = localStorage.getItem(accessToken);
     const token_expiredAt = localStorage.getItem(expiredAt) ?? '';
 
-    console.log(
-      access_token && new Date(token_expiredAt).getTime() - new Date().getTime()
-    );
-
     if (!config.headers) return;
     if (
       access_token &&

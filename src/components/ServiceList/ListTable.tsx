@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { API } from '../../lib/API';
-import { accessToken } from '../../lib/Token';
 import ListItem from './ListItem';
 import * as S from './style';
 import { ClientListType } from '../../types';
@@ -9,11 +8,7 @@ export default function ListTable() {
   const [serviceList, setServiceList] = useState<ClientListType[]>();
   useEffect(() => {
     const getAllList = async () => {
-      const data = await API.get('/client', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem(accessToken),
-        },
-      });
+      const data = await API.get('/client');
       setServiceList(data.data);
     };
     getAllList();

@@ -108,6 +108,7 @@ export default function ModifyMyService({
               <h3>서비스명</h3>
               <S.ModifyInput
                 type="text"
+                maxLength={20}
                 {...register('serviceName', {
                   required: '서비스명을 입력하지 않았습니다.',
                   pattern: {
@@ -121,6 +122,7 @@ export default function ModifyMyService({
               <h3>서비스 URI</h3>
               <S.ModifyInput
                 type="text"
+                maxLength={254}
                 {...register('serviceUri', {
                   required: '사이트 URI를 입력하지 않았습니다.',
                   pattern: {
@@ -134,6 +136,7 @@ export default function ModifyMyService({
               <h3>리다이렉트 URI</h3>
               <S.ModifyInput
                 type="text"
+                maxLength={254}
                 {...register('redirectUri', {
                   required: '리다이렉트 URI를 입력하지 않았습니다.',
                   pattern: {

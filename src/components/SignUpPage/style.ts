@@ -350,13 +350,11 @@ export const IMG = styled.img``;
 
 export const UpLoadProfileContainter = styled.div`
   position: relative;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 100px;
-  transform: translateY(0px);
+  height: 100%;
+  justify-content: space-between;
 
   @keyframes profileMountAnimation {
     0% {

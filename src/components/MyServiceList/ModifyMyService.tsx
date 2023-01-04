@@ -19,7 +19,7 @@ export default function ModifyMyService({
 }) {
   const { register, watch, reset, handleSubmit } = useForm();
   const setUserLists = useSetRecoilState(UserLists);
-  const regUrl = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
+  const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 
   const ForbidScroll = (action: () => void) => {
     const scrollY = window.scrollY;
@@ -124,27 +124,27 @@ export default function ModifyMyService({
               />
             </label>
             <label>
-              <h3>서비스 URL</h3>
+              <h3>서비스 URI</h3>
               <S.ModifyInput
                 type="text"
                 {...register('serviceUri', {
                   required: '사이트 URI를 입력하지 않았습니다.',
                   pattern: {
-                    value: regUrl,
+                    value: regUri,
                     message: '사이트 URI를 형식에 맞게 입력해주세요',
                   },
                 })}
               />
             </label>
             <label>
-              <h3>리다이렉트 URL</h3>
+              <h3>리다이렉트 URI</h3>
               <S.ModifyInput
                 type="text"
                 {...register('redirectUri', {
                   required: '리다이렉트 URI를 입력하지 않았습니다.',
                   pattern: {
-                    value: regUrl,
-                    message: '리다이렉트 URL를 형식에 맞게 입력해주세요',
+                    value: regUri,
+                    message: '리다이렉트 URI를 형식에 맞게 입력해주세요',
                   },
                 })}
               />

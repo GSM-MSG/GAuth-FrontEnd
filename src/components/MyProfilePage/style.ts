@@ -20,7 +20,7 @@ export const TitleSection = styled.div`
   margin-top: 150px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   h1 {
     font-family: 'Pretendard';
   }
@@ -45,6 +45,10 @@ export const ProfileSVGWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  > svg {
+    width: 160px;
+    height: 160px;
+  }
   label {
     cursor: pointer;
     i {
@@ -67,8 +71,8 @@ export const ProfileSVGWrapper = styled.div`
 export const Profile = styled.img`
   margin: 0px;
   padding: 2px;
-  width: 178px;
-  height: 178px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   display: flex;
   justify-content: center;

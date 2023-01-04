@@ -14,3 +14,4 @@ export * from './ServiceList';
 export * from './ProfileSmallFace';
 export * from './ModifyProfile';
 export * from './OopsIcon';
+export * from './CopyButton';

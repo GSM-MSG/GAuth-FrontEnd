@@ -57,6 +57,9 @@ export const ListItemLayer = styled.li`
     font-weight: 500;
     font-size: 30px;
     color: #929292;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 

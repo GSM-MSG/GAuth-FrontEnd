@@ -21,22 +21,6 @@ export default function ModifyMyService({
   const setUserLists = useSetRecoilState(UserLists);
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 
-  const ForbidScroll = (action: () => void) => {
-    const scrollY = window.scrollY;
-    document.body.style.cssText = `
-    overflow: hidden;
-    top: -${scrollY}px;
-    width: 100%;
-    `;
-    action();
-  };
-
-  const AllowScroll = () => {
-    const scrollY = window.scrollY;
-    document.body.style.cssText = '';
-    window.scrollTo(0, parseInt('-' + scrollY.toString() || '0', 10) * -1);
-  };
-
   useEffect(() => {
     const getServiceDetail = async () => {
       try {
@@ -54,18 +38,28 @@ export default function ModifyMyService({
       }
     };
 
-    ForbidScroll(() => getServiceDetail());
-    return AllowScroll();
+    const scrollY = window.scrollY;
+    document.body.style.cssText = `
+    overflow: hidden;
+    top: -${scrollY}px;
+    width: 100%;
+    `;
+    getServiceDetail();
+    return () => {
+      document.body.style.cssText = '';
+      window.scrollTo(0, parseInt('-' + scrollY.toString() || '0', 10) * -1);
+    };
   }, [modifyItem, reset]);
 
-  const ModifyService = async () => {
+  const ModifyService = async (value: FieldValues) => {
     try {
+      const { serviceName, serviceUri, redirectUri } = value;
       const data = await API.patch(
         `/client/${modifyItem.id}`,
         {
-          serviceName: watch('serviceName'),
-          serviceUri: watch('serviceUri'),
-          redirectUri: watch('redirectUri'),
+          serviceName: serviceName,
+          serviceUri: serviceUri,
+          redirectUri: redirectUri,
         },
         {
           headers: {

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import { API } from '../../lib/API';
 import { accessToken } from '../../lib/Token';
 import { ClientListType } from '../../types';
@@ -100,7 +100,7 @@ export default function ModifyMyService({
     }
   };
 
-  const CheckError = (data: object) => {
+  const CheckError = (data: FieldValues) => {
     toast.error(Object.values(data)[0].message);
   };
 

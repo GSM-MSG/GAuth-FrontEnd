@@ -57,9 +57,9 @@ export default function ModifyMyService({
       const data = await API.patch(
         `/client/${modifyItem.id}`,
         {
-          serviceName: serviceName,
-          serviceUri: serviceUri,
-          redirectUri: redirectUri,
+          serviceName,
+          serviceUri,
+          redirectUri,
         },
         {
           headers: {

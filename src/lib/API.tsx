@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { accessToken, expiredAt, refreshToken } from './Token';
 
 export const API = axios.create({
@@ -13,8 +13,8 @@ export const API = axios.create({
   },
 });
 
-const refreshApi = async (err: AxiosError | null) => {
-  const refresh_token = localStorage.getItem(refreshToken) ?? '';
+const refreshApi = async (err: AxiosError | AxiosRequestConfig) => {
+  const refresh_token = localStorage.getItem(refreshToken);
 
   try {
     const { data } = await axios.patch(
@@ -31,7 +31,8 @@ const refreshApi = async (err: AxiosError | null) => {
     localStorage.setItem(refreshToken, data.refreshToken);
     localStorage.setItem(expiredAt, data.expiresAt);
 
-    if (err) return await API.request(err.config);
+    if (err instanceof AxiosError) return await API.request(err.config);
+    return data.accessToken;
   } catch (e) {
     localStorage.removeItem(accessToken);
     localStorage.removeItem(refreshToken);
@@ -44,17 +45,21 @@ const refreshApi = async (err: AxiosError | null) => {
 
 API.interceptors.request.use(
   async (config: AxiosRequestConfig) => {
-    const access_token = localStorage.getItem(accessToken);
+    let access_token = localStorage.getItem(accessToken);
     const token_expiredAt = localStorage.getItem(expiredAt) ?? '';
 
-    if (!config.headers) return;
     if (
-      access_token &&
-      new Date(token_expiredAt).getTime() - new Date().getTime() > 30000
-    )
+      config.headers &&
+      Router.asPath !== '/login' &&
+      Router.asPath !== '/signUp'
+    ) {
+      if (
+        !access_token ||
+        new Date(token_expiredAt).getTime() - new Date().getTime() <= 30000
+      ) {
+        access_token = await refreshApi(config);
+      }
       config.headers['Authorization'] = `Bearer ${access_token}`;
-    else {
-      await refreshApi;
     }
     return config;
   },
@@ -70,8 +75,7 @@ API.interceptors.response.use(
   },
 
   async (err: AxiosError) => {
-    if (err.response && err.response.status === 401) {
-      await refreshApi(err);
-    }
+    if (err.response && err.response.status === 401) return refreshApi(err);
+    return Promise.reject(err);
   }
 );

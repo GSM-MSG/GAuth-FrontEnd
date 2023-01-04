@@ -5,7 +5,7 @@ import * as S from './style';
 import { ClientListType } from '../../types';
 
 export default function ListTable() {
-  const [serviceList, setServiceList] = useState<ClientListType[]>();
+  const [serviceList, setServiceList] = useState<ClientListType[]>([]);
   useEffect(() => {
     const getAllList = async () => {
       const data = await API.get('/client');
@@ -13,6 +13,7 @@ export default function ListTable() {
     };
     getAllList();
   }, []);
+
   return (
     <S.ListTableLayer>
       <S.ListTitle>
@@ -21,10 +22,9 @@ export default function ListTable() {
         <a>URL</a>
       </S.ListTitle>
       <S.ListWrapper>
-        {serviceList?.length !== 0 &&
-          serviceList?.map((listItem, index) => {
-            return <ListItem key={index} listData={listItem} />;
-          })}
+        {serviceList.map((listItem, index) => (
+          <ListItem key={index} listData={listItem} />
+        ))}
       </S.ListWrapper>
     </S.ListTableLayer>
   );

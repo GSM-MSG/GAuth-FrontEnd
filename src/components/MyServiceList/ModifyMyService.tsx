@@ -80,13 +80,13 @@ export default function ModifyMyService({
 
   const GetMyLists = async () => {
     try {
-      const data = await API.get('/client', {
+      const data = await API.get('/user', {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem(accessToken),
         },
       });
       if (data.status !== 200) return;
-      setUserLists(data.data);
+      setUserLists(data.data.clientList);
       setModifyItem();
     } catch (e) {
       if (!(e instanceof AxiosError))

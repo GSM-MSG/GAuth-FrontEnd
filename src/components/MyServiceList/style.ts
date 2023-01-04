@@ -82,6 +82,12 @@ export const ServiceTitle = styled.h3`
   font-size: 40px;
   color: #000000;
   word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 export const ServiceFixBtn = styled.button`

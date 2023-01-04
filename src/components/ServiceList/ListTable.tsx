@@ -1,0 +1,36 @@
+import { useEffect, useState } from 'react';
+import { API } from '../../lib/API';
+import { accessToken } from '../../lib/Token';
+import ListItem from './ListItem';
+import * as S from './style';
+import { ClientListType } from '../../types';
+
+export default function ListTable() {
+  const [serviceList, setServiceList] = useState<ClientListType[]>();
+  useEffect(() => {
+    const getAllList = async () => {
+      const data = await API.get('/client', {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem(accessToken),
+        },
+      });
+      setServiceList(data.data);
+    };
+    getAllList();
+  }, []);
+  return (
+    <S.ListTableLayer>
+      <S.ListTitle>
+        <a>미리보기 사진</a>
+        <a>서비스 이름</a>
+        <a>URL</a>
+      </S.ListTitle>
+      <S.ListWrapper>
+        {serviceList?.length !== 0 &&
+          serviceList?.map((listItem, index) => {
+            return <ListItem key={index} listData={listItem} />;
+          })}
+      </S.ListWrapper>
+    </S.ListTableLayer>
+  );
+}

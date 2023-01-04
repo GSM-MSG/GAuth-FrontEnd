@@ -225,7 +225,7 @@ export const InputWrapper = styled.div`
   input {
     border: none;
     border-bottom: 3px solid black;
-    width: 85%;
+    width: 100%;
     padding: 0 30px 10px 30px;
     font-size: 27px;
     font-weight: 400;
@@ -240,7 +240,6 @@ export const InputWrapper = styled.div`
     }
     @media (max-width: 600px) {
       padding: 0 0 10px 20px;
-      width: 90%;
       font-size: 20px;
     }
   }

@@ -24,11 +24,7 @@ export default function ModifyMyService({
   useEffect(() => {
     const getServiceDetail = async () => {
       try {
-        const data = await API.get(`/client/${modifyItem.id}`, {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem(accessToken),
-          },
-        });
+        const data = await API.get(`/client/${modifyItem.id}`);
         if (data.status !== 200)
           return toast.error('서비스 요청이 실패하였습니다,');
         reset({ ...data.data });
@@ -54,19 +50,11 @@ export default function ModifyMyService({
   const ModifyService = async (value: FieldValues) => {
     try {
       const { serviceName, serviceUri, redirectUri } = value;
-      const data = await API.patch(
-        `/client/${modifyItem.id}`,
-        {
-          serviceName,
-          serviceUri,
-          redirectUri,
-        },
-        {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem(accessToken),
-          },
-        }
-      );
+      const data = await API.patch(`/client/${modifyItem.id}`, {
+        serviceName,
+        serviceUri,
+        redirectUri,
+      });
       if (data.status !== 204) return;
       toast.success('변경사항이 적용되었습니다.');
       GetMyLists();
@@ -80,11 +68,7 @@ export default function ModifyMyService({
 
   const GetMyLists = async () => {
     try {
-      const data = await API.get('/user', {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem(accessToken),
-        },
-      });
+      const data = await API.get('/user');
       if (data.status !== 200) return;
       setUserLists(data.data.clientList);
       setModifyItem();

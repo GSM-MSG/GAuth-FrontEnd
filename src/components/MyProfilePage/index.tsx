@@ -1,7 +1,6 @@
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import { API } from '../../lib/API';
-import { accessToken } from '../../lib/Token';
 import { useUser } from '../../hooks/useUser';
 import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
@@ -20,11 +19,7 @@ export default function MyProfilePage() {
     try {
       const formData = new FormData();
       if (files) formData.append('image', files[0]);
-      const { request } = await API.patch('/user/image', formData, {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem(accessToken),
-        },
-      });
+      const { request } = await API.patch('/user/image', formData);
       if (request.status != 204)
         return toast.error('이미지 업로드를 실패하였습니다.');
       getUser();

@@ -1,19 +1,13 @@
-import mql from '@microlink/mql';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export const usePreview = (uri: string) => {
   const [img, setImg] = useState('');
   useEffect(() => {
-    const getOpenGraphData = async () => {
-      try {
-        const { data } = await mql(uri);
-        if (!data.image) return;
-        setImg(data.image.url);
-      } catch (e) {
-        return;
-      }
-    };
-    getOpenGraphData();
+    (async () => {
+      const { data } = await axios.get(process.env.NEXT_PUBLIC_PROXY_URL + uri);
+      setImg(data.image);
+    })();
   }, [setImg, uri]);
 
   return img;

@@ -14,8 +14,7 @@ export default function Sidebar() {
 
   const logOutHandle = async () => {
     try {
-      const data = await API.delete('/auth');
-      if (data.status !== 204) return toast.error('로그아웃에 실패하였습니다.');
+      await API.delete('/auth');
       localStorage.removeItem(accessToken);
       localStorage.removeItem(refreshToken);
       localStorage.removeItem(expiredAt);

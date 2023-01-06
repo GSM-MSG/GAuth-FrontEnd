@@ -44,7 +44,7 @@ export default function VerifyEmail({
         ...prev,
         approveRequestCount: ++prev.approveRequestCount,
       }));
-      toast.error('이메일을 확인해 주세요');
+      toast.error('이메일을 확인해 주세요.');
     }
   };
 
@@ -66,9 +66,9 @@ export default function VerifyEmail({
       }, 1500);
     } catch (e) {
       if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
-      if (e.response?.status === 409) toast.error('이미 가입한 계정입니다');
+      if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
       if (e.response?.status === 400)
-        toast.error('이메일,비밀번호가 바르지 않습니다');
+        toast.error('이메일,비밀번호가 바르지 않습니다.');
       resetStateHandler();
       setState({
         emailApprove: false,

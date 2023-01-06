@@ -3,7 +3,7 @@ import * as SVG from '../../../public/svg';
 import { ResAddService } from '../../types/ResAddService';
 import * as S from './style';
 
-export default function ServiceInfo({
+export default function ServiceInfoModal({
   serviceData,
   onClose,
 }: {

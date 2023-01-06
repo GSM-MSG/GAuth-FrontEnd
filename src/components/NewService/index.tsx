@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { AddServiceForm } from '../../../public/svg';
+import { AddServiceFormImg } from '../../../public/svg';
 import { API } from '../../lib/API';
 import { accessToken } from '../../lib/Token';
-import { ResAddService } from '../../types/ResAddService';
-import ServiceInfo from './ServiceInfo';
+import { AddServiceForm, ResAddService } from '../../types/ResAddService';
+import ServiceInfoModal from './ServiceInfoModal';
 import * as S from './style';
 
-export default function AddServicePage() {
-  const serviceDefaultData = {
+export default function NewServicePage() {
+  const serviceDefaultData: ResAddService = {
     clientId: '',
     clientSecret: '',
     redirectUri: '',
@@ -17,24 +17,20 @@ export default function AddServicePage() {
     serviceUri: '',
   };
   const [modal, setModal] = useState<boolean>(false);
-  const [serviceData, setServiceData] = useState<ResAddService>({
-    clientId: '',
-    clientSecret: '',
-    redirectUri: '',
-    serviceName: '',
-    serviceUri: '',
-  });
-  const { register, handleSubmit, reset } = useForm({
+  const [serviceData, setServiceData] =
+    useState<ResAddService>(serviceDefaultData);
+  const { register, handleSubmit, reset } = useForm<AddServiceForm>({
     mode: 'all',
-    defaultValues: serviceDefaultData,
+    defaultValues: serviceData,
   });
   const regUrl =
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
-  const onSubmit = async (inputs: ResAddService) => {
+  const onSubmit = async (inputs: AddServiceForm) => {
     try {
-      API.defaults.headers.common['Authorization'] =
-        'Bearer ' + localStorage.getItem(accessToken);
+      API.defaults.headers.common[
+        'Authorization'
+      ] = `Bearer ${localStorage.getItem(accessToken)}`;
       const { data } = await API.post('/client', {
         serviceName: inputs.serviceName,
         serviceUri: inputs.serviceUri,
@@ -42,13 +38,13 @@ export default function AddServicePage() {
       });
       setServiceData(data);
       setModal(true);
-    } catch (e) {}
+    } catch (e) {
+      toast.error('예기치 못한 오류가 발생했습니다.');
+    }
   };
 
   const onError = (err: Object) => {
-    Object.values(err).map((item, idx) => {
-      if (idx === 0) return toast.warn(item.message);
-    });
+    return toast.warn(Object.values(err)[0].message);
   };
 
   return (
@@ -69,7 +65,7 @@ export default function AddServicePage() {
                   message: '서비스명을 입력하지 않았습니다.',
                 },
                 maxLength: {
-                  value: 16,
+                  value: 20,
                   message: '최대 20자까지 입력할 수 있습니다',
                 },
               })}
@@ -83,7 +79,7 @@ export default function AddServicePage() {
                   message: '리다이렉트 URL를 형식에 맞게 입력해주세요',
                 },
                 maxLength: {
-                  value: 16,
+                  value: 254,
                   message: '최대 254자까지 입력할 수 있습니다',
                 },
               })}
@@ -96,16 +92,20 @@ export default function AddServicePage() {
                   value: regUrl,
                   message: '사이트 URI를 형식에 맞게 입력해주세요',
                 },
+                maxLength: {
+                  value: 254,
+                  message: '최대 254자까지 입력할 수 있습니다',
+                },
               })}
             />
           </S.InputContainer>
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         <S.ImgBox>
-          <AddServiceForm />
+          <AddServiceFormImg />
         </S.ImgBox>
         {modal && (
-          <ServiceInfo
+          <ServiceInfoModal
             serviceData={serviceData}
             onClose={() => {
               setModal(false);

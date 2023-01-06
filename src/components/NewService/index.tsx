@@ -71,12 +71,12 @@ export default function NewServicePage() {
               })}
             />
             <input
-              placeholder="리다이렉트 URL을 입력해주세요"
-              {...register('redirectUri', {
-                required: '리다이렉트 URI를 입력하지 않았습니다.',
+              placeholder="서비스 URI을 입력해주세요"
+              {...register('serviceUri', {
+                required: '서비스 URI를 입력하지 않았습니다.',
                 pattern: {
                   value: regUrl,
-                  message: '리다이렉트 URL를 형식에 맞게 입력해주세요',
+                  message: '서비스 URI를 형식에 맞게 입력해주세요',
                 },
                 maxLength: {
                   value: 254,
@@ -85,12 +85,12 @@ export default function NewServicePage() {
               })}
             />
             <input
-              placeholder="사이트 URL을 입력해주세요"
-              {...register('serviceUri', {
-                required: '사이트 URI를 입력하지 않았습니다.',
+              placeholder="리다이렉트 URL을 입력해주세요"
+              {...register('redirectUri', {
+                required: '리다이렉트 URI를 입력하지 않았습니다.',
                 pattern: {
                   value: regUrl,
-                  message: '사이트 URI를 형식에 맞게 입력해주세요',
+                  message: '리다이렉트 URL를 형식에 맞게 입력해주세요',
                 },
                 maxLength: {
                   value: 254,

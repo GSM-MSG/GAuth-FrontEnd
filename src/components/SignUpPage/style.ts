@@ -465,6 +465,7 @@ export const PrivacyConsentWrapper = styled.div`
   background: #fafafa;
   z-index: 200;
   border-radius: 20px;
+  border: 5px solid white;
   box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
   padding: 0 20px 0 20px;
   overflow: scroll;
@@ -477,8 +478,5 @@ export const PrivacyConsentWrapper = styled.div`
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
-  }
-  h1 {
-    margin-top: 50px;
   }
 `;

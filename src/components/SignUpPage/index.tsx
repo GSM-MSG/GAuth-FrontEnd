@@ -62,12 +62,16 @@ export default function SignUpPage() {
       const { request } = await API.post('/email', {
         email: watch('email') + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
       });
-      if (request.status !== 204) return toast.error('다시 시도해 주세요');
+      if (request.status !== 204) return toast.error('다시 시도해 주세요.');
       setValue('verifyEmail', true);
     } catch (e) {
       if (!(e instanceof AxiosError)) return toast.error('unknown error');
       if (e.response?.status === 429)
         return toast.error('15분 동안 최대 3번 요청 가능합니다.');
+      if (e.response?.status === 400) {
+        resetStateHandler();
+        return toast.error('이미 인증된 이메일 요청입니다. 15분 기다려주세요.');
+      }
       if (e.response?.status === 500) return toast.error('error');
     }
   };

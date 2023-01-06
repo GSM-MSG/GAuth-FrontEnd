@@ -14,8 +14,6 @@ export const Layer = styled.div`
   width: 100%;
   height: 850px;
   border-radius: 25px;
-  display: flex;
-  align-items: flex-end;
   background: linear-gradient(
     179.1deg,
     rgba(250, 250, 250, 0.9) 0%,
@@ -23,21 +21,18 @@ export const Layer = styled.div`
   );
   box-shadow: -10px -10px 25px rgba(255, 255, 255, 0.75),
     10px 10px 20px rgba(0, 0, 0, 0.05);
-  padding-bottom: 60px;
 `;
 
 export const MenuContainer = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 0px 10px;
-  gap: 150px;
 `;
 
 export const MenuList = styled.div`
   width: 100%;
-  height: 60%;
+  height: calc(100% - 300px);
   display: flex;
   padding: 50px 0;
   flex-direction: column;
@@ -46,7 +41,11 @@ export const MenuList = styled.div`
   border-top: 1px solid #bbb;
 `;
 
-export const MenuWrapper = styled.div`
+type MenuWrapperType = {
+  pathname: boolean;
+};
+
+export const MenuWrapper = styled.div<MenuWrapperType>`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -61,14 +60,20 @@ export const MenuWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-
-    :hover {
-      background: #5499d9;
+    ${({ pathname }) =>
+      pathname &&
+      `
+     background: #5499d9;
       svg {
         transform: scale(1.1);
         path {
           fill: white;
         }
+      }
+    `}
+    :hover {
+      svg {
+        transform: scale(1.1);
       }
     }
   }
@@ -81,8 +86,20 @@ export const MenuWrapper = styled.div`
 
 export const LogoutWrapper = styled.div`
   width: 100%;
-  height: 20%;
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 40px;
+`;
+
+export const LogoWrapper = styled.div`
+  width: 100%;
+  height: 150px;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  justify-content: center;
+  a {
+    cursor: pointer;
+  }
 `;

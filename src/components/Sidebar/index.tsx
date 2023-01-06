@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import * as SVG from '../../../public/svg';
 import { API } from '../../lib/API';
 import * as S from './style';
-import * as URL from '../../lib/URL';
 import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
+import { NavList } from '../../lib/NavList';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -38,34 +38,18 @@ export default function Sidebar() {
             </Link>
           </S.LogoWrapper>
           <S.MenuList>
-            <S.MenuWrapper pathname={pathname === URL.ServiceList}>
-              <Link href={URL.ServiceList}>
-                <a>
-                  <SVG.ServiceList />
-                </a>
-              </Link>
-            </S.MenuWrapper>
-            <S.MenuWrapper pathname={pathname === URL.NewService}>
-              <Link href={URL.NewService}>
-                <a>
-                  <SVG.AddService />
-                </a>
-              </Link>
-            </S.MenuWrapper>
-            <S.MenuWrapper pathname={pathname === URL.MyProfile}>
-              <Link href={URL.MyProfile}>
-                <a>
-                  <SVG.My />
-                </a>
-              </Link>
-            </S.MenuWrapper>
-            <S.MenuWrapper pathname={pathname === URL.Instructiony}>
-              <Link href={URL.Instructiony}>
-                <a>
-                  <SVG.Intruction />
-                </a>
-              </Link>
-            </S.MenuWrapper>
+            {NavList.map((navData) => {
+              return (
+                <S.MenuWrapper
+                  pathname={pathname === navData.url}
+                  key={navData.url}
+                >
+                  <Link href={navData.url}>
+                    <a>{navData.svg}</a>
+                  </Link>
+                </S.MenuWrapper>
+              );
+            })}
           </S.MenuList>
           <S.LogoutWrapper>
             <a onClick={() => logOutHandle()}>

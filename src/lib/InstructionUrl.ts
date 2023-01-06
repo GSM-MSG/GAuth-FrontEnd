@@ -1,7 +1,6 @@
-export const NOTION_INSTRUCTIOM_PAGE_ID =
-  'GAuth-f21f9c8c5047451780553715a181c0c8';
+export const NOTION_INSTRUCTIOM_PAGE_ID = 'f21f9c8c5047451780553715a181c0c8';
 
-export const InstructionId = [
+export const NOTION_INSTRUCTIOM_DETAIL_PAGE_ID = [
   'GAuth-Web-e5ce3a12484e4a43bc9ac3aee94fdae11',
   'GAuth-Android-87f18a11f82442d19e5dcbafa5b3f7b5',
   'GAuth-iOS-27c6462ae8814fe0a45d3567efd88b7f',

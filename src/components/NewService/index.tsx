@@ -4,12 +4,12 @@ import { toast } from 'react-toastify';
 import { AddServiceFormImg } from '../../../public/svg';
 import { API } from '../../lib/API';
 import { accessToken } from '../../lib/Token';
-import { AddServiceForm, ResAddService } from '../../types/ResAddService';
+import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import ServiceInfoModal from './ServiceInfoModal';
 import * as S from './style';
 
 export default function NewServicePage() {
-  const serviceDefaultData: ResAddService = {
+  const serviceDefaultData: ResNewService = {
     clientId: '',
     clientSecret: '',
     redirectUri: '',
@@ -18,15 +18,15 @@ export default function NewServicePage() {
   };
   const [modal, setModal] = useState<boolean>(false);
   const [serviceData, setServiceData] =
-    useState<ResAddService>(serviceDefaultData);
-  const { register, handleSubmit, reset } = useForm<AddServiceForm>({
+    useState<ResNewService>(serviceDefaultData);
+  const { register, handleSubmit, reset } = useForm<NewServiceForm>({
     mode: 'all',
     defaultValues: serviceData,
   });
   const regUrl =
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
-  const onSubmit = async (inputs: AddServiceForm) => {
+  const onSubmit = async (inputs: NewServiceForm) => {
     try {
       API.defaults.headers.common[
         'Authorization'

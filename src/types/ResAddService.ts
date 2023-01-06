@@ -1,10 +1,10 @@
-export interface AddServiceForm {
+export interface NewServiceForm {
   redirectUri: string;
   serviceName: string;
   serviceUri: string;
 }
 
-export interface ResAddService extends AddServiceForm {
+export interface ResNewService extends NewServiceForm {
   clientId: string;
   clientSecret: string;
 }

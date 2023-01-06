@@ -59,8 +59,8 @@ export default function Sidebar() {
                 </a>
               </Link>
             </S.MenuWrapper>
-            <S.MenuWrapper pathname={pathname === URL.My}>
-              <Link href={URL.My}>
+            <S.MenuWrapper pathname={pathname === URL.Instructiony}>
+              <Link href={URL.Instructiony}>
                 <a>
                   <SVG.Intruction />
                 </a>

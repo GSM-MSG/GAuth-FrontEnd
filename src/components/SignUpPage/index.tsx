@@ -70,7 +70,7 @@ export default function SignUpPage() {
         return toast.error('15분 동안 최대 3번 요청 가능합니다.');
       if (e.response?.status === 400) {
         resetStateHandler();
-        return toast.error('이미 인증된 이메일 요청입니다 15분 기달려주세요');
+        return toast.error('이미 인증된 이메일 요청입니다 15분 기다려주세요');
       }
       if (e.response?.status === 500) return toast.error('error');
     }

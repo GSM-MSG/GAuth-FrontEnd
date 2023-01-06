@@ -38,7 +38,7 @@ export default function VerifyEmail({
           approveRequestCount: ++prev.approveRequestCount,
         }));
       if (profileImg) return GetImgURL();
-      return SingUp();
+      return SignUp();
     } catch (e) {
       setState((prev) => ({
         ...prev,
@@ -48,7 +48,7 @@ export default function VerifyEmail({
     }
   };
 
-  const SingUp = async (data?: string) => {
+  const SignUp = async (data?: string) => {
     try {
       const { request } = await API.post('/auth/signup', {
         email: email + '@gsm.hs.kr',
@@ -84,7 +84,7 @@ export default function VerifyEmail({
       if (profileImg) formData.append('image', profileImg[0]);
       formData.append('email', email + '@gsm.hs.kr');
       const { data } = await API.patch('/auth/image', formData);
-      SingUp(data.imageUrl);
+      SignUp(data.imageUrl);
     } catch (e) {
       toast.error('이미지 요청 실패');
     }

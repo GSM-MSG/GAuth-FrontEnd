@@ -10,7 +10,7 @@ export type ClientInform = {
 
 export interface ClientListType {
   id: number;
-  clientId: String;
-  serviceName: String;
-  serviceUri: String;
+  clientId: string;
+  serviceName: string;
+  serviceUri: string;
 }

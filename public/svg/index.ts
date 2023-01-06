@@ -16,3 +16,4 @@ export * from './ModifyProfile';
 export * from './OopsIcon';
 export * from './CheckIcon';
 export * from './CopyIcon';
+export * from './CopyButton';

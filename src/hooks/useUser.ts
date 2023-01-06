@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { API } from '../lib/API';
 import { accessToken } from '../lib/Token';
 import { ClientInform } from '../types';

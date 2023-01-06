@@ -62,11 +62,7 @@ export default function VerifyEmail({
         const formData = new FormData();
         if (profileImg) formData.append('image', profileImg[0]);
         formData.append('email', email + '@gsm.hs.kr');
-        const { data } = await API.patch('/auth/image', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
+        const { data } = await API.patch('/auth/image', formData);
         SingUp(data.imageUrl);
       } catch (e) {
         toast.error('이미지 요청 실패');

@@ -6,6 +6,7 @@ import * as SVG from '../../../public/svg';
 import { API } from '../../lib/API';
 import * as S from './style';
 import * as URL from '../../lib/URL';
+import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 
 export default function Sidebar() {
   const router = useRouter();
@@ -15,9 +16,9 @@ export default function Sidebar() {
     try {
       const data = await API.delete('/auth');
       if (data.status !== 204) return toast.error('로그아웃에 실패하였습니다.');
-      localStorage.removeItem('Gauth-accessToken');
-      localStorage.removeItem('Gauth-refreshToken');
-      localStorage.removeItem('Gauth-expiredAt');
+      localStorage.removeItem(accessToken);
+      localStorage.removeItem(refreshToken);
+      localStorage.removeItem(expiredAt);
       router.replace('/login');
     } catch (e) {
       if (!(e instanceof AxiosError))

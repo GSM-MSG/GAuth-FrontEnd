@@ -1,4 +1,4 @@
-export function AddServiceForm() {
+export function AddServiceFormImg() {
   return (
     <svg
       width="675"

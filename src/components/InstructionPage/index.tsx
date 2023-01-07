@@ -6,11 +6,7 @@ import { NotionRenderer } from 'react-notion';
 import { NotionPage } from './style';
 import { NOTION_INSTRUCTIOM_PAGE_ID } from '../../lib/InstructionUrl';
 
-export default function InstructionPage({
-  notionId,
-}: {
-  notionId: string | undefined;
-}) {
+export default function InstructionPage({ notionId }: { notionId?: string }) {
   const [notionData, setNotionData] = useState({});
 
   useEffect(() => {
@@ -22,7 +18,7 @@ export default function InstructionPage({
       );
       setNotionData(data);
     })();
-  }, []);
+  }, [notionId]);
 
   return (
     <NotionPage>

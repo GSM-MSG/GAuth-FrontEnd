@@ -153,7 +153,13 @@ export default function SignUpPage() {
                 </S.Submit>
                 <div>
                   <Link href="/login">로그인</Link> |{' '}
-                  <Link href="/find">비밀번호 찾기</Link>
+                  <a
+                    onClick={() => {
+                      toast.info('다음 버전에 추가될 예정');
+                    }}
+                  >
+                    비밀번호 찾기
+                  </a>
                 </div>
               </S.ButtonContainer>
             </S.SignUpContainer>
@@ -202,7 +208,13 @@ export default function SignUpPage() {
                     </S.ChangeBtn>
                   </div>
                   <Link href="/login">로그인</Link> |{' '}
-                  <Link href="/find">비밀번호 찾기</Link>
+                  <a
+                    onClick={() => {
+                      toast.info('다음 버전에 추가될 예정');
+                    }}
+                  >
+                    비밀번호 찾기
+                  </a>
                 </S.ProfileBtnWrapper>
               </S.UpLoadProfileContainter>
             </S.SignUpContainer>

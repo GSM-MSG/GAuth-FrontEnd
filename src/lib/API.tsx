@@ -50,8 +50,8 @@ API.interceptors.request.use(
 
     if (
       config.headers &&
-      Router.asPath !== '/login' &&
-      Router.asPath !== '/signUp'
+      Router.pathname !== '/login' &&
+      Router.pathname !== '/signUp'
     ) {
       if (
         !access_token ||

@@ -251,7 +251,7 @@ export const Email = styled.div`
   top: -50px;
   left: 60%;
   font-size: 27px;
-  z-index: 100;
+  z-index: -1;
 
   @media (max-width: 1200px) {
     color: #fff;

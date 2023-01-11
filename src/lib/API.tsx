@@ -50,8 +50,8 @@ API.interceptors.request.use(
 
     if (
       config.headers &&
-      Router.asPath !== '/login' &&
-      Router.asPath !== '/signUp'
+      Router.pathname !== '/login' &&
+      Router.pathname !== '/signUp'
     ) {
       if (
         !access_token ||
@@ -75,7 +75,13 @@ API.interceptors.response.use(
   },
 
   async (err: AxiosError) => {
-    if (err.response && err.response.status === 401) return refreshApi(err);
+    const resUrl = `${process.env.NEXT_PUBLIC_GAUTH_SERVER_URL}/email`;
+    if (
+      err.response &&
+      err.response.status === 401 &&
+      !err.response.request.responseURL.includes(resUrl)
+    )
+      return refreshApi(err);
     return Promise.reject(err);
   }
 );

@@ -118,8 +118,12 @@ export const ModifyModalBackGround = styled.div`
 `;
 
 export const ModifyModalLayer = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
   width: 1140px;
-  left: calc(50% - 1140px / 2);
   background: #ffffff;
   border-radius: 25px;
   padding: 40px 56px;

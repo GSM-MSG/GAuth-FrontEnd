@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { API } from '../../lib/API';
-import { accessToken } from '../../lib/Token';
 import { ClientListType } from '../../types';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
@@ -33,17 +32,13 @@ export default function ModifyMyService({
           return toast.error('예상치 못한 오류가 발생하였습니다.');
       }
     };
-
-    const scrollY = window.scrollY;
     document.body.style.cssText = `
     overflow: hidden;
-    top: -${scrollY}px;
     width: 100%;
     `;
     getServiceDetail();
     return () => {
       document.body.style.cssText = '';
-      window.scrollTo(0, parseInt('-' + scrollY.toString() || '0', 10) * -1);
     };
   }, [modifyItem, reset]);
 
@@ -84,88 +79,83 @@ export default function ModifyMyService({
 
   return (
     <>
-      <S.ModifyModalBackGround>
-        <S.ModifyModalLayer>
-          <h1>서비스 정보 수정</h1>
-          <form onSubmit={handleSubmit(ModifyService, CheckError)}>
-            <label>
-              <h3>서비스명</h3>
-              <S.ModifyInput
-                type="text"
-                maxLength={20}
-                {...register('serviceName', {
-                  required: '서비스명을 입력하지 않았습니다.',
-                  pattern: {
-                    value: /\S+/,
-                    message: '서비스명을 입력하지 않았습니다.',
-                  },
-                })}
-              />
-            </label>
-            <label>
-              <h3>서비스 URI</h3>
-              <S.ModifyInput
-                type="text"
-                maxLength={254}
-                {...register('serviceUri', {
-                  required: '사이트 URI를 입력하지 않았습니다.',
-                  pattern: {
-                    value: regUri,
-                    message: '사이트 URI를 형식에 맞게 입력해주세요',
-                  },
-                })}
-              />
-            </label>
-            <label>
-              <h3>리다이렉트 URI</h3>
-              <S.ModifyInput
-                type="text"
-                maxLength={254}
-                {...register('redirectUri', {
-                  required: '리다이렉트 URI를 입력하지 않았습니다.',
-                  pattern: {
-                    value: regUri,
-                    message: '리다이렉트 URI를 형식에 맞게 입력해주세요',
-                  },
-                })}
-              />
-            </label>
-            <label>
-              <h3>클라이언트 ID</h3>
-              <div>
-                <i
-                  onClick={() => {
-                    navigator.clipboard.writeText(watch('clientId'));
-                    toast.info('텍스트가 복사 되었습니다.');
-                  }}
-                >
-                  <SVG.CopyButton />
-                </i>
-                <S.CopyInput type="text" {...register('clientId')} readOnly />
-              </div>
-            </label>
-            <label>
-              <h3>클라이언트 SECRET</h3>
-              <div>
-                <i
-                  onClick={() => {
-                    navigator.clipboard.writeText(watch('clientSecret'));
-                    toast.info('텍스트가 복사 되었습니다.');
-                  }}
-                >
-                  <SVG.CopyButton />
-                </i>
-                <S.CopyInput
-                  type="text"
-                  {...register('clientSecret')}
-                  readOnly
-                />
-              </div>
-            </label>
-            <button type="submit">확인</button>
-          </form>
-        </S.ModifyModalLayer>
-      </S.ModifyModalBackGround>
+      <S.ModifyModalLayer>
+        <h1>서비스 정보 수정</h1>
+        <form onSubmit={handleSubmit(ModifyService, CheckError)}>
+          <label>
+            <h3>서비스명</h3>
+            <S.ModifyInput
+              type="text"
+              maxLength={20}
+              {...register('serviceName', {
+                required: '서비스명을 입력하지 않았습니다.',
+                pattern: {
+                  value: /\S+/,
+                  message: '서비스명을 입력하지 않았습니다.',
+                },
+              })}
+            />
+          </label>
+          <label>
+            <h3>서비스 URI</h3>
+            <S.ModifyInput
+              type="text"
+              maxLength={254}
+              {...register('serviceUri', {
+                required: '사이트 URI를 입력하지 않았습니다.',
+                pattern: {
+                  value: regUri,
+                  message: '사이트 URI를 형식에 맞게 입력해주세요',
+                },
+              })}
+            />
+          </label>
+          <label>
+            <h3>리다이렉트 URI</h3>
+            <S.ModifyInput
+              type="text"
+              maxLength={254}
+              {...register('redirectUri', {
+                required: '리다이렉트 URI를 입력하지 않았습니다.',
+                pattern: {
+                  value: regUri,
+                  message: '리다이렉트 URI를 형식에 맞게 입력해주세요',
+                },
+              })}
+            />
+          </label>
+          <label>
+            <h3>클라이언트 ID</h3>
+            <div>
+              <i
+                onClick={() => {
+                  navigator.clipboard.writeText(watch('clientId'));
+                  toast.info('텍스트가 복사 되었습니다.');
+                }}
+              >
+                <SVG.CopyButton />
+              </i>
+              <S.CopyInput type="text" {...register('clientId')} readOnly />
+            </div>
+          </label>
+          <label>
+            <h3>클라이언트 SECRET</h3>
+            <div>
+              <i
+                onClick={() => {
+                  navigator.clipboard.writeText(watch('clientSecret'));
+                  toast.info('텍스트가 복사 되었습니다.');
+                }}
+              >
+                <SVG.CopyButton />
+              </i>
+              <S.CopyInput type="text" {...register('clientSecret')} readOnly />
+            </div>
+          </label>
+          <button type="submit">확인</button>
+        </form>
+      </S.ModifyModalLayer>
+      <S.ModifyModalBackGround onClick={() => GetMyLists()} />
     </>
   );
 }

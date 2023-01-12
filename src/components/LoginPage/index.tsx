@@ -174,7 +174,9 @@ export default function LoginPage() {
             <S.Submit onClick={onLogin}>로그인</S.Submit>
             <div>
               <Link href="/signUp">회원가입</Link> <span>l</span>{' '}
-              <Link href="/initPassword">비밀번호 찾기</Link>
+              <a onClick={() => toast.info('다음 버전에 추가할 예정')}>
+                비밀번호 찾기
+              </a>
             </div>
           </S.ButtonContainer>
         </S.LoginContainer>

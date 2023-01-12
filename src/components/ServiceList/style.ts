@@ -99,10 +99,7 @@ export const PreviewImg = styled.img`
   width: 353px;
   height: 140px;
   border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 export const ServiceTitle = styled.h3`

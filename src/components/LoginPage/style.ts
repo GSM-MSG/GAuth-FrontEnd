@@ -275,6 +275,7 @@ export const InputName = styled.h3<LoginInputProps>`
   position: absolute;
   margin: 0;
   transition: all 0.5s, color 0s;
+  z-index: -1;
   ${({ being }) => {
     if (being) {
       return 'transform: translateY(-25px); font-size: 15px;';

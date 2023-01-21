@@ -9,7 +9,7 @@ export default function SideWave() {
 
   useEffect(() => {
     setViewWidth(window.innerWidth);
-  }, []);
+  }, [setViewWidth]);
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -18,7 +18,7 @@ export default function SideWave() {
       const waves: HTMLCollection = waveRef.current.children;
       Array.prototype.map.call(waves, (e: HTMLDivElement, idx: number) => {
         if (idx <= 2)
-          e.style.width = window.innerWidth > 1200 ? '100vh' : '100vw';
+          e.style.width = window.innerWidth > 1320 ? '100vh' : '100vw';
       });
     });
   }, [viewWidth, setViewWidth]);
@@ -28,7 +28,7 @@ export default function SideWave() {
       <S.SideWave
         fill="url(#gradient1)"
         options={{
-          height: viewWidth > 1200 ? 10 : 50,
+          height: viewWidth > 1320 ? 10 : 50,
           amplitude: 150,
           speed: 0.175,
           points: 1,
@@ -37,7 +37,7 @@ export default function SideWave() {
         <defs>
           <linearGradient
             id="gradient1"
-            gradientTransform={viewWidth > 1200 ? 'rotate(0)' : 'rotate(67.5)'}
+            gradientTransform={viewWidth > 1320 ? 'rotate(0)' : 'rotate(67.5)'}
           >
             <stop offset="0%" stopColor="#7EB2E2" />
             <stop offset="100%" stopColor="#5499D9" />
@@ -47,7 +47,7 @@ export default function SideWave() {
       <S.SideWave
         fill="url(#gradient2)"
         options={{
-          height: viewWidth > 1200 ? 110 : 100,
+          height: viewWidth > 1320 ? 110 : 100,
           amplitude: 200,
           speed: 0.17,
           points: 1,
@@ -56,7 +56,7 @@ export default function SideWave() {
         <defs>
           <linearGradient
             id="gradient2"
-            gradientTransform={viewWidth > 1200 ? 'rotate(0)' : 'rotate(67.5)'}
+            gradientTransform={viewWidth > 1320 ? 'rotate(0)' : 'rotate(67.5)'}
           >
             <stop offset="0%" stopColor="#5499D9" />
             <stop offset="100%" stopColor="#2E80CC" />
@@ -66,7 +66,7 @@ export default function SideWave() {
       <S.SideWave
         fill="url(#gradient3)"
         options={{
-          height: viewWidth > 1200 ? 210 : 150,
+          height: viewWidth > 1320 ? 210 : 150,
           amplitude: 250,
           speed: 0.17,
           points: 1,
@@ -75,14 +75,14 @@ export default function SideWave() {
         <defs>
           <linearGradient
             id="gradient3"
-            gradientTransform={viewWidth > 1200 ? 'rotate(45)' : 'rotate(67.5)'}
+            gradientTransform={viewWidth > 1320 ? 'rotate(0)' : 'rotate(67.5)'}
           >
             <stop offset="11.3%" stopColor="#2E80CC" />
             <stop offset="100%" stopColor="#2566A2" />
           </linearGradient>
         </defs>
       </S.SideWave>
-      {viewWidth >= 1200 && (
+      {viewWidth >= 1320 && (
         <>
           <S.Bubble delay={1.5} />
           <S.Bubble delay={2} />

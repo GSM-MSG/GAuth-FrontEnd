@@ -10,7 +10,7 @@ export const Layer = styled.div`
   left: 0;
   display: flex;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     margin-top: 5vh;
     height: 95%;
   }
@@ -21,23 +21,24 @@ export const Layer = styled.div`
   }
 `;
 
-export const SideWaveBox = styled.div``;
+export const SideWaveBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+`;
 
 export const SideWave = styled(Wave)`
   position: fixed;
   transform: rotate(90deg);
   transform-origin: left bottom;
-  top: -100%;
-  height: 100%;
-  left: calc(100vw - 1920px);
+  top: -50vw;
+  height: 50vw;
+  left: 0;
 
-  @media (max-width: 1650px) {
-    left: calc(1650px - 1920px);
-  }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     top: 0;
     left: 0;
+    height: 100%;
     transform: rotate(0);
   }
 `;
@@ -92,12 +93,12 @@ export const Bubble = styled.span`
 
 export const TitleWrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   min-width: 650px;
   display: flex;
   align-items: center;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     min-width: 0;
   }
 `;
@@ -117,9 +118,10 @@ export const TitleBox = styled.div`
   align-items: center;
   padding-left: 30px;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     width: 100%;
     gap: 50px;
+    padding-left: 0;
   }
 
   h1 {
@@ -127,7 +129,7 @@ export const TitleBox = styled.div`
     font-size: 45px;
     letter-spacing: 16px;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       font-size: 40px;
     }
   }
@@ -137,7 +139,7 @@ export const TitleBox = styled.div`
     font-size: 35px;
     font-weight: 600;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       font-size: 30px;
     }
   }
@@ -172,7 +174,7 @@ export const LoginContainer = styled.div`
     letter-spacing: 5px;
     color: #2e80cc;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       color: #fff;
       font-size: 55px;
     }
@@ -192,13 +194,13 @@ export const LoginName = styled.h2`
   word-break: keep-all;
   -webkit-line-clamp: 3;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     color: #fff;
   }
 
   span:nth-of-type(1) {
     color: #2e80cc;
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       color: #8cf;
     }
   }
@@ -242,7 +244,7 @@ export const InputWrapper = styled.div`
     cursor: pointer;
     ime-mode: inactive;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       color: #fff;
     }
     @media (max-width: 600px) {
@@ -260,7 +262,7 @@ export const Email = styled.div`
   font-size: 27px;
   z-index: -1;
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     color: #fff;
   }
   @media (max-width: 600px) {
@@ -282,7 +284,7 @@ export const InputName = styled.h3<LoginInputProps>`
     }
   }};
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1320px) {
     color: #fff;
     font-size: 18px;
     ${({ being }) => {
@@ -302,7 +304,7 @@ export const ButtonContainer = styled.div`
 
   div > * {
     color: #929292;
-    @media (max-width: 1200px) {
+    @media (max-width: 1320px) {
       color: #fff;
     }
     @media (max-width: 600px) {

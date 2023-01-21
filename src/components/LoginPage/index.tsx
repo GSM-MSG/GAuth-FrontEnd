@@ -41,7 +41,7 @@ export default function LoginPage() {
   useEffect(() => {
     makeTitleSize();
     addEventListener('resize', () => makeTitleSize());
-  }, [serviceName, setServiceName]);
+  }, [serviceName, setServiceName, viewWidth]);
 
   useEffect(() => {
     if (!router.isReady) return;

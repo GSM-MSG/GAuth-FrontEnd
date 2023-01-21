@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Wave from 'react-wavify';
-import { LoginInputProps } from '../../types';
+// import { LoginInputProps } from '../../types';
 
 export const Layer = styled.div`
   width: 100vw;
@@ -154,7 +154,7 @@ export const LoginWrapper = styled.div`
   z-index: 10;
 `;
 
-export const LoginContainer = styled.div`
+export const LoginContainer = styled.form`
   width: 425px;
   display: flex;
   flex-direction: column;
@@ -257,7 +257,7 @@ export const InputWrapper = styled.div`
 export const Email = styled.div`
   position: relative;
   display: inline;
-  top: -50px;
+  top: -60px;
   left: 60%;
   font-size: 27px;
   z-index: -1;
@@ -268,17 +268,17 @@ export const Email = styled.div`
   @media (max-width: 600px) {
     font-size: 20px;
     left: calc(100% - 120px);
-    top: -42px;
+    top: -51px;
   }
 `;
 
-export const InputName = styled.h3<LoginInputProps>`
+export const InputName = styled.h3`
   color: #929292;
   position: absolute;
   margin: 0;
   transition: all 0.5s, color 0s;
   z-index: -1;
-  ${({ being }) => {
+  ${({ being }: { being: boolean }) => {
     if (being) {
       return 'transform: translateY(-25px); font-size: 15px;';
     }
@@ -287,7 +287,7 @@ export const InputName = styled.h3<LoginInputProps>`
   @media (max-width: 1320px) {
     color: #fff;
     font-size: 18px;
-    ${({ being }) => {
+    ${({ being }: { being: boolean }) => {
       if (being) {
         return 'transform: translateY(-25px); font-size: 14px;';
       }

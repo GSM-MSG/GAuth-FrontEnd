@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Wave from 'react-wavify';
-// import { LoginInputProps } from '../../types';
 
 export const Layer = styled.div`
   width: 100vw;
@@ -242,7 +241,6 @@ export const InputWrapper = styled.div`
     background-color: transparent;
     z-index: 10;
     cursor: pointer;
-    ime-mode: inactive;
 
     @media (max-width: 1320px) {
       color: #fff;
@@ -250,6 +248,15 @@ export const InputWrapper = styled.div`
     @media (max-width: 600px) {
       padding: 0 0 10px 20px;
       font-size: 20px;
+    }
+  }
+  input:-webkit-autofill {
+    -webkit-text-fill-color: #000;
+    box-shadow: 0 0 0px 1000px transparent inset;
+    transition: background-color 9999s;
+
+    @media (max-width: 1320px) {
+      -webkit-text-fill-color: #fff;
     }
   }
 `;

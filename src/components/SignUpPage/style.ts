@@ -31,6 +31,11 @@ export const SideWave = styled(Wave)`
   bottom: 0;
   transform-origin: bottom;
   height: 950px;
+  @media (max-width: 1320px) {
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
 `;
 
 export const Title = styled.div`
@@ -151,6 +156,7 @@ export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 80px;
+  margin: 0 auto;
   justify-content: center;
   align-items: center;
   transition: 0.5s;
@@ -163,8 +169,19 @@ export const SignUpContainer = styled.div`
     letter-spacing: 5px;
     margin: 0;
     color: #2e80cc;
+    @media (max-width: 1320px) {
+      color: #fff;
+      font-size: 55px;
+    }
+    @media (max-width: 600px) {
+      font-size: 50px;
+      width: 100%;
+    }
   }
 
+  @media (max-width: 600px) {
+    width: 80%;
+  }
   @media (max-width: 1200px) {
     h1 {
       color: #fff;
@@ -203,6 +220,14 @@ export const InputWrapper = styled.div`
     font-weight: 400;
     outline: none;
     background-color: transparent;
+
+    @media (max-width: 1320px) {
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      padding: 0 0 10px 20px;
+      font-size: 20px;
+    }
   }
   @media (max-width: 1200px) {
     input {
@@ -249,6 +274,9 @@ export const ButtonContainer = styled.div`
     @media (max-width: 1200px) {
       color: #fff;
     }
+    @media (max-width: 600px) {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -269,6 +297,13 @@ export const Submit = styled.button`
   &:active {
     box-shadow: rgba(50, 50, 93, 0.15) 0px 30px 60px -12px inset,
       rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;
+  }
+
+  @media (max-width: 600px) {
+    width: 80%;
+    min-width: 160px;
+    height: 48px;
+    font-size: 20px;
   }
 `;
 
@@ -344,6 +379,22 @@ export const PrivacyConsent = styled.div`
       text-decoration: underline #fff;
     }
   }
+  @media (max-width: 600px) {
+    p {
+      font-size: 10px;
+    }
+    a {
+      font-size: 11px;
+    }
+    input[type='checkbox'] {
+      ::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
 `;
 
 export const IMG = styled.img``;
@@ -409,6 +460,11 @@ export const ProfileBtnWrapper = styled.div`
     gap: 10px;
     margin-bottom: 10px;
   }
+  @media (max-width: 600px) {
+    div {
+      gap: 5px;
+    }
+  }
 `;
 
 export const ChangeBtn = styled.button`
@@ -430,6 +486,12 @@ export const ChangeBtn = styled.button`
   border: 2px solid #5499d9;
   width: 148px;
   height: 60px;
+  @media (max-width: 600px) {
+    width: 70%;
+    min-width: 130px;
+    height: 48px;
+    font-size: 20px;
+  }
 `;
 
 export const Profile = styled.img`
@@ -461,7 +523,7 @@ export const PrivacyConsentWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 600px;
-  height: 775px;
+  aspect-ratio: auto 1/1.292;
   background: #fafafa;
   z-index: 200;
   border-radius: 20px;
@@ -478,5 +540,8 @@ export const PrivacyConsentWrapper = styled.div`
     border-radius: 10px;
     background-clip: padding-box;
     border: 2px solid transparent;
+  }
+  @media (max-width: 700px) {
+    width: 85vw;
   }
 `;

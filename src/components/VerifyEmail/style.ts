@@ -18,8 +18,10 @@ export const Layer = styled.div`
 `;
 
 export const Wrapper = styled.div<WrapperType>`
-  width: ${(e) => (e.check ? '607px' : '950px')};
-  height: ${(e) => (e.check ? '367px' : '575px')};
+  width: ${(e) => (e.check ? '42vw' : '65vw')};
+  aspect-ratio: auto 1/0.605;
+  min-width: 220px;
+  padding: 20px;
   background: #fafafa;
   display: flex;
   justify-content: space-around;
@@ -55,10 +57,10 @@ export const Wrapper = styled.div<WrapperType>`
     font-size: 27px;
     cursor: pointer;
   }
-  @media (max-width: 1200px) {
-    width: ${(e) => (e.check ? '42vw' : '79vw')};
-  }
   @media (max-width: 850px) {
+    svg {
+      width: 20vw;
+    }
     h2 {
       font-size: 30px;
     }
@@ -68,10 +70,26 @@ export const Wrapper = styled.div<WrapperType>`
         font-size: 24px;
       }
     }
+    button {
+      width: 143px;
+      height: 40px;
+      font-size: 20px;
+    }
   }
-  @media (max-width: 450px) {
+  @media (max-width: 850px) {
     h2 {
-      font-size: 22px;
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+      span {
+        font-size: 18px;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 15px;
     }
     p {
       font-size: 16px;

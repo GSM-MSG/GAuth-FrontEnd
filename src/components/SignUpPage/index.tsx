@@ -136,11 +136,20 @@ export default function SignUpPage() {
               <S.ButtonContainer>
                 <S.Submit
                   onClick={() => {
+                    const reg_pw =
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,72}/;
                     if (/^.{0}$/.test(watch('email'))) {
                       toast.error('이메일 입력을 확인해주세요.');
                       setFocus('email');
                     } else if (!/^.{8,72}$/.test(watch('pw'))) {
-                      toast.error('암호의 길이는 8자 이상 72자 이하 입니다.');
+                      toast.error(
+                        '비밀번호의 길이는 8자 이상 72자 이하 입니다.'
+                      );
+                      setFocus('pw');
+                    } else if (!reg_pw.test(watch('pw'))) {
+                      toast.error(
+                        '비밀번호는 대문자, 소문자, 숫자, 특수문자가 각각 1개 이상 포함해야 합니다.'
+                      );
                       setFocus('pw');
                     } else if (!watch('privacyCheck')) {
                       toast.error(

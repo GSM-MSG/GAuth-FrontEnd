@@ -143,7 +143,7 @@ export default function SignUpPage() {
                       setFocus('email');
                     } else if (!/^.{8,72}$/.test(watch('pw'))) {
                       toast.error(
-                        '비밀번호의 길이는 8자 이상 72자 이하 입니다.'
+                        '비밀번호의 길이는 8자 이상 72자 이하여야 합니다.'
                       );
                       setFocus('pw');
                     } else if (!reg_pw.test(watch('pw'))) {

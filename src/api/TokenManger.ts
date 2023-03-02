@@ -19,7 +19,7 @@ class TokenManager {
     this._expiresAt = localStorage.getItem(expiredAt);
   }
 
-  checkTokent(expiredString: string | null) {
+  checkToken(expiredString: string | null) {
     if (!expiredString) return;
     return new Date(expiredString).getTime() - new Date().getTime() >= 30000;
   }

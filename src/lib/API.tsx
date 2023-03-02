@@ -3,7 +3,7 @@ import Router, { useRouter } from 'next/router';
 import { accessToken, expiredAt, refreshToken } from './Token';
 
 export const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_GAUTH_SERVER_URL,
   withCredentials: true,
   headers: {
     'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_GAUTH_SERVER_URL!,
@@ -18,7 +18,7 @@ const refreshApi = async (err: AxiosError | AxiosRequestConfig) => {
 
   try {
     const { data } = await axios.patch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/auth`,
+      `${process.env.NEXT_PUBLIC_GAUTH_SERVER_URL}/auth`,
       {},
       {
         headers: {
@@ -51,7 +51,8 @@ API.interceptors.request.use(
     if (
       config.headers &&
       Router.pathname !== '/login' &&
-      Router.pathname !== '/signUp'
+      Router.pathname !== '/signUp' &&
+      Router.pathname !== '/newlogin'
     ) {
       if (
         !access_token ||

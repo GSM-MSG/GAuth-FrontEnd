@@ -10,3 +10,13 @@ export const UserLists = atom<ClientListType[]>({
   key: 'userLists',
   default: [],
 });
+
+export const ModalTile = atom<string>({
+  key: 'modalTitle',
+  default: '',
+});
+
+export const ModalType = atom<string>({
+  key: 'modalType',
+  default: 'signIn',
+});

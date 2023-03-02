@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
-import { API } from '../../lib/API';
 import SideWave from './SideWave';
 import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { useRecoilValue } from 'recoil';
@@ -12,6 +11,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { LoginFormProps } from '../../types';
+import API from '../../api';
 
 export default function LoginPage() {
   const [serviceName, setServiceName] = useState<string>('');

@@ -137,7 +137,7 @@ export default function SignUpPage() {
                 <S.Submit
                   onClick={() => {
                     const reg_pw =
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,72}/;
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&^#])[A-Za-z\d$@$!%*?&^#]{8,72}/;
                     if (/^.{0}$/.test(watch('email'))) {
                       toast.error('이메일 입력을 확인해주세요.');
                       setFocus('email');

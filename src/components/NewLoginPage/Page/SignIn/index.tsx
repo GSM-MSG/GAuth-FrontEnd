@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import CreateTitle from '../../../common/CreateTitle';
-import { SubmitBtn } from '../../style';
-import { ModalType } from '../../../../Atom/Atoms';
+import { SubmitWrapper } from '../../style';
+import { ModalType, ModalPage } from '../../../../Atom/Atoms';
 import Input from '../../../common/Input';
 import * as S from './style';
 import { useForm } from 'react-hook-form';
@@ -21,6 +21,7 @@ export default function SignIn() {
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
   const setModalType = useSetRecoilState(ModalType);
+  const setModalPage = useSetRecoilState(ModalPage);
   const {
     register,
     formState: { errors },
@@ -72,6 +73,11 @@ export default function SignIn() {
     }
   };
 
+  const changeModalType = (type: string) => {
+    setModalPage(0);
+    setModalType(type);
+  };
+
   return (
     <>
       <CreateTitle
@@ -79,9 +85,9 @@ export default function SignIn() {
         logo={true}
         subTitle={serviceName ? '' : '저희 guath가 처음이신가요?'}
         option={serviceName ? '' : '회원가입'}
-        onClick={() => setModalType('signUp')}
+        onClick={() => changeModalType('signUp')}
       />
-      <S.Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <S.InputWrapper>
           <Input
             label="이메일"
@@ -96,9 +102,11 @@ export default function SignIn() {
           />
           {error && <p>{error}</p>}
         </S.InputWrapper>
-        <SubmitBtn type="submit">로그인</SubmitBtn>
-        <p onClick={() => setModalType('findPsw')}>비밀번호 찾기</p>
-      </S.Wrapper>
+        <SubmitWrapper>
+          <button type="submit">로그인</button>
+          <p onClick={() => changeModalType('findPsw')}>비밀번호 찾기</p>
+        </SubmitWrapper>
+      </S.Form>
     </>
   );
 }

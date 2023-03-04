@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
 import VerifyEmail from '../VerifyEmail';
-import { API } from '../../lib/API';
 import PrivacyConsent from './PrivacyConsent';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
@@ -10,6 +9,7 @@ import * as Util from '../../util';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
+import API from '../../api';
 
 export default function SignUpPage() {
   const formDefaultValues = {

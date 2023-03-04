@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { AddServiceFormImg } from '../../../public/svg';
-import { API } from '../../lib/API';
+import API from '../../api';
 import { accessToken } from '../../lib/Token';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import ServiceInfoModal from './ServiceInfoModal';

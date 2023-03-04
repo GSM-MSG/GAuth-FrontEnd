@@ -9,6 +9,7 @@ export default function ListTable() {
   useEffect(() => {
     const getAllList = async () => {
       const data = await API.get('/client');
+      if (!data) return;
       setServiceList(data.data);
     };
     getAllList();

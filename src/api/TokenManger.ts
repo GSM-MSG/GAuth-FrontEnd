@@ -44,7 +44,7 @@ class TokenManager {
       localStorage.removeItem(refreshToken);
       localStorage.removeItem(expiredAt);
 
-      Router.replace('/login');
+      return Router.push('/login');
     }
   }
 

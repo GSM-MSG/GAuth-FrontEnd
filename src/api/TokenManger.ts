@@ -25,7 +25,12 @@ class TokenManager {
   }
 
   async getRefresh(refresh: string | null) {
-    if (refresh) return;
+    const skipUrl = ['/login', 'signUp'];
+    if (refresh) {
+      if (skipUrl.includes(window.location.pathname)) {
+        return;
+      } else return Router.push('/login');
+    }
 
     try {
       const { data } = await axios.patch(

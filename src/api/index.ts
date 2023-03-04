@@ -23,23 +23,18 @@ API.interceptors.request.use(async (config) => {
   return config;
 });
 
-// API.interceptors.response.use(
-//   (res: AxiosResponse) => {
-//     return res;
-//   },
+API.interceptors.response.use(
+  (res: AxiosResponse) => {
+    return res;
+  },
 
-//   async (err: AxiosError) => {
-//     const tokenManager = new TokenManager();
+  async (err: AxiosError) => {
+    const tokenManager = new TokenManager();
 
-//     const resUrl = `${process.env.NEXT_PUBLIC_GAUTH_SERVER_URL}/email`;
-//     if (
-//       err.response &&
-//       err.response.status === 401 &&
-//       !err.response.request.responseURL.includes(resUrl)
-//     )
-//       return tokenManager.getRefresh(tokenManager.refreshToken);
-//     return Promise.reject(err);
-//   }
-// );
+    if (err.response && err.response.status === 401)
+      return tokenManager.getRefresh(tokenManager.refreshToken);
+    return Promise.reject(err);
+  }
+);
 
 export default API;

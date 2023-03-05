@@ -128,7 +128,7 @@ export default function LoginPage() {
                 {...register('email', {
                   required: '이메일을 입력하지 않았습니다',
                   pattern: {
-                    value: /^s[0-9]{5}/g,
+                    value: /[a-zA-Z\d]/gi,
                     message: 'GSM메일 형식에 맞게 입력해주세요',
                   },
                   onBlur: () =>

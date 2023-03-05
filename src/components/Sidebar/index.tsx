@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import * as SVG from '../../../public/svg';
-import { API } from '../../lib/API';
 import * as S from './style';
 import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { NavList } from '../../lib/NavList';
+import API from '../../api';
 
 export default function Sidebar() {
   const router = useRouter();

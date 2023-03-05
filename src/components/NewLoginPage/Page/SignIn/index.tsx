@@ -1,17 +1,17 @@
 import { useSetRecoilState } from 'recoil';
 import CreateTitle from '../../../common/CreateTitle';
-import { SubmitWrapper } from '../../style';
+import { Form, InputWrapper, SubmitWrapper } from '../../style';
 import { ModalType, ModalPage } from '../../../../Atom/Atoms';
 import Input from '../../../common/Input';
-import * as S from './style';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import * as Type from '../../../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
-import { API } from '../../../../lib/API';
+
 import { accessToken, expiredAt, refreshToken } from '../../../../lib/Token';
+import API from '../../../../api';
 
 export default function SignIn() {
   const router = useRouter();
@@ -87,8 +87,8 @@ export default function SignIn() {
         option={serviceName ? '' : '회원가입'}
         onClick={() => changeModalType('signUp')}
       />
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <S.InputWrapper>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputWrapper>
           <Input
             label="이메일"
             errors={!!errors.email}
@@ -101,12 +101,12 @@ export default function SignIn() {
             type="password"
           />
           {error && <p>{error}</p>}
-        </S.InputWrapper>
+        </InputWrapper>
         <SubmitWrapper>
           <button type="submit">로그인</button>
           <p onClick={() => changeModalType('findPsw')}>비밀번호 찾기</p>
         </SubmitWrapper>
-      </S.Form>
+      </Form>
     </>
   );
 }

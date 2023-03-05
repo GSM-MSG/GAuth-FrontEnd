@@ -1,7 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 import { ModalType } from '../../../../Atom/Atoms';
 import CreateTitle from '../../../common/CreateTitle';
-import { Section, SubmitBtn } from '../../style';
+import { SubmitWrapper } from '../../style';
 
 export default function SignUp() {
   const setModalType = useSetRecoilState(ModalType);
@@ -15,8 +15,9 @@ export default function SignUp() {
         option={'로그인'}
         onClick={() => setModalType('signIn')}
       />
-      <Section></Section>
-      <SubmitBtn>회원가입</SubmitBtn>
+      <SubmitWrapper>
+        <button>회원가입</button>
+      </SubmitWrapper>
     </>
   );
 }

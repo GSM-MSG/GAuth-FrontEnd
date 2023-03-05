@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { LoginFormProps } from '../types';
 import { ClientListType } from '../types/ClientInForm';
 
 export const ViewWidth = atom<number>({
@@ -16,7 +17,20 @@ export const ModalTile = atom<string>({
   default: '',
 });
 
+export const ModalPage = atom<number>({
+  key: 'modalPage',
+  default: 0,
+});
+
 export const ModalType = atom<string>({
   key: 'modalType',
   default: 'signIn',
+});
+
+export const EmailInfo = atom<LoginFormProps>({
+  key: 'emailInfo',
+  default: {
+    email: '',
+    password: '',
+  },
 });

@@ -10,6 +10,8 @@ import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import API from '../../api';
+import { useRouter } from 'next/router';
+import { client_id, redirect_uri } from '../../lib/OauthQuery';
 
 export default function SignUpPage() {
   const formDefaultValues = {
@@ -29,6 +31,7 @@ export default function SignUpPage() {
   const { register, watch, setValue, setFocus, reset } = useForm({
     defaultValues: formDefaultValues,
   });
+  const router = useRouter();
 
   const resetStateHandler = () => {
     reset(formDefaultValues);
@@ -78,6 +81,16 @@ export default function SignUpPage() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const onRouting = () => {
+    router.push({
+      pathname: '/login',
+      query: {
+        client_id: router.query[client_id],
+        redirect_uri: router.query[redirect_uri],
+      },
+    });
   };
 
   return (
@@ -165,7 +178,10 @@ export default function SignUpPage() {
                   다음
                 </S.Submit>
                 <div>
-                  <Link href="/login">로그인</Link> |{' '}
+                  <button type="button" onClick={onRouting}>
+                    로그인
+                  </button>{' '}
+                  |{' '}
                   <a
                     onClick={() => {
                       toast.info('다음 버전에 추가될 예정');
@@ -220,7 +236,10 @@ export default function SignUpPage() {
                       다음
                     </S.ChangeBtn>
                   </div>
-                  <Link href="/login">로그인</Link> |{' '}
+                  <button type="button" onClick={onRouting}>
+                    로그인
+                  </button>{' '}
+                  |{' '}
                   <a
                     onClick={() => {
                       toast.info('다음 버전에 추가될 예정');

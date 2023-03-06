@@ -311,6 +311,10 @@ export const ButtonContainer = styled.div`
 
   div > * {
     color: #929292;
+    background: none;
+    font-size: 1em;
+    cursor: pointer;
+
     @media (max-width: 1320px) {
       color: #fff;
     }

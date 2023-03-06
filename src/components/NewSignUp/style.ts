@@ -109,20 +109,6 @@ export const ProfileSVGWrapper = styled.div`
   align-items: center;
   label {
     cursor: pointer;
-    i {
-      position: absolute;
-      top: 130px;
-      left: 130px;
-    }
-    :hover {
-      i {
-        svg {
-          path {
-            fill: #868e96;
-          }
-        }
-      }
-    }
   }
 `;
 

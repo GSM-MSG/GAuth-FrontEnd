@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { EmailInfo, ModalPage, PrivacyInfo } from '../../Atom/Atoms';
 import API from '../../api';
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { SubmitWrapper } from '../common/Auth/style';
@@ -69,7 +69,7 @@ export default function Profile() {
       resetModalType('/signUp');
       setModalPage(5);
     } catch (e) {
-      if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
+      if (!axios.isAxiosError(e)) return toast.error('unkonwn error');
       if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
       if (e.response?.status === 400)
         toast.error('이메일,비밀번호가 바르지 않습니다.');

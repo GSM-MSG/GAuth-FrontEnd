@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import SideWave from './SideWave';
@@ -6,7 +5,7 @@ import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { useRecoilValue } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
@@ -85,7 +84,7 @@ export default function LoginPage() {
         'Bearer ' + data.accessToken;
       router.replace('/');
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!axios.isAxiosError(e))
         return toast.error('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
         toast.warn('이메일 또는 비밀번호가 틀렸습니다.');

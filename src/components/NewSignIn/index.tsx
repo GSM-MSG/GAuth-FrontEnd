@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import API from '../../api';
 import {
@@ -43,7 +43,7 @@ export default function NewSignInPage() {
           const { data } = await API.get(`/oauth/${router.query.client_id}`);
           setServiceName(data.serviceName);
         } catch (e) {
-          if (e instanceof AxiosError && e.response!.status === 404) {
+          if (axios.isAxiosError(e) && e.response!.status === 404) {
             toast.error('해당하는 서비스가 없습니다.');
             router.back();
           } else {

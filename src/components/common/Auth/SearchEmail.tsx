@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -54,7 +54,7 @@ export default function SearchEmail({ title }: Props) {
       });
       setModalPage(1);
     } catch (e) {
-      if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
+      if (!axios.isAxiosError(e)) return toast.error('unkonwn error');
       if (e.response?.status === 429)
         return toast.error('15분 동안 최대 3번 요청 가능합니다.');
       if (e.response?.status === 400) {

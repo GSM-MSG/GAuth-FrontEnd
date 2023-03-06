@@ -43,7 +43,7 @@ export default function VerifyEmail({ title }: Props) {
         </p>
       </CheckingMessage>
       <SubmitWrapper>
-        <button onClick={() => checkEmail()}>다음</button>
+        <button onClick={checkEmail}>다음</button>
         <p onClick={() => changeModalType('/login')}>로그인 하러가기</p>
       </SubmitWrapper>
     </>

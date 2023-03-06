@@ -48,7 +48,7 @@ export default function Privacy() {
         </span>
       </S.PrivacyConsent>
       <SubmitWrapper>
-        <button onClick={() => checkPrivacy()}>다음</button>
+        <button onClick={checkPrivacy}>다음</button>
       </SubmitWrapper>
     </>
   );

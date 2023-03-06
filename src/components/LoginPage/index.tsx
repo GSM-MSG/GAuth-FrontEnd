@@ -134,7 +134,6 @@ export default function LoginPage() {
                   onBlur: () =>
                     getValues('email') === '' && setEmailCheck(false),
                 })}
-                maxLength={6}
                 onFocus={() => setEmailCheck(true)}
               />
               <S.Email>@gsm.hs.kr</S.Email>

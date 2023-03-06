@@ -7,8 +7,7 @@ import { useEffect, useState } from 'react';
 import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import axios, { AxiosError } from 'axios';
-import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
+import axios from 'axios';
 import API from '../../api';
 import {
   Form,
@@ -18,6 +17,7 @@ import {
   Wrapper,
 } from '../common/Auth/style';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
+import TokenManager from '../../api/TokenManger';
 
 export default function NewSignInPage() {
   const router = useRouter();
@@ -55,6 +55,7 @@ export default function NewSignInPage() {
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
     try {
+      const tokenManager = new TokenManager();
       const { data } = await API.post(isQuery ? '/oauth/code' : '/auth', {
         email: inputs.email + '@gsm.hs.kr',
         password: inputs.password,
@@ -62,15 +63,12 @@ export default function NewSignInPage() {
 
       if (isQuery)
         return router.replace(`${router.query.redirect_uri}?code=${data.code}`);
-
-      localStorage.setItem(accessToken, data.accessToken);
-      localStorage.setItem(refreshToken, data.refreshToken);
-      localStorage.setItem(expiredAt, data.expiresAt);
+      tokenManager.setToken(data);
       API.defaults.headers.common['Authorization'] =
         'Bearer ' + data.accessToken;
       router.replace('/');
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!axios.isAxiosError(e))
         return setError('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
         setError('이메일 또는 비밀번호가 틀렸습니다.');

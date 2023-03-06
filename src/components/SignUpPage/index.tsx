@@ -23,7 +23,7 @@ export default function SignUpPage() {
     img: '',
     verifyEmail: false,
   };
-
+  const [loading, setLoading] = useState(false);
   const signUpRef = useRef<HTMLDivElement>(null);
   const [profileImg, setProfileImg] = useState<FileList>();
   const { register, watch, setValue, setFocus, reset } = useForm({
@@ -58,7 +58,9 @@ export default function SignUpPage() {
   };
 
   const RequsetEmail = async () => {
+    if (loading) return;
     try {
+      setLoading(true);
       const { request } = await API.post('/email', {
         email: watch('email') + '@gsm.hs.kr', // 정규식 ^[a-zA-Z0-9]+@gsm.hs.kr$, 공백 미허용
       });
@@ -73,6 +75,8 @@ export default function SignUpPage() {
         return toast.error('이미 인증된 이메일 요청입니다. 15분 기다려주세요.');
       }
       if (e.response?.status === 500) return toast.error('error');
+    } finally {
+      setLoading(false);
     }
   };
 

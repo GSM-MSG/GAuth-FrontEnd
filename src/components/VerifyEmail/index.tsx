@@ -1,12 +1,12 @@
 import * as S from './style';
 import { useState } from 'react';
-import { API } from '../../lib/API';
 import { useRouter } from 'next/router';
 import ApproveEmailModal from './ApproveEmailModal';
 import SuccessEmailCheckModal from './SuccessEmailCheckModal';
 import FailEmailCheckModal from './FailEmailCheckModal';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
+import API from '../../api';
 
 export default function VerifyEmail({
   email,

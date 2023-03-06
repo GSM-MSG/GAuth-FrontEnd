@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
-import { API } from '../../lib/API';
 import { ClientListType } from '../../types';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
@@ -8,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
 import { AxiosError } from 'axios';
+import API from '../../api';
 
 export default function ModifyMyService({
   modifyItem,

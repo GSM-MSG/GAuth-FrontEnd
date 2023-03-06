@@ -277,6 +277,16 @@ export const ButtonContainer = styled.div`
     @media (max-width: 600px) {
       font-size: 14px;
     }
+
+    > button {
+      background: none;
+      font-size: 1em;
+      cursor: pointer;
+
+      @media (max-width: 1200px) {
+        color: #fff;
+      }
+    }
   }
 `;
 
@@ -454,6 +464,15 @@ export const ProfileBtnWrapper = styled.div`
   color: #929292;
   @media (max-width: 1200px) {
     color: #fff;
+  }
+  > button {
+    background: none;
+    font-size: 1em;
+    cursor: pointer;
+
+    @media (max-width: 1200px) {
+      color: #fff;
+    }
   }
   div {
     display: flex;

@@ -1,12 +1,12 @@
 import * as S from './style';
 import * as SVG from '../../../public/svg';
-import { API } from '../../lib/API';
 import { useUser } from '../../hooks/useUser';
 import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
 import { useEffect } from 'react';
+import API from '../../api';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();

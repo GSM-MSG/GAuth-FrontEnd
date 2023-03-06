@@ -29,7 +29,7 @@ export default function NewPassword() {
       submitBtn="완료"
       bottomPhrase="로그인 하러가기"
       changeModal="/login"
-      onSubmit={(data) => onSubmit(data)}
+      onSubmit={onSubmit}
     />
   );
 }

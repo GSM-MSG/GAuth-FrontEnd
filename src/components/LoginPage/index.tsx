@@ -60,7 +60,7 @@ export default function LoginPage() {
         } catch (e) {
           if (e instanceof AxiosError && e.response!.status === 404) {
             toast.error('해당하는 서비스가 없습니다.');
-            // router.back();
+            router.back();
           } else {
             toast.error('예기치 못한 오류가 발생하였습니다.');
           }

@@ -102,7 +102,7 @@ export default function Profile() {
         />
       </S.ProfileSVGWrapper>
       <SubmitWrapper>
-        <button onClick={() => onSubmit()}>완료</button>
+        <button onClick={onSubmit}>완료</button>
       </SubmitWrapper>
     </>
   );

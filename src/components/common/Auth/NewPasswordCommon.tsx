@@ -98,7 +98,7 @@ export default function NewPasswordCommon({
         <SubmitWrapper>
           <button type="submit">{submitBtn}</button>
           {bottomPhrase && (
-            <p onClick={() => changeModalType()}>{bottomPhrase}</p>
+            <p onClick={changeModalType}>{bottomPhrase}</p>
           )}
         </SubmitWrapper>
       </Form>

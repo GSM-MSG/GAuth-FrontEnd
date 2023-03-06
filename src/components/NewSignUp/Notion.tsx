@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NotionRenderer } from 'react-notion';
+import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { ModalPage, PrivacyInfo } from '../../Atom/Atoms';
 import { SubmitWrapper } from '../common/Auth/style';
@@ -14,10 +15,14 @@ export default function Notion() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(
-        `https://notion-api.splitbee.io/v1/page/${NOTION_INSTRUCTIOM_PAGE_ID}`
-      );
-      setResponse(data);
+      try {
+        const { data } = await axios.get(
+          `https://notion-api.splitbee.io/v1/page/${NOTION_INSTRUCTIOM_PAGE_ID}`
+        );
+        setResponse(data);
+      } catch (e) {
+        if (!axios.isAxiosError(e)) return toast.error('unkonwn error');
+      }
     })();
   }, []);
 

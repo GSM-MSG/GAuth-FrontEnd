@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { LoginFormProps } from '../../types';
 import API from '../../api';
+import { client_id, redirect_uri } from '../../lib/OauthQuery';
 
 export default function LoginPage() {
   const [serviceName, setServiceName] = useState<string>('');
@@ -24,6 +25,7 @@ export default function LoginPage() {
   const isQuery =
     router.query.client_id !== undefined &&
     router.query.redirect_uri !== undefined;
+  const signUpUri = `/signup?${client_id}=${router.query[client_id]}&${redirect_uri}=${router.query[redirect_uri]}`;
 
   const { register, handleSubmit, getValues } = useForm<LoginFormProps>({
     mode: 'onSubmit',
@@ -96,6 +98,19 @@ export default function LoginPage() {
     return toast.warn(Object.values(err)[0].message);
   };
 
+  const onRouting = () => {
+    router.push(
+      {
+        pathname: '/signUp',
+        query: {
+          client_id: router.query[client_id],
+          redirect_uri: router.query[redirect_uri],
+        },
+      },
+      '/signUp'
+    );
+  };
+
   return (
     <S.Layer>
       <SideWave />
@@ -156,7 +171,10 @@ export default function LoginPage() {
           <S.ButtonContainer>
             <S.Submit type="submit">로그인</S.Submit>
             <div>
-              <Link href="/signUp">회원가입</Link> <span>l</span>{' '}
+              <button type="button" onClick={onRouting}>
+                회원가입
+              </button>{' '}
+              <span>l</span>{' '}
               <a onClick={() => toast.info('다음 버전에 추가할 예정')}>
                 비밀번호 찾기
               </a>

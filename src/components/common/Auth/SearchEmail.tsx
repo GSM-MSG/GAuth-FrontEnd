@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -7,7 +8,8 @@ import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
-import { Form, InputWrapper, SubmitWrapper } from './style';
+import { LightCube } from '../Loading';
+import { Form, InputWrapper, Loading, SubmitWrapper } from './style';
 
 interface Props {
   title?: string;
@@ -15,6 +17,7 @@ interface Props {
 
 export default function SearchEmail({ title }: Props) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
 
@@ -22,6 +25,7 @@ export default function SearchEmail({ title }: Props) {
     setModalPage(0);
     router.push(type);
   };
+
   const {
     register,
     formState: { errors },
@@ -31,12 +35,14 @@ export default function SearchEmail({ title }: Props) {
   });
 
   const searchEmail = async ({ email }: { email: string }) => {
+    if (loading) return;
     setEmailInfo({ ...emailInfo, ['email']: email });
     try {
+      setLoading(true);
       await API.post('/email', {
         email: email + '@gsm.hs.kr',
       });
-      setModalPage((prev) => ++prev);
+      setModalPage(1);
     } catch (e) {
       if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
       if (e.response?.status === 429)
@@ -46,6 +52,8 @@ export default function SearchEmail({ title }: Props) {
         return setModalPage(2);
       }
       if (e.response?.status === 500) return toast.error('error');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,20 +65,26 @@ export default function SearchEmail({ title }: Props) {
         subTitle={'가입하신 이메일을 입력해주세요.'}
       />
       <Form onSubmit={handleSubmit(searchEmail)}>
-        <InputWrapper>
-          <Input
-            label="이메일"
-            errors={!!errors.email}
-            register={register('email', {
-              required: '이메일을 입력하지 않았습니다',
-              pattern: {
-                value: /^[a-zA-Z0-9]*$/g,
-                message: 'GSM메일 형식에 맞게 입력해주세요',
-              },
-            })}
-            fixed="@gsm.hs.kr"
-          />
-        </InputWrapper>
+        {loading ? (
+          <Loading>
+            <LightCube color="#00ccff" />
+          </Loading>
+        ) : (
+          <InputWrapper>
+            <Input
+              label="이메일"
+              errors={!!errors.email}
+              register={register('email', {
+                required: '이메일을 입력하지 않았습니다',
+                pattern: {
+                  value: /^[a-zA-Z0-9]*$/g,
+                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                },
+              })}
+              fixed="@gsm.hs.kr"
+            />
+          </InputWrapper>
+        )}
         <SubmitWrapper>
           <button type="submit">다음</button>
           <p onClick={() => changeModalType('/login')}>로그인 하러가기</p>

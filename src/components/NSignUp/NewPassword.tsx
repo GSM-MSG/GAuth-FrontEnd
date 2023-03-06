@@ -6,7 +6,7 @@ export default function NewPassword() {
   const setModalPage = useSetRecoilState(ModalPage);
 
   const onSubmit = () => {
-    setModalPage((prev) => ++prev);
+    setModalPage(4);
   };
   return (
     <NewPasswordCommon

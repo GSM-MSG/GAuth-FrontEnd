@@ -1,14 +1,13 @@
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { ModalPage, ModalType, PrivacyInfo } from '../../Atom/Atoms';
+import { ModalPage, PrivacyInfo } from '../../Atom/Atoms';
 import { SubmitWrapper } from '../common/Auth/style';
 import CreateTitle from '../common/CreateTitle';
 import * as S from './style';
 
 export default function Privacy() {
   const router = useRouter();
-  const setModalType = useSetRecoilState(ModalType);
   const setModalPage = useSetRecoilState(ModalPage);
   const [privacy, setPrivacy] = useRecoilState(PrivacyInfo);
 
@@ -20,7 +19,7 @@ export default function Privacy() {
   const checkPrivacy = () => {
     if (!privacy)
       return toast.error('개인정보 수집 및 이용에 대해 동의해 주십시오.');
-    setModalPage((prev) => ++prev);
+    setModalPage(3);
   };
 
   return (

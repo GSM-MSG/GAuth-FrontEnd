@@ -25,7 +25,7 @@ class TokenManager {
   }
 
   async getRefresh(refresh: string | null) {
-    const skipUrl = ['/login', '/signUp', '/newlogin'];
+    const skipUrl = ['/login', '/signUp', '/newpsw'];
 
     if (!refresh) {
       if (skipUrl.includes(Router.route)) {

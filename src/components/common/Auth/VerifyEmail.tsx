@@ -25,7 +25,7 @@ export default function VerifyEmail({ title }: Props) {
         params: { email: emailInfo.email + '@gsm.hs.kr' },
       });
       if (request.status === 200) {
-        setModalPage((prev) => ++prev);
+        setModalPage(2);
       }
     } catch (e) {
       toast.error('이메일을 확인해 주세요.');

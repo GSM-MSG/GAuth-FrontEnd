@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
-import { ModalPage } from '../../Atom/Atoms';
 import SearchEmail from '../common/Auth/SearchEmail';
+import { ModalPage } from '../../Atom/Atoms';
 import { Layout, Wrapper } from '../common/Auth/style';
 import VerifyEmail from '../common/Auth/VerifyEmail';
 import NewPassword from './NewPassword';

@@ -1,26 +1,30 @@
 import { useSetRecoilState } from 'recoil';
-import CreateTitle from '../../../common/CreateTitle';
-import { Form, InputWrapper, SubmitWrapper } from '../../style';
-import { ModalType, ModalPage } from '../../../../Atom/Atoms';
-import Input from '../../../common/Input';
+import CreateTitle from '../common/CreateTitle';
+import { ModalPage } from '../../Atom/Atoms';
+import Input from '../common/Input';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import * as Type from '../../../../types';
+import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
+import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
+import API from '../../api';
+import {
+  Form,
+  InputWrapper,
+  Layout,
+  SubmitWrapper,
+  Wrapper,
+} from '../common/Auth/style';
 
-import { accessToken, expiredAt, refreshToken } from '../../../../lib/Token';
-import API from '../../../../api';
-
-export default function SignIn() {
+export default function NSignIn() {
   const router = useRouter();
   const isQuery =
     router.query.client_id !== undefined &&
     router.query.redirect_uri !== undefined;
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
-  const setModalType = useSetRecoilState(ModalType);
   const setModalPage = useSetRecoilState(ModalPage);
   const {
     register,
@@ -75,38 +79,55 @@ export default function SignIn() {
 
   const changeModalType = (type: string) => {
     setModalPage(0);
-    setModalType(type);
+    router.push(type);
   };
 
   return (
-    <>
-      <CreateTitle
-        title={serviceName || '뭐든 단 한번으로'}
-        logo={true}
-        subTitle={serviceName ? '' : '저희 guath가 처음이신가요?'}
-        option={serviceName ? '' : '회원가입'}
-        onClick={() => changeModalType('signUp')}
-      />
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <InputWrapper>
-          <Input
-            label="이메일"
-            errors={!!errors.email}
-            register={register('email', { required: true })}
-          />
-          <Input
-            label="비밀번호"
-            errors={!!errors.password}
-            register={register('password', { required: true })}
-            type="password"
-          />
-          {error && <p>{error}</p>}
-        </InputWrapper>
-        <SubmitWrapper>
-          <button type="submit">로그인</button>
-          <p onClick={() => changeModalType('findPsw')}>비밀번호 찾기</p>
-        </SubmitWrapper>
-      </Form>
-    </>
+    <Layout>
+      <Wrapper>
+        <CreateTitle
+          title={serviceName ? serviceName + '에 로그인' : '뭐든 단 한번으로'}
+          logo={true}
+          subTitle={serviceName ? '' : '저희 guath가 처음이신가요?'}
+          option={serviceName ? '' : '회원가입'}
+          onClick={() => changeModalType('/signUp')}
+        />
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <InputWrapper>
+            <Input
+              label="이메일"
+              fixed="@gsm.hs.kr"
+              errors={!!errors.email}
+              register={register('email', {
+                required: '이메일을 입력하지 않았습니다',
+                pattern: {
+                  value: /^[a-zA-Z0-9]*$/g,
+                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                },
+              })}
+            />
+            <Input
+              label="비밀번호"
+              errors={!!errors.password}
+              register={register('password', {
+                required: '비밀번호를 입력하지 않았습니다',
+                pattern: {
+                  value:
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,72}/,
+                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                },
+                maxLength: 72,
+              })}
+              type="password"
+            />
+            {error && <p>{error}</p>}
+          </InputWrapper>
+          <SubmitWrapper>
+            <button type="submit">로그인</button>
+            <p onClick={() => changeModalType('/newpsw')}>비밀번호 찾기</p>
+          </SubmitWrapper>
+        </Form>
+      </Wrapper>
+    </Layout>
   );
 }

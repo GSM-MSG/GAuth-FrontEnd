@@ -12,11 +12,6 @@ export const UserLists = atom<ClientListType[]>({
   default: [],
 });
 
-export const ModalTile = atom<string>({
-  key: 'modalTitle',
-  default: '',
-});
-
 export const ModalPage = atom<number>({
   key: 'modalPage',
   default: 0,
@@ -33,4 +28,9 @@ export const EmailInfo = atom<LoginFormProps>({
     email: '',
     password: '',
   },
+});
+
+export const PrivacyInfo = atom<boolean>({
+  key: 'privacy',
+  default: false,
 });

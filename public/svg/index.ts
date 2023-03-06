@@ -19,3 +19,4 @@ export * from './CopyIcon';
 export * from './CopyButton';
 export * from './SideBarLogo';
 export * from './NewLogo';
+export * from './ImageUpload';

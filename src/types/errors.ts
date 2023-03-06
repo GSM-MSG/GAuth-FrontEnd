@@ -1,3 +1,3 @@
-export type errorTpye = {
+export type errorType = {
   errors: boolean;
 };

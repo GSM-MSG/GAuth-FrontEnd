@@ -25,7 +25,6 @@ export default function LoginPage() {
   const isQuery =
     router.query.client_id !== undefined &&
     router.query.redirect_uri !== undefined;
-  const signUpUri = `/signup?${client_id}=${router.query[client_id]}&${redirect_uri}=${router.query[redirect_uri]}`;
 
   const { register, handleSubmit, getValues } = useForm<LoginFormProps>({
     mode: 'onSubmit',

@@ -1,5 +1,4 @@
 import CreateTitle from '../common/CreateTitle';
-// import { SubmitWrapper } from '../NewLoginPage/style';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import { useState } from 'react';

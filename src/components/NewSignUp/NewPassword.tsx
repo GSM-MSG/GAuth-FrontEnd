@@ -12,7 +12,7 @@ export default function NewPassword() {
     <NewPasswordCommon
       title="회원가입"
       submitBtn="다음"
-      onSubmit={() => onSubmit()}
+      onSubmit={onSubmit}
     />
   );
 }

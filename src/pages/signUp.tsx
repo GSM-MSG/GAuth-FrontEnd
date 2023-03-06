@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
-import NSignUp from '../components/NSignUp';
+import NewSignUpPage from '../components/NewSignUp';
 
 const SignUp: NextPage = () => {
-  return <NSignUp />;
+  return <NewSignUpPage />;
 };
 
 export default SignUp;

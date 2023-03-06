@@ -19,7 +19,7 @@ import {
 } from '../common/Auth/style';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 
-export default function NSignIn() {
+export default function NewSignInPage() {
   const router = useRouter();
   const isQuery =
     router.query.client_id !== undefined &&

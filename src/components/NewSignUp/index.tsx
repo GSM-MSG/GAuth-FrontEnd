@@ -8,7 +8,7 @@ import Notion from './Notion';
 import Privacy from './Privacy';
 import Profile from './Profile';
 import Success from './Success';
-export default function NSignUp() {
+export default function NewSignUpPage() {
   const modalPage = useRecoilValue(ModalPage);
 
   return (

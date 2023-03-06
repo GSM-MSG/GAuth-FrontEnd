@@ -5,7 +5,7 @@ import { Layout, Wrapper } from '../common/Auth/style';
 import VerifyEmail from '../common/Auth/VerifyEmail';
 import NewPassword from './NewPassword';
 
-export default function FindPsw() {
+export default function NewFindPswPage() {
   const modalPage = useRecoilValue(ModalPage);
 
   return (

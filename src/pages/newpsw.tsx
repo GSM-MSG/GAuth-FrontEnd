@@ -1,8 +1,8 @@
 import { NextPage } from 'next';
-import FindPsw from '../components/NFindPsw';
+import NewFindPswPage from '../components/NewFindPsw';
 
-const NewPsw: NextPage = () => {
-  return <FindPsw />;
+const FindPsw: NextPage = () => {
+  return <NewFindPswPage />;
 };
 
-export default NewPsw;
+export default FindPsw;

@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -19,7 +19,7 @@ export default function NewPassword() {
       setModalPage(0);
       router.push('/login');
     } catch (e) {
-      if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
+      if (!axios.isAxiosError(e)) return toast.error('unkonwn error');
     }
   };
 

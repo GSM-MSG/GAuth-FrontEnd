@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import { client_id, redirect_uri } from '../../../lib/OauthQuery';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
 import { LightCube } from '../Loading';
@@ -23,7 +24,16 @@ export default function SearchEmail({ title }: Props) {
 
   const changeModalType = (type: string) => {
     setModalPage(0);
-    router.push(type);
+    if (router.query[client_id] && router.query[redirect_uri]) {
+      return router.push({
+        pathname: type,
+        query: {
+          client_id: router.query[client_id],
+          redirect_uri: router.query[redirect_uri],
+        },
+      });
+    }
+    return router.push(type);
   };
 
   const {

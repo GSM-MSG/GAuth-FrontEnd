@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import SideWave from './SideWave';
@@ -148,7 +147,6 @@ export default function LoginPage() {
                   onBlur: () =>
                     getValues('email') === '' && setEmailCheck(false),
                 })}
-                maxLength={6}
                 onFocus={() => setEmailCheck(true)}
               />
               <S.Email>@gsm.hs.kr</S.Email>

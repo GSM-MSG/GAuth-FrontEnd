@@ -13,19 +13,23 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 432px;
   height: 554px;
+  font-size: 20px;
   background: #ffffff;
   border: 1px solid #d0d0d0;
   border-radius: 10px;
   padding: 60px 40px 50px;
-  @media (max-width: 700px) {
-    width: 62vw;
-    height: 79vw;
+  @media (max-width: 550px) {
+    width: 78vw;
+    height: 101vw;
+    padding: 11vw 7vw 9vw;
+    font-size: 3.6364vw;
   }
 `;
 
 export const SubmitWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   button {
     width: 100%;
@@ -33,17 +37,23 @@ export const SubmitWrapper = styled.div`
     background: #5499d9;
     border-radius: 10px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 0.85em;
     color: #ffffff;
     cursor: pointer;
   }
 
   p {
     font-weight: 400;
-    font-size: 15px;
+    font-size: 0.85em;
     color: #929292;
     text-align: center;
     cursor: pointer;
+  }
+  @media (max-width: 550px) {
+    gap: 3.6vw;
+    button {
+      height: 8vw;
+    }
   }
 `;
 
@@ -61,7 +71,7 @@ export const InputWrapper = styled.div`
   p {
     margin-top: 12px;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 0.75em;
     color: #f03131;
   }
 `;
@@ -78,11 +88,10 @@ export const CheckingMessage = styled.div`
   text-align: center;
   h1 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1em;
   }
   p {
-    font-size: 15px;
-    line-height: 18px;
+    font-size: 0.85em;
   }
 `;
 

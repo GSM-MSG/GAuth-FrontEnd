@@ -5,7 +5,10 @@ export const PrivacyConsent = styled.div`
   width: 100%;
   height: 100%;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 0.7em;
+  @media (max-width: 550px) {
+    padding-top: 35px;
+  }
   span {
     display: flex;
     align-items: center;
@@ -15,6 +18,9 @@ export const PrivacyConsent = styled.div`
     display: flex;
     gap: 8px;
     cursor: pointer;
+    @media (max-width: 550px) {
+      gap: 1.5vw;
+    }
   }
   input[type='checkbox'] {
     cursor: pointer;
@@ -32,6 +38,10 @@ export const PrivacyConsent = styled.div`
       height: 18px;
       border: 1px solid #b4b4b4;
       border-radius: 3px;
+      @media (max-width: 550px) {
+        width: 3.27vw;
+        height: 3.27vw;
+      }
     }
     :checked {
       ::before {
@@ -94,7 +104,7 @@ export const NotionWrapper = styled.div`
 export const ProfileTitle = styled.p`
   margin-top: 20px;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 0.85em;
   color: #515151;
   strong {
     font-weight: 900;
@@ -109,6 +119,11 @@ export const ProfileSVGWrapper = styled.div`
   align-items: center;
   label {
     cursor: pointer;
+    @media (max-width: 550px) {
+      svg {
+        width: 24.5vw;
+      }
+    }
   }
 `;
 
@@ -121,6 +136,10 @@ export const Profile = styled.img`
   align-items: center;
   object-fit: cover;
   background: #fff;
+  @media (max-width: 550px) {
+    width: 24.5vw;
+    height: 24.5vw;
+  }
 `;
 
 export const SuccessWrapper = styled.div`
@@ -135,10 +154,10 @@ export const SuccessWrapper = styled.div`
   color: #515151;
   h1 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1em;
   }
   p {
     font-weight: 400;
-    font-size: 15px;
+    font-size: 0.75em;
   }
 `;

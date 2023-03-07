@@ -21,19 +21,25 @@ export default function SearchEmail({ title }: Props) {
   const [loading, setLoading] = useState(false);
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
+  const isQuery =
+    router.query.client_id !== undefined &&
+    router.query.redirect_uri !== undefined;
 
   const changeModalType = (type: string) => {
     setModalPage(0);
-    if (router.query[client_id] && router.query[redirect_uri]) {
-      return router.push({
-        pathname: type,
-        query: {
-          client_id: router.query[client_id],
-          redirect_uri: router.query[redirect_uri],
-        },
-      });
-    }
-    return router.push(type);
+    router.push(
+      isQuery
+        ? {
+            pathname: type,
+            query: {
+              client_id: router.query[client_id],
+              redirect_uri: router.query[redirect_uri],
+            },
+          }
+        : {
+            pathname: type,
+          }
+    );
   };
 
   const {

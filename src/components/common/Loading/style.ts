@@ -8,7 +8,7 @@ type placedprop = {
 export const cube = styled.div`
   position: relative;
   width: 50px;
-  height: 50px;
+  aspect-ratio: auto 1/1;
   transform-style: preserve-3d;
   animation: animate 2s linear infinite;
   @keyframes animate {
@@ -27,6 +27,9 @@ export const cube = styled.div`
     height: 100%;
     transform-style: preserve-3d;
   }
+  @media (max-width: 550px) {
+    width: 9vw;
+  }
 `;
 
 export const span = styled.span<placedprop>`
@@ -38,23 +41,24 @@ export const span = styled.span<placedprop>`
   background: linear-gradient(rgba(100, 100, 255), ${(props) => props.color});
   transform: rotateY(calc(90deg * var(--i))) translateZ(25px);
   --i: ${(prop) => prop.num};
+  @media (max-width: 550px) {
+    transform: rotateY(calc(90deg * var(--i))) translateZ(4.5vw);
+  }
 `;
-
 export const top = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 50px;
-  height: 50px;
+  aspect-ratio: auto 1/1;
   background-color: rgba(100, 100, 255);
   transform: rotateX(90deg) translateZ(25px);
+  @media (max-width: 550px) {
+    width: 9vw;
+    transform: rotateX(90deg) translateZ(4.5vw);
+  }
 `;
-export const bottom = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 50px;
-  height: 50px;
+export const bottom = styled(top)`
   background-color: #00ccff;
   transform: rotateX(90deg) translateZ(-25px);
+  @media (max-width: 550px) {
+    transform: rotateX(90deg) translateZ(-4.5vw);
+  }
 `;

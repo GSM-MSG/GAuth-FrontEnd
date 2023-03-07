@@ -1,4 +1,4 @@
 export * from './ClientInForm';
 export * from './LoginForm';
-export * from './errors';
+export * from './Errors';
 export * from './TokenType';

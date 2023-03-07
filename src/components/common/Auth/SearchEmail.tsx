@@ -22,8 +22,8 @@ export default function SearchEmail({ title }: Props) {
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const isQuery =
-    router.query.client_id !== undefined &&
-    router.query.redirect_uri !== undefined;
+    router.query[client_id] !== undefined &&
+    router.query[redirect_uri] !== undefined;
 
   const changeModalType = (type: string) => {
     setModalPage(0);

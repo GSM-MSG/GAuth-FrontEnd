@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import { isAxiosError } from 'axios';
 import API from '../../api';
 import {
   Form,
@@ -43,7 +43,7 @@ export default function NewSignInPage() {
           const { data } = await API.get(`/oauth/${router.query.client_id}`);
           setServiceName(data.serviceName);
         } catch (e) {
-          if (axios.isAxiosError(e) && e.response!.status === 404) {
+          if (isAxiosError(e) && e.response!.status === 404) {
             toast.error('해당하는 서비스가 없습니다.');
             router.back();
           } else {
@@ -68,7 +68,7 @@ export default function NewSignInPage() {
         'Bearer ' + data.accessToken;
       router.replace('/');
     } catch (e) {
-      if (!axios.isAxiosError(e))
+      if (!isAxiosError(e))
         return setError('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
         setError('이메일 또는 비밀번호가 틀렸습니다.');

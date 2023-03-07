@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { NotionRenderer } from 'react-notion';
 import { toast } from 'react-toastify';
@@ -21,7 +21,7 @@ export default function Notion() {
         );
         setResponse(data);
       } catch (e) {
-        if (!axios.isAxiosError(e)) return toast.error('unkonwn error');
+        if (!isAxiosError(e)) return toast.error('unkonwn error');
       }
     })();
   }, []);

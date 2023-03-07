@@ -6,7 +6,7 @@ import * as SVG from '../../../public/svg';
 import WaveWrapper from './WaveWrapper';
 import * as Util from '../../util';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import { isAxiosError } from 'axios';
 import { useForm } from 'react-hook-form';
 import API from '../../api';
 import { useRouter } from 'next/router';
@@ -69,7 +69,7 @@ export default function SignUpPage() {
       if (request.status !== 204) return toast.error('다시 시도해 주세요.');
       setValue('verifyEmail', true);
     } catch (e) {
-      if (!axios.isAxiosError(e)) return toast.error('unknown error');
+      if (!isAxiosError(e)) return toast.error('unknown error');
       if (e.response?.status === 429)
         return toast.error('15분 동안 최대 3번 요청 가능합니다.');
       if (e.response?.status === 400) {

@@ -91,6 +91,9 @@ export const LogoutWrapper = styled.div`
   align-items: flex-end;
   justify-content: center;
   padding: 40px;
+  i {
+    cursor: pointer;
+  }
 `;
 
 export const LogoWrapper = styled.div`
@@ -99,7 +102,4 @@ export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  a {
-    cursor: pointer;
-  }
 `;

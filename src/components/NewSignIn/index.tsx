@@ -125,7 +125,7 @@ export default function NewSignInPage() {
                 required: '비밀번호를 입력하지 않았습니다',
                 pattern: {
                   value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,72}/,
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&^])[A-Za-z\d$@$!%*?&^]{8,72}/,
                   message: 'GSM메일 형식에 맞게 입력해주세요',
                 },
                 maxLength: 72,

@@ -14,11 +14,9 @@ API.interceptors.request.use(async (config) => {
     await tokenManager.getRefresh(tokenManager.refreshToken);
   }
 
-  config.headers = {
-    Authorization: tokenManager.accessToken
-      ? `Bearer ${tokenManager.accessToken}`
-      : '',
-  };
+  config.headers['Authorization'] = tokenManager.accessToken
+    ? `Bearer ${tokenManager.accessToken}`
+    : undefined;
 
   return config;
 });

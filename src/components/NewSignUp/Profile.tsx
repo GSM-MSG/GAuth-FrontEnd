@@ -25,7 +25,8 @@ export default function Profile() {
       const { data } = await API.patch('/auth/image', formData);
       setImg(data.imageUrl);
     } catch (e) {
-      toast.error('이미지 요청 실패');
+      if (!isAxiosError(e)) toast.error('unkonwn error');
+      resetModalType('/login');
     }
   };
 
@@ -73,7 +74,7 @@ export default function Profile() {
       if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
       if (e.response?.status === 400)
         toast.error('이메일,비밀번호가 바르지 않습니다.');
-      resetModalType('/signUp');
+      resetModalType('/login');
     }
   };
 

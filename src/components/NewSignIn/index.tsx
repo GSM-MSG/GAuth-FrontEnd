@@ -78,16 +78,19 @@ export default function NewSignInPage() {
 
   const changeModalType = (type: string) => {
     setModalPage(0);
-    router.push(
-      {
-        pathname: type,
-        query: {
-          client_id: router.query[client_id],
-          redirect_uri: router.query[redirect_uri],
+    if (isQuery) {
+      return router.push(
+        {
+          pathname: type,
+          query: {
+            client_id: router.query[client_id],
+            redirect_uri: router.query[redirect_uri],
+          },
         },
-      },
-      type
-    );
+        type
+      );
+    }
+    return router.push(type);
   };
 
   return (

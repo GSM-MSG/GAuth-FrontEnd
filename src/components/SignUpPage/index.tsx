@@ -104,7 +104,6 @@ export default function SignUpPage() {
                 <S.InputWrapper>
                   <S.InputName being={watch('emailCheck')}>이메일</S.InputName>
                   <input
-                    maxLength={6}
                     {...register('email', {
                       onChange(e) {
                         setValue(

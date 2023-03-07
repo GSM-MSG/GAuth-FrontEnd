@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
 import SideWave from './SideWave';

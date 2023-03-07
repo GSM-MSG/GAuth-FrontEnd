@@ -20,6 +20,9 @@ export default function NewPassword() {
       router.push('/login');
     } catch (e) {
       if (!isAxiosError(e)) return toast.error('unkonwn error');
+      if (e.response?.status === 401)
+        return toast.error('이메일 인증 기한이 만료 되었습니다.');
+      router.push('/login');
     }
   };
 

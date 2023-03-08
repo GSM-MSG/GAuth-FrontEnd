@@ -73,7 +73,6 @@ export default function MyProfilePage() {
               </label>
               <input
                 type="file"
-                multiple
                 accept="image/*"
                 id="profile"
                 style={{ display: 'none' }}

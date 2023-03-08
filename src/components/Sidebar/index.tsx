@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -20,7 +20,7 @@ export default function Sidebar() {
       localStorage.removeItem(expiredAt);
       router.replace('/login');
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!isAxiosError(e))
         return toast.error('예기치 못한 오류가 발생하였습니다.');
       toast.error('로그아웃에 실패하였습니다.');
     }

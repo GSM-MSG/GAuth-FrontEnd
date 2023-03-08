@@ -10,7 +10,10 @@ const API = axios.create({
 API.interceptors.request.use(async (config) => {
   const tokenManager = new TokenManager();
 
-  if (!tokenManager.checkToken(tokenManager.expiresAt)) {
+  if (
+    !tokenManager.checkToken(tokenManager.expiresAt) &&
+    tokenManager.skipUrl()
+  ) {
     await tokenManager.getRefresh(tokenManager.refreshToken);
   }
 

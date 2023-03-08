@@ -1,45 +1,45 @@
 export function AddService() {
   return (
-    <i>
-      <svg
-        width="65"
-        height="65"
-        viewBox="0 0 65 65"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g filter="url(#filter0_b_1491_74)">
-          <path
-            d="M32.375 18.8333C33.4968 18.8333 34.4062 19.7428 34.4062 20.8646V30.3438H43.8854C45.0072 30.3438 45.9167 31.2532 45.9167 32.375C45.9167 33.4968 45.0072 34.4062 43.8854 34.4062H34.4062V43.8854C34.4062 45.0072 33.4968 45.9167 32.375 45.9167C31.2532 45.9167 30.3438 45.0072 30.3438 43.8854V34.4062H20.8646C19.7428 34.4062 18.8333 33.4968 18.8333 32.375C18.8333 31.2532 19.7428 30.3438 20.8646 30.3438H30.3438V20.8646C30.3438 19.7428 31.2532 18.8333 32.375 18.8333ZM8 16.8021C8 11.9408 11.9408 8 16.8021 8H47.9479C52.8091 8 56.75 11.9408 56.75 16.8021V47.9479C56.75 52.8091 52.8091 56.75 47.9479 56.75H16.8021C11.9408 56.75 8 52.8091 8 47.9479V16.8021ZM16.8021 12.0625C14.1845 12.0625 12.0625 14.1845 12.0625 16.8021V47.9479C12.0625 50.5655 14.1845 52.6875 16.8021 52.6875H47.9479C50.5655 52.6875 52.6875 50.5655 52.6875 47.9479V16.8021C52.6875 14.1845 50.5655 12.0625 47.9479 12.0625H16.8021Z"
-            fill="#929292"
+    <svg
+      width="19"
+      height="19"
+      viewBox="0 0 19 19"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g filter="url(#filter0_b_1_1377)">
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M0.330078 4.2041C0.330078 2.40917 1.78515 0.954102 3.58008 0.954102H15.0801C16.875 0.954102 18.3301 2.40917 18.3301 4.2041V15.7041C18.3301 17.499 16.875 18.9541 15.0801 18.9541H3.58008C1.78515 18.9541 0.330078 17.499 0.330078 15.7041V4.2041ZM10.0801 5.7041C10.0801 5.28989 9.74428 4.9541 9.33008 4.9541C8.91588 4.9541 8.58008 5.28989 8.58008 5.7041V8.2041C8.58008 8.75639 8.13236 9.2041 7.58008 9.2041H5.08008C4.66587 9.2041 4.33008 9.5399 4.33008 9.9541C4.33008 10.3683 4.66587 10.7041 5.08008 10.7041H7.58008C8.13236 10.7041 8.58008 11.1518 8.58008 11.7041V14.2041C8.58008 14.6183 8.91588 14.9541 9.33008 14.9541C9.74428 14.9541 10.0801 14.6183 10.0801 14.2041V11.7041C10.0801 11.1518 10.5278 10.7041 11.0801 10.7041H13.5801C13.9943 10.7041 14.3301 10.3683 14.3301 9.9541C14.3301 9.5399 13.9943 9.2041 13.5801 9.2041H11.0801C10.5278 9.2041 10.0801 8.75639 10.0801 8.2041V5.7041Z"
+          fill="#D9D9D9"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_b_1_1377"
+          x="-41.6699"
+          y="-41.0459"
+          width="102"
+          height="102"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feGaussianBlur in="BackgroundImageFix" stdDeviation="21" />
+          <feComposite
+            in2="SourceAlpha"
+            operator="in"
+            result="effect1_backgroundBlur_1_1377"
           />
-        </g>
-        <defs>
-          <filter
-            id="filter0_b_1491_74"
-            x="-34"
-            y="-34"
-            width="132.75"
-            height="132.75"
-            filterUnits="userSpaceOnUse"
-            colorInterpolationFilters="sRGB"
-          >
-            <feFlood floodOpacity="0" result="BackgroundImageFix" />
-            <feGaussianBlur in="BackgroundImageFix" stdDeviation="21" />
-            <feComposite
-              in2="SourceAlpha"
-              operator="in"
-              result="effect1_backgroundBlur_1491_74"
-            />
-            <feBlend
-              mode="normal"
-              in="SourceGraphic"
-              in2="effect1_backgroundBlur_1491_74"
-              result="shape"
-            />
-          </filter>
-        </defs>
-      </svg>
-    </i>
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_backgroundBlur_1_1377"
+            result="shape"
+          />
+        </filter>
+      </defs>
+    </svg>
   );
 }

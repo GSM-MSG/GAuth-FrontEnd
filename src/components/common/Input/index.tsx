@@ -23,7 +23,7 @@ export default function Input({
         {label}
       </S.Label>
       <S.InputWrapper>
-        <S.Input type={type} {...register} />
+        <S.Input type={type} {...register} autoComplete="on" />
         <S.FixedInputValue>{fixed}</S.FixedInputValue>
       </S.InputWrapper>
     </S.Wrapper>

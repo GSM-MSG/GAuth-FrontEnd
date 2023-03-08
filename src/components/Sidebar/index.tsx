@@ -46,6 +46,9 @@ export default function Sidebar() {
                 </S.MenuWrapper>
               );
             })}
+            <S.ListLogout onClick={() => logOutHandle()}>
+              <SVG.Logout />
+            </S.ListLogout>
           </S.MenuList>
         </S.SideBarWrapper>
         <S.LogoutWrapper onClick={() => logOutHandle()}>

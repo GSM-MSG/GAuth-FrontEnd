@@ -6,7 +6,10 @@ export const Layout = styled.div`
   left: 0;
   width: 100px;
   height: 100%;
+
   @media (max-width: 800px) {
+    top: auto;
+    bottom: 0;
     width: 100%;
     height: 50px;
   }
@@ -28,28 +31,6 @@ export const SideBarWrapper = styled.div`
   height: 100%;
 `;
 
-export const LogoutWrapper = styled.div`
-  width: 100%;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  :hover {
-    background: #1c1c1c;
-    path {
-      fill: #ffff;
-    }
-  }
-  @media (max-width: 800px) {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 80px;
-    height: 100%;
-  }
-`;
-
 export const LogoWrapper = styled.div`
   position: absolute;
   top: 50px;
@@ -60,9 +41,30 @@ export const LogoWrapper = styled.div`
   justify-content: center;
 
   @media (max-width: 800px) {
-    top: 50%;
+    transform: translateX(0);
+    position: fixed;
+    top: 25px;
     left: 25px;
-    transform: translateY(-50%);
+  }
+`;
+
+export const LogoutWrapper = styled.div`
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  :hover {
+    background: #1c1c1c;
+    path {
+      fill: #ffff;
+    }
+  }
+
+  @media (max-width: 800px) {
+    display: none;
   }
 `;
 
@@ -77,6 +79,10 @@ export const MenuList = styled.div`
 
   @media (max-width: 800px) {
     flex-direction: row;
+    justify-content: space-around;
+    svg {
+      width: 15px;
+    }
   }
 `;
 
@@ -91,5 +97,18 @@ export const MenuWrapper = styled.div`
     :hover {
       transform: scale(1.5);
     }
+  }
+`;
+
+export const ListLogout = styled.div`
+  svg {
+    cursor: pointer;
+    transition: 0.2s;
+    :hover {
+      transform: scale(1.5);
+    }
+  }
+  @media (min-width: 800px) {
+    display: none;
   }
 `;

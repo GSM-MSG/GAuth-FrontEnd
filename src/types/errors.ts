@@ -1,3 +1,3 @@
-export type ErrorType = {
+export type Errors = {
   errors: boolean;
 };

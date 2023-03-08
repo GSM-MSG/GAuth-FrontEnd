@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ErrorType } from '../../../types';
+import { Errors } from '../../../types';
 
 export const Wrapper = styled.div`
   margin-top: 20px;
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Label = styled.label<ErrorType>`
+export const Label = styled.label<Errors>`
   font-weight: 400;
   font-size: 0.65em;
   color: ${({ errors }) => (errors ? ' #F03131' : '#929292')};

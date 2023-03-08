@@ -6,6 +6,7 @@ import API from '../../api';
 
 export default function ListTable() {
   const [serviceList, setServiceList] = useState<ClientListType[]>([]);
+
   useEffect(() => {
     const getAllList = async () => {
       const data = await API.get('/client');
@@ -16,17 +17,10 @@ export default function ListTable() {
   }, []);
 
   return (
-    <S.ListTableLayer>
-      <S.ListTitle>
-        <a>미리보기 사진</a>
-        <a>서비스 이름</a>
-        <a>URL</a>
-      </S.ListTitle>
-      <S.ListWrapper>
-        {serviceList.map((listItem, index) => (
-          <ListItem key={index} listData={listItem} />
-        ))}
-      </S.ListWrapper>
-    </S.ListTableLayer>
+    <S.ListTableWrapper>
+      {serviceList.map((listItem, index) => (
+        <ListItem key={index} listData={listItem} />
+      ))}
+    </S.ListTableWrapper>
   );
 }

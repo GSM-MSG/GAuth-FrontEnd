@@ -24,6 +24,11 @@ export const Wrapper = styled.div`
   @media (max-width: 800px) {
     flex-direction: row;
   }
+  i {
+    @media (min-width: 801px) {
+      display: none;
+    }
+  }
 `;
 
 export const SideBarWrapper = styled.div`
@@ -39,12 +44,18 @@ export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
 
   @media (max-width: 800px) {
-    transform: translateX(0);
     position: fixed;
-    top: 25px;
-    left: 25px;
+    transform: translateX(0);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    justify-content: space-between;
+    padding: 20px 55px;
+    background: #ffffff;
   }
 `;
 
@@ -63,21 +74,8 @@ export const LogoutWrapper = styled.div`
     }
   }
 
-  @media (min-width: 800px) {
-    :hover {
-      background: #1c1c1c;
-      path {
-        fill: #ffff;
-      }
-    }
-  }
-
   @media (max-width: 800px) {
-    position: fixed;
-    right: 25px;
-    top: 15px;
-    width: 50px;
-    height: 40px;
+    display: none;
   }
 `;
 

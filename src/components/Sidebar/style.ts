@@ -57,14 +57,27 @@ export const LogoutWrapper = styled.div`
   cursor: pointer;
 
   :hover {
-    background: #1c1c1c;
-    path {
-      fill: #ffff;
+    svg {
+      transition: 0.1s;
+      transform: scale(1.5);
+    }
+  }
+
+  @media (min-width: 800px) {
+    :hover {
+      background: #1c1c1c;
+      path {
+        fill: #ffff;
+      }
     }
   }
 
   @media (max-width: 800px) {
-    display: none;
+    position: fixed;
+    right: 25px;
+    top: 15px;
+    width: 50px;
+    height: 40px;
   }
 `;
 
@@ -97,18 +110,5 @@ export const MenuWrapper = styled.div`
     :hover {
       transform: scale(1.5);
     }
-  }
-`;
-
-export const ListLogout = styled.div`
-  svg {
-    cursor: pointer;
-    transition: 0.2s;
-    :hover {
-      transform: scale(1.5);
-    }
-  }
-  @media (min-width: 800px) {
-    display: none;
   }
 `;

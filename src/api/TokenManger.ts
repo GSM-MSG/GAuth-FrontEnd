@@ -25,6 +25,7 @@ class TokenManager {
   }
 
   async getRefresh(refresh: string | null) {
+    if (this.skipUrl()) return;
     if (!refresh) return Router.push('/login');
 
     try {
@@ -51,9 +52,7 @@ class TokenManager {
   skipUrl() {
     const skipUrl = ['/login', '/signUp', '/newpsw'];
 
-    if (skipUrl.includes(Router.route)) return false;
-
-    return true;
+    return skipUrl.includes(Router.route);
   }
 
   setToken(tokens: TokenType) {

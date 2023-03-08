@@ -1,105 +1,114 @@
 import styled from '@emotion/styled';
 
-export const Positioner = styled.div`
+export const Layout = styled.div`
   position: fixed;
-  width: 125px;
+  top: 0;
+  left: 0;
+  width: 100px;
   height: 100%;
-  margin-left: 80px;
-  display: flex;
-  align-items: center;
-`;
 
-export const Layer = styled.div`
-  top: 2.5vh;
-  width: 100%;
-  height: 850px;
-  border-radius: 25px;
-  background: linear-gradient(
-    179.1deg,
-    rgba(250, 250, 250, 0.9) 0%,
-    rgba(255, 255, 255, 0.5) 100%
-  );
-  box-shadow: -10px -10px 25px rgba(255, 255, 255, 0.75),
-    10px 10px 20px rgba(0, 0, 0, 0.05);
-`;
-
-export const MenuContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const MenuList = styled.div`
-  width: 100%;
-  height: calc(100% - 300px);
-  display: flex;
-  padding: 50px 0;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  border-top: 1px solid #bbb;
-`;
-
-type MenuWrapperType = {
-  pathname: boolean;
-};
-
-export const MenuWrapper = styled.div<MenuWrapperType>`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 500;
-  font-size: 26px;
-  gap: 8px;
-  i {
-    width: 70px;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    ${({ pathname }) =>
-      pathname &&
-      `
-     background: #5499d9;
-      svg {
-        transform: scale(1.1);
-        path {
-          fill: white;
-        }
-      }
-    `}
-    :hover {
-      svg {
-        transform: scale(1.1);
-      }
-    }
+  @media (max-width: 800px) {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
   }
-  svg {
-    width: 70px;
-    margin: 0;
-    cursor: pointer;
+`;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 800px) {
+    flex-direction: row;
+  }
+`;
+
+export const SideBarWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const LogoWrapper = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 800px) {
+    transform: translateX(0);
+    position: fixed;
+    top: 25px;
+    left: 25px;
   }
 `;
 
 export const LogoutWrapper = styled.div`
   width: 100%;
-  height: 150px;
+  height: 80px;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
-  padding: 40px;
+  align-items: center;
+  cursor: pointer;
+
+  :hover {
+    svg {
+      transition: 0.1s;
+      transform: scale(1.5);
+    }
+  }
+
+  @media (min-width: 800px) {
+    :hover {
+      background: #1c1c1c;
+      path {
+        fill: #ffff;
+      }
+    }
+  }
+
+  @media (max-width: 800px) {
+    position: fixed;
+    right: 25px;
+    top: 15px;
+    width: 50px;
+    height: 40px;
+  }
 `;
 
-export const LogoWrapper = styled.div`
+export const MenuList = styled.div`
   width: 100%;
-  height: 150px;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  a {
+  gap: 40px;
+
+  @media (max-width: 800px) {
+    flex-direction: row;
+    justify-content: space-around;
+    svg {
+      width: 15px;
+    }
+  }
+`;
+
+export const MenuWrapper = styled.div`
+  path {
+    fill: ${({ pathname }: { pathname: boolean }) => pathname && '#999999'};
+  }
+
+  svg {
     cursor: pointer;
+    transition: 0.2s;
+    :hover {
+      transform: scale(1.5);
+    }
   }
 `;

@@ -5,7 +5,7 @@ import ApproveEmailModal from './ApproveEmailModal';
 import SuccessEmailCheckModal from './SuccessEmailCheckModal';
 import FailEmailCheckModal from './FailEmailCheckModal';
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import API from '../../api';
 
 export default function VerifyEmail({
@@ -55,7 +55,8 @@ export default function VerifyEmail({
         password: pw,
         profileUrl: data ?? null,
       });
-      if (request.status !== 201) return toast.error('error');
+      if (request.status !== 201)
+        return toast.error('예상치 못한 오류가 발생하였습니다.');
       setState((prev) => ({
         ...prev,
         emailApprove: !emailApprove,
@@ -65,7 +66,8 @@ export default function VerifyEmail({
         router.push('/login');
       }, 1500);
     } catch (e) {
-      if (!(e instanceof AxiosError)) return toast.error('unkonwn error');
+      if (!isAxiosError(e))
+        return toast.error('예상치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
       if (e.response?.status === 400)
         toast.error('이메일,비밀번호가 바르지 않습니다.');

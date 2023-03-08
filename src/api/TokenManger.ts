@@ -25,13 +25,7 @@ class TokenManager {
   }
 
   async getRefresh(refresh: string | null) {
-    const skipUrl = ['/login', '/signUp'];
-
-    if (!refresh) {
-      if (skipUrl.includes(Router.route)) {
-        return;
-      } else return Router.push('/login');
-    }
+    if (!refresh) return Router.push('/login');
 
     try {
       const { data } = await axios.patch(
@@ -52,6 +46,14 @@ class TokenManager {
 
       return Router.push('/login');
     }
+  }
+
+  skipUrl() {
+    const skipUrl = ['/login', '/signUp', '/newpsw'];
+
+    if (skipUrl.includes(Router.route)) return false;
+
+    return true;
   }
 
   setToken(tokens: TokenType) {

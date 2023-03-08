@@ -10,15 +10,16 @@ const API = axios.create({
 API.interceptors.request.use(async (config) => {
   const tokenManager = new TokenManager();
 
-  if (!tokenManager.checkToken(tokenManager.expiresAt)) {
+  if (
+    !tokenManager.checkToken(tokenManager.expiresAt) &&
+    tokenManager.skipUrl()
+  ) {
     await tokenManager.getRefresh(tokenManager.refreshToken);
   }
 
-  config.headers = {
-    Authorization: tokenManager.accessToken
-      ? `Bearer ${tokenManager.accessToken}`
-      : '',
-  };
+  config.headers['Authorization'] = tokenManager.accessToken
+    ? `Bearer ${tokenManager.accessToken}`
+    : undefined;
 
   return config;
 });

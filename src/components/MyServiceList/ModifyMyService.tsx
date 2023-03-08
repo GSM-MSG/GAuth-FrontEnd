@@ -6,7 +6,7 @@ import * as SVG from '../../../public/svg';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import API from '../../api';
 
 export default function ModifyMyService({
@@ -28,7 +28,7 @@ export default function ModifyMyService({
           return toast.error('서비스 요청이 실패하였습니다,');
         reset({ ...data.data });
       } catch (e) {
-        if (!(e instanceof AxiosError))
+        if (!isAxiosError(e))
           return toast.error('예상치 못한 오류가 발생하였습니다.');
       }
     };
@@ -54,7 +54,7 @@ export default function ModifyMyService({
       toast.success('변경사항이 적용되었습니다.');
       GetMyLists();
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!isAxiosError(e))
         return toast.error('예상치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 404)
         return toast.error('해당 서비스를 찾을수 없습니다.');
@@ -68,7 +68,7 @@ export default function ModifyMyService({
       setUserLists(data.data.clientList);
       setModifyItem();
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!isAxiosError(e))
         return toast.error('예상치 못한 오류가 발생하였습니다.');
     }
   };

@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -20,21 +20,19 @@ export default function Sidebar() {
       localStorage.removeItem(expiredAt);
       router.replace('/login');
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!isAxiosError(e))
         return toast.error('예기치 못한 오류가 발생하였습니다.');
       toast.error('로그아웃에 실패하였습니다.');
     }
   };
 
   return (
-    <S.Positioner>
-      <S.Layer>
-        <S.MenuContainer>
+    <S.Layout>
+      <S.Wrapper>
+        <S.SideBarWrapper>
           <S.LogoWrapper>
             <Link href="/">
-              <a>
-                <SVG.SideBarLogo />
-              </a>
+              <SVG.SideBarLogo />
             </Link>
           </S.LogoWrapper>
           <S.MenuList>
@@ -44,20 +42,16 @@ export default function Sidebar() {
                   pathname={pathname === navData.url}
                   key={navData.url}
                 >
-                  <Link href={navData.url}>
-                    <a>{navData.svg}</a>
-                  </Link>
+                  <Link href={navData.url}>{navData.svg}</Link>
                 </S.MenuWrapper>
               );
             })}
           </S.MenuList>
-          <S.LogoutWrapper>
-            <a onClick={() => logOutHandle()}>
-              <SVG.Logout />
-            </a>
-          </S.LogoutWrapper>
-        </S.MenuContainer>
-      </S.Layer>
-    </S.Positioner>
+        </S.SideBarWrapper>
+        <S.LogoutWrapper onClick={() => logOutHandle()}>
+          <SVG.Logout />
+        </S.LogoutWrapper>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

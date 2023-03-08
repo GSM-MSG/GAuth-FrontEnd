@@ -18,13 +18,7 @@ export default function MyServiceList() {
         {userList.length !== 0 ? (
           <>
             {userList.map((listItem, index) => {
-              return (
-                <ListItem
-                  key={index}
-                  listData={listItem}
-                  setModifyItem={() => setModifyItem(listItem)}
-                />
-              );
+              return <ListItem key={index} listData={listItem} />;
             })}
           </>
         ) : (

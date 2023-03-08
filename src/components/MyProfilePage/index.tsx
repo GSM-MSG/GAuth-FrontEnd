@@ -7,6 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
 import { useEffect } from 'react';
 import API from '../../api';
+import Image from 'next/image';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
@@ -48,55 +49,60 @@ export default function MyProfilePage() {
     event.stopPropagation();
   };
   return (
-    <S.Positioner>
-      <S.Layer>
+    <S.Layout>
+      <S.Wrapper>
         <S.TitleSection>
           <h1>마이페이지&등록한 서비스 관리</h1>
           <h3>여기에서 등록해주신 서비스를 쉽게 관리하실 수 있어요!</h3>
         </S.TitleSection>
-        <S.ProfileSection>
-          <S.UpLoadProfileContainter>
-            <S.ProfileSVGWrapper>
-              <label
-                htmlFor="profile"
-                onDrop={dropHandler}
-                onDragOver={dragOverHandler}
-              >
-                {user.profileUrl ? (
-                  <S.Profile src={user.profileUrl} />
-                ) : (
-                  <SVG.ProfileSmallFace />
-                )}
-                <i>
-                  <SVG.ModifyProfile />
-                </i>
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                id="profile"
-                style={{ display: 'none' }}
-                onChange={changeHandler}
-              />
-            </S.ProfileSVGWrapper>
-            <S.PrivacySection>
-              <div>
-                <h1>{user.name}</h1>
-                <p>
-                  {user.grade +
-                    '학년 ' +
-                    user.classNum +
-                    '반 ' +
-                    user.number +
-                    '번'}
-                </p>
-              </div>
-              <h3>{user.email}</h3>
-            </S.PrivacySection>
-          </S.UpLoadProfileContainter>
-        </S.ProfileSection>
+        <S.ProfileWrapper>
+          <S.ProfileSection>
+            <label
+              htmlFor="profile"
+              onDrop={dropHandler}
+              onDragOver={dragOverHandler}
+            >
+              {user.profileUrl ? (
+                <S.Profile>
+                  <Image
+                    alt="NoImage"
+                    priority={true}
+                    src={user.profileUrl}
+                    fill
+                    sizes="100%"
+                  />
+                </S.Profile>
+              ) : (
+                <SVG.ProfileSmallFace />
+              )}
+              <i>
+                <SVG.ModifyProfile />
+              </i>
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              id="profile"
+              style={{ display: 'none' }}
+              onChange={changeHandler}
+            />
+          </S.ProfileSection>
+          <S.PrivacySection>
+            <h1>{user.name}</h1>
+            <p>
+              {user.grade +
+                '학년 ' +
+                user.classNum +
+                '반 ' +
+                user.number +
+                '번'}
+            </p>
+            <h3>{user.email}</h3>
+          </S.PrivacySection>
+        </S.ProfileWrapper>
+        <S.Hr />
         <MyServiceList />
-      </S.Layer>
-    </S.Positioner>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

@@ -27,9 +27,9 @@ export default function Sidebar() {
   };
 
   return (
-    <S.Positioner>
-      <S.Layer>
-        <S.MenuContainer>
+    <S.Layout>
+      <S.Wrapper>
+        <S.SideBarWrapper>
           <S.LogoWrapper>
             <Link href="/">
               <SVG.SideBarLogo />
@@ -47,13 +47,11 @@ export default function Sidebar() {
               );
             })}
           </S.MenuList>
-          <S.LogoutWrapper>
-            <i onClick={() => logOutHandle()}>
-              <SVG.Logout />
-            </i>
-          </S.LogoutWrapper>
-        </S.MenuContainer>
-      </S.Layer>
-    </S.Positioner>
+        </S.SideBarWrapper>
+        <S.LogoutWrapper onClick={() => logOutHandle()}>
+          <SVG.Logout />
+        </S.LogoutWrapper>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

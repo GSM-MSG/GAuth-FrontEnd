@@ -31,6 +31,9 @@ export default function SignUpPage() {
     defaultValues: formDefaultValues,
   });
   const router = useRouter();
+  const isQuery =
+    router.query[client_id] !== undefined &&
+    router.query[redirect_uri] !== undefined;
 
   const resetStateHandler = () => {
     reset(formDefaultValues);
@@ -83,13 +86,19 @@ export default function SignUpPage() {
   };
 
   const onRouting = () => {
-    router.push({
-      pathname: '/login',
-      query: {
-        client_id: router.query[client_id],
-        redirect_uri: router.query[redirect_uri],
-      },
-    });
+    router.push(
+      isQuery
+        ? {
+            pathname: '/login',
+            query: {
+              client_id: router.query[client_id],
+              redirect_uri: router.query[redirect_uri],
+            },
+          }
+        : {
+            pathname: '/login',
+          }
+    );
   };
 
   return (

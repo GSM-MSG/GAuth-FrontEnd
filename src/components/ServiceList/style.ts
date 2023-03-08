@@ -48,11 +48,12 @@ export const ListTableWrapper = styled.ul`
   margin-top: 30px;
   display: flex;
   flex-wrap: wrap;
+  gap: 0 20px;
   @media (max-width: 1400px) {
     justify-content: space-around;
     gap: 0 10px;
   }
-  gap: 0 20px;
+  
 `;
 
 export const ListItemLayer = styled.div`

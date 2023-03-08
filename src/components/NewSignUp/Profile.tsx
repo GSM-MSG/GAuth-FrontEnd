@@ -25,7 +25,7 @@ export default function Profile() {
       const { data } = await API.patch('/auth/image', formData);
       setImg(data.imageUrl);
     } catch (e) {
-      if (!isAxiosError(e)) toast.error('unkonwn error');
+      if (!isAxiosError(e)) toast.error('예상치 못한 오류가 발생하였습니다.');
       resetModalType('/login');
     }
   };

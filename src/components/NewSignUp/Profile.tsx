@@ -70,7 +70,8 @@ export default function Profile() {
       resetModalType('/signUp');
       setModalPage(5);
     } catch (e) {
-      if (!isAxiosError(e)) return toast.error('unkonwn error');
+      if (!isAxiosError(e))
+        return toast.error('예기치 못한 오류가 발생했습니다.');
       if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
       if (e.response?.status === 400)
         toast.error('이메일,비밀번호가 바르지 않습니다.');

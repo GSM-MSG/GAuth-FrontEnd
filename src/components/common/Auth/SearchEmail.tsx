@@ -60,14 +60,16 @@ export default function SearchEmail({ title }: Props) {
       });
       setModalPage(1);
     } catch (e) {
-      if (!isAxiosError(e)) return toast.error('unkonwn error');
+      if (!isAxiosError(e))
+        return toast.error('예기치 못한 오류가 발생했습니다.');
       if (e.response?.status === 429)
         return toast.error('15분 동안 최대 3번 요청 가능합니다.');
       if (e.response?.status === 400) {
         toast.info('이미 인증된 이메일 요청입니다.');
         return setModalPage(2);
       }
-      if (e.response?.status === 500) return toast.error('error');
+      if (e.response?.status === 500)
+        return toast.error('예기치 못한 오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }

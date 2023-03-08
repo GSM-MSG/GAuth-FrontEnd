@@ -4,11 +4,11 @@ import { NotionRenderer } from 'react-notion';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { ModalPage, PrivacyInfo } from '../../Atom/Atoms';
+import { NotionPrivacyPageId } from '../../lib/PrivacyInfo';
 import { SubmitWrapper } from '../common/Auth/style';
 import * as S from './style';
 
 export default function Notion() {
-  const NOTION_INSTRUCTIOM_PAGE_ID = '1386310822b1406695bc604ba28821e2';
   const [response, setResponse] = useState({});
   const setPrivacy = useSetRecoilState(PrivacyInfo);
   const setModalPage = useSetRecoilState(ModalPage);
@@ -17,11 +17,12 @@ export default function Notion() {
     (async () => {
       try {
         const { data } = await axios.get(
-          `https://notion-api.splitbee.io/v1/page/${NOTION_INSTRUCTIOM_PAGE_ID}`
+          `https://notion-api.splitbee.io/v1/page/${NotionPrivacyPageId}`
         );
         setResponse(data);
       } catch (e) {
-        if (!isAxiosError(e)) return toast.error('unkonwn error');
+        if (!isAxiosError(e))
+          return toast.error('예기치 못한 오류가 발생했습니다.');
       }
     })();
   }, []);

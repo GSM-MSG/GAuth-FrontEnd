@@ -27,14 +27,12 @@ export default function Sidebar() {
   };
 
   return (
-    <S.Positioner>
-      <S.Layer>
-        <S.MenuContainer>
+    <S.Layout>
+      <S.Wrapper>
+        <S.SideBarWrapper>
           <S.LogoWrapper>
             <Link href="/">
-              <a>
-                <SVG.SideBarLogo />
-              </a>
+              <SVG.SideBarLogo />
             </Link>
           </S.LogoWrapper>
           <S.MenuList>
@@ -44,20 +42,16 @@ export default function Sidebar() {
                   pathname={pathname === navData.url}
                   key={navData.url}
                 >
-                  <Link href={navData.url}>
-                    <a>{navData.svg}</a>
-                  </Link>
+                  <Link href={navData.url}>{navData.svg}</Link>
                 </S.MenuWrapper>
               );
             })}
           </S.MenuList>
-          <S.LogoutWrapper>
-            <a onClick={() => logOutHandle()}>
-              <SVG.Logout />
-            </a>
-          </S.LogoutWrapper>
-        </S.MenuContainer>
-      </S.Layer>
-    </S.Positioner>
+        </S.SideBarWrapper>
+        <S.LogoutWrapper onClick={() => logOutHandle()}>
+          <SVG.Logout />
+        </S.LogoutWrapper>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

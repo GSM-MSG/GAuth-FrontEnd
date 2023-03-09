@@ -34,6 +34,9 @@ export default function Sidebar() {
             <Link href="/">
               <SVG.SideBarLogo />
             </Link>
+            <i onClick={() => logOutHandle()}>
+              <SVG.Logout />
+            </i>
           </S.LogoWrapper>
           <S.MenuList>
             {NavList.map((navData) => {

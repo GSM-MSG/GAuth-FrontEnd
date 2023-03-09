@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import { passwordRegex } from '../../../lib/Regex';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
 import { Form, InputWrapper, SubmitWrapper } from './style';
@@ -71,9 +72,9 @@ export default function NewPasswordCommon({
             register={register('password', {
               required: '비밀번호를 입력하지 않았습니다',
               pattern: {
-                value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,72}/,
-                message: 'GSM메일 형식에 맞게 입력해주세요',
+                value: passwordRegex,
+                message:
+                  '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
               },
               maxLength: 72,
             })}
@@ -97,9 +98,7 @@ export default function NewPasswordCommon({
         </InputWrapper>
         <SubmitWrapper>
           <button type="submit">{submitBtn}</button>
-          {bottomPhrase && (
-            <p onClick={changeModalType}>{bottomPhrase}</p>
-          )}
+          {bottomPhrase && <p onClick={changeModalType}>{bottomPhrase}</p>}
         </SubmitWrapper>
       </Form>
     </>

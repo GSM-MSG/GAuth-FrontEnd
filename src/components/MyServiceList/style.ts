@@ -265,13 +265,12 @@ export const CopyInput = styled.input`
 
 export const EmptyLisyLayer = styled.div`
   margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
   width: 100%;
   height: 300px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   border-radius: 20px;
   transition: ease 0.2s;
   box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
@@ -279,6 +278,7 @@ export const EmptyLisyLayer = styled.div`
   h1 {
     transition: all 0.2s;
     font-size: 40px;
+    margin: 0 100px;
   }
   :hover {
     box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);

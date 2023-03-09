@@ -14,17 +14,17 @@ export default function MyServiceList() {
   return (
     <S.Layer>
       <S.Title>내가 등록한 서비스</S.Title>
-      <S.ListWrapper>
-        {userList.length !== 0 ? (
+      {userList.length !== 0 ? (
+        <S.ListWrapper>
           <>
             {userList.map((listItem, index) => {
               return <ListItem key={index} listData={listItem} />;
             })}
           </>
-        ) : (
-          <EmptyList />
-        )}
-      </S.ListWrapper>
+        </S.ListWrapper>
+      ) : (
+        <EmptyList />
+      )}
       {modifyItem && (
         <ModifyMyService
           modifyItem={modifyItem}

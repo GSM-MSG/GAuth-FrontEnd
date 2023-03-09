@@ -69,6 +69,7 @@ export default function NewPasswordCommon({
             type="password"
             label={`${newPassword ? '새' : ''} 비밀번호`}
             errors={!!errors.password}
+            message={errors.password?.message}
             register={register('password', {
               required: '비밀번호를 입력하지 않았습니다',
               pattern: {

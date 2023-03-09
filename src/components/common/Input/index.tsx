@@ -4,6 +4,7 @@ import * as S from './style';
 interface Props {
   label: string;
   errors: boolean;
+  message?: string;
   register?: UseFormRegisterReturn;
   type?: string;
   fixed?: string;
@@ -12,6 +13,7 @@ interface Props {
 export default function Input({
   label,
   errors,
+  message,
   register,
   type = 'text',
   fixed,
@@ -21,6 +23,7 @@ export default function Input({
       <S.Label errors={errors}>
         {errors && '* '}
         {label}
+        {message && ' - ' + message}
       </S.Label>
       <S.InputWrapper>
         <S.Input type={type} {...register} autoComplete="on" />

@@ -1,6 +1,4 @@
-import { useSetRecoilState } from 'recoil';
 import CreateTitle from '../common/CreateTitle';
-import { ModalPage } from '../../Atom/Atoms';
 import Input from '../common/Input';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
@@ -16,17 +14,18 @@ import {
   SubmitWrapper,
   Wrapper,
 } from '../common/Auth/style';
-import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
+import { useResetModal } from '../../hooks/useResetModal';
 
 export default function NewSignInPage() {
   const router = useRouter();
+  const { changeModalType } = useResetModal();
   const isQuery =
     router.query.client_id !== undefined &&
     router.query.redirect_uri !== undefined;
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
-  const setModalPage = useSetRecoilState(ModalPage);
+
   const {
     register,
     formState: { errors },
@@ -74,24 +73,6 @@ export default function NewSignInPage() {
         setError('이메일 또는 비밀번호가 틀렸습니다.');
       if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
     }
-  };
-
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(
-      isQuery
-        ? {
-            pathname: type,
-            query: {
-              client_id: router.query[client_id],
-              redirect_uri: router.query[redirect_uri],
-            },
-          }
-        : {
-            pathname: type,
-          },
-      type
-    );
   };
 
   return (

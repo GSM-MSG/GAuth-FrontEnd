@@ -1,20 +1,15 @@
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { ModalPage, PrivacyInfo } from '../../Atom/Atoms';
+import { useResetModal } from '../../hooks/useResetModal';
 import { SubmitWrapper } from '../common/Auth/style';
 import CreateTitle from '../common/CreateTitle';
 import * as S from './style';
 
 export default function Privacy() {
-  const router = useRouter();
   const setModalPage = useSetRecoilState(ModalPage);
   const [privacy, setPrivacy] = useRecoilState(PrivacyInfo);
-
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(type);
-  };
+  const { changeModalType } = useResetModal();
 
   const checkPrivacy = () => {
     if (!privacy)

@@ -14,6 +14,7 @@ import {
   SubmitWrapper,
   Wrapper,
 } from '../common/Auth/style';
+import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
 import { useResetModal } from '../../hooks/useResetModal';
 import { passwordRegex } from '../../lib/Regex';
@@ -22,8 +23,8 @@ export default function NewSignInPage() {
   const router = useRouter();
   const { changeModalType } = useResetModal();
   const isQuery =
-    router.query.client_id !== undefined &&
-    router.query.redirect_uri !== undefined;
+    router.query[client_id] !== undefined &&
+    router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
 

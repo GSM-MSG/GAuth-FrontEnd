@@ -1,61 +1,75 @@
 import styled from '@emotion/styled';
 
-export const Positioner = styled.div`
-  position: relative;
-  left: 20vw;
-  width: 80%;
-  height: 100vh;
+export const Layout = styled.div`
+  width: 100%;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  justify-content: center;
+  @media (min-width: 801px) {
+    padding-left: 100px;
+  }
 `;
 
-export const Layer = styled.div`
+export const Wrapper = styled.div`
+  width: 1200px;
   display: flex;
-  gap: 50px;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 20px;
+  @media (max-width: 1500px) {
+    align-items: center;
+  }
+  @media (max-width: 550px) {
+    font-size: 3.6364vw;
+    width: 100%;
+    margin: 0 50px;
+  }
+`;
+
+export const TitleSection = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h1 {
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #1c1c1c;
+  }
+  h3 {
+    font-weight: 600;
+    font-size: 0.8em;
+    color: #929292;
+  }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 80px;
-  width: 40%;
-`;
-
-export const FormTitle = styled.div`
-  h1 {
-    font-family: 'Pretendard';
-  }
-  h3 {
-    color: #929292;
+  width: 352px;
+  @media (max-width: 550px) {
+    width: 100%;
   }
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 100px;
-  width: 95%;
-  margin-left: 5%;
-
-  input {
-    background: none;
-    border-bottom: 2px solid #2e80cc;
-    font-size: 24px;
-    font-weight: 500;
-    padding: 10px;
-  }
+  gap: 10px;
+  width: 100%;
+  margin-top: 53px;
 `;
 
 export const Submit = styled.button`
-  width: 350px;
-  height: 80px;
+  width: 100%;
+  aspect-ratio: auto 1/0.125;
   color: #fff;
-  background: #2e80cc;
-  border-radius: 40px;
-  font-size: 28px;
-  margin: 0 auto;
-  font-weight: 800;
+  background: #5499d9;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.75em;
+  margin-top: 70px;
 `;
 
 export const ImgBox = styled.div`

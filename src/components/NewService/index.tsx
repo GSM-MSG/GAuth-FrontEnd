@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { AddServiceFormImg } from '../../../public/svg';
 import API from '../../api';
 import { accessToken } from '../../lib/Token';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
+import Input from '../common/Input';
 import ServiceInfoModal from './ServiceInfoModal';
 import * as S from './style';
 
@@ -19,7 +19,12 @@ export default function NewServicePage() {
   const [modal, setModal] = useState<boolean>(false);
   const [serviceData, setServiceData] =
     useState<ResNewService>(serviceDefaultData);
-  const { register, handleSubmit, reset } = useForm<NewServiceForm>({
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<NewServiceForm>({
     mode: 'all',
     defaultValues: serviceData,
   });
@@ -48,17 +53,18 @@ export default function NewServicePage() {
   };
 
   return (
-    <S.Positioner>
-      <S.Layer>
+    <S.Layout>
+      <S.Wrapper>
         <S.Form onSubmit={handleSubmit(onSubmit, onError)}>
-          <S.FormTitle>
+          <S.TitleSection>
             <h1>서비스를 등록해볼까요?</h1>
             <h3>서비스 등록도, 학생정보 수집도 쉽게!</h3>
-          </S.FormTitle>
+          </S.TitleSection>
           <S.InputContainer>
-            <input
-              placeholder="서비스명을 입력해주세요"
-              {...register('serviceName', {
+            <Input
+              label="서비스명"
+              errors={!!errors.serviceName}
+              register={register('serviceName', {
                 required: '서비스명을 입력하지 않았습니다.',
                 pattern: {
                   value: /\S+/,
@@ -70,9 +76,10 @@ export default function NewServicePage() {
                 },
               })}
             />
-            <input
-              placeholder="서비스 URI을 입력해주세요"
-              {...register('serviceUri', {
+            <Input
+              label="리다이렉트 URL"
+              errors={!!errors.serviceName}
+              register={register('serviceUri', {
                 required: '서비스 URI를 입력하지 않았습니다.',
                 pattern: {
                   value: regUrl,
@@ -84,9 +91,10 @@ export default function NewServicePage() {
                 },
               })}
             />
-            <input
-              placeholder="리다이렉트 URL을 입력해주세요"
-              {...register('redirectUri', {
+            <Input
+              label="사이트 URL"
+              errors={!!errors.serviceName}
+              register={register('redirectUri', {
                 required: '리다이렉트 URI를 입력하지 않았습니다.',
                 pattern: {
                   value: regUrl,
@@ -101,9 +109,6 @@ export default function NewServicePage() {
           </S.InputContainer>
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
-        <S.ImgBox>
-          <AddServiceFormImg />
-        </S.ImgBox>
         {modal && (
           <ServiceInfoModal
             serviceData={serviceData}
@@ -113,7 +118,7 @@ export default function NewServicePage() {
             }}
           />
         )}
-      </S.Layer>
-    </S.Positioner>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

@@ -72,7 +72,7 @@ export default function NewSignInPage() {
       if (!isAxiosError(e))
         return setError('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
-        setError('이메일 또는 비밀번호가 틀렸습니다.');
+        setError('이메일 또는 비밀번호가 일치하지 않습니다..');
       if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
     }
   };
@@ -111,6 +111,7 @@ export default function NewSignInPage() {
               label="이메일"
               fixed="@gsm.hs.kr"
               errors={!!errors.email}
+              message={errors.email?.message}
               register={register('email', {
                 required: '이메일을 입력하지 않았습니다',
                 pattern: {
@@ -122,6 +123,7 @@ export default function NewSignInPage() {
             <Input
               label="비밀번호"
               errors={!!errors.password}
+              message={errors.password?.message}
               register={register('password', {
                 required: '비밀번호를 입력하지 않았습니다',
                 pattern: {

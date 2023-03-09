@@ -17,9 +17,7 @@ export default function ListItem({
     <S.ListItemLayer>
       <S.PreviewImg src={imgUrl || `/png/NoImage.png`} />
       <S.ServiceTitle>{serviceName}</S.ServiceTitle>
-      <Link href={serviceUri}>
-        <a>{serviceUri}</a>
-      </Link>
+      <Link href={serviceUri}>{serviceUri}</Link>
       <S.ServiceFixBtn onClick={() => setModifyItem()}>수정</S.ServiceFixBtn>
     </S.ListItemLayer>
   );

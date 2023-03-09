@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
@@ -9,11 +10,15 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
 
   return (
     <S.ListItemLayer>
-      <S.PreviewImg src={imgUrl || `/png/NoImage.png`} />
-      <S.ServiceTitle>{serviceName}</S.ServiceTitle>
-      <Link href={serviceUri}>
-        <a>{serviceUri}</a>
-      </Link>
+      <S.PreviewImg>
+        {imgUrl && (
+          <Image alt="NoImage" priority={true} src={imgUrl} fill sizes="100%" />
+        )}
+      </S.PreviewImg>
+      <S.ServiceTitle>
+        <h3>{serviceName}</h3>
+        <Link href={serviceUri}>사이트로 이동</Link>
+      </S.ServiceTitle>
     </S.ListItemLayer>
   );
 }

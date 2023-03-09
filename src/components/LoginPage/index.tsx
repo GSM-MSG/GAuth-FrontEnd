@@ -1,17 +1,17 @@
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import * as S from './style';
-import { API } from '../../lib/API';
 import SideWave from './SideWave';
 import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { useRecoilValue } from 'recoil';
 import { ViewWidth } from '../../Atom/Atoms';
 import { LoginLogo } from '../../../public/svg';
-import { AxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { LoginFormProps } from '../../types';
+import API from '../../api';
+import { client_id, redirect_uri } from '../../lib/OauthQuery';
+import { isAxiosError } from 'axios';
 
 export default function LoginPage() {
   const [serviceName, setServiceName] = useState<string>('');
@@ -57,7 +57,7 @@ export default function LoginPage() {
           const { data } = await API.get(`/oauth/${router.query.client_id}`);
           setServiceName(data.serviceName);
         } catch (e) {
-          if (e instanceof AxiosError && e.response!.status === 404) {
+          if (isAxiosError(e) && e.response!.status === 404) {
             toast.error('해당하는 서비스가 없습니다.');
             router.back();
           } else {
@@ -84,7 +84,7 @@ export default function LoginPage() {
         'Bearer ' + data.accessToken;
       router.replace('/');
     } catch (e) {
-      if (!(e instanceof AxiosError))
+      if (!isAxiosError(e))
         return toast.error('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
         toast.warn('이메일 또는 비밀번호가 틀렸습니다.');
@@ -94,6 +94,19 @@ export default function LoginPage() {
 
   const onError = (err: Object) => {
     return toast.warn(Object.values(err)[0].message);
+  };
+
+  const onRouting = () => {
+    router.push(
+      {
+        pathname: '/signUp',
+        query: {
+          client_id: router.query[client_id],
+          redirect_uri: router.query[redirect_uri],
+        },
+      },
+      '/signUp'
+    );
   };
 
   return (
@@ -128,13 +141,12 @@ export default function LoginPage() {
                 {...register('email', {
                   required: '이메일을 입력하지 않았습니다',
                   pattern: {
-                    value: /^s[0-9]{5}/g,
+                    value: /[a-zA-Z\d]/gi,
                     message: 'GSM메일 형식에 맞게 입력해주세요',
                   },
                   onBlur: () =>
                     getValues('email') === '' && setEmailCheck(false),
                 })}
-                maxLength={6}
                 onFocus={() => setEmailCheck(true)}
               />
               <S.Email>@gsm.hs.kr</S.Email>
@@ -156,7 +168,10 @@ export default function LoginPage() {
           <S.ButtonContainer>
             <S.Submit type="submit">로그인</S.Submit>
             <div>
-              <Link href="/signUp">회원가입</Link> <span>l</span>{' '}
+              <button type="button" onClick={onRouting}>
+                회원가입
+              </button>{' '}
+              <span>l</span>{' '}
               <a onClick={() => toast.info('다음 버전에 추가할 예정')}>
                 비밀번호 찾기
               </a>

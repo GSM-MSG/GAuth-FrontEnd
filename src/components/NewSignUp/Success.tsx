@@ -1,18 +1,11 @@
-import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { ModalPage } from '../../Atom/Atoms';
+import { useResetModal } from '../../hooks/useResetModal';
 import { SubmitWrapper } from '../common/Auth/style';
 import CreateTitle from '../common/CreateTitle';
 import * as S from './style';
 
 export default function Success() {
-  const router = useRouter();
-  const setModalPage = useSetRecoilState(ModalPage);
+  const { changeModalType } = useResetModal();
 
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(type);
-  };
   return (
     <>
       <CreateTitle title={'회원가입'} logo={true} />

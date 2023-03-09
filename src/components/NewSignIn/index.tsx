@@ -1,6 +1,4 @@
-import { useSetRecoilState } from 'recoil';
 import CreateTitle from '../common/CreateTitle';
-import { ModalPage } from '../../Atom/Atoms';
 import Input from '../common/Input';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
@@ -18,15 +16,18 @@ import {
 } from '../common/Auth/style';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
+import { useResetModal } from '../../hooks/useResetModal';
+import { passwordRegex } from '../../lib/Regex';
 
 export default function NewSignInPage() {
   const router = useRouter();
+  const { changeModalType } = useResetModal();
   const isQuery =
-    router.query.client_id !== undefined &&
-    router.query.redirect_uri !== undefined;
+    router.query[client_id] !== undefined &&
+    router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
-  const setModalPage = useSetRecoilState(ModalPage);
+
   const {
     register,
     formState: { errors },
@@ -71,27 +72,9 @@ export default function NewSignInPage() {
       if (!isAxiosError(e))
         return setError('예기치 못한 오류가 발생하였습니다.');
       if (e.response?.status === 400 || e.response?.status === 404)
-        setError('이메일 또는 비밀번호가 틀렸습니다.');
+        setError('이메일 또는 비밀번호가 일치하지 않습니다..');
       if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
     }
-  };
-
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(
-      isQuery
-        ? {
-            pathname: type,
-            query: {
-              client_id: router.query[client_id],
-              redirect_uri: router.query[redirect_uri],
-            },
-          }
-        : {
-            pathname: type,
-          },
-      type
-    );
   };
 
   return (
@@ -110,6 +93,7 @@ export default function NewSignInPage() {
               label="이메일"
               fixed="@gsm.hs.kr"
               errors={!!errors.email}
+              message={errors.email?.message}
               register={register('email', {
                 required: '이메일을 입력하지 않았습니다',
                 pattern: {
@@ -121,12 +105,13 @@ export default function NewSignInPage() {
             <Input
               label="비밀번호"
               errors={!!errors.password}
+              message={errors.password?.message}
               register={register('password', {
                 required: '비밀번호를 입력하지 않았습니다',
                 pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&^])[A-Za-z\d$@$!%*?&^]{8,72}/,
-                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                  value: passwordRegex,
+                  message:
+                    '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
                 maxLength: 72,
               })}

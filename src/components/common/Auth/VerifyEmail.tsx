@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import { useResetModal } from '../../../hooks/useResetModal';
 import CreateTitle from '../CreateTitle';
 import { CheckingMessage, SubmitWrapper } from './style';
 
@@ -11,13 +11,9 @@ interface Props {
 }
 
 export default function VerifyEmail({ title }: Props) {
-  const router = useRouter();
   const setModalPage = useSetRecoilState(ModalPage);
+  const { changeModalType } = useResetModal();
   const emailInfo = useRecoilValue(EmailInfo);
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(type);
-  };
 
   const checkEmail = async () => {
     try {

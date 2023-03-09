@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import { useRecoilState } from 'recoil';
+import { EmailInfo } from '../../../Atom/Atoms';
+import { useResetModal } from '../../../hooks/useResetModal';
 import { passwordRegex } from '../../../lib/Regex';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
@@ -25,15 +26,12 @@ export default function NewPasswordCommon({
   changeModal,
   onSubmit,
 }: Props) {
-  const router = useRouter();
-  const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const [error, setError] = useState('');
-
-  const changeModalType = () => {
+  const { changeModalType } = useResetModal();
+  const setModalType = () => {
     if (!changeModal) return;
-    setModalPage(0);
-    router.push(changeModal);
+    changeModalType(changeModal);
   };
 
   const {
@@ -99,7 +97,7 @@ export default function NewPasswordCommon({
         </InputWrapper>
         <SubmitWrapper>
           <button type="submit">{submitBtn}</button>
-          {bottomPhrase && <p onClick={changeModalType}>{bottomPhrase}</p>}
+          {bottomPhrase && <p onClick={setModalType}>{bottomPhrase}</p>}
         </SubmitWrapper>
       </Form>
     </>

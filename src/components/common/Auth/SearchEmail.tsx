@@ -1,12 +1,11 @@
 import { isAxiosError } from 'axios';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
-import { client_id, redirect_uri } from '../../../lib/OauthQuery';
+import { useResetModal } from '../../../hooks/useResetModal';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
 import { LightCube } from '../Loading';
@@ -17,30 +16,10 @@ interface Props {
 }
 
 export default function SearchEmail({ title }: Props) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { changeModalType } = useResetModal();
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
-  const isQuery =
-    router.query[client_id] !== undefined &&
-    router.query[redirect_uri] !== undefined;
-
-  const changeModalType = (type: string) => {
-    setModalPage(0);
-    router.push(
-      isQuery
-        ? {
-            pathname: type,
-            query: {
-              client_id: router.query[client_id],
-              redirect_uri: router.query[redirect_uri],
-            },
-          }
-        : {
-            pathname: type,
-          }
-    );
-  };
 
   const {
     register,

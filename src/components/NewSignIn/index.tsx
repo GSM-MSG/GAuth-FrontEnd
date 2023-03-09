@@ -18,6 +18,7 @@ import {
 } from '../common/Auth/style';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
+import { passwordRegex } from '../../lib/Regex';
 
 export default function NewSignInPage() {
   const router = useRouter();
@@ -124,9 +125,9 @@ export default function NewSignInPage() {
               register={register('password', {
                 required: '비밀번호를 입력하지 않았습니다',
                 pattern: {
-                  value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&^])[A-Za-z\d$@$!%*?&^]{8,72}/,
-                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                  value: passwordRegex,
+                  message:
+                    '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
                 maxLength: 72,
               })}

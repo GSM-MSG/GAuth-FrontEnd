@@ -49,7 +49,6 @@ export default function MyProfilePage() {
     event.stopPropagation();
   };
 
-  const [a, setA] = useState(false);
   return (
     <S.Positioner>
       <S.Layer>
@@ -84,7 +83,7 @@ export default function MyProfilePage() {
             </S.ProfileSVGWrapper>
             <S.PrivacySection>
               <div>
-                <h1 onClick={() => setA(true)}>{user.name}</h1>
+                <h1>{user.name}</h1>
                 <p>
                   {user.grade +
                     '학년 ' +
@@ -100,16 +99,6 @@ export default function MyProfilePage() {
         </S.ProfileSection>
         <MyServiceList />
       </S.Layer>
-
-      {a && (
-        <Portal
-          onClose={() => {
-            setA(false);
-          }}
-        >
-          <div>fdsafdsaf</div>
-        </Portal>
-      )}
     </S.Positioner>
   );
 }

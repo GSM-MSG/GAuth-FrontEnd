@@ -83,7 +83,7 @@ export default function NewSignInPage() {
         <CreateTitle
           title={serviceName ? serviceName + '에 로그인' : '뭐든 단 한번으로'}
           logo={true}
-          subTitle={serviceName ? '' : '저희 guath가 처음이신가요?'}
+          subTitle={serviceName ? '' : '저희 gauth가 처음이신가요?'}
           option={serviceName ? '' : '회원가입'}
           onClick={() => changeModalType('/signUp')}
         />

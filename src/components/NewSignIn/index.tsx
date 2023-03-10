@@ -34,23 +34,16 @@ export default function NewSignInPage() {
 
   useEffect(() => {
     const autoOauth = async () => {
-      try {
-        const { data } = await API.post('/oauth/access');
-        if (isQuery)
-          return router.replace(
-            `${router.query.redirect_uri}?code=${data.code}`
-          );
-      } catch (e) {
-        console.log(e);
-      }
+      const { data } = await API.post('/oauth/code/access');
+      if (isQuery)
+        router.replace(`${router.query.redirect_uri}?code=${data.code}`);
     };
 
     const getService = async () => {
       try {
         const { data } = await API.get(`/oauth/${router.query.client_id}`);
         setServiceName(data.serviceName);
-        if (checkAuto) toast.info('백엔드 개발중이에요.');
-        //  autoOauth();
+        if (checkAuto) autoOauth();
       } catch (e) {
         if (isAxiosError(e) && e.response!.status === 404) {
           toast.error('해당하는 서비스가 없습니다.');

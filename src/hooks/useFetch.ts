@@ -1,16 +1,8 @@
-import { Method, isAxiosError } from 'axios';
+import { isAxiosError } from 'axios';
 import { useState, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import API from '../api';
-
-interface Props<T> {
-  url: string;
-  method: Method;
-  onSuccess?: (data: T) => void | Promise<void>;
-  onFailure?: (e: unknown) => void | Promise<void>;
-  successMessage?: string;
-  errorMessage?: string;
-}
+import Props from '../types/hooks/useFetch';
 
 const useFetch = <T>({
   url,

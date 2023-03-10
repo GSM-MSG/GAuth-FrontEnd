@@ -4,9 +4,11 @@ import { ModalPage } from '../../Atom/Atoms';
 import { Layout, Wrapper } from '../common/Auth/style';
 import VerifyEmail from '../common/Auth/VerifyEmail';
 import NewPassword from './NewPassword';
+import { useAutoLogin } from '../../hooks/useAutoLogin';
 
 export default function NewFindPswPage() {
   const modalPage = useRecoilValue(ModalPage);
+  useAutoLogin();
 
   return (
     <Layout>

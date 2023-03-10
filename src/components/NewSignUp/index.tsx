@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import { ModalPage } from '../../Atom/Atoms';
+import { useAutoLogin } from '../../hooks/useAutoLogin';
 import SearchEmail from '../common/Auth/SearchEmail';
 import { Layout, Wrapper } from '../common/Auth/style';
 import VerifyEmail from '../common/Auth/VerifyEmail';
@@ -10,6 +11,7 @@ import Profile from './Profile';
 import Success from './Success';
 export default function NewSignUpPage() {
   const modalPage = useRecoilValue(ModalPage);
+  useAutoLogin();
 
   return (
     <Layout>

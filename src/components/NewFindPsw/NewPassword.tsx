@@ -1,23 +1,24 @@
 import { isAxiosError } from 'axios';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import API from '../../api';
-import { EmailInfo, ModalPage } from '../../Atom/Atoms';
+import { EmailInfo } from '../../Atom/Atoms';
+import { useResetModal } from '../../hooks/useResetModal';
 import NewPasswordCommon from '../common/Auth/NewPasswordCommon';
 
 export default function NewPassword() {
   const router = useRouter();
-  const setModalPage = useSetRecoilState(ModalPage);
   const emailInfo = useRecoilValue(EmailInfo);
+  const { changeModalType } = useResetModal();
+
   const onSubmit = async (data: { password: string; rePassword: string }) => {
     try {
       await API.patch('/auth/password/initialize', {
         email: emailInfo.email + '@gsm.hs.kr',
         newPassword: data.rePassword,
       });
-      setModalPage(0);
-      router.push('/login');
+      changeModalType('/login');
     } catch (e) {
       if (!isAxiosError(e))
         return toast.error('예상치 못한 오류가 발생하였습니다.');

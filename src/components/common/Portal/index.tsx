@@ -18,6 +18,10 @@ const Portal = ({ children, onClose }: Props) => {
 
   if (!isMounted) return null;
 
+  document.body.style.cssText = `
+    overflow: hidden
+  `;
+
   return ReactDOM.createPortal(
     <Positioner onClick={onClose}>{children}</Positioner>,
     document.getElementById('portal')!

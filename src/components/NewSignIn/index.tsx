@@ -58,7 +58,7 @@ export default function NewSignInPage() {
     if (isQuery) {
       getService();
     } else {
-      checkAuto ? router.push('/') : '';
+      checkAuto && router.push('/'); 
     }
     return;
   }, [checkAuto, isQuery, router]);

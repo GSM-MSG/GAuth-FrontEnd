@@ -39,9 +39,7 @@ class TokenManager {
       this.setToken(data);
       return true;
     } catch (e) {
-      localStorage.removeItem(accessToken);
-      localStorage.removeItem(refreshToken);
-      localStorage.removeItem(expiredAt);
+      deleteToken();
       if (push) return false;
       return Router.push('/login');
     }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Router from 'next/router';
 import { accessToken, expiredAt, refreshToken } from '../lib/Token';
+import { getRefreshProps } from '../types/TokenMangerType';
 import TokenType from '../types/TokenType';
 
 class TokenManager {
@@ -24,27 +25,22 @@ class TokenManager {
     return new Date(expiredString).getTime() - new Date().getTime() >= 30000;
   }
 
-  async getRefresh(refresh: string | null) {
-    if (this.skipUrl()) return;
-    if (!refresh) return Router.push('/login');
-
+  async getRefresh({ refresh, push = false }: getRefreshProps) {
     try {
       const { data } = await axios.patch(
         `${process.env.NEXT_PUBLIC_GAUTH_SERVER_URL}/auth`,
         {},
         {
           headers: {
-            RefreshToken: `Bearer ${this._refreshToken}`,
+            RefreshToken: `Bearer ${refresh}`,
           },
         }
       );
       this.setToken(data);
-      return;
+      return true;
     } catch (e) {
-      localStorage.removeItem(accessToken);
-      localStorage.removeItem(refreshToken);
-      localStorage.removeItem(expiredAt);
-
+      this.deleteToken();
+      if (push) return false;
       return Router.push('/login');
     }
   }
@@ -63,6 +59,12 @@ class TokenManager {
     localStorage.setItem(accessToken, tokens.accessToken);
     localStorage.setItem(refreshToken, tokens.refreshToken);
     localStorage.setItem(expiredAt, tokens.expiresAt);
+  }
+
+  deleteToken() {
+    localStorage.removeItem(accessToken);
+    localStorage.removeItem(refreshToken);
+    localStorage.removeItem(expiredAt);
   }
 
   get accessToken() {

@@ -39,7 +39,7 @@ class TokenManager {
       this.setToken(data);
       return true;
     } catch (e) {
-      deleteToken();
+      this.deleteToken();
       if (push) return false;
       return Router.push('/login');
     }

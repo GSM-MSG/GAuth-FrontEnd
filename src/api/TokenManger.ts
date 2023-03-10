@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Router from 'next/router';
 import { accessToken, expiredAt, refreshToken } from '../lib/Token';
+import { getRefreshProps } from '../types/TokenMangerType';
 import TokenType from '../types/TokenType';
 
 class TokenManager {
@@ -24,13 +25,7 @@ class TokenManager {
     return new Date(expiredString).getTime() - new Date().getTime() >= 30000;
   }
 
-  async getRefresh({
-    refresh,
-    push = false,
-  }: {
-    refresh: string | null;
-    push?: boolean;
-  }) {
+  async getRefresh({ refresh, push = false }: getRefreshProps) {
     try {
       const { data } = await axios.patch(
         `${process.env.NEXT_PUBLIC_GAUTH_SERVER_URL}/auth`,

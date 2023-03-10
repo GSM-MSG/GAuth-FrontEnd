@@ -2,12 +2,12 @@ import { useState, ReactNode, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Positioner } from './style';
 
-type PortalProps = {
+type Props = {
   children: ReactNode;
   onClose: () => void;
 };
 
-const Portal = ({ children, onClose }: PortalProps) => {
+const Portal = ({ children, onClose }: Props) => {
   const [isMounted, setMounted] = useState(false);
 
   useEffect(() => {

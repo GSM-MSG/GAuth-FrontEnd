@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import API from '../../api';
+import Portal from '../common/Portal';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
@@ -47,6 +48,8 @@ export default function MyProfilePage() {
     event.preventDefault();
     event.stopPropagation();
   };
+
+  const [a, setA] = useState(false);
   return (
     <S.Positioner>
       <S.Layer>
@@ -81,7 +84,7 @@ export default function MyProfilePage() {
             </S.ProfileSVGWrapper>
             <S.PrivacySection>
               <div>
-                <h1>{user.name}</h1>
+                <h1 onClick={() => setA(true)}>{user.name}</h1>
                 <p>
                   {user.grade +
                     '학년 ' +
@@ -97,6 +100,16 @@ export default function MyProfilePage() {
         </S.ProfileSection>
         <MyServiceList />
       </S.Layer>
+
+      {a && (
+        <Portal
+          onClose={() => {
+            setA(false);
+          }}
+        >
+          <div>fdsafdsaf</div>
+        </Portal>
+      )}
     </S.Positioner>
   );
 }

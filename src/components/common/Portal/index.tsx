@@ -12,15 +12,18 @@ const Portal = ({ children, onClose }: Props) => {
 
   useEffect(() => {
     setMounted(true);
+    document.body.style.cssText = `
+      overflow: hidden
+    `;
+
+    return () => {
+      document.body.style.cssText = '';
+    };
   }, []);
 
   if (typeof window === 'undefined') return null;
 
   if (!isMounted) return null;
-
-  document.body.style.cssText = `
-    overflow: hidden
-  `;
 
   return ReactDOM.createPortal(
     <Positioner onClick={onClose}>{children}</Positioner>,

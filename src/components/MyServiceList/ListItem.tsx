@@ -4,15 +4,12 @@ import { ClientListType } from '../../types';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import Image from 'next/image';
-import { useRecoilState } from 'recoil';
-import { FixModalToggle } from '../../Atom/Atoms';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
   const { serviceName, serviceUri } = listData;
-  const [fixModal, setFixModal] = useRecoilState(FixModalToggle);
+  const [toggle, setToggle] = useState(false);
   const imgUrl = usePreview(serviceUri);
-  const { id, toggle } = fixModal;
   const modalRef = useRef<HTMLDivElement>(null);
   const fixIconRef = useRef<HTMLElement>(null);
 
@@ -24,9 +21,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
         !modalRef.current.contains(e.target as Node) &&
         !fixIconRef.current.contains(e.target as Node)
       ) {
-        setFixModal((prev) => {
-          return { id: prev.id, toggle: !toggle };
-        });
+        setToggle((prev) => !prev);
       }
     };
     document.addEventListener('mousedown', checkOutSide);
@@ -47,18 +42,10 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
             sizes="100%"
           />
         </S.PreviewImg>
-        <i
-          ref={fixIconRef}
-          onClick={() =>
-            setFixModal({
-              id: listData.id,
-              toggle: !toggle,
-            })
-          }
-        >
+        <i ref={fixIconRef} onClick={() => setToggle((prev) => !prev)}>
           <SVG.FixIcon />
         </i>
-        {listData.id === id && toggle && (
+        {toggle && (
           <S.ItemController ref={modalRef}>
             <p>수정</p>
             <p>삭제</p>

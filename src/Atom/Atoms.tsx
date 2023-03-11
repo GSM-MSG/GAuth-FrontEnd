@@ -43,10 +43,10 @@ export const PrivacyInfo = atom<boolean>({
   default: false,
 });
 
-export const FixModalToggle = atom({
-  key: 'fix',
+export const FixModalType = atom({
+  key: 'fixModalType',
   default: {
     id: 0,
-    toggle: false,
+    type: '',
   },
 });

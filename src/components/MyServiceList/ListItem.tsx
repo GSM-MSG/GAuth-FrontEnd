@@ -59,12 +59,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
           <SVG.FixIcon />
         </i>
         {listData.id === id && toggle && (
-          <S.ItemController
-            ref={modalRef}
-            onMouseDown={() => {
-              console.log(1);
-            }}
-          >
+          <S.ItemController ref={modalRef}>
             <p>수정</p>
             <p>삭제</p>
           </S.ItemController>

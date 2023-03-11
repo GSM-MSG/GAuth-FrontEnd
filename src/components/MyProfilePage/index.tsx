@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import API from '../../api';
 import Image from 'next/image';
 
@@ -48,6 +48,7 @@ export default function MyProfilePage() {
     event.preventDefault();
     event.stopPropagation();
   };
+
   return (
     <S.Layout>
       <S.Wrapper>

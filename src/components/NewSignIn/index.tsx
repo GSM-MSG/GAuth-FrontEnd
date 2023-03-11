@@ -7,17 +7,12 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { isAxiosError } from 'axios';
 import API from '../../api';
-import {
-  Form,
-  InputWrapper,
-  Layout,
-  SubmitWrapper,
-  Wrapper,
-} from '../common/Auth/style';
+import * as S from './style';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
 import { useResetModal } from '../../hooks/useResetModal';
 import { passwordRegex } from '../../lib/Regex';
+import { useAutoLogin } from '../../hooks/useAutoLogin';
 
 export default function NewSignInPage() {
   const router = useRouter();
@@ -27,6 +22,7 @@ export default function NewSignInPage() {
     router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
   const [error, setError] = useState('');
+  const { checkAuto } = useAutoLogin(false);
 
   const {
     register,
@@ -37,22 +33,35 @@ export default function NewSignInPage() {
   });
 
   useEffect(() => {
-    if (!router.isReady) return;
-    isQuery &&
-      (async () => {
-        try {
-          const { data } = await API.get(`/oauth/${router.query.client_id}`);
-          setServiceName(data.serviceName);
-        } catch (e) {
-          if (isAxiosError(e) && e.response!.status === 404) {
-            toast.error('해당하는 서비스가 없습니다.');
-            router.back();
-          } else {
-            toast.error('예기치 못한 오류가 발생하였습니다.');
-          }
+    const autoOauth = async () => {
+      const { data } = await API.post('/oauth/code/access');
+      if (isQuery)
+        router.replace(`${router.query.redirect_uri}?code=${data.code}`);
+    };
+
+    const getService = async () => {
+      try {
+        const { data } = await API.get(`/oauth/${router.query.client_id}`);
+        setServiceName(data.serviceName);
+        if (checkAuto) autoOauth();
+      } catch (e) {
+        if (isAxiosError(e) && e.response!.status === 404) {
+          toast.error('해당하는 서비스가 없습니다.');
+          router.back();
+        } else {
+          toast.error('예기치 못한 오류가 발생하였습니다.');
         }
-      })();
-  }, [router.isReady, isQuery, router]);
+      }
+    };
+
+    if (!router.isReady || checkAuto === undefined) return;
+    if (isQuery) {
+      getService();
+    } else {
+      checkAuto && router.push('/'); 
+    }
+    return;
+  }, [checkAuto, isQuery, router]);
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
     try {
@@ -78,17 +87,17 @@ export default function NewSignInPage() {
   };
 
   return (
-    <Layout>
-      <Wrapper>
+    <S.Layout>
+      <S.Wrapper>
         <CreateTitle
           title={serviceName ? serviceName + '에 로그인' : '뭐든 단 한번으로'}
           logo={true}
-          subTitle={serviceName ? '' : '저희 guath가 처음이신가요?'}
+          subTitle={serviceName ? '' : '저희 gauth가 처음이신가요?'}
           option={serviceName ? '' : '회원가입'}
           onClick={() => changeModalType('/signUp')}
         />
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <InputWrapper>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
+          <S.InputWrapper>
             <Input
               label="이메일"
               fixed="@gsm.hs.kr"
@@ -118,13 +127,13 @@ export default function NewSignInPage() {
               type="password"
             />
             {error && <p>{error}</p>}
-          </InputWrapper>
-          <SubmitWrapper>
+          </S.InputWrapper>
+          <S.SubmitWrapper>
             <button type="submit">로그인</button>
             <p onClick={() => changeModalType('/newpsw')}>비밀번호 찾기</p>
-          </SubmitWrapper>
-        </Form>
-      </Wrapper>
-    </Layout>
+          </S.SubmitWrapper>
+        </S.Form>
+      </S.Wrapper>
+    </S.Layout>
   );
 }

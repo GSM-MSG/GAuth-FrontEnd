@@ -10,8 +10,11 @@ const API = axios.create({
 API.interceptors.request.use(async (config) => {
   const tokenManager = new TokenManager();
 
-  if (!tokenManager.checkToken(tokenManager.expiresAt)) {
-    await tokenManager.getRefresh(tokenManager.refreshToken);
+  if (
+    !tokenManager.checkToken(tokenManager.expiresAt) &&
+    !tokenManager.skipUrl()
+  ) {
+    await tokenManager.getRefresh({ refresh: tokenManager.refreshToken });
   }
 
   config.headers['Authorization'] = tokenManager.accessToken
@@ -30,7 +33,7 @@ API.interceptors.response.use(
     const tokenManager = new TokenManager();
 
     if (err.response && err.response.status === 401)
-      return tokenManager.getRefresh(tokenManager.refreshToken);
+      return tokenManager.getRefresh({ refresh: tokenManager.refreshToken });
     return Promise.reject(err);
   }
 );

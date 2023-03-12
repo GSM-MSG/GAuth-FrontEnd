@@ -28,8 +28,6 @@ export default function ModifyMyService() {
     (async () => {
       try {
         const data = await API.get(`/client/${fix.id}`);
-        if (data.status !== 200)
-          return toast.error('서비스 요청이 실패하였습니다,');
         reset({ ...data.data });
       } catch (e) {
         if (!isAxiosError(e))
@@ -41,13 +39,12 @@ export default function ModifyMyService() {
   const ModifyService = async (value: FieldValues) => {
     try {
       const { serviceName, serviceUri, redirectUri } = value;
-      console.log(value);
-      const data = await API.patch(`/client/${fix.id}`, {
+      await API.patch(`/client/${fix.id}`, {
         serviceName,
         serviceUri,
         redirectUri,
       });
-      if (data.status !== 204) return;
+
       toast.success('변경사항이 적용되었습니다.');
       getUser();
       setFix({

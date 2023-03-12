@@ -24,6 +24,7 @@ export const Input = styled.input`
   width: 100%;
   height: 40px;
   border-bottom: 1px solid #d7d7d7;
+  background: transparent;
   font-size: 0.85em;
   :valid,
   :focus {

@@ -6,6 +6,7 @@ export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   header {
     max-height: 0;
     min-height: 0;
@@ -20,9 +21,11 @@ export const Layout = styled.div`
 export const Wrapper = styled.div`
   width: 1200px;
   font-size: 20px;
+
   @media (max-width: 1400px) {
     width: 100%;
     margin: 0 50px 50px;
+
     > * {
       font-size: 1.4vw;
     }

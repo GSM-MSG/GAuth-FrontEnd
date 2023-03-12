@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
@@ -28,6 +27,7 @@ export default function NewPasswordCommon({
 }: Props) {
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const [error, setError] = useState('');
+  const [checkPassword, setCheckPassword] = useState(true);
   const { changeModalType } = useResetModal();
   const setModalType = () => {
     if (!changeModal) return;
@@ -64,7 +64,7 @@ export default function NewPasswordCommon({
       <Form onSubmit={handleSubmit(setPassword)}>
         <InputWrapper>
           <Input
-            type="password"
+            type={checkPassword ? undefined : 'password'}
             label={`${newPassword ? '새' : ''} 비밀번호`}
             errors={!!errors.password}
             message={errors.password?.message}
@@ -77,6 +77,10 @@ export default function NewPasswordCommon({
               },
               maxLength: 72,
             })}
+            fixed={checkPassword ? '닫기' : '보기'}
+            fixedHandle={() => {
+              setCheckPassword((prev) => !prev);
+            }}
           />
           <Input
             type="password"

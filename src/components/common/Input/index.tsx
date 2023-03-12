@@ -8,6 +8,7 @@ interface Props {
   register?: UseFormRegisterReturn;
   type?: string;
   fixed?: string;
+  fixedHandle?: () => void;
 }
 
 export default function Input({
@@ -17,6 +18,7 @@ export default function Input({
   register,
   type = 'text',
   fixed,
+  fixedHandle,
 }: Props) {
   return (
     <S.Wrapper>
@@ -27,7 +29,12 @@ export default function Input({
       </S.Label>
       <S.InputWrapper>
         <S.Input type={type} {...register} autoComplete="on" />
-        <S.FixedInputValue>{fixed}</S.FixedInputValue>
+        <S.FixedInputValue
+          cursor={!!fixedHandle}
+          onClick={() => fixedHandle && fixedHandle()}
+        >
+          {fixed}
+        </S.FixedInputValue>
       </S.InputWrapper>
     </S.Wrapper>
   );

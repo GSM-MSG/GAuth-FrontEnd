@@ -21,6 +21,7 @@ export default function NewSignInPage() {
     router.query[client_id] !== undefined &&
     router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
+  const [checkPassword, setCheckPassword] = useState(true);
   const [error, setError] = useState('');
   const { checkAuto } = useAutoLogin(false);
 
@@ -58,7 +59,7 @@ export default function NewSignInPage() {
     if (isQuery) {
       getService();
     } else {
-      checkAuto && router.push('/'); 
+      checkAuto && router.push('/');
     }
     return;
   }, [checkAuto, isQuery, router]);
@@ -124,7 +125,11 @@ export default function NewSignInPage() {
                 },
                 maxLength: 72,
               })}
-              type="password"
+              type={checkPassword ? undefined : 'password'}
+              fixed={checkPassword ? '닫기' : '보기'}
+              fixedHandle={() => {
+                setCheckPassword((prev) => !prev);
+              }}
             />
             {error && <p>{error}</p>}
           </S.InputWrapper>

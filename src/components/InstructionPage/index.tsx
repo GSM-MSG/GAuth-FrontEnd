@@ -1,7 +1,7 @@
 import 'react-notion/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import { BlockMapType, NotionRenderer } from 'react-notion';
-import { NotionPage } from './style';
+import * as S from './style';
 
 export default function InstructionPage({
   notionId,
@@ -9,10 +9,12 @@ export default function InstructionPage({
   notionId: BlockMapType;
 }) {
   return (
-    <NotionPage>
-      {Object.keys(notionId).length && (
-        <NotionRenderer blockMap={notionId} fullPage={true} />
-      )}
-    </NotionPage>
+    <S.Layout>
+      <S.Wrapper>
+        {Object.keys(notionId).length && (
+          <NotionRenderer blockMap={notionId} fullPage={true} />
+        )}
+      </S.Wrapper>
+    </S.Layout>
   );
 }

@@ -158,111 +158,6 @@ export const ServiceTitle = styled.h3`
   -webkit-box-orient: vertical;
 `;
 
-//ModifyMyService
-export const ModifyModalBackGround = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: rgba(1, 1, 1, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ModifyModalLayer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  width: 1140px;
-  background: #ffffff;
-  border-radius: 25px;
-  padding: 40px 56px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    width: 100%;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    color: #000000;
-  }
-  form {
-    margin-top: 9px;
-    width: 100%;
-    height: auto;
-    display: flex;
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-    label {
-      width: 512px;
-      height: auto;
-
-      h3 {
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        color: #000000;
-        margin-bottom: 4px;
-      }
-      div {
-        position: relative;
-        i {
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 100;
-        }
-      }
-      input {
-        width: 512px;
-        height: 52px;
-        border-radius: 12px;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-      }
-    }
-  }
-
-  button {
-    width: 343px;
-    height: 80px;
-    margin-top: 29px;
-    margin-bottom: 56px;
-    background: #2e80cc;
-    border-radius: 40px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 30px;
-    text-align: center;
-    color: #f7f8fc;
-  }
-`;
-
-export const ModifyInput = styled.input`
-  background: #ffffff;
-  border: 2px solid #5499d9;
-  color: #929292;
-  padding: 20px;
-`;
-
-export const CopyInput = styled.input`
-  background: #929292;
-  color: #f7f8fc;
-  padding: 0 50px 0 20px;
-`;
-
 export const EmptyLisyLayer = styled.div`
   margin-top: 30px;
   width: 100%;
@@ -287,4 +182,13 @@ export const EmptyLisyLayer = styled.div`
       font-size: 50px;
     }
   }
+`;
+
+export const DeleteTitle = styled.h1`
+  text-align: center;
+`;
+
+export const DeleteWrapper = styled.div`
+  width: 100%;
+  height: 100%;
 `;

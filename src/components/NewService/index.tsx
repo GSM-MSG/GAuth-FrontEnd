@@ -10,6 +10,11 @@ import ServiceInfoModal from './InfoModal';
 import * as S from './style';
 
 export default function NewServicePage() {
+  const regUrl =
+    /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
+
+  const [modal, setModal] = useState<boolean>(false);
+
   const serviceDefaultData: ResNewService = {
     clientId: '',
     clientSecret: '',
@@ -17,9 +22,10 @@ export default function NewServicePage() {
     serviceName: '',
     serviceUri: '',
   };
-  const [modal, setModal] = useState<boolean>(false);
+
   const [serviceData, setServiceData] =
     useState<ResNewService>(serviceDefaultData);
+
   const {
     register,
     formState: { errors },
@@ -28,8 +34,15 @@ export default function NewServicePage() {
   } = useForm<NewServiceForm>({
     defaultValues: serviceData,
   });
-  const regUrl =
-    /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
+
+  const onError = (err: Object) => {
+    return toast.warn(Object.values(err)[0].message);
+  };
+
+  const onClose = () => {
+    setModal(false);
+    reset(serviceDefaultData);
+  };
 
   const onSubmit = async (inputs: NewServiceForm) => {
     try {
@@ -46,15 +59,6 @@ export default function NewServicePage() {
     } catch (e) {
       toast.error('예기치 못한 오류가 발생했습니다.');
     }
-  };
-
-  const onError = (err: Object) => {
-    return toast.warn(Object.values(err)[0].message);
-  };
-
-  const onClose = () => {
-    setModal(false);
-    reset(serviceDefaultData);
   };
 
   return (

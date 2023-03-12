@@ -18,6 +18,7 @@ export const ModalWrapper = styled.div`
     gap: 9px;
     margin: 0;
     align-items: center;
+
     svg {
       width: 1.35em;
     }
@@ -38,12 +39,14 @@ export const ModalSection = styled.section`
   flex-direction: column;
   justify-content: space-between;
   padding-top: 60px;
+
   div {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1em;
   }
+
   button {
     width: 100%;
     aspect-ratio: auto 1 / 0.125;
@@ -66,11 +69,13 @@ export const Info = styled.label`
   display: flex;
   align-items: center;
   gap: 0.25em;
+
   p {
     white-space: nowrap;
     font-weight: 400;
     font-size: 0.75em;
   }
+
   input {
     width: 100%;
     height: 100%;
@@ -86,6 +91,7 @@ export const Info = styled.label`
       width: 1em;
       height: 1em;
     }
+
     :hover {
       path {
         fill: #5499d9;

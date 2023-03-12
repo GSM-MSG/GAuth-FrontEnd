@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 import MyServiceList from '../MyServiceList';
 import { useSetRecoilState } from 'recoil';
 import { UserLists } from '../../Atom/Atoms';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import API from '../../api';
+import Portal from '../common/Portal';
 
 export default function MyProfilePage() {
   const [user, getUser] = useUser();
@@ -47,6 +48,7 @@ export default function MyProfilePage() {
     event.preventDefault();
     event.stopPropagation();
   };
+
   return (
     <S.Positioner>
       <S.Layer>

@@ -27,7 +27,7 @@ export default function NewPasswordCommon({
 }: Props) {
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const [error, setError] = useState('');
-  const [checkPassword, setCheckPassword] = useState(true);
+  const [checkPassword, setCheckPassword] = useState(false);
   const { changeModalType } = useResetModal();
   const setModalType = () => {
     if (!changeModal) return;
@@ -76,6 +76,9 @@ export default function NewPasswordCommon({
                   '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
               },
               maxLength: 72,
+              onChange() {
+                setCheckPassword(false);
+              },
             })}
             fixed={checkPassword ? '닫기' : '보기'}
             fixedHandle={() => {

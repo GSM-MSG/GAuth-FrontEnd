@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import * as S from './style';
 
@@ -7,7 +8,7 @@ interface Props {
   message?: string;
   register?: UseFormRegisterReturn;
   type?: string;
-  fixed?: string;
+  fixed?: string | ReactElement;
   fixedHandle?: () => void;
 }
 

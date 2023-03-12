@@ -21,7 +21,7 @@ export default function NewSignInPage() {
     router.query[client_id] !== undefined &&
     router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
-  const [checkPassword, setCheckPassword] = useState(true);
+  const [checkPassword, setCheckPassword] = useState(false);
   const [error, setError] = useState('');
   const { checkAuto } = useAutoLogin(false);
 
@@ -124,6 +124,9 @@ export default function NewSignInPage() {
                     '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
                 maxLength: 72,
+                onChange() {
+                  setCheckPassword(false);
+                },
               })}
               type={checkPassword ? undefined : 'password'}
               fixed={checkPassword ? '닫기' : '보기'}

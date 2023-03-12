@@ -1,15 +1,16 @@
 import ListItem from './ListItem';
-import ModifyMyService from './ModifyMyService';
-import { ClientListType } from '../../types';
+import ModifyMyService from './Modify';
 import * as S from './style';
 import EmptyList from './EmptyList';
-import { useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { User } from '../../Atom/Atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { FixService, User } from '../../Atom/Atoms';
+import Portal from '../common/Portal';
+import DeleteService from './Delete/DeleteService';
 
 export default function MyServiceList() {
-  const [modifyItem, setModifyItem] = useState<ClientListType | null>(null);
+  const [fix, setFix] = useRecoilState(FixService);
   const user = useRecoilValue(User);
+  const { type } = fix;
 
   return (
     <S.Layer>
@@ -25,11 +26,22 @@ export default function MyServiceList() {
       ) : (
         <EmptyList />
       )}
-      {modifyItem && (
-        <ModifyMyService
-          modifyItem={modifyItem}
-          setModifyItem={() => setModifyItem(null)}
-        />
+      {fix.type && (
+        <Portal
+          onClose={() =>
+            setFix((prev) => {
+              return {
+                ...prev,
+                type: '',
+              };
+            })
+          }
+        >
+          <div>
+            {type === 'modify' && <ModifyMyService />}
+            {type === 'delete' && <DeleteService />}
+          </div>
+        </Portal>
       )}
     </S.Layer>
   );

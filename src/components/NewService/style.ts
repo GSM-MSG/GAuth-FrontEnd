@@ -70,6 +70,7 @@ export const Submit = styled.button`
   font-weight: 600;
   font-size: 0.75em;
   margin-top: 70px;
+  cursor: pointer;
 `;
 
 export const ImgBox = styled.div`

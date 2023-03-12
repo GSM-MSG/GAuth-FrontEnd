@@ -25,7 +25,6 @@ export default function NewServicePage() {
     handleSubmit,
     reset,
   } = useForm<NewServiceForm>({
-    mode: 'all',
     defaultValues: serviceData,
   });
   const regUrl =

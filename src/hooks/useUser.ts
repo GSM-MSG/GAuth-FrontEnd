@@ -1,20 +1,15 @@
 import { useEffect, useState } from 'react';
-
 import { accessToken } from '../lib/Token';
 import { ClientInform } from '../types';
 import { toast } from 'react-toastify';
 import API from '../api';
+import { useRecoilState } from 'recoil';
+import { User } from '../Atom/Atoms';
 
-export const useUser = (): [ClientInform, () => void] => {
-  const [user, setUser] = useState<ClientInform>({
-    email: '',
-    name: '',
-    grade: 0,
-    classNum: 0,
-    number: 0,
-    profileUrl: null,
-    clientList: [],
-  });
+export const useUser = (
+  toggle: boolean | undefined = true
+): [ClientInform, () => void] => {
+  const [user, setUser] = useRecoilState(User);
 
   const getUser = async () => {
     try {
@@ -33,7 +28,7 @@ export const useUser = (): [ClientInform, () => void] => {
   };
 
   useEffect(() => {
-    getUser();
+    toggle && getUser();
   }, []);
 
   return [user, getUser];

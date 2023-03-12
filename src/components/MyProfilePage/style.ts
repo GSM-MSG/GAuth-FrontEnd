@@ -1,84 +1,118 @@
 import styled from '@emotion/styled';
 
-export const Positioner = styled.div`
+export const Layout = styled.div`
   width: 100%;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 801px) {
+    padding-left: 100px;
+  }
 `;
 
-export const Layer = styled.div`
-  width: 65vw;
-  height: 100%;
-  @media (max-width: 1300px) {
-    width: 400px;
+export const Wrapper = styled.div`
+  width: 910px;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+    padding: 0 50px;
   }
 `;
 
 export const TitleSection = styled.div`
-  margin-top: 150px;
+  width: 100%;
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+
   h1 {
-    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #1c1c1c;
   }
   h3 {
+    font-weight: 600;
+    font-size: 0.8em;
     color: #929292;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
+`;
+
+export const ProfileWrapper = styled.div`
+  width: 372px;
+  height: 167px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  margin-top: 60px;
+  display: flex;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+
+  @media (max-width: 420px) {
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 10px;
   }
 `;
 
 export const ProfileSection = styled.div`
-  width: 100%;
-  height: 178px;
-  display: flex;
-  margin-top: 80px;
-`;
-
-export const UpLoadProfileContainter = styled.div`
-  display: flex;
-`;
-
-export const ProfileSVGWrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 33px 24px;
+
   > svg {
-    width: 160px;
-    height: 160px;
+    width: 100px;
+    height: 100px;
   }
+
   label {
+    position: relative;
     cursor: pointer;
+
     i {
       position: absolute;
-      top: 130px;
-      left: 130px;
+      right: 0;
+      bottom: 0;
     }
+
     :hover {
       i {
-        svg {
-          path {
-            fill: #868e96;
-          }
+        path {
+          fill: #868e96;
         }
       }
     }
   }
 `;
 
-export const Profile = styled.img`
-  margin: 0px;
-  padding: 2px;
-  width: 160px;
-  height: 160px;
+export const Profile = styled.div`
+  position: relative;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  object-fit: cover;
   background: #fff;
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+  }
 `;
 
 export const PrivacySection = styled.div`
@@ -87,25 +121,34 @@ export const PrivacySection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 47px;
-  div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    h1 {
-      font-size: 45px;
-      font-weight: 700;
-      color: #000000;
-    }
-    p {
-      font-size: 27px;
-      font-weight: 600;
-      color: #000000;
-    }
+  margin-left: 13px;
+  color: #000000;
+
+  h1 {
+    font-weight: 700;
+    font-size: 13px;
   }
+
+  p {
+    margin-top: 4px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
   h3 {
-    font-size: 27px;
+    margin-top: 8px;
     font-weight: 300;
+    font-size: 15px;
     color: #929292;
   }
+
+  @media (max-width: 420px) {
+    margin: 0;
+  }
+`;
+
+export const Hr = styled.hr`
+  margin-top: 41px;
+  background: #e6e6e6;
+  border-radius: 2px;
 `;

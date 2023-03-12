@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   font-size: 20px;
   @media (max-width: 1100px) {
     width: 100%;
-    margin: 0 50px;
+    padding: 0 50px;
   }
 `;
 
@@ -38,6 +38,9 @@ export const TitleSection = styled.div`
     font-size: 0.8em;
     color: #929292;
   }
+  @media (max-width: 500px) {
+    font-size: 4vw;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -48,6 +51,15 @@ export const ProfileWrapper = styled.div`
   border-radius: 10px;
   margin-top: 60px;
   display: flex;
+  @media (max-width: 500px) {
+    width: 100%;
+  }
+  @media (max-width: 420px) {
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 10px;
+  }
 `;
 
 export const ProfileSection = styled.div`
@@ -117,6 +129,9 @@ export const PrivacySection = styled.div`
     font-weight: 300;
     font-size: 15px;
     color: #929292;
+  }
+  @media (max-width: 420px) {
+    margin: 0;
   }
 `;
 

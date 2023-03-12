@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
     background: #5499d9;
     border-radius: 10px;
     color: #ffffff;
+    cursor: pointer;
   }
   @media (max-width: 550px) {
     width: 78vw;

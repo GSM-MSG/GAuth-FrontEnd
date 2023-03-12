@@ -5,7 +5,7 @@ import EmptyList from './EmptyList';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, User } from '../../Atom/Atoms';
 import Portal from '../common/Portal';
-import DeleteService from './Delete/DeleteService';
+import DeleteService from './Delete';
 
 export default function MyServiceList() {
   const [fix, setFix] = useRecoilState(FixService);

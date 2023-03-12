@@ -6,6 +6,7 @@ export const Layout = styled.div`
   left: 0;
   width: 100px;
   height: 100%;
+  z-index: 100;
 
   @media (max-width: 800px) {
     top: auto;

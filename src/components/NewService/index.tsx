@@ -5,7 +5,8 @@ import API from '../../api';
 import { accessToken } from '../../lib/Token';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
-import ServiceInfoModal from './ServiceInfoModal';
+import Portal from '../common/Portal';
+import ServiceInfoModal from './InfoModal';
 import * as S from './style';
 
 export default function NewServicePage() {
@@ -49,6 +50,11 @@ export default function NewServicePage() {
 
   const onError = (err: Object) => {
     return toast.warn(Object.values(err)[0].message);
+  };
+
+  const onClose = () => {
+    setModal(false);
+    reset(serviceDefaultData);
   };
 
   return (
@@ -109,13 +115,9 @@ export default function NewServicePage() {
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <ServiceInfoModal
-            serviceData={serviceData}
-            onClose={() => {
-              setModal(false);
-              reset(serviceDefaultData);
-            }}
-          />
+          <Portal onClose={onClose}>
+            <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
+          </Portal>
         )}
       </S.Wrapper>
     </S.Layout>

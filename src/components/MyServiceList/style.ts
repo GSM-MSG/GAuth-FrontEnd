@@ -59,6 +59,7 @@ export const ListItemLayer = styled.li`
   }
   @media (max-width: 600px) {
     width: 100%;
+    margin-bottom: 80px;
   }
 `;
 

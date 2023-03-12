@@ -9,10 +9,12 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 20px;
+
   > h1 {
     font-weight: 600;
     font-size: 1.2em;
   }
+
   > form {
     width: 100%;
     height: 100%;
@@ -31,6 +33,7 @@ export const Wrapper = styled.div`
     color: #ffffff;
     cursor: pointer;
   }
+
   @media (max-width: 550px) {
     width: 78vw;
     font-size: 3.6364vw;
@@ -52,8 +55,10 @@ export const CopyTitle = styled.div`
     display: flex;
     gap: 5px;
     align-items: center;
+
     i {
       cursor: pointer;
+
       :hover {
         path {
           fill: #5499d9;
@@ -61,6 +66,7 @@ export const CopyTitle = styled.div`
       }
     }
   }
+
   h4 {
     font-weight: 400;
     font-size: 0.7em;
@@ -68,6 +74,7 @@ export const CopyTitle = styled.div`
     overflow-y: hidden;
     overflow-x: scroll;
     -ms-overflow-style: none;
+
     ::-webkit-scrollbar {
       display: none;
     }

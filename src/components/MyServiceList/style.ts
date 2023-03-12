@@ -23,23 +23,11 @@ export const ListWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;
+
   @media (max-width: 1100px) {
     justify-content: space-around;
     gap: 10px 1.2727vw;
   }
-`;
-
-export const MoreListBtn = styled.button`
-  width: 280px;
-  height: 80px;
-  background: #2e80cc;
-  border-radius: 25px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  color: #f7f8fc;
-  margin: 20px 0 20px 0;
 `;
 
 //ServiceListItem
@@ -72,6 +60,7 @@ export const PreviweWrapper = styled.div`
 
   i {
     cursor: pointer;
+
     svg {
       position: absolute;
       top: 14px;
@@ -93,6 +82,7 @@ export const ItemController = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
   p {
     width: 100%;
     height: 100%;
@@ -103,13 +93,16 @@ export const ItemController = styled.div`
     font-size: 13px;
     color: #d1d1d1;
     cursor: pointer;
+
     :hover {
       color: #ffff;
     }
   }
+
   @media (max-width: 1100px) {
     width: 6vw;
   }
+
   @media (max-width: 800px) {
     width: 73px;
   }
@@ -128,6 +121,7 @@ export const ServiceInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   a {
     color: #929292;
     font-weight: 500;
@@ -170,25 +164,19 @@ export const EmptyLisyLayer = styled.div`
   transition: ease 0.2s;
   box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
   color: #929292;
+
   h1 {
     transition: all 0.2s;
     font-size: 40px;
     margin: 0 100px;
   }
+
   :hover {
     box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
     color: #111111;
+
     h1 {
       font-size: 50px;
     }
   }
-`;
-
-export const DeleteTitle = styled.h1`
-  text-align: center;
-`;
-
-export const DeleteWrapper = styled.div`
-  width: 100%;
-  height: 100%;
 `;

@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   text-align: center;
   font-size: 20px;
+
   > h1 {
     font-weight: 600;
     font-size: 1.2em;
@@ -68,10 +69,11 @@ export const Button = styled.button`
   width: 100%;
   font-weight: 500;
   font-size: 0.65em;
+  border-radius: 10px;
+  cursor: pointer;
+
   background: ${({ modeType }: { modeType: boolean }) =>
     modeType ? '#DE4949' : '#D1D1D1'};
-  border-radius: 10px;
   color: ${({ modeType }: { modeType: boolean }) =>
     modeType ? '#FFFFFF' : '#888888'};
-  cursor: pointer;
 `;

@@ -17,11 +17,9 @@ export default function MyServiceList() {
       <S.Title>내가 등록한 서비스</S.Title>
       {user.clientList.length !== 0 ? (
         <S.ListWrapper>
-          <>
-            {user.clientList.map((listItem, index) => {
-              return <ListItem key={index} listData={listItem} />;
-            })}
-          </>
+          {user.clientList.map((listItem, index) => {
+            return <ListItem key={index} listData={listItem} />;
+          })}
         </S.ListWrapper>
       ) : (
         <EmptyList />

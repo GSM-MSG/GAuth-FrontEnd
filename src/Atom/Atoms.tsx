@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { LoginFormProps } from '../types';
 import { ClientInform } from '../types/ClientInForm';
+import { FixModalType } from '../types/FixModalType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -43,10 +44,11 @@ export const PrivacyInfo = atom<boolean>({
   default: false,
 });
 
-export const FixModalType = atom({
+export const FixService = atom<FixModalType>({
   key: 'fixModalType',
   default: {
-    id: 0,
+    id: undefined,
     type: '',
+    toggle: false,
   },
 });

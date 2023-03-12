@@ -6,7 +6,7 @@ interface Props<T> {
   onSuccess?: (data: T) => void | Promise<void>;
   onFailure?: (e: unknown) => void | Promise<void>;
   successMessage?: string;
-  errorMessage?: string;
+  errorMessage?: { [status: number]: string };
 }
 
 export default Props;

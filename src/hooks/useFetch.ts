@@ -16,7 +16,7 @@ const useFetch = <T>({
   const [isLoading, setLoading] = useState(false);
 
   const fetch = useCallback(
-    async (body: any) => {
+    async (body?: any) => {
       setLoading(true);
 
       try {
@@ -34,8 +34,8 @@ const useFetch = <T>({
           return toast.error('알 수 없는 에러가 발생했습니다');
         else if (e.response && e.response.status >= 500)
           toast.error('알 수 없는 에러가 발생했습니다');
-        else if (errorMessage)
-          await toast.error('알 수 없는 에러가 발생했습니다');
+        else if (errorMessage && e.response && errorMessage[e.response.status])
+          await toast.error(errorMessage[e.response.status]);
 
         if (onFailure) await onFailure(e);
       } finally {

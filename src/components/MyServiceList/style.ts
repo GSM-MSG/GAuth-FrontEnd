@@ -82,6 +82,18 @@ export const ItemController = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%);
+    }
+  }
 
   p {
     width: 100%;
@@ -93,6 +105,7 @@ export const ItemController = styled.div`
     font-size: 13px;
     color: #d1d1d1;
     cursor: pointer;
+    transition: 0.5s;
 
     :hover {
       color: #ffff;

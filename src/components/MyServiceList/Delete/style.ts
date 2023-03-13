@@ -71,9 +71,15 @@ export const Button = styled.button`
   font-size: 0.65em;
   border-radius: 10px;
   cursor: pointer;
+  opacity: 0.8;
+  transition: 0.4s;
 
   background: ${({ modeType }: { modeType: boolean }) =>
     modeType ? '#DE4949' : '#D1D1D1'};
   color: ${({ modeType }: { modeType: boolean }) =>
     modeType ? '#FFFFFF' : '#888888'};
+
+  :hover {
+    opacity: 1;
+  }
 `;

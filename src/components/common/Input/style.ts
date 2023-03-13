@@ -42,5 +42,5 @@ export const FixedInputValue = styled.div`
   transform: translateY(-50%);
   color: #a6a6a6;
   font-size: 0.85em;
-  cursor: ${({ cursor }: { cursor: boolean }) => cursor && 'pointer'};
+  cursor: ${({ point }: { point: boolean }) => point && 'pointer'};
 `;

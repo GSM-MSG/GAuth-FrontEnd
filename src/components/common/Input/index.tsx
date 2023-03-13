@@ -31,7 +31,7 @@ export default function Input({
       <S.InputWrapper>
         <S.Input type={type} {...register} autoComplete="on" />
         <S.FixedInputValue
-          cursor={!!fixedHandle}
+          point={!!fixedHandle}
           onClick={() => fixedHandle && fixedHandle()}
         >
           {fixed}

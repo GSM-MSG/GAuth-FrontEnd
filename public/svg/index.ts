@@ -20,3 +20,5 @@ export * from './NewLogo';
 export * from './ImageUpload';
 export * from './FixIcon';
 export * from './ErrorIcon';
+export * from './OpenIcon';
+export * from './CloseIcon';

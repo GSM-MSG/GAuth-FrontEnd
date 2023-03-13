@@ -19,7 +19,7 @@ export const Title = styled.h1`
 
 export const ListWrapper = styled.ul`
   width: 100%;
-  margin-top: 30px;
+  margin: 30px 0 60px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px 14px;

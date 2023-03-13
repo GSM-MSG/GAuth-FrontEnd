@@ -47,6 +47,17 @@ export const LogoWrapper = styled.div`
   justify-content: center;
   z-index: 100;
 
+  i {
+    cursor: pointer;
+
+    :hover {
+      svg {
+        transition: 0.1s;
+        transform: scale(1.5);
+      }
+    }
+  }
+
   @media (max-width: 800px) {
     position: fixed;
     transform: translateX(0);

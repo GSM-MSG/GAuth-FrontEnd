@@ -32,6 +32,12 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     color: #ffffff;
     cursor: pointer;
+    opacity: 0.8;
+    transition: 0.4s;
+
+    :hover {
+      opacity: 1;
+    }
   }
 
   @media (max-width: 550px) {

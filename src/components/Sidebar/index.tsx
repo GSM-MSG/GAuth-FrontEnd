@@ -1,30 +1,28 @@
-import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import * as SVG from '../../../public/svg';
 import * as S from './style';
-import { accessToken, expiredAt, refreshToken } from '../../lib/Token';
 import { NavList } from '../../lib/NavList';
-import API from '../../api';
+import useFetch from '../../hooks/useFetch';
+import TokenManager from '../../api/TokenManger';
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = router.pathname;
 
-  const logOutHandle = async () => {
-    try {
-      await API.delete('/auth');
-      localStorage.removeItem(accessToken);
-      localStorage.removeItem(refreshToken);
-      localStorage.removeItem(expiredAt);
+  const { fetch: logOutHandle } = useFetch({
+    url: '/auth',
+    method: 'delete',
+    onSuccess: () => {
+      const tokenManager = new TokenManager();
+      tokenManager.deleteToken();
       router.replace('/login');
-    } catch (e) {
-      if (!isAxiosError(e))
-        return toast.error('예기치 못한 오류가 발생하였습니다.');
+    },
+    onFailure: () => {
       toast.error('로그아웃에 실패하였습니다.');
-    }
-  };
+    },
+  });
 
   return (
     <S.Layout>

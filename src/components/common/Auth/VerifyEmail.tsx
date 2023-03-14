@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import useFetch from '../../../hooks/useFetch';
 import { useResetModal } from '../../../hooks/useResetModal';
 import CreateTitle from '../CreateTitle';
 import { CheckingMessage, SubmitWrapper } from './style';
@@ -15,18 +15,14 @@ export default function VerifyEmail({ title }: Props) {
   const { changeModalType } = useResetModal();
   const emailInfo = useRecoilValue(EmailInfo);
 
-  const checkEmail = async () => {
-    try {
-      const { request } = await API.get('/email', {
-        params: { email: emailInfo.email + '@gsm.hs.kr' },
-      });
-      if (request.status === 200) {
-        setModalPage(2);
-      }
-    } catch (e) {
+  const { fetch: checkEmail } = useFetch({
+    url: `/email?email=${emailInfo.email}@gsm.hs.kr`,
+    method: 'get',
+    onSuccess: () => setModalPage(2),
+    onFailure: () => {
       toast.error('이메일을 확인해 주세요.');
-    }
-  };
+    },
+  });
 
   return (
     <>
@@ -39,7 +35,7 @@ export default function VerifyEmail({ title }: Props) {
         </p>
       </CheckingMessage>
       <SubmitWrapper>
-        <button onClick={checkEmail}>다음</button>
+        <button onClick={() => checkEmail()}>다음</button>
         <p onClick={() => changeModalType('/login')}>로그인 하러가기</p>
       </SubmitWrapper>
     </>

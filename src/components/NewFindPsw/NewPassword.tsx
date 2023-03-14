@@ -1,32 +1,32 @@
-import { isAxiosError } from 'axios';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 import { useRecoilValue } from 'recoil';
-import API from '../../api';
 import { EmailInfo } from '../../Atom/Atoms';
+import useFetch from '../../hooks/useFetch';
 import { useResetModal } from '../../hooks/useResetModal';
 import NewPasswordCommon from '../common/Auth/NewPasswordCommon';
 
 export default function NewPassword() {
-  const router = useRouter();
   const emailInfo = useRecoilValue(EmailInfo);
   const { changeModalType } = useResetModal();
 
-  const onSubmit = async (data: { password: string; rePassword: string }) => {
-    try {
-      await API.patch('/auth/password/initialize', {
-        email: emailInfo.email + '@gsm.hs.kr',
-        newPassword: data.rePassword,
-      });
+  const { fetch } = useFetch({
+    url: '/auth/password/initialize',
+    method: 'patch',
+    onSuccess: () => {
       changeModalType('/login');
-    } catch (e) {
-      if (!isAxiosError(e))
-        return toast.error('예상치 못한 오류가 발생하였습니다.');
-      if (e.response?.status === 401)
-        return toast.error('이메일 인증 기한이 만료 되었습니다.');
-      router.push('/login');
-    }
-  };
+    },
+    onFailure: () => {
+      changeModalType('/login');
+    },
+    errorMessage: {
+      401: '이메일 인증 기한이 만료 되었습니다.',
+    },
+  });
+
+  const onSubmit = async (data: { password: string; rePassword: string }) =>
+    fetch({
+      email: emailInfo.email + '@gsm.hs.kr',
+      newPassword: data.rePassword,
+    });
 
   return (
     <NewPasswordCommon

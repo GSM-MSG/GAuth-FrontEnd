@@ -3,12 +3,12 @@ import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
 import { useRecoilState } from 'recoil';
-import { isAxiosError } from 'axios';
-import API from '../../../api';
 import { FixService } from '../../../Atom/Atoms';
 import { useUser } from '../../../hooks/useUser';
 import Input from '../../common/Input';
 import * as S from './style';
+import useFetch from '../../../hooks/useFetch';
+import { ResNewService } from '../../../types/ResAddService';
 
 export default function ModifyMyService() {
   const [user, getUser] = useUser(false);
@@ -20,44 +20,49 @@ export default function ModifyMyService() {
     reset,
     handleSubmit,
   } = useForm();
+
   const [fix, setFix] = useRecoilState(FixService);
 
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await API.get(`/client/${fix.id}`);
-        reset({ ...data.data });
-      } catch (e) {
-        if (!isAxiosError(e))
-          return toast.error('예상치 못한 오류가 발생하였습니다.');
-      }
-    })();
-  }, [reset, fix]);
+  const { fetch: getService } = useFetch<ResNewService>({
+    url: `/client/${fix.id}`,
+    method: 'get',
+    onSuccess: (data) => {
+      reset({ ...data });
+    },
+  });
 
-  const ModifyService = async (value: FieldValues) => {
-    try {
-      const { serviceName, serviceUri, redirectUri } = value;
-      await API.patch(`/client/${fix.id}`, {
-        serviceName,
-        serviceUri,
-        redirectUri,
-      });
-
+  const { fetch } = useFetch({
+    url: `/client/${fix.id}`,
+    method: 'patch',
+    onSuccess: () => {
       toast.success('변경사항이 적용되었습니다.');
       getUser();
+    },
+    onFinaly: () => {
       setFix({
         id: undefined,
         type: '',
         toggle: false,
       });
-    } catch (e) {
-      if (!isAxiosError(e))
-        return toast.error('예상치 못한 오류가 발생하였습니다.');
-      if (e.response?.status === 404)
-        return toast.error('해당 서비스를 찾을수 없습니다.');
-    }
+    },
+    errorMessage: {
+      404: '해당 서비스를 찾을수 없습니다.',
+    },
+  });
+
+  useEffect(() => {
+    getService();
+  }, []);
+
+  const ModifyService = async (value: FieldValues) => {
+    const { serviceName, serviceUri, redirectUri } = value;
+    fetch({
+      serviceName,
+      serviceUri,
+      redirectUri,
+    });
   };
 
   const CheckError = (data: FieldValues) => {

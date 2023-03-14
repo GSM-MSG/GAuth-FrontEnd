@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import API from '../../api';
-import { accessToken } from '../../lib/Token';
+import useFetch from '../../hooks/useFetch';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
 import Portal from '../common/Portal';
@@ -44,22 +43,21 @@ export default function NewServicePage() {
     reset(serviceDefaultData);
   };
 
-  const onSubmit = async (inputs: NewServiceForm) => {
-    try {
-      API.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer ${localStorage.getItem(accessToken)}`;
-      const { data } = await API.post('/client', {
-        serviceName: inputs.serviceName,
-        serviceUri: inputs.serviceUri,
-        redirectUri: inputs.redirectUri,
-      });
+  const { fetch } = useFetch<ResNewService>({
+    url: '/client',
+    method: 'post',
+    onSuccess: (data) => {
       setServiceData(data);
       setModal(true);
-    } catch (e) {
-      toast.error('예기치 못한 오류가 발생했습니다.');
-    }
-  };
+    },
+  });
+
+  const onSubmit = async (inputs: NewServiceForm) =>
+    fetch({
+      serviceName: inputs.serviceName,
+      serviceUri: inputs.serviceUri,
+      redirectUri: inputs.redirectUri,
+    });
 
   return (
     <S.Layout>

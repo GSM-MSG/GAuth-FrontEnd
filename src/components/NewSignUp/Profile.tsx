@@ -4,11 +4,9 @@ import * as SVG from '../../../public/svg';
 import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { EmailInfo, ModalPage, PrivacyInfo } from '../../Atom/Atoms';
-import API from '../../api';
-import { isAxiosError } from 'axios';
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { SubmitWrapper } from '../common/Auth/style';
+import useFetch from '../../hooks/useFetch';
 
 export default function Profile() {
   const router = useRouter();
@@ -17,17 +15,33 @@ export default function Profile() {
   const setPrivacy = useSetRecoilState(PrivacyInfo);
   const [img, setImg] = useState('');
 
-  const GetImgURL = async (files: FileList) => {
-    try {
-      const formData = new FormData();
-      if (files) formData.append('image', files[0]);
-      formData.append('email', emailInfo.email + '@gsm.hs.kr');
-      const { data } = await API.patch('/auth/image', formData);
-      setImg(data.imageUrl);
-    } catch (e) {
-      if (!isAxiosError(e)) toast.error('예상치 못한 오류가 발생하였습니다.');
+  const { fetch: getImage } = useFetch<{ imageUrl: string }>({
+    url: 'auth/image',
+    method: 'patch',
+    onSuccess: (data) => setImg(data.imageUrl),
+  });
+
+  const { fetch: signUp } = useFetch({
+    url: '/auth/signup',
+    method: 'post',
+    onSuccess: () => {
+      resetModalType('/signUp');
+      setModalPage(5);
+    },
+    onFailure: () => {
       resetModalType('/login');
-    }
+    },
+    errorMessage: {
+      409: '이미 가입한 계정입니다.',
+      400: '이메일,비밀번호가 바르지 않습니다',
+    },
+  });
+
+  const GetImgURL = async (files: FileList) => {
+    const formData = new FormData();
+    if (files) formData.append('image', files[0]);
+    formData.append('email', emailInfo.email + '@gsm.hs.kr');
+    getImage(formData);
   };
 
   const resetModalType = (type: string) => {
@@ -60,24 +74,12 @@ export default function Profile() {
     event.stopPropagation();
   };
 
-  const onSubmit = async () => {
-    try {
-      await API.post('/auth/signup', {
-        email: emailInfo.email + '@gsm.hs.kr',
-        password: emailInfo.password,
-        profileUrl: img ?? null,
-      });
-      resetModalType('/signUp');
-      setModalPage(5);
-    } catch (e) {
-      if (!isAxiosError(e))
-        return toast.error('예기치 못한 오류가 발생했습니다.');
-      if (e.response?.status === 409) toast.error('이미 가입한 계정입니다.');
-      if (e.response?.status === 400)
-        toast.error('이메일,비밀번호가 바르지 않습니다.');
-      resetModalType('/login');
-    }
-  };
+  const onSubmit = async () =>
+    signUp({
+      email: emailInfo.email + '@gsm.hs.kr',
+      password: emailInfo.password,
+      profileUrl: img ?? null,
+    });
 
   return (
     <>

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Router from 'next/router';
 import { accessToken, expiredAt, refreshToken } from '../lib/Token';
+import { TokenType } from '../types';
 import { getRefreshProps } from '../types/TokenMangerType';
-import TokenType from '../types/TokenType';
 
 class TokenManager {
   private _accessToken: string | null = null;

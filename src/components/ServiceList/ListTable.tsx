@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react';
 import ListItem from './ListItem';
 import * as S from './style';
 import { ClientListType } from '../../types';
-import API from '../../api';
+import useFetch from '../../hooks/useFetch';
 
 export default function ListTable() {
   const [serviceList, setServiceList] = useState<ClientListType[]>([]);
 
+  const { fetch: getAllList } = useFetch<ClientListType[]>({
+    url: '/client',
+    method: 'get',
+    onSuccess: (data) => {
+      if (data) setServiceList(data);
+    },
+  });
+
   useEffect(() => {
-    const getAllList = async () => {
-      const data = await API.get('/client');
-      if (!data) return;
-      setServiceList(data.data);
-    };
     getAllList();
   }, []);
 

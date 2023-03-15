@@ -1,10 +1,8 @@
-import { isAxiosError } from 'axios';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import API from '../../../api';
 import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import useFetch from '../../../hooks/useFetch';
 import { useResetModal } from '../../../hooks/useResetModal';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
@@ -16,7 +14,6 @@ interface Props {
 }
 
 export default function SearchEmail({ title }: Props) {
-  const [loading, setLoading] = useState(false);
   const { changeModalType } = useResetModal();
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
@@ -29,29 +26,26 @@ export default function SearchEmail({ title }: Props) {
     shouldUseNativeValidation: true,
   });
 
-  const searchEmail = async ({ email }: { email: string }) => {
-    if (loading) return;
-    setEmailInfo({ ...emailInfo, ['email']: email });
-    try {
-      setLoading(true);
-      await API.post('/email', {
-        email: email + '@gsm.hs.kr',
-      });
-      setModalPage(1);
-    } catch (e) {
-      if (!isAxiosError(e))
-        return toast.error('예기치 못한 오류가 발생했습니다.');
-      if (e.response?.status === 429)
-        return toast.error('15분 동안 최대 3번 요청 가능합니다.');
+  const { fetch, isLoading } = useFetch({
+    url: '/email',
+    method: 'post',
+    onSuccess: () => setModalPage(1),
+    onFailure: (e) => {
       if (e.response?.status === 400) {
         toast.info('이미 인증된 이메일 요청입니다.');
         return setModalPage(2);
       }
-      if (e.response?.status === 500)
-        return toast.error('예기치 못한 오류가 발생했습니다.');
-    } finally {
-      setLoading(false);
-    }
+    },
+    errorMessage: {
+      429: '동안 최대 3번 요청 가능합니다.',
+      500: '예기치 못한 오류가 발생했습니다.',
+    },
+  });
+
+  const searchEmail = async ({ email }: { email: string }) => {
+    if (isLoading) return;
+    setEmailInfo({ ...emailInfo, ['email']: email });
+    fetch({ email: email + '@gsm.hs.kr' });
   };
 
   return (
@@ -62,7 +56,7 @@ export default function SearchEmail({ title }: Props) {
         subTitle={'가입하신 이메일을 입력해주세요.'}
       />
       <Form onSubmit={handleSubmit(searchEmail)}>
-        {loading ? (
+        {isLoading ? (
           <Loading>
             <LightCube color="#00ccff" />
           </Loading>

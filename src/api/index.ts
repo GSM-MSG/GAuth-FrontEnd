@@ -32,7 +32,7 @@ API.interceptors.response.use(
   async (err: AxiosError) => {
     const tokenManager = new TokenManager();
 
-    if (err.response && err.response.status === 401)
+    if (err.response && err.response.status === 401 && !tokenManager.skipUrl())
       return tokenManager.getRefresh({ refresh: tokenManager.refreshToken });
     return Promise.reject(err);
   }

@@ -1,7 +1,5 @@
-type TokenType = {
+export interface TokenType {
   accessToken: string;
   expiresAt: string;
   refreshToken: string;
-};
-
-export default TokenType;
+}

@@ -1,23 +1,26 @@
 import Image from 'next/image';
 import { toast } from 'react-toastify';
 import * as SVG from '../../../public/svg';
-import API from '../../api';
+import useFetch from '../../hooks/useFetch';
 import { useUser } from '../../hooks/useUser';
 import * as S from './style';
 
 export default function Profile() {
   const [user, getUser] = useUser();
-  const updateMyProfileImg = async (files: FileList) => {
-    try {
-      const formData = new FormData();
-      if (files) formData.append('image', files[0]);
-      const { request } = await API.patch('/user/image', formData);
-      if (request.status != 204)
-        return toast.error('이미지 업로드를 실패하였습니다.');
+  const { fetch } = useFetch({
+    url: '/user/image',
+    method: 'patch',
+    onSuccess: () => {
       getUser();
-    } catch (e) {
+    },
+    onFailure: () => {
       toast.error('이미지 업로드를 실패하였습니다.');
-    }
+    },
+  });
+  const updateMyProfileImg = async (files: FileList) => {
+    const formData = new FormData();
+    if (files) formData.append('image', files[0]);
+    fetch(formData);
   };
 
   const handleFiles = (files: FileList) => {

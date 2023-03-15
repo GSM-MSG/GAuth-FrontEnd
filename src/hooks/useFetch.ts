@@ -9,6 +9,7 @@ const useFetch = <T>({
   method,
   onSuccess,
   onFailure,
+  onFinaly,
   successMessage,
   errorMessage,
 }: Props<T>) => {
@@ -39,6 +40,7 @@ const useFetch = <T>({
 
         if (onFailure) await onFailure(e);
       } finally {
+        if (onFinaly) onFinaly();
         setLoading(false);
       }
     },

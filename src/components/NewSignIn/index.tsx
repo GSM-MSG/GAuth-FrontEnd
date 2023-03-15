@@ -12,7 +12,7 @@ import { useResetModal } from '../../hooks/useResetModal';
 import { passwordRegex } from '../../lib/Regex';
 import { useAutoLogin } from '../../hooks/useAutoLogin';
 import useFetch from '../../hooks/useFetch';
-import { AutoOauth } from '../../types/API/autoOauth';
+import { OauthCode } from '../../types/API/OauthCode';
 import { GetService } from '../../types/API/GetService';
 import { TokenType } from '../../types';
 
@@ -35,7 +35,7 @@ export default function NewSignInPage() {
     shouldUseNativeValidation: true,
   });
 
-  const { fetch: autoOauth } = useFetch<AutoOauth>({
+  const { fetch: autoOauth } = useFetch<OauthCode>({
     url: '/oauth/code/access',
     method: 'post',
     onSuccess: (data) => {
@@ -59,7 +59,7 @@ export default function NewSignInPage() {
     },
   });
 
-  const { fetch: authLogin } = useFetch<AutoOauth>({
+  const { fetch: authLogin } = useFetch<OauthCode>({
     url: '/oauth/code',
     method: 'post',
     onSuccess: (data) => {

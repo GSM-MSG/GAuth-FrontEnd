@@ -5,6 +5,7 @@ import { EmailInfo } from '../../../Atom/Atoms';
 import { useResetModal } from '../../../hooks/useResetModal';
 import { passwordRegex } from '../../../lib/Regex';
 import CreateTitle from '../CreateTitle';
+import * as SVG from '../../../../public/svg';
 import Input from '../Input';
 import { Form, InputWrapper, SubmitWrapper } from './style';
 
@@ -80,7 +81,10 @@ export default function NewPasswordCommon({
                 setCheckPassword(false);
               },
             })}
-            fixed={checkPassword ? '닫기' : '보기'}
+            fixed={
+              watch('password') &&
+              (checkPassword ? <SVG.CloseIcon /> : <SVG.OpenIcon />)
+            }
             fixedHandle={() => {
               setCheckPassword((prev) => !prev);
             }}

@@ -6,6 +6,7 @@ import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import * as S from './style';
+import * as SVG from '../../../public/svg';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
 import { useResetModal } from '../../hooks/useResetModal';
@@ -28,6 +29,7 @@ export default function NewSignInPage() {
   const { checkAuto } = useAutoLogin(false);
 
   const {
+    watch,
     register,
     formState: { errors },
     handleSubmit,
@@ -149,7 +151,10 @@ export default function NewSignInPage() {
                 },
               })}
               type={checkPassword ? undefined : 'password'}
-              fixed={checkPassword ? '닫기' : '보기'}
+              fixed={
+                watch('password') &&
+                (checkPassword ? <SVG.CloseIcon /> : <SVG.OpenIcon />)
+              }
               fixedHandle={() => {
                 setCheckPassword((prev) => !prev);
               }}

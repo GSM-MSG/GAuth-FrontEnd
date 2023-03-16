@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 import * as S from './style';
 
@@ -7,7 +8,8 @@ interface Props {
   message?: string;
   register?: UseFormRegisterReturn;
   type?: string;
-  fixed?: string;
+  fixed?: string | ReactElement;
+  fixedHandle?: () => void;
 }
 
 export default function Input({
@@ -17,6 +19,7 @@ export default function Input({
   register,
   type = 'text',
   fixed,
+  fixedHandle,
 }: Props) {
   return (
     <S.Wrapper>
@@ -27,7 +30,12 @@ export default function Input({
       </S.Label>
       <S.InputWrapper>
         <S.Input type={type} {...register} autoComplete="on" />
-        <S.FixedInputValue>{fixed}</S.FixedInputValue>
+        <S.FixedInputValue
+          point={!!fixedHandle}
+          onClick={() => fixedHandle && fixedHandle()}
+        >
+          {fixed}
+        </S.FixedInputValue>
       </S.InputWrapper>
     </S.Wrapper>
   );

@@ -1,9 +1,15 @@
-import { useState, ReactNode, useEffect } from 'react';
+import {
+  useState,
+  useEffect,
+  ReactElement,
+  MouseEvent,
+  cloneElement,
+} from 'react';
 import ReactDOM from 'react-dom';
 import { Positioner } from './style';
 
 type Props = {
-  children: ReactNode;
+  children: ReactElement;
   onClose: () => void;
 };
 
@@ -25,8 +31,14 @@ const Portal = ({ children, onClose }: Props) => {
 
   if (!isMounted) return null;
 
+  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return ReactDOM.createPortal(
-    <Positioner onClick={onClose}>{children}</Positioner>,
+    <Positioner onClick={onClose}>
+      {cloneElement(children, { onClick })}
+    </Positioner>,
     document.getElementById('portal')!
   );
 };

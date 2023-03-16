@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
@@ -6,6 +5,7 @@ import { EmailInfo } from '../../../Atom/Atoms';
 import { useResetModal } from '../../../hooks/useResetModal';
 import { passwordRegex } from '../../../lib/Regex';
 import CreateTitle from '../CreateTitle';
+import * as SVG from '../../../../public/svg';
 import Input from '../Input';
 import { Form, InputWrapper, SubmitWrapper } from './style';
 
@@ -28,6 +28,7 @@ export default function NewPasswordCommon({
 }: Props) {
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const [error, setError] = useState('');
+  const [checkPassword, setCheckPassword] = useState(false);
   const { changeModalType } = useResetModal();
   const setModalType = () => {
     if (!changeModal) return;
@@ -64,7 +65,7 @@ export default function NewPasswordCommon({
       <Form onSubmit={handleSubmit(setPassword)}>
         <InputWrapper>
           <Input
-            type="password"
+            type={checkPassword ? undefined : 'password'}
             label={`${newPassword ? '새' : ''} 비밀번호`}
             errors={!!errors.password}
             message={errors.password?.message}
@@ -76,7 +77,17 @@ export default function NewPasswordCommon({
                   '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
               },
               maxLength: 72,
+              onChange() {
+                setCheckPassword(false);
+              },
             })}
+            fixed={
+              watch('password') &&
+              (checkPassword ? <SVG.CloseIcon /> : <SVG.OpenIcon />)
+            }
+            fixedHandle={() => {
+              setCheckPassword((prev) => !prev);
+            }}
           />
           <Input
             type="password"

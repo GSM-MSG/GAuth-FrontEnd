@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const Layer = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 80px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,72 +11,150 @@ export const Layer = styled.div`
 
 export const Title = styled.h1`
   width: 100%;
-  font-family: 'Pretendard';
-  font-weight: 800;
-  font-size: 36px;
+  font-weight: 700;
+  font-size: 16px;
   color: #000000;
   text-align: start;
 `;
 
 export const ListWrapper = styled.ul`
   width: 100%;
-  height: auto;
-`;
+  margin: 30px 0 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
 
-export const MoreListBtn = styled.button`
-  width: 300px;
-  height: 80px;
-  background: #2e80cc;
-  border-radius: 25px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  color: #f7f8fc;
-  margin: 20px 0 20px 0;
+  @media (max-width: 1100px) {
+    justify-content: space-around;
+    gap: 10px 1.2727vw;
+  }
 `;
 
 //ServiceListItem
 
 export const ListItemLayer = styled.li`
-  width: 100%;
-  height: 200px;
-  margin-top: 32px;
-  background: #ffffff;
-  box-shadow: -10px -10px 25px rgba(255, 255, 255, 0.75),
-    10px 10px 20px rgba(0, 0, 0, 0.05);
-  border-radius: 25px;
-  list-style: none;
+  width: 294px;
+  aspect-ratio: auto 1 / 0.49;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  a {
-    width: 300px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 30px;
-    color: #929292;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 9px;
+  @media (max-width: 1100px) {
+    width: 24vw;
+  }
+  @media (max-width: 800px) {
+    width: 40vw;
+  }
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
 
-export const PreviewImg = styled.img`
-  width: 353px;
-  height: 140px;
-  border-radius: 25px;
-  object-fit: contain;
+export const PreviweWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: auto 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  i {
+    cursor: pointer;
+
+    svg {
+      position: absolute;
+      top: 14px;
+      left: 17px;
+    }
+  }
+`;
+
+export const ItemController = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+  width: 73px;
+  aspect-ratio: auto 1 / 0.986;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0.5;
+      transform: translateY(-75%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-50%);
+    }
+  }
+
+  p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 9px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #d1d1d1;
+    cursor: pointer;
+    transition: 0.5s;
+
+    :hover {
+      color: #ffff;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    width: 6vw;
+  }
+
+  @media (max-width: 800px) {
+    width: 73px;
+  }
+`;
+
+export const PreviewImg = styled.div`
+  position: relative;
+  width: 124px;
+  aspect-ratio: auto 1 / 0.355;
+  overflow: hidden;
+`;
+
+export const ServiceInfoWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: auto 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  a {
+    color: #929292;
+    font-weight: 500;
+    font-size: 13px;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    :hover {
+      color: #5499d9;
+    }
+  }
 `;
 
 export const ServiceTitle = styled.h3`
-  width: 220px;
-  height: auto;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
+  font-size: 13px;
+  line-height: 16px;
   color: #000000;
   word-break: break-all;
   text-overflow: ellipsis;
@@ -87,147 +165,31 @@ export const ServiceTitle = styled.h3`
   -webkit-box-orient: vertical;
 `;
 
-export const ServiceFixBtn = styled.button`
-  width: 144px;
-  height: 72px;
-  background: #5499d9;
-  border-radius: 20px;
-  color: #f7f8fc;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 32px;
-  border: none;
-  cursor: pointer;
-`;
-
-//ModifyMyService
-export const ModifyModalBackGround = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: rgba(1, 1, 1, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ModifyModalLayer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  width: 1140px;
-  background: #ffffff;
-  border-radius: 25px;
-  padding: 40px 56px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h1 {
-    width: 100%;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    color: #000000;
-  }
-  form {
-    margin-top: 9px;
-    width: 100%;
-    height: auto;
-    display: flex;
-    gap: 12px;
-    flex-direction: column;
-    align-items: center;
-    label {
-      width: 512px;
-      height: auto;
-
-      h3 {
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 16px;
-        color: #000000;
-        margin-bottom: 4px;
-      }
-      div {
-        position: relative;
-        i {
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          z-index: 100;
-        }
-      }
-      input {
-        width: 512px;
-        height: 52px;
-        border-radius: 12px;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-      }
-    }
-  }
-
-  button {
-    width: 343px;
-    height: 80px;
-    margin-top: 29px;
-    margin-bottom: 56px;
-    background: #2e80cc;
-    border-radius: 40px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 30px;
-    text-align: center;
-    color: #f7f8fc;
-  }
-`;
-
-export const ModifyInput = styled.input`
-  background: #ffffff;
-  border: 2px solid #5499d9;
-  color: #929292;
-  padding: 20px;
-`;
-
-export const CopyInput = styled.input`
-  background: #929292;
-  color: #f7f8fc;
-  padding: 0 50px 0 20px;
-`;
-
 export const EmptyLisyLayer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   height: 300px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   border-radius: 20px;
   transition: ease 0.2s;
   box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
   color: #929292;
+
   h1 {
     transition: all 0.2s;
-    font-size: 20px;
+    font-size: 40px;
+    margin: 0 100px;
   }
+
   :hover {
     box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
     color: #111111;
+
     h1 {
-      font-size: 40px;
+      font-size: 50px;
     }
   }
 `;

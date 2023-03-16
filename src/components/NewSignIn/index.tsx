@@ -5,14 +5,17 @@ import { useEffect, useState } from 'react';
 import * as Type from '../../types';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { isAxiosError } from 'axios';
-import API from '../../api';
 import * as S from './style';
+import * as SVG from '../../../public/svg';
 import { client_id, redirect_uri } from '../../lib/OauthQuery';
 import TokenManager from '../../api/TokenManger';
 import { useResetModal } from '../../hooks/useResetModal';
 import { passwordRegex } from '../../lib/Regex';
 import { useAutoLogin } from '../../hooks/useAutoLogin';
+import useFetch from '../../hooks/useFetch';
+import { OauthCode } from '../../types/API/OauthCode';
+import { GetService } from '../../types/API/GetService';
+import { TokenType } from '../../types';
 
 export default function NewSignInPage() {
   const router = useRouter();
@@ -21,10 +24,12 @@ export default function NewSignInPage() {
     router.query[client_id] !== undefined &&
     router.query[redirect_uri] !== undefined;
   const [serviceName, setServiceName] = useState('');
+  const [checkPassword, setCheckPassword] = useState(false);
   const [error, setError] = useState('');
   const { checkAuto } = useAutoLogin(false);
 
   const {
+    watch,
     register,
     formState: { errors },
     handleSubmit,
@@ -32,58 +37,76 @@ export default function NewSignInPage() {
     shouldUseNativeValidation: true,
   });
 
-  useEffect(() => {
-    const autoOauth = async () => {
-      const { data } = await API.post('/oauth/code/access');
+  const { fetch: autoOauth } = useFetch<OauthCode>({
+    url: '/oauth/code/access',
+    method: 'post',
+    onSuccess: (data) => {
       if (isQuery)
         router.replace(`${router.query.redirect_uri}?code=${data.code}`);
-    };
+    },
+  });
 
-    const getService = async () => {
-      try {
-        const { data } = await API.get(`/oauth/${router.query.client_id}`);
-        setServiceName(data.serviceName);
-        if (checkAuto) autoOauth();
-      } catch (e) {
-        if (isAxiosError(e) && e.response!.status === 404) {
-          toast.error('해당하는 서비스가 없습니다.');
-          router.back();
-        } else {
-          toast.error('예기치 못한 오류가 발생하였습니다.');
-        }
+  const { fetch: getService } = useFetch<GetService>({
+    url: `/oauth/${router.query.client_id}`,
+    method: 'get',
+    onSuccess: (data) => {
+      setServiceName(data.serviceName);
+      if (checkAuto) autoOauth();
+    },
+    onFailure: (e) => {
+      if (e.response!.status === 404) {
+        toast.error('해당하는 서비스가 없습니다.');
+        router.back();
       }
-    };
+    },
+  });
 
+  const { fetch: authLogin } = useFetch<OauthCode>({
+    url: '/oauth/code',
+    method: 'post',
+    onSuccess: (data) => {
+      router.replace(`${router.query.redirect_uri}?code=${data.code}`);
+    },
+    onFailure: (e) => {
+      if (e.response?.status === 400 || e.response?.status === 404)
+        setError('이메일 또는 비밀번호가 일치하지 않습니다..');
+      if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
+    },
+  });
+
+  const { fetch: login } = useFetch<TokenType>({
+    url: '/auth',
+    method: 'post',
+    onSuccess: (data) => {
+      const tokenManager = new TokenManager();
+
+      tokenManager.setToken(data);
+      router.replace('/');
+    },
+    onFailure: (e) => {
+      if (e.response?.status === 400 || e.response?.status === 404)
+        setError('이메일 또는 비밀번호가 일치하지 않습니다..');
+      if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
+    },
+  });
+
+  useEffect(() => {
     if (!router.isReady || checkAuto === undefined) return;
     if (isQuery) {
       getService();
     } else {
-      checkAuto && router.push('/'); 
+      checkAuto && router.push('/');
     }
     return;
   }, [checkAuto, isQuery, router]);
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
-    try {
-      const tokenManager = new TokenManager();
-      const { data } = await API.post(isQuery ? '/oauth/code' : '/auth', {
-        email: inputs.email + '@gsm.hs.kr',
-        password: inputs.password,
-      });
+    const data = {
+      email: inputs.email + '@gsm.hs.kr',
+      password: inputs.password,
+    };
 
-      if (isQuery)
-        return router.replace(`${router.query.redirect_uri}?code=${data.code}`);
-      tokenManager.setToken(data);
-      API.defaults.headers.common['Authorization'] =
-        'Bearer ' + data.accessToken;
-      router.replace('/');
-    } catch (e) {
-      if (!isAxiosError(e))
-        return setError('예기치 못한 오류가 발생하였습니다.');
-      if (e.response?.status === 400 || e.response?.status === 404)
-        setError('이메일 또는 비밀번호가 일치하지 않습니다..');
-      if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
-    }
+    isQuery ? authLogin(data) : login(data);
   };
 
   return (
@@ -123,8 +146,18 @@ export default function NewSignInPage() {
                     '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
                 maxLength: 72,
+                onChange() {
+                  setCheckPassword(false);
+                },
               })}
-              type="password"
+              type={checkPassword ? undefined : 'password'}
+              fixed={
+                watch('password') &&
+                (checkPassword ? <SVG.CloseIcon /> : <SVG.OpenIcon />)
+              }
+              fixedHandle={() => {
+                setCheckPassword((prev) => !prev);
+              }}
             />
             {error && <p>{error}</p>}
           </S.InputWrapper>

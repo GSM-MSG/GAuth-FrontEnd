@@ -7,6 +7,10 @@ export const Layer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > a {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`
@@ -177,11 +181,12 @@ export const EmptyLisyLayer = styled.div`
   transition: ease 0.2s;
   box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
   color: #929292;
+  white-space: nowrap;
 
   h1 {
     transition: all 0.2s;
-    font-size: 40px;
-    margin: 0 100px;
+    font-size: 30px;
+    margin: 0;
   }
 
   :hover {
@@ -189,7 +194,14 @@ export const EmptyLisyLayer = styled.div`
     color: #111111;
 
     h1 {
-      font-size: 50px;
+      transform: scale(1.3);
+    }
+  }
+
+  @media (max-width: 550px) {
+    margin-bottom: 60px;
+    h1 {
+      font-size: 5.4545vw;
     }
   }
 `;

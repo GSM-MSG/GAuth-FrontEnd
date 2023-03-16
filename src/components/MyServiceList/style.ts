@@ -86,8 +86,8 @@ export const ItemController = styled.div`
 
   @keyframes fadeIn {
     0% {
-      opacity: 0;
-      transform: translateY(0%);
+      opacity: 0.5;
+      transform: translateY(-75%);
     }
     100% {
       opacity: 1;

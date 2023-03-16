@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
+
 import useFetch from '../../hooks/useFetch';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
@@ -34,10 +34,6 @@ export default function NewServicePage() {
     defaultValues: serviceData,
   });
 
-  const onError = (err: Object) => {
-    return toast.warn(Object.values(err)[0].message);
-  };
-
   const onClose = () => {
     setModal(false);
     reset(serviceDefaultData);
@@ -62,7 +58,7 @@ export default function NewServicePage() {
   return (
     <S.Layout>
       <S.Wrapper>
-        <S.Form onSubmit={handleSubmit(onSubmit, onError)}>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.TitleSection>
             <h1>서비스를 등록해볼까요?</h1>
             <h3>서비스 등록도, 학생정보 수집도 쉽게!</h3>
@@ -71,6 +67,7 @@ export default function NewServicePage() {
             <Input
               label="서비스명"
               errors={!!errors.serviceName}
+              message={errors.serviceName?.message}
               register={register('serviceName', {
                 required: '서비스명을 입력하지 않았습니다.',
                 pattern: {
@@ -85,22 +82,8 @@ export default function NewServicePage() {
             />
             <Input
               label="리다이렉트 URL"
-              errors={!!errors.serviceName}
-              register={register('serviceUri', {
-                required: '서비스 URI를 입력하지 않았습니다.',
-                pattern: {
-                  value: regUrl,
-                  message: '서비스 URI를 형식에 맞게 입력해주세요',
-                },
-                maxLength: {
-                  value: 254,
-                  message: '최대 254자까지 입력할 수 있습니다',
-                },
-              })}
-            />
-            <Input
-              label="사이트 URL"
-              errors={!!errors.serviceName}
+              errors={!!errors.redirectUri}
+              message={errors.redirectUri?.message}
               register={register('redirectUri', {
                 required: '리다이렉트 URI를 입력하지 않았습니다.',
                 pattern: {
@@ -113,13 +96,27 @@ export default function NewServicePage() {
                 },
               })}
             />
+            <Input
+              label="사이트 URL"
+              errors={!!errors.serviceUri}
+              message={errors.serviceUri?.message}
+              register={register('serviceUri', {
+                required: '서비스 URI를 입력하지 않았습니다.',
+                pattern: {
+                  value: regUrl,
+                  message: '서비스 URI를 형식에 맞게 입력해주세요',
+                },
+                maxLength: {
+                  value: 254,
+                  message: '최대 254자까지 입력할 수 있습니다',
+                },
+              })}
+            />
           </S.InputContainer>
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <Portal onClose={onClose}>
-            <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
-          </Portal>
+          <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
         )}
       </S.Wrapper>
     </S.Layout>

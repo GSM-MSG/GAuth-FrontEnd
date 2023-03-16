@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const ModalWrapper = styled.div`
+export const Wrapper = styled.div`
   width: 432px;
   aspect-ratio: auto 1 / 1.169;
   background: #ffffff;

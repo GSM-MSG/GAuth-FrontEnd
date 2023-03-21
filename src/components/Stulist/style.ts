@@ -1,0 +1,192 @@
+import styled from '@emotion/styled';
+
+export const Layout = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 801px) {
+    padding-left: 100px;
+  }
+`;
+
+export const Wrapper = styled.div`
+  position: relative;
+  margin-top: 150px;
+  width: 990px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 20px;
+
+  @media (max-width: 1100px) {
+    margin-top: 50px;
+    width: 100%;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 650px) {
+    padding: 0;
+  }
+`;
+
+export const SelecTypeBtn = styled.button`
+  font-weight: 500;
+  font-size: 14px;
+  background: none;
+  color: ${({ colorType }: { colorType: boolean }) =>
+    colorType ? '#5499D9' : '#BABABA'};
+  cursor: pointer;
+`;
+
+export const Section = styled.div`
+  margin: 0;
+  width: 850px;
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
+`;
+
+export const Nav = styled.nav`
+  margin-top: 10px;
+  width: 100%;
+  height: 49px;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  padding: 0 20px;
+
+  input {
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    font-size: 14px;
+    ::placeholder {
+      color: #929292;
+    }
+  }
+
+  i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+`;
+
+export const TableWrapper = styled.div`
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4e4e4;
+  margin-top: 70px;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    text-align: left;
+    width: 10%;
+    :nth-of-type(1) {
+      padding-left: 20px;
+      ${({ modeType }: { modeType: boolean }) =>
+        modeType && 'text-align: center'}
+    }
+
+    :nth-of-type(2) {
+      width: ${({ modeType }: { modeType: boolean }) => modeType && '80%'};
+    }
+    :nth-last-of-type(2) {
+      width: ${({ modeType }: { modeType: boolean }) => !modeType && '15%'};
+    }
+
+    :nth-last-of-type(1) {
+      width: ${({ modeType }: { modeType: boolean }) =>
+        modeType ? '10%' : '50%'};
+      span {
+        display: flex;
+        gap: 12px;
+      }
+    }
+  }
+
+  tr {
+    font-size: 14px;
+    line-height: 17px;
+    color: #1c1c1c;
+
+    th {
+      font-weight: 500;
+      font-size: 13px;
+      color: #929292;
+      padding: 27px 0px;
+
+      input[type='checkbox'] {
+        width: 16px;
+        ::before {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    td {
+      padding: 33px 0px;
+    }
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid #e4e4e4;
+    }
+  }
+`;
+
+export const CheckBox = styled.input`
+  cursor: pointer;
+  width: 18px;
+  -webkit-appearance: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  ::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #b4b4b4;
+    border-radius: 3px;
+    @media (max-width: 550px) {
+      width: 3.27vw;
+      height: 3.27vw;
+    }
+  }
+  :checked {
+    ::before {
+      border: 1px solid #2e80cc;
+    }
+    ::after {
+      content: '';
+      position: absolute;
+      transform: rotate(-40deg) translate(1px, -1px);
+      width: 9px;
+      height: 5px;
+      border-left: 1px solid #2e80cc;
+      border-bottom: 1px solid #2e80cc;
+    }
+  }
+`;

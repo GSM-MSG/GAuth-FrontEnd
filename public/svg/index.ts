@@ -22,3 +22,5 @@ export * from './FixIcon';
 export * from './ErrorIcon';
 export * from './OpenIcon';
 export * from './CloseIcon';
+export * from './SearchIcon';
+export * from './Alarm';

@@ -24,3 +24,5 @@ export * from './OpenIcon';
 export * from './CloseIcon';
 export * from './SearchIcon';
 export * from './Alarm';
+export * from './StudentIcon';
+export * from './TeacherIcon';

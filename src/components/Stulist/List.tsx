@@ -1,5 +1,5 @@
-import { useRecoilValue } from 'recoil';
-import { Search, StuList } from '../../Atom/Atoms';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { ApproveId, Search, StuList } from '../../Atom/Atoms';
 import * as S from './style';
 
 interface Props {
@@ -7,10 +7,9 @@ interface Props {
 }
 
 export default function List({ type }: Props) {
+  const setApproveId = useSetRecoilState(ApproveId);
   const stuList = useRecoilValue(StuList);
   const search = useRecoilValue(Search);
-
-  console.log(stuList);
 
   return (
     <S.TableWrapper>
@@ -35,32 +34,44 @@ export default function List({ type }: Props) {
           </tr>
         </thead>
         <tbody>
-          {stuList.map((e, index) => (
-            <tr key={index}>
-              {type && (
-                <td>
-                  <S.CheckBox type="checkbox" />
-                </td>
-              )}
-              {!type && (
-                <>
-                  <td>{e.name}</td>
-                  <td>{e.grade}</td>
-                  <td>{e.classNum}</td>
-                  <td>{e.num}</td>
-                </>
-              )}
-              <td>{e.email}</td>
-              {type && (
-                <td>
-                  <span>
-                    <S.SelecTypeBtn colorType={true}>수락</S.SelecTypeBtn>
-                    <S.SelecTypeBtn colorType={false}>거절</S.SelecTypeBtn>
-                  </span>
-                </td>
-              )}
-            </tr>
-          ))}
+          {stuList
+            .filter((e) =>
+              (e.email + e.grade + e.classNum + e.name).includes(search)
+            )
+            .map((e, index) => (
+              <tr key={index}>
+                {type && (
+                  <td>
+                    <S.CheckBox type="checkbox" />
+                  </td>
+                )}
+                {!type && (
+                  <>
+                    <td>{e.name}</td>
+                    <td>{e.grade}</td>
+                    <td>{e.classNum}</td>
+                    <td>{e.num}</td>
+                  </>
+                )}
+                <td>{e.email}</td>
+                {type && (
+                  <td>
+                    <span>
+                      <S.SelecTypeBtn
+                        colorType={true}
+                        onClick={() => {
+                          setApproveId(e.email);
+                          // onOpen();
+                        }}
+                      >
+                        수락
+                      </S.SelecTypeBtn>
+                      <S.SelecTypeBtn colorType={false}>거절</S.SelecTypeBtn>
+                    </span>
+                  </td>
+                )}
+              </tr>
+            ))}
         </tbody>
       </S.Table>
     </S.TableWrapper>

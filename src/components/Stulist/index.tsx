@@ -1,14 +1,21 @@
-import { useRouter } from 'next/router';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { ApproveId, ModalPage } from '../../Atom/Atoms';
 import SidBar from '../common/Sidebar/SideBar';
+import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
 import Header from './Header';
 import List from './List';
 import NavBar from './NavBar';
 import * as S from './style';
 
-export default function StuListPage() {
-  const router = useRouter();
-  const mode = router.query?.type?.toString() === 'applicant';
+export default function StuListPage({ mode }: { mode: boolean }) {
+  const setModalPage = useSetRecoilState(ModalPage);
+  const [approve, setApproveId] = useRecoilState(ApproveId);
+
+  const onClose = () => {
+    setApproveId('');
+    setModalPage(0);
+  };
 
   return (
     <S.Layout>
@@ -20,6 +27,7 @@ export default function StuListPage() {
           <List type={mode} />
         </S.Section>
       </S.Wrapper>
+      {approve && <AddUser onClose={onClose} />}
     </S.Layout>
   );
 }

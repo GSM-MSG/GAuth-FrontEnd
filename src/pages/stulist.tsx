@@ -1,12 +1,25 @@
-import { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Sidebar from '../components/Sidebar';
 import StuListPage from '../components/Stulist';
 
-const StuList: NextPage = () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const type = context.query.type?.toString() || '';
+  if (type === 'applicant') {
+    return { props: { ok: true } };
+  } else {
+    return { props: { ok: false } };
+  }
+};
+
+interface Props {
+  ok: boolean;
+}
+
+const StuList = ({ ok }: Props) => {
   return (
     <>
       <Sidebar />
-      <StuListPage />
+      <StuListPage mode={ok} />
     </>
   );
 };

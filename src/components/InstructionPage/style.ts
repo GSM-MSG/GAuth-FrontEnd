@@ -22,12 +22,19 @@ export const Wrapper = styled.div`
   width: 1200px;
   font-size: 20px;
 
+  pre {
+    background: transparent;
+  }
+  code {
+    color: #000;
+  }
+
   @media (max-width: 1400px) {
     width: 100%;
     margin: 0 50px 50px;
 
     > * {
-      font-size: 1.4vw;
+      font-size: 1.125vw;
     }
   }
 `;

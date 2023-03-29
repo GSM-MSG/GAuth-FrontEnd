@@ -16,11 +16,6 @@ export default function List({ type }: Props) {
       <S.Table modeType={type}>
         <thead>
           <tr>
-            {type && (
-              <th>
-                <S.CheckBox type="checkbox" />
-              </th>
-            )}
             {!type && (
               <>
                 <th>이름</th>
@@ -35,16 +30,9 @@ export default function List({ type }: Props) {
         </thead>
         <tbody>
           {stuList
-            .filter((e) =>
-              (e.email + e.grade + e.classNum + e.name).includes(search)
-            )
+            .filter((e) => (e.email + e.name).includes(search))
             .map((e, index) => (
               <tr key={index}>
-                {type && (
-                  <td>
-                    <S.CheckBox type="checkbox" />
-                  </td>
-                )}
                 {!type && (
                   <>
                     <td>{e.name}</td>
@@ -61,7 +49,6 @@ export default function List({ type }: Props) {
                         colorType={true}
                         onClick={() => {
                           setApproveId(e.email);
-                          // onOpen();
                         }}
                       >
                         수락

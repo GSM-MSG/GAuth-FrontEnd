@@ -28,7 +28,7 @@ export default function SaveXlsx({ onClose }: Props) {
   });
 
   const setFileHandle = (e: FileList) => {
-    if (e[0].name.split('.')[1] !== 'xlsx')
+    if (e && e[0].name.split('.')[1] !== 'xlsx')
       return toast.error('파일 형식이 맞지 않습니다.');
     setFile(e);
   };

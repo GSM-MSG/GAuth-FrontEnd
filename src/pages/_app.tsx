@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>Gauth</title>
+        <title>GAuth</title>
       </Head>
       <RecoilRoot>
         <GlobalStyle />

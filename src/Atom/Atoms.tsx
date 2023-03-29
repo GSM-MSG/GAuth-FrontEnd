@@ -71,3 +71,8 @@ export const Search = atom({
   key: 'search',
   default: '',
 });
+
+export const ApproveId = atom({
+  key: 'approveId',
+  default: '',
+});

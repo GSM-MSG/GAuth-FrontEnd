@@ -101,15 +101,7 @@ export const Table = styled.table`
     width: 10%;
     :nth-of-type(1) {
       padding-left: 20px;
-      ${({ modeType }: { modeType: boolean }) =>
-        modeType && 'text-align: center'}
-    }
-
-    :nth-of-type(2) {
-      width: ${({ modeType }: { modeType: boolean }) => modeType && '80%'};
-    }
-    :nth-last-of-type(2) {
-      width: ${({ modeType }: { modeType: boolean }) => !modeType && '15%'};
+      ${({ modeType }: { modeType: boolean }) => modeType && 'width: 80%'}
     }
 
     :nth-last-of-type(1) {
@@ -150,43 +142,6 @@ export const Table = styled.table`
   tbody {
     tr {
       border-top: 1px solid #e4e4e4;
-    }
-  }
-`;
-
-export const CheckBox = styled.input`
-  cursor: pointer;
-  width: 18px;
-  -webkit-appearance: none;
-  outline: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
-  ::before {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #b4b4b4;
-    border-radius: 3px;
-    @media (max-width: 550px) {
-      width: 3.27vw;
-      height: 3.27vw;
-    }
-  }
-  :checked {
-    ::before {
-      border: 1px solid #2e80cc;
-    }
-    ::after {
-      content: '';
-      position: absolute;
-      transform: rotate(-40deg) translate(1px, -1px);
-      width: 9px;
-      height: 5px;
-      border-left: 1px solid #2e80cc;
-      border-bottom: 1px solid #2e80cc;
     }
   }
 `;

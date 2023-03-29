@@ -28,7 +28,7 @@ export const Title = styled.div`
 export const SelectBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 
   > p {
     font-weight: 500;
@@ -36,9 +36,13 @@ export const SelectBtnWrapper = styled.div`
     color: #515151;
   }
 
-  span {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  svg {
+    transform: scale(0.6);
+    :hover {
+      cursor: pointer;
+      path {
+        fill: #929292;
+      }
+    }
   }
 `;

@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { LoginFormProps, ClientInform, FixModalType } from '../types';
-import { StuListType } from '../types/StuListType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -60,7 +59,7 @@ export const Filter = atom({
   },
 });
 
-export const StuList = atom<StuListType[]>({
+export const StuList = atom<any[]>({
   key: 'stulist',
   default: [],
 });

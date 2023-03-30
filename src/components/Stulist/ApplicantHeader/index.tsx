@@ -3,16 +3,15 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { StuList } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
-import { stuListType } from '../../../types/StuListType';
+import { StuListType } from '../../../types/StuListType';
 import SaveXlsx from '../SaveXlsx';
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
-import { useRouter } from 'next/router';
 
 export default function ApplicantHeader() {
   const setStulist = useSetRecoilState(StuList);
   const [xlxsModal, setXlsxModal] = useState(false);
-  const { fetch } = useFetch<stuListType[]>({
+  const { fetch } = useFetch<StuListType[]>({
     url: '/user/pending',
     method: 'get',
     onSuccess: (data) => {

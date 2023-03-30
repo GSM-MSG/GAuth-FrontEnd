@@ -1,10 +1,6 @@
 import { atom } from 'recoil';
-import {
-  LoginFormProps,
-  ClientInform,
-  FixModalType,
-  StuListType,
-} from '../types';
+import { LoginFormProps, ClientInform, FixModalType } from '../types';
+import { StuListType } from '../types/StuListType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',

@@ -7,3 +7,4 @@ export * from './ResAddService';
 export * from './RoleListType';
 export * from './TokenMangerType';
 export * from './TokenType';
+export * from './StuListType';

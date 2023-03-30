@@ -1,5 +1,7 @@
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { ApproveId, ModalPage } from '../../Atom/Atoms';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { ApproveId, ModalPage, Role } from '../../Atom/Atoms';
 import SidBar from '../common/Sidebar/SideBar';
 import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
@@ -9,8 +11,14 @@ import NavBar from './NavBar';
 import * as S from './style';
 
 export default function StuListPage({ mode }: { mode: boolean }) {
+  const route = useRouter();
   const setModalPage = useSetRecoilState(ModalPage);
   const [approve, setApproveId] = useRecoilState(ApproveId);
+  const userRole = useRecoilValue(Role);
+
+  useEffect(() => {
+    !!userRole.length && !userRole.includes('ROLE_ADMIN') && route.push('/');
+  }, [userRole]);
 
   const onClose = () => {
     setApproveId('');

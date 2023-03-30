@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { StuList } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
-import { StuListType } from '../../../types/StuListType';
+import { StuListType } from '../../../types/stuListType';
 import SaveXlsx from '../SaveXlsx';
 import * as S from './style';
 import * as SVG from '../../../../public/svg';

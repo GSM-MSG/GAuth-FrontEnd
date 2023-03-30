@@ -3,7 +3,7 @@ import * as S from './style';
 import * as SVG from '../../../../public/svg/index';
 import useFetch from '../../../hooks/useFetch';
 import { useEffect } from 'react';
-import { StuListType } from '../../../types/StuListType';
+import { StuListType } from '../../../types/stuListType';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Filter, StuList } from '../../../Atom/Atoms';
 

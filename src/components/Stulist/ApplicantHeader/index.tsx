@@ -7,6 +7,7 @@ import { stuListType } from '../../../types/stuListType';
 import SaveXlsx from '../SaveXlsx';
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
+import { useRouter } from 'next/router';
 
 export default function ApplicantHeader() {
   const setStulist = useSetRecoilState(StuList);

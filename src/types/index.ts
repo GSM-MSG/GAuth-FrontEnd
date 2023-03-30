@@ -8,3 +8,4 @@ export * from './RoleListType';
 export * from './StuListType';
 export * from './TokenMangerType';
 export * from './TokenType';
+export * from './StuListType';

@@ -27,3 +27,4 @@ export * from './Alarm';
 export * from './StudentIcon';
 export * from './TeacherIcon';
 export * from './FileIcon';
+export * from './AdminIcon';

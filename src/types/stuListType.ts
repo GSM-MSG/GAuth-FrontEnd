@@ -1,4 +1,4 @@
-export type stuListType = {
+export type StuListType = {
   id?: string;
   name?: string;
   email: string;

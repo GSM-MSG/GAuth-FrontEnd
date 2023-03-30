@@ -5,7 +5,6 @@ export * from './FixModalType';
 export * from './LoginForm';
 export * from './ResAddService';
 export * from './RoleListType';
-export * from './StuListType';
 export * from './TokenMangerType';
 export * from './TokenType';
 export * from './StuListType';

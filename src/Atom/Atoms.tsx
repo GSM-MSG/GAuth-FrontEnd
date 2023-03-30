@@ -76,3 +76,8 @@ export const ApproveId = atom({
   key: 'approveId',
   default: '',
 });
+
+export const Role = atom<string[]>({
+  key: 'userRole',
+  default: [],
+});

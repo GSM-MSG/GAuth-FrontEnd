@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { ApproveId, Search, StuList } from '../../Atom/Atoms';
+import { ApproveId, Search, StuList } from '../../../Atom/Atoms';
 import * as S from './style';
 
 interface Props {

@@ -7,7 +7,7 @@ import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
 import Header from './Header';
 import List from './List';
-import NavBar from './NavBar';
+import SearchBar from './SearchBar';
 import * as S from './style';
 
 export default function StuListPage({ mode }: { mode: boolean }) {
@@ -31,7 +31,7 @@ export default function StuListPage({ mode }: { mode: boolean }) {
         {!mode && <SidBar />}
         <S.Section>
           {mode ? <ApplicantHeader /> : <Header />}
-          <NavBar />
+          <SearchBar />
           <List type={mode} />
         </S.Section>
       </S.Wrapper>

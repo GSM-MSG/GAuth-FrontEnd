@@ -15,7 +15,7 @@ export default function NotionPage({ notion }: { notion?: BlockMapType }) {
   if (notion)
     return (
       <>
-        <SEOConfig title="GAuth | instruction" />
+        <SEOConfig title="GAuth | 설명" />
         <Sidebar />
         <InstructionPage notionId={notion} />
       </>

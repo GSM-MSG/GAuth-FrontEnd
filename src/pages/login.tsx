@@ -5,7 +5,7 @@ import SEOConfig from '../components/SEO';
 const Login: NextPage = () => {
   return (
     <>
-      <SEOConfig title="GAuth | login" />
+      <SEOConfig title="GAuth | 로그인" />
       <NewSignInPage />;
     </>
   );

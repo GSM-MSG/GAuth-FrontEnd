@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 export default function MyProfile() {
   return (
     <>
-      <SEOConfig title="GAuth | profile" />
+      <SEOConfig title="GAuth | 프로필" />
       <Sidebar />
       <MyProfilePage />
     </>

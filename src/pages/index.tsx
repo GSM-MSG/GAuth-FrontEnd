@@ -6,7 +6,7 @@ import SEOConfig from '../components/SEO';
 const Home: NextPage = () => {
   return (
     <>
-      <SEOConfig title="GAuth" />
+      <SEOConfig title="GAuth | 홈" />
       <Sidebar />
       <ServiceList />
     </>

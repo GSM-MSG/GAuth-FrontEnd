@@ -5,8 +5,8 @@ import SEOConfig from '../components/SEO';
 const FindPsw: NextPage = () => {
   return (
     <>
-      <SEOConfig title="GAuth | newPsw" />
-      <NewFindPswPage />;
+      <SEOConfig title="GAuth | 비밀번호변경" />
+      <NewFindPswPage />
     </>
   );
 };

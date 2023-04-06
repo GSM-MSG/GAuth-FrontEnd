@@ -5,8 +5,8 @@ import SEOConfig from '../components/SEO';
 const SignUp: NextPage = () => {
   return (
     <>
-      <SEOConfig title="GAuth | signUp" />
-      <NewSignUpPage />;
+      <SEOConfig title="GAuth | 회원가입" />
+      <NewSignUpPage />
     </>
   );
 };

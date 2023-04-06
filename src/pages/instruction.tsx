@@ -7,7 +7,7 @@ import SEOConfig from '../components/SEO';
 export default function NotionPage({ notion }: { notion: BlockMapType }) {
   return (
     <>
-      <SEOConfig title="GAuth | instruction" />
+      <SEOConfig title="GAuth | 설명" />
       <Sidebar />
       <InstructionPage notionId={notion} />
     </>

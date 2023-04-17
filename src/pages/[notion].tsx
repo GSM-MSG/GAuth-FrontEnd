@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { BlockMapType } from 'react-notion';
 import InstructionPage from '../components/InstructionPage';
 import Sidebar from '../components/Sidebar';
+import SEOConfig from '../components/SEO';
 
 export default function NotionPage({ notion }: { notion?: BlockMapType }) {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function NotionPage({ notion }: { notion?: BlockMapType }) {
   if (notion)
     return (
       <>
+        <SEOConfig title="GAuth | 설명" />
         <Sidebar />
         <InstructionPage notionId={notion} />
       </>

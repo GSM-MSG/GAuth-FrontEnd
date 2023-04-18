@@ -13,7 +13,6 @@ export default function NotionPage({ notion }: { notion: BlockMapType }) {
     </>
   );
 }
-2;
 
 export async function getServerSideProps() {
   try {

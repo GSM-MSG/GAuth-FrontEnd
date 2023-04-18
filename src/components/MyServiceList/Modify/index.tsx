@@ -101,7 +101,7 @@ export default function ModifyMyService() {
           <Input
             label={'리다이렉트 URI'}
             errors={!!errors.error}
-            register={register('serviceUri', {
+            register={register('redirectUri', {
               required: '사이트 URI를 입력하지 않았습니다.',
               pattern: {
                 value: regUri,

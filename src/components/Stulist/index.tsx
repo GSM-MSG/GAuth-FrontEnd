@@ -7,7 +7,7 @@ import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
 import Header from './Header';
 import List from './List';
-import SearchBar from './SearchBar';
+import SearchBar from '../common/SearchBar';
 import * as S from './style';
 
 export default function StuListPage({ mode }: { mode: boolean }) {

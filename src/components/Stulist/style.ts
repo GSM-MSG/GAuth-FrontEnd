@@ -34,9 +34,16 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Section = styled.div`
+export const Section = styled.section`
   margin: 0;
   width: 850px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   @media (max-width: 1100px) {
     width: 100%;
   }

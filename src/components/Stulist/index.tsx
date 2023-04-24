@@ -30,8 +30,10 @@ export default function StuListPage({ mode }: { mode: boolean }) {
       <S.Wrapper>
         {!mode && <SidBar />}
         <S.Section>
-          {mode ? <ApplicantHeader /> : <Header />}
-          <SearchBar />
+          <div>
+            {mode ? <ApplicantHeader /> : <Header />}
+            <SearchBar />
+          </div>
           <List type={mode} />
         </S.Section>
       </S.Wrapper>

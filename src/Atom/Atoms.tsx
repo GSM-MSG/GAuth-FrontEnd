@@ -27,7 +27,7 @@ export const ModalPage = atom<number>({
 
 export const ModalType = atom<string>({
   key: 'modalType',
-  default: 'signIn',
+  default: '',
 });
 
 export const EmailInfo = atom<LoginFormProps>({
@@ -70,9 +70,9 @@ export const Search = atom({
   default: '',
 });
 
-export const ApproveId = atom({
+export const ApproveId = atom<number | undefined>({
   key: 'approveId',
-  default: 0,
+  default: undefined,
 });
 
 export const Role = atom<string[]>({

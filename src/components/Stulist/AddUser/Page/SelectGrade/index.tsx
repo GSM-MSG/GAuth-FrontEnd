@@ -4,21 +4,19 @@ import * as S from './style';
 import * as SVG from '../../../../../../public/svg';
 import { Form } from '../../style';
 import { useSetRecoilState } from 'recoil';
-import { ModalPage } from '../../../../../Atom/Atoms';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import { ModalType } from '../../../../../Atom/Atoms';
+import { ROLE_STUDENT, ROLE_TEACHER } from '../../../../../lib/UserRole';
 
 export default function SelectGrade() {
-  const setModalPage = useSetRecoilState(ModalPage);
+  const setModalType = useSetRecoilState(ModalType);
   const [userGrade, setUserGrade] = useState('');
-
-  const student = 'student';
-  const teacher = 'teacher';
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!userGrade) return toast.error('권한을 선택해주세요');
-    setModalPage(userGrade === student ? 1 : 2);
+    setModalType(userGrade);
   };
 
   return (
@@ -33,13 +31,13 @@ export default function SelectGrade() {
           <S.SelectBox>
             <S.Input
               type="radio"
-              id={student}
+              id={ROLE_STUDENT}
               name={'grade'}
-              checked={userGrade === student}
+              checked={userGrade === ROLE_STUDENT}
               readOnly
-              onClick={() => setUserGrade(student)}
+              onClick={() => setUserGrade(ROLE_STUDENT)}
             />
-            <S.Label htmlFor={student}>
+            <S.Label htmlFor={ROLE_STUDENT}>
               <SVG.StudentIcon />
               <p>학생</p>
             </S.Label>
@@ -51,13 +49,13 @@ export default function SelectGrade() {
           <S.SelectBox>
             <S.Input
               type="radio"
-              id={teacher}
+              id={ROLE_TEACHER}
               name={'grade'}
-              checked={userGrade === teacher}
+              checked={userGrade === ROLE_TEACHER}
               readOnly
-              onClick={() => setUserGrade(teacher)}
+              onClick={() => setUserGrade(ROLE_TEACHER)}
             />
-            <S.Label htmlFor={teacher}>
+            <S.Label htmlFor={ROLE_TEACHER}>
               <SVG.TeacherIcon />
               <p>선생님</p>
             </S.Label>

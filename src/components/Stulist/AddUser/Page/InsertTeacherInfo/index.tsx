@@ -2,20 +2,18 @@ import { useForm } from 'react-hook-form';
 import CreateTitle from '../../../../common/CreateTitle';
 import Input from '../../../../common/Input';
 import { SubmitWrapper } from '../../../../NewSignIn/style';
-import { useRecoilValue } from 'recoil';
 import { Form } from '../../style';
 import * as S from './style';
-import useFetch from '../../../../../hooks/useFetch';
-import { ApproveId } from '../../../../../Atom/Atoms';
+import { AcceptUserType } from '../../../../../types/AcceptUserType';
 
 interface Props {
   onClose: () => void;
+  onAccept: (body: AcceptUserType) => void;
 }
 
-export default function InsertTeacherInfo({ onClose }: Props) {
+export default function InsertTeacherInfo({ onClose, onAccept }: Props) {
   const MALE = 'MALE';
   const FEMALE = 'FEMALE';
-  const approveId = useRecoilValue(ApproveId);
 
   const {
     register,
@@ -25,13 +23,6 @@ export default function InsertTeacherInfo({ onClose }: Props) {
     shouldUseNativeValidation: true,
   });
 
-  const { fetch } = useFetch({
-    url: '/user/accept-teacher',
-    method: 'patch',
-    successMessage: '추가 완료',
-    errorMessage: '실패',
-  });
-
   const onSubmit = ({
     name,
     gender,
@@ -39,8 +30,7 @@ export default function InsertTeacherInfo({ onClose }: Props) {
     name: string;
     gender: 'MALE' | 'FEMALE';
   }) => {
-    fetch({
-      id: approveId,
+    onAccept({
       name,
       gender,
     });

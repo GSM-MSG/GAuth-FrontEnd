@@ -1,21 +1,19 @@
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
-import { ApproveId } from '../../../../../Atom/Atoms';
-import useFetch from '../../../../../hooks/useFetch';
 import CreateTitle from '../../../../common/CreateTitle';
 import Input from '../../../../common/Input';
 import { SubmitWrapper } from '../../../../NewSignIn/style';
 import { Form } from '../../style';
 import * as S from './style';
+import { AcceptUserType } from '../../../../../types/AcceptUserType';
 
 interface Props {
   onClose: () => void;
+  onAccept: (body: AcceptUserType) => void;
 }
 
-export default function InsertStuInfo({ onClose }: Props) {
+export default function InsertStuInfo({ onClose, onAccept }: Props) {
   const MALE = 'MALE';
   const FEMALE = 'FEMALE';
-  const approveId = useRecoilValue(ApproveId);
 
   const {
     register,
@@ -25,12 +23,6 @@ export default function InsertStuInfo({ onClose }: Props) {
     shouldUseNativeValidation: true,
   });
 
-  const { fetch } = useFetch({
-    url: '/user/accept-student',
-    method: 'patch',
-    successMessage: '추가 성공',
-    errorMessage: '추가 실패',
-  });
   const onSubmit = ({
     name,
     stuNum,
@@ -40,14 +32,14 @@ export default function InsertStuInfo({ onClose }: Props) {
     stuNum: string;
     gender: 'MALE' | 'FEMALE';
   }) => {
-    fetch({
-      id: approveId,
+    onAccept({
       name,
       gender,
       grade: parseInt(stuNum.substring(0, 1)),
       classNum: parseInt(stuNum.substring(1, 2)),
       num: parseInt(stuNum.substring(2, 4)),
     });
+
     onClose();
   };
 

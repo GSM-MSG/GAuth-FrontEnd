@@ -3,6 +3,7 @@ import { ApproveId, Search, StuList } from '../../../Atom/Atoms';
 import * as S from './style';
 import useFetch from '../../../hooks/useFetch';
 import { useEffect, useState } from 'react';
+import { useUserList } from '../../../hooks/useUserList';
 
 interface Props {
   type: boolean;
@@ -13,9 +14,17 @@ export default function List({ type }: Props) {
   const [pedingId, setPedIngId] = useState(0);
   const stuList = useRecoilValue(StuList);
   const search = useRecoilValue(Search);
+  const { getUserList } = useUserList({
+    defaultUri: '/user/pending',
+    getAuto: false,
+  });
+
   const { fetch } = useFetch({
     url: `user/reject/${pedingId}`,
     method: 'DELETE',
+    onSuccess: () => {
+      getUserList();
+    },
   });
 
   useEffect(() => {

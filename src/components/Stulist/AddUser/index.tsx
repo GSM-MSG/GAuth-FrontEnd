@@ -8,6 +8,7 @@ import { ApproveId, ModalType } from '../../../Atom/Atoms';
 import { ROLE_STUDENT, ROLE_TEACHER } from '../../../lib/UserRole';
 import useFetch from '../../../hooks/useFetch';
 import { AcceptUserType } from '../../../types/AcceptUserType';
+import { useUserList } from '../../../hooks/useUserList';
 
 interface Props {
   onClose: () => void;
@@ -17,9 +18,17 @@ export default function AddUser({ onClose }: Props) {
   const modalType = useRecoilValue(ModalType);
   const approveId = useRecoilValue(ApproveId);
 
+  const { getUserList } = useUserList({
+    defaultUri: '/user/pending',
+    getAuto: false,
+  });
+
   const { fetch } = useFetch({
     url: `user/accept-user/${approveId}`,
     method: 'PATCH',
+    onSuccess: () => {
+      getUserList();
+    },
     successMessage: '추가 완료',
     errorMessage: '실패',
   });

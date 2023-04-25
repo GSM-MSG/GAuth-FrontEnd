@@ -1,25 +1,20 @@
 import Link from 'next/link';
 import * as S from './style';
 import * as SVG from '../../../../public/svg/index';
-import useFetch from '../../../hooks/useFetch';
 import { useEffect } from 'react';
-import { StuListType } from '../../../types/StuListType';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { Filter, StuList } from '../../../Atom/Atoms';
+import { useRecoilValue } from 'recoil';
+import { Filter } from '../../../Atom/Atoms';
+import { useUserList } from '../../../hooks/useUserList';
 
 export default function Header() {
-  const setStulist = useSetRecoilState(StuList);
   const filter = useRecoilValue(Filter);
-  const { fetch } = useFetch<StuListType[]>({
-    url: `/user/user-list?grade=${filter.grade}&classNum=${filter.classNum}&keyword=`,
-    method: 'get',
-    onSuccess: (data) => {
-      setStulist(data);
-    },
+
+  const { getUserList } = useUserList({
+    defaultUri: `/user/user-list?grade=${filter.grade}&classNum=${filter.classNum}&keyword=`,
   });
 
   useEffect(() => {
-    fetch();
+    getUserList();
   }, [filter]);
 
   return (

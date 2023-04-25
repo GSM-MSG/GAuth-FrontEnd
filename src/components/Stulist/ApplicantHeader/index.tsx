@@ -1,26 +1,18 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { StuList } from '../../../Atom/Atoms';
-import useFetch from '../../../hooks/useFetch';
-import { StuListType } from '../../../types/StuListType';
 import SaveXlsx from '../SaveXlsx';
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
+import { useUserList } from '../../../hooks/useUserList';
 
 export default function ApplicantHeader() {
-  const setStulist = useSetRecoilState(StuList);
   const [xlxsModal, setXlsxModal] = useState(false);
-  const { fetch } = useFetch<StuListType[]>({
-    url: '/user/pending',
-    method: 'get',
-    onSuccess: (data) => {
-      setStulist(data);
-    },
+  const { getUserList } = useUserList({
+    defaultUri: '/user/pending',
   });
 
   useEffect(() => {
-    fetch();
+    getUserList();
   }, []);
 
   return (

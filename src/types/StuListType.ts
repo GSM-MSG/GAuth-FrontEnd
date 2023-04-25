@@ -1,5 +1,5 @@
 export type StuListType = {
-  id?: string;
+  id: number;
   name?: string;
   email: string;
   grade?: number;

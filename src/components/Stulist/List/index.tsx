@@ -1,6 +1,8 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { ApproveId, Search, StuList } from '../../../Atom/Atoms';
 import * as S from './style';
+import useFetch from '../../../hooks/useFetch';
+import { useEffect, useState } from 'react';
 
 interface Props {
   type: boolean;
@@ -8,8 +10,20 @@ interface Props {
 
 export default function List({ type }: Props) {
   const setApproveId = useSetRecoilState(ApproveId);
+  const [pedingId, setPedIngId] = useState(0);
   const stuList = useRecoilValue(StuList);
   const search = useRecoilValue(Search);
+  const { fetch } = useFetch({
+    url: `user/reject/${pedingId}`,
+    method: 'DELETE',
+  });
+
+  useEffect(() => {
+    if (!pedingId) return;
+    const result = confirm('정말 거절 하실 건가요?');
+    if (result) fetch();
+    return setPedIngId(0);
+  }, [pedingId]);
 
   return (
     <S.TableWrapper>
@@ -48,12 +62,17 @@ export default function List({ type }: Props) {
                       <S.SelecTypeBtn
                         colorType={true}
                         onClick={() => {
-                          setApproveId(e.email);
+                          setApproveId(e.id);
                         }}
                       >
                         수락
                       </S.SelecTypeBtn>
-                      <S.SelecTypeBtn colorType={false}>거절</S.SelecTypeBtn>
+                      <S.SelecTypeBtn
+                        colorType={false}
+                        onClick={() => setPedIngId(e.id)}
+                      >
+                        거절
+                      </S.SelecTypeBtn>
                     </span>
                   </td>
                 )}

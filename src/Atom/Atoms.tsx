@@ -72,7 +72,7 @@ export const Search = atom({
 
 export const ApproveId = atom({
   key: 'approveId',
-  default: '',
+  default: 0,
 });
 
 export const Role = atom<string[]>({

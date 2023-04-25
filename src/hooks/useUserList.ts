@@ -18,6 +18,7 @@ export const useUserList = ({ defaultUri, getAuto = true }: Props) => {
     onSuccess: (data) => {
       setStulist(data);
     },
+    errorMessage: '유저 리스트를 찾을 수 없습니다.',
   });
 
   useEffect(() => {

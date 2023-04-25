@@ -21,7 +21,7 @@ export default function StuListPage({ mode }: { mode: boolean }) {
   }, [userRole]);
 
   const onClose = () => {
-    setApproveId(0);
+    setApproveId(undefined);
     setModalPage(0);
   };
 

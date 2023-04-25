@@ -25,6 +25,8 @@ export default function List({ type }: Props) {
     onSuccess: () => {
       getUserList();
     },
+    successMessage: '삭제 완료.',
+    errorMessage: '삭제를 실패하였습니다.',
   });
 
   useEffect(() => {

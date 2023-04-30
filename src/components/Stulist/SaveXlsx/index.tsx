@@ -57,7 +57,7 @@ export default function SaveXlsx({ onClose }: Props) {
         />
         <S.Form>
           <DragAndDrop dropHandle={setFileHandle} dragIngHandle={setIsDragging}>
-            <S.XlsxBox htmlFor="xlsx" dragIng={isDragging}>
+            <S.XlsxBox htmlFor="xlsx" dragging={isDragging}>
               {file && file[0] ? (
                 <S.UploadFile>
                   <SVG.Intruction />

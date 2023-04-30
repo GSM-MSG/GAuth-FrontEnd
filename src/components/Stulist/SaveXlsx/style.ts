@@ -40,13 +40,13 @@ export const XlsxBox = styled.label`
   align-items: center;
   overflow: hidden;
   cursor: pointer;
-  background: ${({ dragIng }: { dragIng: boolean }) =>
-    dragIng ? '#929292' : '#e0e0e0'};
+  background: ${({ dragging }: { dragging: boolean }) =>
+    dragging ? '#929292' : '#e0e0e0'};
   div {
     svg {
       transition: 0.2s;
-      transform: ${({ dragIng }: { dragIng: boolean }) =>
-        dragIng ? 'scale(1.2)' : 'scale(1)'};
+      transform: ${({ dragging }: { dragging: boolean }) =>
+        dragging ? 'scale(1.2)' : 'scale(1)'};
     }
   }
 `;

@@ -11,27 +11,27 @@ export default function DragAndDrop({
   dropHandle,
   dragIngHandle,
 }: Props) {
-  const onDragEnter = (e: React.DragEvent<HTMLElement>) => {
+  const preventEventHandle = (e: React.DragEvent<HTMLElement>) => {
     e.preventDefault();
     e.stopPropagation();
+  };
+
+  const onDragEnter = (e: React.DragEvent<HTMLElement>) => {
+    preventEventHandle(e);
     if (dragIngHandle) dragIngHandle(true);
   };
 
   const onDrop = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+    preventEventHandle(e);
     dropHandle(e.dataTransfer.files);
     if (dragIngHandle) dragIngHandle(false);
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
+  const onDragOver = (e: React.DragEvent<HTMLElement>) => preventEventHandle(e);
 
   const onDragLeave = (e: React.DragEvent<HTMLElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
+    preventEventHandle(e);
+
     if (e.currentTarget.contains(e.relatedTarget as Node)) return;
     if (dragIngHandle) dragIngHandle(false);
   };

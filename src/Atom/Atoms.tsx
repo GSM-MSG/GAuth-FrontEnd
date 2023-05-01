@@ -1,7 +1,6 @@
 import { atom } from 'recoil';
-import { LoginFormProps } from '../types';
-import { ClientInform } from '../types/ClientInForm';
-import { FixModalType } from '../types/FixModalType';
+import { LoginFormProps, ClientInform, FixModalType } from '../types';
+import { StuListType } from '../types/StuListType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -28,7 +27,7 @@ export const ModalPage = atom<number>({
 
 export const ModalType = atom<string>({
   key: 'modalType',
-  default: 'signIn',
+  default: '',
 });
 
 export const EmailInfo = atom<LoginFormProps>({
@@ -51,4 +50,32 @@ export const FixService = atom<FixModalType>({
     type: '',
     toggle: false,
   },
+});
+
+export const Filter = atom({
+  key: 'filter',
+  default: {
+    grade: '1',
+    classNum: '1',
+  },
+});
+
+export const StuList = atom<StuListType[]>({
+  key: 'stulist',
+  default: [],
+});
+
+export const Search = atom({
+  key: 'search',
+  default: '',
+});
+
+export const ApproveId = atom<number | undefined>({
+  key: 'approveId',
+  default: undefined,
+});
+
+export const Role = atom<string[]>({
+  key: 'userRole',
+  default: [],
 });

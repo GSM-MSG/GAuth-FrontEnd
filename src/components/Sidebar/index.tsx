@@ -6,10 +6,18 @@ import * as S from './style';
 import { NavList } from '../../lib/NavList';
 import useFetch from '../../hooks/useFetch';
 import TokenManager from '../../api/TokenManger';
+import { useRole } from '../../hooks/useRole';
+import { useRecoilValue } from 'recoil';
+import { Role } from '../../Atom/Atoms';
+import { AdminNavList } from '../../lib/AdminNavList';
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = router.pathname;
+  const userRole = useRecoilValue(Role);
+  const navList = userRole.includes('ROLE_ADMIN') ? AdminNavList : NavList;
+
+  useRole();
 
   const { fetch: logOutHandle } = useFetch({
     url: '/auth',
@@ -37,7 +45,7 @@ export default function Sidebar() {
             </i>
           </S.LogoWrapper>
           <S.MenuList>
-            {NavList.map((navData) => {
+            {navList.map((navData) => {
               return (
                 <S.MenuWrapper
                   pathname={pathname === navData.url}

@@ -6,7 +6,7 @@ import * as SVG from '../../../../public/svg';
 import { useUserList } from '../../../hooks/useUserList';
 
 export default function ApplicantHeader() {
-  const [xlxsModal, setXlsxModal] = useState(false);
+  const [xlsxModal, setXlsxModal] = useState(false);
   const { getUserList } = useUserList({
     defaultUri: '/user/pending',
   });
@@ -29,7 +29,7 @@ export default function ApplicantHeader() {
           </i>
         </S.SelectBtnWrapper>
       </S.Header>
-      {xlxsModal && <SaveXlsx onClose={() => setXlsxModal(false)} />}
+      {xlsxModal && <SaveXlsx onClose={() => setXlsxModal(false)} />}
     </>
   );
 }

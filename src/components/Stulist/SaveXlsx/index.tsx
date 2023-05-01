@@ -56,7 +56,10 @@ export default function SaveXlsx({ onClose }: Props) {
           subTitle={'승인하실 학생들에 정보가 담긴 엑셀을 올려주세요.'}
         />
         <S.Form>
-          <DragAndDrop dropHandle={setFileHandle} dragIngHandle={setIsDragging}>
+          <DragAndDrop
+            dropHandle={setFileHandle}
+            draggingHandle={setIsDragging}
+          >
             <S.XlsxBox htmlFor="xlsx" dragging={isDragging}>
               {file && file[0] ? (
                 <S.UploadFile>

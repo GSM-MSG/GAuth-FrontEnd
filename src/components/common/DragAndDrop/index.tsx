@@ -27,8 +27,6 @@ export default function DragAndDrop({
     if (dragIngHandle) dragIngHandle(false);
   };
 
-  const onDragOver = (e: React.DragEvent<HTMLElement>) => preventEventHandle(e);
-
   const onDragLeave = (e: React.DragEvent<HTMLElement>) => {
     preventEventHandle(e);
 
@@ -38,7 +36,12 @@ export default function DragAndDrop({
 
   return (
     <>
-      {cloneElement(children, { onDragEnter, onDrop, onDragOver, onDragLeave })}
+      {cloneElement(children, {
+        onDragEnter,
+        onDrop,
+        onDragOver: preventEventHandle,
+        onDragLeave,
+      })}
     </>
   );
 }

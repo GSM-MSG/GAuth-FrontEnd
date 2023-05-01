@@ -4,7 +4,7 @@ import { FilterList } from '../../../lib/FilterList';
 import Item from './Item';
 import * as S from './style';
 
-export default function SidBar() {
+export default function SideBar() {
   const [filter, setFilter] = useRecoilState(Filter);
 
   const onChange = (grade: string, value: string) => {

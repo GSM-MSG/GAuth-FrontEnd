@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ApproveId, ModalPage, Role } from '../../Atom/Atoms';
-import SidBar from '../common/Sidebar/SideBar';
+import SideBar from '../common/Sidebar/SideBar';
 import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
 import Header from './Header';
@@ -28,7 +28,7 @@ export default function StuListPage({ mode }: { mode: boolean }) {
   return (
     <S.Layout>
       <S.Wrapper>
-        {!mode && <SidBar />}
+        {!mode && <SideBar />}
         <S.Section>
           <div>
             {mode ? <ApplicantHeader /> : <Header />}

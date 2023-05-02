@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil';
 import Portal from '../../common/Portal';
 import InsertStuInfo from './Page/InsertStuInfo';
 import InsertTeacherInfo from './Page/InsertTeacherInfo';
+import InsertGraduInfo from './Page/InsertGraduInfo';
 import SelectGrade from './Page/SelectGrade';
 import * as S from './style';
 import { ApproveId, ModalType } from '../../../Atom/Atoms';
@@ -46,6 +47,9 @@ export default function AddUser({ onClose }: Props) {
         )}
         {modalType === ROLE_TEACHER && (
           <InsertTeacherInfo onClose={onClose} onAccept={acceptUserHandle} />
+        )}
+        {modalType === ROLE_TEACHER && (
+          <InsertGraduInfo onClose={onClose} onAccept={acceptUserHandle} />
         )}
       </S.Wrapper>
     </Portal>

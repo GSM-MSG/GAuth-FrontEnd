@@ -11,7 +11,7 @@ interface Props {
   onAccept: (body: AcceptUserType) => void;
 }
 
-export default function InsertTeacherInfo({ onClose, onAccept }: Props) {
+export default function InsertGradurInfo({ onClose, onAccept }: Props) {
   const MALE = 'MALE';
   const FEMALE = 'FEMALE';
 

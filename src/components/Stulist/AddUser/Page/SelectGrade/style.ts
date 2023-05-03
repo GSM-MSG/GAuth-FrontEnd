@@ -18,7 +18,7 @@ export const SelectBox = styled.div`
     font-size: 0.65em;
     text-align: center;
     color: #515151;
-    font-size: 1.1rem
+    font-size: 1.1rem;
   }
 
   :hover {
@@ -28,6 +28,9 @@ export const SelectBox = styled.div`
         transition: all 0.2s;
         transform: scale(1.4);
       }
+    }
+    span {
+      color: #5499d9;
     }
     p {
       color: #5499d9;
@@ -43,6 +46,12 @@ export const Input = styled.input`
     border: 2px solid #5499d9;
     svg {
       transform: scale(1.4);
+    }
+    span {
+      color: #5499d9;
+    }
+    p {
+      color: #5499d9;
     }
   }
 `;
@@ -74,8 +83,8 @@ export const Label = styled.label`
 
   p {
     position: absolute;
-    font-weight: 600;
-    font-size: 1.2rem;
+    font-weight: 500;
+    font-size: 1.1rem;
     text-align: center;
     color: #515151;
 

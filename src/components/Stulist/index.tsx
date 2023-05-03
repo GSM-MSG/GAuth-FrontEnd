@@ -37,7 +37,7 @@ export default function StuListPage({ mode }: { mode: boolean }) {
           <List type={mode} />
         </S.Section>
       </S.Wrapper>
-      {!approve && <AddUser onClose={onClose} />}
+      {approve && <AddUser onClose={onClose} />}
     </S.Layout>
   );
 }

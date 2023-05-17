@@ -1,5 +1,6 @@
 export type FilterListType = {
   title: string;
-  type: 'grade' | 'classNum';
-  list: string[];
+  type: 'ROLE_STUDENT' | 'ROLE_TEACHER' | 'ROLE_GRADUATE';
+  gradelist: string[];
+  classlist: string[];
 };

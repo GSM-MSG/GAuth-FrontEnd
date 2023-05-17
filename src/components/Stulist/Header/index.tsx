@@ -10,7 +10,7 @@ export default function Header() {
   const filter = useRecoilValue(Filter);
 
   const { getUserList } = useUserList({
-    defaultUri: `/user/user-list?grade=${filter.grade}&classNum=${filter.classNum}&keyword=`,
+    defaultUri: `/user/user-list?grade=${filter.grade}&classNum=${filter.classNum}&keyword=&role=${filter.role}`,
   });
 
   useEffect(() => {

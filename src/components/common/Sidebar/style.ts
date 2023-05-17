@@ -11,7 +11,7 @@ export const SideBar = styled.div`
   padding: 20px 20px 36px;
   display: flex;
   flex-direction: column;
-  gap: 33px;
+  gap: 20px;
 `;
 
 export const SideInput = styled.input`
@@ -32,18 +32,29 @@ export const SideTap = styled.label`
 export const FilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 8px;
+`;
+
+export const RoleWrapper = styled.div<{ menuActive: boolean; select: boolean }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   h3 {
-    color: #1c1c1c;
+    color: ${(props) => (props.select ? '#1c1c1c' : '#a2a2a2')};
     font-weight: 600;
     font-size: 15px;
+    cursor: pointer;
   }
+  svg {
+    transform: ${(props) => !props.menuActive && 'rotate(0.75turn)'};
+    cursor: pointer;
+  }
+`;
 
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 17px;
-  }
+export const MenuWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 14px;
+  gap: 17px;
 `;

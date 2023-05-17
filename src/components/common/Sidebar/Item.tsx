@@ -19,13 +19,13 @@ export default function Item({
     <>
       <S.SideInput
         type="radio"
-        id={type + listValue}
-        name={type}
+        id={title + listValue}
+        name={title}
         checked={select === listValue}
         readOnly
         onClick={onClick}
       />
-      <S.SideTap htmlFor={type + listValue}>
+      <S.SideTap htmlFor={title + listValue}>
         {listValue} {title}
       </S.SideTap>
     </>

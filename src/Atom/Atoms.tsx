@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { LoginFormProps, ClientInform, FixModalType } from '../types';
 import { StuListType } from '../types/StuListType';
+import { StulistFilterType } from '../types/StulistFilterType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -52,7 +53,7 @@ export const FixService = atom<FixModalType>({
   },
 });
 
-export const Filter = atom({
+export const Filter = atom<StulistFilterType>({
   key: 'filter',
   default: {
     role: 'ROLE_STUDENT',

@@ -26,7 +26,9 @@ export default function SideBar() {
           >
             <h3 onClick={() => onChange('role', e.type)}>{e.title}</h3>
             {e.type === 'ROLE_STUDENT' && (
-              <SVG.Arrow onClick={() => setMenuActive((prev) => !prev)} />
+              <div onClick={() => setMenuActive((prev) => !prev)}>
+                <SVG.Arrow />
+              </div>
             )}
           </S.RoleWrapper>
           {menuActive && (

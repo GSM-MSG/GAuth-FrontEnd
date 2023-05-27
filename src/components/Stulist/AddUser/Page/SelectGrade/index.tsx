@@ -7,7 +7,11 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { ModalType } from '../../../../../Atom/Atoms';
-import { ROLE_STUDENT, ROLE_TEACHER } from '../../../../../lib/UserRole';
+import {
+  ROLE_GRADUATE,
+  ROLE_STUDENT,
+  ROLE_TEACHER,
+} from '../../../../../lib/UserRole';
 
 export default function SelectGrade() {
   const setModalType = useSetRecoilState(ModalType);
@@ -39,12 +43,30 @@ export default function SelectGrade() {
             />
             <S.Label htmlFor={ROLE_STUDENT}>
               <SVG.StudentIcon />
-              <p>학생</p>
+              <p>재학생</p>
+              <span>
+                자신이 등록한 서비스만
+                <br /> 관리 가능
+              </span>
             </S.Label>
-            <p>
-              자신이 등록한 서비스만
-              <br /> 관리 가능
-            </p>
+          </S.SelectBox>
+          <S.SelectBox>
+            <S.Input
+              type="radio"
+              id={ROLE_GRADUATE}
+              name={'grade'}
+              checked={userGrade === ROLE_GRADUATE}
+              readOnly
+              onClick={() => setUserGrade(ROLE_GRADUATE)}
+            />
+            <S.Label htmlFor={ROLE_GRADUATE}>
+              <SVG.GraduateIcon />
+              <p>졸업생</p>
+              <span>
+                자신이 등록한 서비스만
+                <br /> 관리 가능
+              </span>
+            </S.Label>
           </S.SelectBox>
           <S.SelectBox>
             <S.Input
@@ -58,11 +80,11 @@ export default function SelectGrade() {
             <S.Label htmlFor={ROLE_TEACHER}>
               <SVG.TeacherIcon />
               <p>선생님</p>
+              <span>
+                서비스 관리 및 유저
+                <br /> 관리 가능
+              </span>
             </S.Label>
-            <p>
-              서비스 관리 및 유저
-              <br /> 관리 가능
-            </p>
           </S.SelectBox>
         </S.Wrapper>
         <SubmitWrapper>

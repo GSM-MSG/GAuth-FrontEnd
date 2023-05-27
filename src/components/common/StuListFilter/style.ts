@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
 
+type RoleWrapperType = {
+  menuActive: boolean;
+  select: boolean;
+};
+
 export const SideBar = styled.div`
   position: sticky;
   width: 120px;
@@ -35,7 +40,7 @@ export const FilterWrapper = styled.div`
   gap: 8px;
 `;
 
-export const RoleWrapper = styled.div<{ menuActive: boolean; select: boolean }>`
+export const RoleWrapper = styled.div<RoleWrapperType>`
   display: flex;
   justify-content: space-between;
   align-items: center;

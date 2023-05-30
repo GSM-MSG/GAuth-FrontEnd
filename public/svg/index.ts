@@ -28,4 +28,5 @@ export * from './StudentIcon';
 export * from './TeacherIcon';
 export * from './FileIcon';
 export * from './AdminIcon';
+export * from './Arrow';
 export * from './GraduateIcon';

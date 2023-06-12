@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import * as SVG from '../../../../public/svg';
 import { Filter } from '../../../Atom/Atoms';
 import { FilterList } from '../../../lib/FilterList';
+import { FilterOptionType } from '../../../types/components/Sidebar';
 import Item from './Item';
 import * as S from './style';
 
@@ -10,7 +11,7 @@ export default function SideBar() {
   const [filter, setFilter] = useRecoilState(Filter);
   const [menuActive, setMenuActive] = useState(false);
 
-  const onChange = (name: 'role' | 'grade' | 'classNum', value: string) => {
+  const onChange = (name: FilterOptionType, value: string) => {
     return setFilter((prev) => {
       if (prev[name] === value && name !== 'role')
         return { ...prev, [name]: '0' };

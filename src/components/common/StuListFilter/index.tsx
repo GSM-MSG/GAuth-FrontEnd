@@ -1,17 +1,19 @@
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
+import * as SVG from '../../../../public/svg';
 import { Filter } from '../../../Atom/Atoms';
 import { FilterList } from '../../../lib/FilterList';
 import Item from './Item';
 import * as S from './style';
-import * as SVG from '../../../../public/svg';
-import { useState } from 'react';
 
 export default function SideBar() {
   const [filter, setFilter] = useRecoilState(Filter);
   const [menuActive, setMenuActive] = useState(false);
 
-  const onChange = (name: string, value: string) => {
-    setFilter((prev) => {
+  const onChange = (name: 'role' | 'grade' | 'classNum', value: string) => {
+    return setFilter((prev) => {
+      if (prev[name] === value && name !== 'role')
+        return { ...prev, [name]: '0' };
       return { ...prev, [name]: value };
     });
   };

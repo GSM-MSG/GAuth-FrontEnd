@@ -49,7 +49,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
             alt="NoImage"
             priority={true}
             src={imgUrl || `/png/NoImage.png`}
-            fill
+            layout="fill"
             sizes="100%"
           />
         </S.PreviewImg>

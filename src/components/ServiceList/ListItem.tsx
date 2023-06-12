@@ -12,7 +12,13 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
     <S.ListItemLayer>
       <S.PreviewImg>
         {imgUrl && (
-          <Image alt="NoImage" priority={true} src={imgUrl} fill sizes="100%" />
+          <Image
+            alt="NoImage"
+            priority={true}
+            src={imgUrl}
+            layout="fill"
+            sizes="100%"
+          />
         )}
       </S.PreviewImg>
       <S.ServiceTitle>

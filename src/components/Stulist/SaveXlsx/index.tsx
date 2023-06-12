@@ -3,7 +3,7 @@ import useFetch from '../../../hooks/useFetch';
 import CreateTitle from '../../common/CreateTitle';
 import DragAndDrop from '../../common/DragAndDrop';
 import Portal from '../../common/Portal';
-import { SubmitWrapper } from '../../NewSignIn/style';
+import { SubmitWrapper } from '../../SignIn/style';
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';

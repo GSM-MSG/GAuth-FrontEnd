@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ApproveId, ModalPage, Role } from '../../Atom/Atoms';
-import SideBar from '../common/Sidebar/SideBar';
+import SideBar from '../common/StuListFilter';
 import AddUser from './AddUser';
 import ApplicantHeader from './ApplicantHeader';
 import Header from './Header';

@@ -51,7 +51,9 @@ export default function Sidebar() {
                   pathname={pathname === navData.url}
                   key={navData.url}
                 >
-                  <Link href={navData.url}>{navData.svg}</Link>
+                  <Link href={navData.url}>
+                    <a>{navData.svg}</a>
+                  </Link>
                 </S.MenuWrapper>
               );
             })}

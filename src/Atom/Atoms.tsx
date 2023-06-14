@@ -57,8 +57,8 @@ export const Filter = atom<StulistFilterType>({
   key: 'filter',
   default: {
     role: 'ROLE_STUDENT',
-    grade: '1',
-    classNum: '1',
+    grade: '0',
+    classNum: '0',
   },
 });
 

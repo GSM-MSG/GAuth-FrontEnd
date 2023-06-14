@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import CreateTitle from '../../../../common/CreateTitle';
 import Input from '../../../../common/Input';
-import { SubmitWrapper } from '../../../../NewSignIn/style';
+import { SubmitWrapper } from '../../../../SignIn/style';
 import { Form } from '../../style';
 import * as S from './style';
 import { AcceptUserType } from '../../../../../types/AcceptUserType';

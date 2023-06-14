@@ -1,5 +1,5 @@
 import CreateTitle from '../../../../common/CreateTitle';
-import { SubmitWrapper } from '../../../../NewSignIn/style';
+import { SubmitWrapper } from '../../../../SignIn/style';
 import * as S from './style';
 import * as SVG from '../../../../../../public/svg';
 import { Form } from '../../style';

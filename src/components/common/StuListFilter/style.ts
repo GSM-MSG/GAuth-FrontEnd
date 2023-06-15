@@ -8,7 +8,7 @@ type RoleWrapperType = {
 export const SideBar = styled.div`
   position: sticky;
   width: 120px;
-  height: 380px;
+  height: max-content;
   top: 15px;
   background: #ffffff;
   border: 1px solid #e4e4e4;
@@ -28,7 +28,7 @@ export const SideInput = styled.input`
 `;
 
 export const SideTap = styled.label`
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   color: #a2a2a2;
@@ -61,5 +61,9 @@ export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 14px;
-  gap: 17px;
+  gap: 12px;
+
+  label:nth-of-type(3) {
+    margin-bottom: 8px;
+  }
 `;

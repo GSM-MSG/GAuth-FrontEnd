@@ -8,7 +8,7 @@ Gauth는 학교 Oauth 서비스로, 교내 프로젝트나 서비스를 만들 �
 
 ## How to Clone?
 ```
- git clone https://github.com/GSM-MSG/GAUTH-frontend.git
+ git clone https://github.com/GSM-MSG/GAuth-FrontEnd.git
 ```
 
 ## How to use?

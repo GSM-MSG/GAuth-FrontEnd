@@ -23,6 +23,7 @@ export default function DeleteService() {
         type: '',
         toggle: false,
       });
+      setServiceCheckList([]);
     },
     successMessage: '삭제 되었습니다.',
     errorMessage: {

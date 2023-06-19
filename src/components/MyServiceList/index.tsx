@@ -21,7 +21,7 @@ export default function MyServiceList() {
       setDeleteState(false);
       setServiceCheckList([]);
     };
-  }, []);
+  }, [user.clientList]);
 
   return (
     <S.Layer>

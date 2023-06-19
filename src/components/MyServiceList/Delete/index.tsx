@@ -4,10 +4,14 @@ import { useUser } from '../../../hooks/useUser';
 import { useRecoilState } from 'recoil';
 import { FixService } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
+import { ServiceCheckList } from '../../../Atom/Atoms';
+import { ClientListType } from '../../../types';
 
 export default function DeleteService() {
   const [user, getUser] = useUser(false);
   const [fix, setFix] = useRecoilState(FixService);
+  const [serviceCheckList, setServiceCheckList] =
+    useRecoilState(ServiceCheckList);
 
   const { fetch } = useFetch({
     url: `/client/${fix.id}`,
@@ -34,7 +38,28 @@ export default function DeleteService() {
         <S.Title>
           <SVG.ErrorIcon />
           <h4>정말 삭제하실건가요?</h4>
-          <p>삭제하시면 다시 복구할 수 없어요.</p>
+          <S.ServiceNameWrapper>
+            <div>
+              {serviceCheckList.map(
+                (data: ClientListType, index) =>
+                  index < 3 && (
+                    <p key={index}>
+                      {data.serviceName.length > 12
+                        ? data.serviceName.slice(0, 4) +
+                          '...' +
+                          data.serviceName.slice(
+                            data.serviceName.length - 4,
+                            data.serviceName.length
+                          )
+                        : data.serviceName}
+                    </p>
+                  )
+              )}
+            </div>
+            {serviceCheckList.length > 3 && (
+              <p>외 {serviceCheckList.length - 3}개</p>
+            )}
+          </S.ServiceNameWrapper>
         </S.Title>
         <S.ButtonWrapper>
           <S.Button modeType={true} onClick={() => fetch()}>

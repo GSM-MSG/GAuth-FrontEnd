@@ -46,15 +46,15 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const ListItemClick = () => {
     deleteState &&
       setServiceCheckList((prev) =>
-        prev.find((data) => data.id === listData.id)
-          ? prev.filter((data) => data.id !== listData.id)
+        prev.find((data) => data.id === id)
+          ? prev.filter((data) => data.id !== id)
           : [...prev, listData]
       );
   };
 
   return (
     <S.ListItemLayer
-      check={serviceCheckList.find((data) => data.id === listData.id)}
+      check={serviceCheckList.find((data) => data.id === id)}
       onClick={ListItemClick}
     >
       <S.PreviweWrapper>
@@ -75,15 +75,13 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       {deleteState && (
         <>
           <S.DeleteSelect
-            name={`${listData.id}`}
+            name={`${id}`}
             type="checkbox"
             checked={
-              serviceCheckList.find((data) => data.id === listData.id)
-                ? true
-                : false
+              serviceCheckList.find((data) => data.id === id) ? true : false
             }
           />
-          <S.CheckContainer htmlFor={`${listData.id}`}>
+          <S.CheckContainer htmlFor={`${id}`}>
             <S.Circle />
           </S.CheckContainer>
         </>

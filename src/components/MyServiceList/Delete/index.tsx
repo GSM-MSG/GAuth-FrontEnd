@@ -1,7 +1,7 @@
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
 import { useUser } from '../../../hooks/useUser';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { FixService } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
 import { ServiceCheckList } from '../../../Atom/Atoms';
@@ -9,7 +9,7 @@ import { ClientListType } from '../../../types';
 
 export default function DeleteService() {
   const [user, getUser] = useUser(false);
-  const [fix, setFix] = useRecoilState(FixService);
+  const setFix = useSetRecoilState(FixService);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
 

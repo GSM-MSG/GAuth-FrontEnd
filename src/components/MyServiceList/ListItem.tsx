@@ -4,7 +4,7 @@ import { ClientListType } from '../../types';
 import * as S from './style';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
@@ -13,7 +13,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const imgUrl = usePreview(serviceUri);
   const modalRef = useRef<HTMLDivElement>(null);
   const fixIconRef = useRef<HTMLElement>(null);
-  const [deleteState, setDeleteState] = useRecoilState(isDelete);
+  const deleteState = useRecoilValue(isDelete);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
 

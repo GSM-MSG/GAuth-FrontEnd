@@ -14,7 +14,7 @@ export default function DeleteService() {
     useRecoilState(ServiceCheckList);
 
   const { fetch } = useFetch({
-    url: `/client/${fix.id}`,
+    url: `/client?ids=${serviceCheckList.map((data) => data.id).join()}`,
     method: 'delete',
     onSuccess: () => {
       getUser();

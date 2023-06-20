@@ -1,7 +1,7 @@
 import * as S from './style';
 import * as SVG from '../../../../public/svg';
 import { useUser } from '../../../hooks/useUser';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { FixService } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
 import { ServiceCheckList } from '../../../Atom/Atoms';
@@ -12,17 +12,13 @@ export default function DeleteService() {
   const setFix = useSetRecoilState(FixService);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
-
+  const resetFix = useResetRecoilState(FixService);
   const { fetch } = useFetch({
     url: `/client?ids=${serviceCheckList.map((data) => data.id).join()}`,
     method: 'delete',
     onSuccess: () => {
       getUser();
-      setFix({
-        id: undefined,
-        type: '',
-        toggle: false,
-      });
+      resetFix();
       setServiceCheckList([]);
     },
     successMessage: '삭제 되었습니다.',

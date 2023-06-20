@@ -44,7 +44,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:13.3.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:18.2.0"],\
-            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.43.9"],\
+            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.45.0"],\
             ["react-notion", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:0.10.0"],\
             ["react-toastify", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:9.1.2"],\
             ["react-wavify", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:1.8.0"],\
@@ -234,6 +234,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/helper-string-parser", "npm:7.21.5"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:7.22.5", {\
+          "packageLocation": "./.yarn/cache/@babel-helper-string-parser-npm-7.22.5-448ff0e489-836851ca5e.zip/node_modules/@babel/helper-string-parser/",\
+          "packageDependencies": [\
+            ["@babel/helper-string-parser", "npm:7.22.5"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["@babel/helper-validator-identifier", [\
@@ -241,6 +248,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@babel-helper-validator-identifier-npm-7.19.1-d84f19e1dc-0eca5e86a7.zip/node_modules/@babel/helper-validator-identifier/",\
           "packageDependencies": [\
             ["@babel/helper-validator-identifier", "npm:7.19.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.22.5", {\
+          "packageLocation": "./.yarn/cache/@babel-helper-validator-identifier-npm-7.22.5-4536624779-7f0f301134.zip/node_modules/@babel/helper-validator-identifier/",\
+          "packageDependencies": [\
+            ["@babel/helper-validator-identifier", "npm:7.22.5"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -283,7 +297,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@babel-parser-npm-7.21.5-6ab0121057-c7ec0dae79.zip/node_modules/@babel/parser/",\
           "packageDependencies": [\
             ["@babel/parser", "npm:7.21.5"],\
-            ["@babel/types", "npm:7.21.5"]\
+            ["@babel/types", "npm:7.22.5"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -336,6 +350,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/types", "npm:7.21.5"],\
             ["@babel/helper-string-parser", "npm:7.21.5"],\
             ["@babel/helper-validator-identifier", "npm:7.19.1"],\
+            ["to-fast-properties", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:7.22.5", {\
+          "packageLocation": "./.yarn/cache/@babel-types-npm-7.22.5-d1e4264bef-c13a9c1dc7.zip/node_modules/@babel/types/",\
+          "packageDependencies": [\
+            ["@babel/types", "npm:7.22.5"],\
+            ["@babel/helper-string-parser", "npm:7.22.5"],\
+            ["@babel/helper-validator-identifier", "npm:7.22.5"],\
             ["to-fast-properties", "npm:2.0.0"]\
           ],\
           "linkType": "HARD"\
@@ -1040,7 +1064,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["next", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:13.3.4"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:18.2.0"],\
-            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.43.9"],\
+            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.45.0"],\
             ["react-notion", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:0.10.0"],\
             ["react-toastify", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:9.1.2"],\
             ["react-wavify", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:1.8.0"],\
@@ -3738,17 +3762,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["react-hook-form", [\
-        ["npm:7.43.9", {\
-          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.43.9-3a3f4f3335-65b94de625.zip/node_modules/react-hook-form/",\
+        ["npm:7.45.0", {\
+          "packageLocation": "./.yarn/cache/react-hook-form-npm-7.45.0-7021c1ab3a-3e35253f0e.zip/node_modules/react-hook-form/",\
           "packageDependencies": [\
-            ["react-hook-form", "npm:7.43.9"]\
+            ["react-hook-form", "npm:7.45.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.43.9", {\
-          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-4c2a524d6b/0/cache/react-hook-form-npm-7.43.9-3a3f4f3335-65b94de625.zip/node_modules/react-hook-form/",\
+        ["virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.45.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-hook-form-virtual-45494989cc/0/cache/react-hook-form-npm-7.45.0-7021c1ab3a-3e35253f0e.zip/node_modules/react-hook-form/",\
           "packageDependencies": [\
-            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.43.9"],\
+            ["react-hook-form", "virtual:f542b976f67bf6097c40fb81bd15aa36dab2a82bd9922a7ffce273cf66da3a65d5bd208ecc486fc923781b0172077c71e4eca2880765eb3fe6d69b2f0eab362b#npm:7.45.0"],\
             ["@types/react", "npm:18.2.0"],\
             ["react", "npm:18.2.0"]\
           ],\

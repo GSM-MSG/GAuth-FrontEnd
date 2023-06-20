@@ -45,6 +45,7 @@ export default function NewServicePage() {
     onSuccess: (data) => {
       setServiceData(data);
       setModal(true);
+      reset();
     },
   });
 

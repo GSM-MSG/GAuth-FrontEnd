@@ -48,12 +48,28 @@ export const Title = styled.div`
     font-size: 0.8em;
     color: #1c1c1c;
   }
+`;
+
+export const ServiceNameWrapper = styled.div`
+  display: flex;
 
   p {
     margin-top: 6px;
+    margin-right: 3px;
     font-weight: 500;
     font-size: 0.65em;
     color: #929292;
+  }
+
+  div {
+    display: flex;
+
+    p:after {
+      content: ',';
+    }
+    p:last-child:after {
+      content: none;
+    }
   }
 `;
 

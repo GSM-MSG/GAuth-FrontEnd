@@ -7,7 +7,7 @@ import Input from '../common/Input';
 import Portal from '../common/Portal';
 import ServiceInfoModal from './InfoModal';
 import * as S from './style';
-
+  
 export default function NewServicePage() {
   const regUrl =
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;

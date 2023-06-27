@@ -20,7 +20,7 @@
     "next": "^12.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.5",
+    "react-hook-form": "^7.45.0",
     "react-notion": "^0.10.0",
     "react-toastify": "^9.1.1",
     "react-wavify": "^1.7.0",

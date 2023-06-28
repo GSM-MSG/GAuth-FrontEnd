@@ -64,7 +64,7 @@ export default function NewSignInPage() {
     },
   });
 
-  const { fetch: authLogin } = useFetch<OauthCode>({
+  const { fetch: authLogin, isLoading: authLoginLoding } = useFetch<OauthCode>({
     url: '/oauth/code',
     method: 'post',
     onSuccess: (data) => {
@@ -78,12 +78,11 @@ export default function NewSignInPage() {
     },
   });
 
-  const { fetch: login } = useFetch<TokenType>({
+  const { fetch: login, isLoading: loginLoding } = useFetch<TokenType>({
     url: '/auth',
     method: 'post',
     onSuccess: (data) => {
       const tokenManager = new TokenManager();
-
       tokenManager.setToken(data);
       router.replace('/');
     },
@@ -106,11 +105,12 @@ export default function NewSignInPage() {
   }, [checkAuto, isQuery, router]);
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
+    if (loginLoding || authLoginLoding) return;
+
     const data = {
       email: inputs.email + '@gsm.hs.kr',
       password: inputs.password,
     };
-
     isQuery ? authLogin(data) : login(data);
   };
 

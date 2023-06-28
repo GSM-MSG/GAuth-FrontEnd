@@ -1,5 +1,10 @@
 import { atom } from 'recoil';
-import { LoginFormProps, ClientInform, FixModalType } from '../types';
+import {
+  LoginFormProps,
+  ClientInform,
+  FixModalType,
+  ClientListType,
+} from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
 
@@ -57,8 +62,8 @@ export const Filter = atom<StulistFilterType>({
   key: 'filter',
   default: {
     role: 'ROLE_STUDENT',
-    grade: '1',
-    classNum: '1',
+    grade: '0',
+    classNum: '0',
   },
 });
 
@@ -79,5 +84,12 @@ export const ApproveId = atom<number | undefined>({
 
 export const Role = atom<string[]>({
   key: 'userRole',
+  default: [],
+});
+
+export const isDelete = atom({ key: 'isDelete', default: false });
+
+export const ServiceCheckList = atom<ClientListType[]>({
+  key: 'serviceCheckList',
   default: [],
 });

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import NewSignUpPage from '../components/NewSignUp';
+import NewSignUpPage from '../components/SignUp';
 import SEOConfig from '../components/SEO';
 
 const SignUp: NextPage = () => {

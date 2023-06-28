@@ -2,11 +2,10 @@ import Link from 'next/link';
 import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
 import * as S from './style';
-import * as SVG from '../../../public/svg';
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
-import { FixService } from '../../Atom/Atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
   const { id, serviceName, serviceUri } = listData;
@@ -14,6 +13,9 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const imgUrl = usePreview(serviceUri);
   const modalRef = useRef<HTMLDivElement>(null);
   const fixIconRef = useRef<HTMLElement>(null);
+  const deleteState = useRecoilValue(isDelete);
+  const [serviceCheckList, setServiceCheckList] =
+    useRecoilState(ServiceCheckList);
 
   useEffect(() => {
     const checkOutSide = (e: MouseEvent) => {
@@ -41,43 +43,49 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
     });
   };
 
+  const ListItemClick = () => {
+    deleteState &&
+      setServiceCheckList((prev) =>
+        prev.find((data) => data.id === id)
+          ? prev.filter((data) => data.id !== id)
+          : [...prev, listData]
+      );
+  };
+
   return (
-    <S.ListItemLayer>
+    <S.ListItemLayer
+      check={serviceCheckList.find((data) => data.id === id)}
+      onClick={ListItemClick}
+    >
       <S.PreviweWrapper>
         <S.PreviewImg>
           <Image
             alt="NoImage"
             priority={true}
             src={imgUrl || `/png/NoImage.png`}
-            fill
+            layout="fill"
             sizes="100%"
           />
         </S.PreviewImg>
-        <i
-          ref={fixIconRef}
-          onClick={() => {
-            setFix((prev) => {
-              return {
-                id: id,
-                type: '',
-                toggle: !prev.toggle,
-              };
-            });
-          }}
-        >
-          <SVG.FixIcon />
-        </i>
-        {fix.id === id && fix.toggle && (
-          <S.ItemController ref={modalRef}>
-            <p onClick={() => setTypeHandle('modify')}>수정</p>
-            <p onClick={() => setTypeHandle('delete')}>삭제</p>
-          </S.ItemController>
-        )}
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitle>{serviceName}</S.ServiceTitle>
         <Link href={serviceUri}>{serviceUri}</Link>
       </S.ServiceInfoWrapper>
+      {deleteState && (
+        <>
+          <S.DeleteSelect
+            name={`${id}`}
+            type="checkbox"
+            checked={
+              serviceCheckList.find((data) => data.id === id) ? true : false
+            }
+          />
+          <S.CheckContainer htmlFor={`${id}`}>
+            <S.Circle />
+          </S.CheckContainer>
+        </>
+      )}
     </S.ListItemLayer>
   );
 }

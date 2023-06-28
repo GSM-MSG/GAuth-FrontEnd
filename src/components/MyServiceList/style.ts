@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ClientListType } from '../../types';
 
 export const Layer = styled.div`
   width: 100%;
@@ -13,12 +14,31 @@ export const Layer = styled.div`
   }
 `;
 
-export const Title = styled.h1`
+export const TitleContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Title = styled.h1`
   font-weight: 700;
   font-size: 16px;
   color: #000000;
-  text-align: start;
+`;
+
+export const Delete = styled.p`
+  font-size: 16px;
+  color: #929292;
+  cursor: pointer;
+`;
+
+export const DeleteContainer = styled.div`
+  display: flex;
+  gap: 14px;
+
+  p:nth-child(1) {
+    color: #f03131;
+  }
 `;
 
 export const ListWrapper = styled.ul`
@@ -41,8 +61,11 @@ export const ListItemLayer = styled.li`
   aspect-ratio: auto 1 / 0.49;
   display: flex;
   background: #ffffff;
-  border: 1px solid #e4e4e4;
+  border: ${({ check }: { check: ClientListType | undefined }) =>
+    check ? '1px solid #5499D9' : '1px solid #e4e4e4'};
+  cursor: pointer;
   border-radius: 9px;
+  position: relative;
   @media (max-width: 1100px) {
     width: 24vw;
   }
@@ -51,6 +74,52 @@ export const ListItemLayer = styled.li`
   }
   @media (max-width: 600px) {
     width: 100%;
+  }
+`;
+
+export const CheckContainer = styled.label`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  &:after {
+    opacity: 0;
+    content: ' ';
+    background: url('/png/Check.png');
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 5px;
+    top: 4px;
+  }
+`;
+
+export const Circle = styled.span`
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #e4e4e4;
+  box-sizing: border-box;
+  border-radius: 50%;
+  position: relative;
+`;
+
+export const DeleteSelect = styled.input`
+  position: absolute;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 1px;
+
+  &:checked + ${CheckContainer} {
+    &:after {
+      opacity: 1;
+    }
+    & span {
+      border: 1px solid #5499d9;
+    }
   }
 `;
 
@@ -70,58 +139,6 @@ export const PreviweWrapper = styled.div`
       top: 14px;
       left: 17px;
     }
-  }
-`;
-
-export const ItemController = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 8px;
-  transform: translateY(-50%);
-  width: 73px;
-  aspect-ratio: auto 1 / 0.986;
-  border-radius: 7px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: fadeIn 0.3s ease;
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0.5;
-      transform: translateY(-75%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(-50%);
-    }
-  }
-
-  p {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 9px;
-    font-weight: 500;
-    font-size: 13px;
-    color: #d1d1d1;
-    cursor: pointer;
-    transition: 0.5s;
-
-    :hover {
-      color: #ffff;
-    }
-  }
-
-  @media (max-width: 1100px) {
-    width: 6vw;
-  }
-
-  @media (max-width: 800px) {
-    width: 73px;
   }
 `;
 
@@ -182,6 +199,7 @@ export const EmptyLisyLayer = styled.div`
   box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
   color: #929292;
   white-space: nowrap;
+  cursor: pointer;
 
   h1 {
     transition: all 0.2s;

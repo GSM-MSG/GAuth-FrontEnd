@@ -57,7 +57,7 @@ export default function Profile() {
                 alt="NoImage"
                 priority={true}
                 src={user.profileUrl}
-                fill
+                layout="fill"
                 sizes="100%"
               />
             </S.Profile>

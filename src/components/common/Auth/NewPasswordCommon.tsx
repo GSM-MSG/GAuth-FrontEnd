@@ -74,7 +74,7 @@ export default function NewPasswordCommon({
               pattern: {
                 value: passwordRegex,
                 message:
-                  '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
+                  '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 20자 이하 형식을 맞춰주세요',
               },
               maxLength: 72,
               onChange() {

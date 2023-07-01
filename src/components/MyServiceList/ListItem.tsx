@@ -57,6 +57,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       check={serviceCheckList.find((data) => data.id === id)}
       onClick={ListItemClick}
     >
+      <S.Modify>서비스 수정하기</S.Modify>
       <S.PreviweWrapper>
         <S.PreviewImg>
           <Image
@@ -70,7 +71,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitle>{serviceName}</S.ServiceTitle>
-        <Link href={serviceUri}>{serviceUri}</Link>
+        <S.ServiceLink href={serviceUri}>{serviceUri}</S.ServiceLink>
       </S.ServiceInfoWrapper>
       {deleteState && (
         <>

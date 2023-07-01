@@ -39,7 +39,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
 
   const setTypeHandle = (type: string) => {
     setFix((prev) => {
-      return { ...prev, type: type };
+      return { ...prev, id, type: type };
     });
   };
 
@@ -57,7 +57,15 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       check={serviceCheckList.find((data) => data.id === id)}
       onClick={ListItemClick}
     >
-      <S.Modify>서비스 수정하기</S.Modify>
+      {!deleteState && (
+        <S.Modify
+          onClick={() => {
+            setTypeHandle('modify');
+          }}
+        >
+          서비스 수정하기
+        </S.Modify>
+      )}
       <S.PreviweWrapper>
         <S.PreviewImg>
           <Image

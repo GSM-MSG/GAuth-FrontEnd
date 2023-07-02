@@ -32,33 +32,34 @@ export default function MyServiceList() {
           <S.Title>내가 등록한 서비스</S.Title>
         )}
 
-        {user.clientList.length !== 0 && deleteState ? (
-          <S.DeleteContainer>
-            <S.Delete
-              onClick={() =>
-                serviceCheckList.length > 0 &&
-                setFix((prev) => {
-                  return {
-                    ...prev,
-                    type: 'delete',
-                  };
-                })
-              }
-            >
-              삭제
-            </S.Delete>
-            <S.Delete
-              onClick={() => {
-                setDeleteState(false);
-                setServiceCheckList([]);
-              }}
-            >
-              취소
-            </S.Delete>
-          </S.DeleteContainer>
-        ) : (
-          <S.Delete onClick={() => setDeleteState(true)}>삭제</S.Delete>
-        )}
+        {user.clientList.length !== 0 &&
+          (deleteState ? (
+            <S.DeleteContainer>
+              <S.Delete
+                onClick={() =>
+                  serviceCheckList.length > 0 &&
+                  setFix((prev) => {
+                    return {
+                      ...prev,
+                      type: 'delete',
+                    };
+                  })
+                }
+              >
+                삭제
+              </S.Delete>
+              <S.Delete
+                onClick={() => {
+                  setDeleteState(false);
+                  setServiceCheckList([]);
+                }}
+              >
+                취소
+              </S.Delete>
+            </S.DeleteContainer>
+          ) : (
+            <S.Delete onClick={() => setDeleteState(true)}>삭제</S.Delete>
+          ))}
       </S.TitleContainer>
       {user.clientList.length !== 0 ? (
         <S.ListWrapper>

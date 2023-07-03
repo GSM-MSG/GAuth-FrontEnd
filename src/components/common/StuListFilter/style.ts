@@ -13,7 +13,7 @@ export const SideBar = styled.div`
   background: #ffffff;
   border: 1px solid #e4e4e4;
   border-radius: 10px;
-  padding: 25px 13px 25px 40px;
+  padding: 25px 15px 25px 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;

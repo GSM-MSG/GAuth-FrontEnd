@@ -29,7 +29,7 @@ export default function MyServiceList() {
         {deleteState ? (
           <S.Title>서비스 삭제</S.Title>
         ) : (
-          <S.Title>내가 등록한 서비스</S.Title>
+          <S.Title>내 서비스</S.Title>
         )}
 
         {user.clientList.length !== 0 &&

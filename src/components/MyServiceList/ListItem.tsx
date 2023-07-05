@@ -44,12 +44,13 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   };
 
   const ListItemClick = () => {
-    deleteState &&
-      setServiceCheckList((prev) =>
-        prev.find((data) => data.id === id)
-          ? prev.filter((data) => data.id !== id)
-          : [...prev, listData]
-      );
+    deleteState
+      ? setServiceCheckList((prev) =>
+          prev.find((data) => data.id === id)
+            ? prev.filter((data) => data.id !== id)
+            : [...prev, listData]
+        )
+      : setTypeHandle('modify');
   };
 
   return (
@@ -57,15 +58,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       check={serviceCheckList.find((data) => data.id === id)}
       onClick={ListItemClick}
     >
-      {!deleteState && (
-        <S.Modify
-          onClick={() => {
-            setTypeHandle('modify');
-          }}
-        >
-          서비스 수정하기
-        </S.Modify>
-      )}
+      {!deleteState && <S.Modify>서비스 수정하기</S.Modify>}
       <S.PreviweWrapper>
         <S.PreviewImg>
           <Image
@@ -79,7 +72,14 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitle>{serviceName}</S.ServiceTitle>
-        <S.ServiceLink href={serviceUri}>{serviceUri}</S.ServiceLink>
+        <S.ServiceLink
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          href={serviceUri}
+        >
+          {serviceUri}
+        </S.ServiceLink>
       </S.ServiceInfoWrapper>
       {deleteState && (
         <>

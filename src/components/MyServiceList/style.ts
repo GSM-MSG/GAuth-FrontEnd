@@ -54,7 +54,32 @@ export const ListWrapper = styled.ul`
   }
 `;
 
-//ServiceListItem
+
+export const Modify = styled.div`
+  position: absolute;
+  opacity: 0;
+  font-size: 13px;
+  color: #3f9aee;
+  right: 8px;
+  top: 8px;
+  transition: 0.5s;
+`;
+
+export const ServiceLink = styled.a`
+  color: #929292;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  :hover {
+    color: #5499d9;
+  }
+`;
 
 export const ListItemLayer = styled.li`
   width: 294px;
@@ -66,6 +91,13 @@ export const ListItemLayer = styled.li`
   cursor: pointer;
   border-radius: 9px;
   position: relative;
+  transition: 0.5s;
+  &:hover {
+    border: 1px solid #5499d9;
+    ${Modify} {
+      opacity: 1;
+    }
+  }
   @media (max-width: 1100px) {
     width: 24vw;
   }
@@ -155,22 +187,6 @@ export const ServiceInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  a {
-    color: #929292;
-    font-weight: 500;
-    font-size: 13px;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    :hover {
-      color: #5499d9;
-    }
-  }
 `;
 
 export const ServiceTitle = styled.h3`

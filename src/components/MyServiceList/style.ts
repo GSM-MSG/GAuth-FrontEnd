@@ -55,7 +55,6 @@ export const ListWrapper = styled.ul`
   }
 `;
 
-//ServiceListItem
 
 export const Modify = styled.div`
   position: absolute;

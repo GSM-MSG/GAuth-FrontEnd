@@ -39,17 +39,18 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
 
   const setTypeHandle = (type: string) => {
     setFix((prev) => {
-      return { ...prev, type: type };
+      return { ...prev, id, type: type };
     });
   };
 
   const ListItemClick = () => {
-    deleteState &&
-      setServiceCheckList((prev) =>
-        prev.find((data) => data.id === id)
-          ? prev.filter((data) => data.id !== id)
-          : [...prev, listData]
-      );
+    deleteState
+      ? setServiceCheckList((prev) =>
+          prev.find((data) => data.id === id)
+            ? prev.filter((data) => data.id !== id)
+            : [...prev, listData]
+        )
+      : setTypeHandle('modify');
   };
 
   return (
@@ -57,6 +58,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       check={serviceCheckList.find((data) => data.id === id)}
       onClick={ListItemClick}
     >
+      {!deleteState && <S.Modify>서비스 수정하기</S.Modify>}
       <S.PreviweWrapper>
         <S.PreviewImg>
           <Image
@@ -70,7 +72,14 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitle>{serviceName}</S.ServiceTitle>
-        <Link href={serviceUri}>{serviceUri}</Link>
+        <S.ServiceLink
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          href={serviceUri}
+        >
+          {serviceUri}
+        </S.ServiceLink>
       </S.ServiceInfoWrapper>
       {deleteState && (
         <>

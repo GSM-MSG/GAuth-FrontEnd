@@ -30,8 +30,9 @@ export default function VerifyEmail({ title }: Props) {
       <CheckingMessage>
         <h1>이메일로 인증링크를 보냈어요.</h1>
         <p>
-          혹시 이메일이 안오셨다면 스팸 메일을
-          <br /> 확인해주세요.
+          이메일이 오지 않았다면
+          <br />
+          스팸 메일함을 확인해 보세요!
         </p>
       </CheckingMessage>
       <SubmitWrapper>

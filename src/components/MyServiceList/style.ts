@@ -4,7 +4,7 @@ import { ClientListType } from '../../types';
 export const Layer = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 50px;
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +53,6 @@ export const ListWrapper = styled.ul`
     gap: 10px 1.2727vw;
   }
 `;
-
 
 export const Modify = styled.div`
   position: absolute;
@@ -203,32 +202,37 @@ export const ServiceTitle = styled.h3`
 `;
 
 export const EmptyLisyLayer = styled.div`
-  margin-top: 30px;
+  margin: 1vw 0 2vw 0;
   width: 100%;
-  height: 300px;
-  display: inline-flex;
+  height: 380px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  border-radius: 20px;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
   transition: ease 0.2s;
-  box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
-  color: #929292;
+  color: #000;
   white-space: nowrap;
   cursor: pointer;
 
   h1 {
-    transition: all 0.2s;
-    font-size: 30px;
-    margin: 0;
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #929292;
   }
 
   :hover {
-    box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
-    color: #111111;
+    border: 1px solid #3f9aee;
 
-    h1 {
-      transform: scale(1.3);
+    p {
+      color: #3f9aee;
     }
   }
 

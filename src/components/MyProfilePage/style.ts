@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 
 export const TitleSection = styled.div`
   width: 100%;
-  margin-top: 120px;
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -52,7 +52,7 @@ export const ProfileWrapper = styled.div`
   background: #ffffff;
   border: 1px solid #e4e4e4;
   border-radius: 10px;
-  margin-top: 60px;
+  margin-top: 2vw;
   display: flex;
 
   @media (max-width: 500px) {

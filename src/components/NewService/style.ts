@@ -64,6 +64,18 @@ export const InputContainer = styled.div`
   gap: 10px;
   width: 100%;
   margin-top: 53px;
+
+  span {
+    margin-top: 28px;
+    font-weight: 400;
+    font-size: 0.65em;
+    color: #929292;
+    display: flex;
+    align-items: center;
+    div {
+      margin-left: 4px;
+    }
+  }
 `;
 
 export const Submit = styled.button`

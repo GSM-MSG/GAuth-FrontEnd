@@ -13,7 +13,7 @@ export default function NewServicePage() {
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
   const [modal, setModal] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isClose, setIsOpen] = useState<boolean>(true);
 
   const serviceDefaultData: ResNewService = {
     clientId: '',
@@ -42,9 +42,9 @@ export default function NewServicePage() {
 
   let disclosureStatus: string;
 
-  const handleOpen = () => {
-    setIsOpen(!isOpen);
-    if (isOpen) {
+  const handleClose = () => {
+    setIsClose(!isClose);
+    if (isClose) {
       disclosureStatus = 'PRIVATE';
     } else {
       disclosureStatus = 'PUBLIC';

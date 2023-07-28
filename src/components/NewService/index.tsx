@@ -13,7 +13,7 @@ export default function NewServicePage() {
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
   const [modal, setModal] = useState<boolean>(false);
-  const [isClose, setIsOpen] = useState<boolean>(true);
+  const [isClose, setIsClose] = useState<boolean>(true);
 
   const serviceDefaultData: ResNewService = {
     clientId: '',
@@ -128,12 +128,12 @@ export default function NewServicePage() {
             />
             <span>
               공개여부:{' '}
-              {isOpen ? (
-                <div onClick={handleOpen}>
+              {isClose ? (
+                <div onClick={handleClose}>
                   <SVG.AddServicePublic />
                 </div>
               ) : (
-                <div onClick={handleOpen}>
+                <div onClick={handleClose}>
                   <SVG.AddServicePrivate />
                 </div>
               )}

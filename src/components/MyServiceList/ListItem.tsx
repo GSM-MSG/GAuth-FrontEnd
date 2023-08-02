@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
 import * as S from './style';
+import * as SVG from '../../../public/svg';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 
@@ -16,6 +17,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const deleteState = useRecoilValue(isDelete);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   useEffect(() => {
     const checkOutSide = (e: MouseEvent) => {
@@ -71,7 +73,10 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
         </S.PreviewImg>
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
-        <S.ServiceTitle>{serviceName}</S.ServiceTitle>
+        <S.ServiceTitleContainer>
+          {isOpen ? <SVG.AddServicePublic /> : <SVG.AddServicePrivate />}
+          <S.ServiceTitle>{serviceName}</S.ServiceTitle>
+        </S.ServiceTitleContainer>
         <S.ServiceLink
           onClick={(e) => {
             e.stopPropagation();

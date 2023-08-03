@@ -1,6 +1,6 @@
 import * as SVG from '../../../../public/svg';
 import { ResNewService } from '../../../types/ResAddService';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Portal from '../../common/Portal';
 import Info from './Info';
 import * as S from './style';
@@ -12,8 +12,23 @@ export default function ServiceInfoModal({
   serviceData: ResNewService;
   onClose: () => void;
 }) {
-  const { clientId, clientSecret, redirectUri, serviceName, serviceUri } =
-    serviceData;
+  const {
+    clientId,
+    clientSecret,
+    redirectUri,
+    serviceName,
+    serviceUri,
+    serviceScope,
+  } = serviceData;
+
+  const [publicStatus, setPublicStatus] = useState('');
+  useEffect(() => {
+    if(serviceScope === 'PRIVATE') {
+      setPublicStatus('비공개');
+    } else if (serviceScope === 'PUBLIC') {
+      setPublicStatus('공개');
+    }
+  } ,[]);
 
   return (
     <Portal onClose={onClose}>
@@ -33,6 +48,7 @@ export default function ServiceInfoModal({
               value={clientSecret}
               copy={true}
             />
+            <Info title="공개여부 :" value={publicStatus} />
           </div>
           <button onClick={onClose}>확인</button>
         </S.ModalSection>

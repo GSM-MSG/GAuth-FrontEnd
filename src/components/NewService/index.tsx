@@ -21,7 +21,7 @@ export default function NewServicePage() {
     redirectUri: '',
     serviceName: '',
     serviceUri: '',
-    disclosureStatus: '',
+    serviceScope: '',
   };
 
   const [serviceData, setServiceData] =
@@ -41,13 +41,13 @@ export default function NewServicePage() {
     reset(serviceDefaultData);
   };
 
-  let disclosureStatus: string;
+  const [disclosureStatus, setDisclosureStatus] = useState('PUBLIC');
   const handleClose = () => {
     setIsClose(!isClose);
     if (isClose) {
-      disclosureStatus = 'PRIVATE';
+      setDisclosureStatus('PRIVATE');
     } else {
-      disclosureStatus = 'PUBLIC';
+      setDisclosureStatus('PUBLIC');
     }
   };
 
@@ -143,7 +143,6 @@ export default function NewServicePage() {
         </S.Form>
         {modal && (
           <ServiceInfoModal
-            disclosureStatus={disclosureStatus}
             serviceData={serviceData}
             onClose={onClose}
           />

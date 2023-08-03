@@ -9,7 +9,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
-  const { id, serviceName, serviceUri } = listData;
+  const { id, serviceName, serviceUri, serviceScope } = listData;
   const [fix, setFix] = useRecoilState(FixService);
   const imgUrl = usePreview(serviceUri);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -17,7 +17,6 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const deleteState = useRecoilValue(isDelete);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   useEffect(() => {
     const checkOutSide = (e: MouseEvent) => {
@@ -74,7 +73,11 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitleContainer>
-          {isOpen ? <SVG.AddServicePublic /> : <SVG.AddServicePrivate />}
+          {serviceScope === 'PUBLIC' ? (
+            <SVG.AddServicePublic />
+          ) : (
+            <SVG.AddServicePrivate />
+          )}
           <S.ServiceTitle>{serviceName}</S.ServiceTitle>
         </S.ServiceTitleContainer>
         <S.ServiceLink

@@ -20,7 +20,9 @@ export default function ModifyMyService() {
   } = useForm();
 
   const [user, getUser] = useUser(true);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(
+    watch('serviceScope') === 'PUBLIC' ? true : false
+  );
 
   const [fix, setFix] = useRecoilState(FixService);
 
@@ -58,11 +60,12 @@ export default function ModifyMyService() {
   }, []);
 
   const ModifyService = async (value: FieldValues) => {
-    const { serviceName, serviceUri, redirectUri } = value;
+    const { serviceName, serviceUri, redirectUri, serviceScope } = value;
     fetch({
       serviceName,
       serviceUri,
       redirectUri,
+      serviceScope: isOpen ? 'PUBLIC' : 'PRIVATE',
     });
   };
 

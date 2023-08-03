@@ -1,5 +1,6 @@
 import * as SVG from '../../../../public/svg';
 import { ResNewService } from '../../../types/ResAddService';
+import { useState } from 'react';
 import Portal from '../../common/Portal';
 import Info from './Info';
 import * as S from './style';

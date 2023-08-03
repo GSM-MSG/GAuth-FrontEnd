@@ -21,6 +21,7 @@ export default function NewServicePage() {
     redirectUri: '',
     serviceName: '',
     serviceUri: '',
+    disclosureStatus: '',
   };
 
   const [serviceData, setServiceData] =
@@ -41,7 +42,6 @@ export default function NewServicePage() {
   };
 
   let disclosureStatus: string;
-
   const handleClose = () => {
     setIsClose(!isClose);
     if (isClose) {
@@ -142,7 +142,11 @@ export default function NewServicePage() {
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
+          <ServiceInfoModal
+            disclosureStatus={disclosureStatus}
+            serviceData={serviceData}
+            onClose={onClose}
+          />
         )}
       </S.Wrapper>
     </S.Layout>

@@ -20,9 +20,7 @@ export default function ModifyMyService() {
   } = useForm();
 
   const [user, getUser] = useUser(true);
-  const [isOpen, setIsOpen] = useState<boolean>(
-    watch('serviceScope') === 'PUBLIC' ? true : false
-  );
+  const [serviceScope, setServiceScope] = useState<string>('');
 
   const [fix, setFix] = useRecoilState(FixService);
 
@@ -33,6 +31,7 @@ export default function ModifyMyService() {
     method: 'get',
     onSuccess: (data) => {
       reset({ ...data });
+      setServiceScope(data.serviceScope);
     },
   });
 
@@ -60,12 +59,12 @@ export default function ModifyMyService() {
   }, []);
 
   const ModifyService = async (value: FieldValues) => {
-    const { serviceName, serviceUri, redirectUri, serviceScope } = value;
+    const { serviceName, serviceUri, redirectUri } = value;
     fetch({
       serviceName,
       serviceUri,
       redirectUri,
-      serviceScope: isOpen ? 'PUBLIC' : 'PRIVATE',
+      serviceScope,
     });
   };
 
@@ -74,7 +73,7 @@ export default function ModifyMyService() {
   };
 
   const ChangeSeviceScope = () => {
-    setIsOpen((prev) => !prev);
+    setServiceScope((prev) => (prev === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC'));
   };
 
   return (
@@ -151,7 +150,7 @@ export default function ModifyMyService() {
               <S.Scope>
                 <p>공개 여부 :</p>
                 <div onClick={ChangeSeviceScope}>
-                  {isOpen ? (
+                  {serviceScope === 'PUBLIC' ? (
                     <SVG.AddServicePublic />
                   ) : (
                     <SVG.AddServicePrivate />

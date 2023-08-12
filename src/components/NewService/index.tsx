@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
@@ -13,6 +13,7 @@ export default function NewServicePage() {
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
   const [modal, setModal] = useState<boolean>(false);
+  const [isClose, setIsClose] = useState<boolean>(true);
 
   const serviceDefaultData: ResNewService = {
     clientId: '',
@@ -20,6 +21,7 @@ export default function NewServicePage() {
     redirectUri: '',
     serviceName: '',
     serviceUri: '',
+    serviceScope: '',
   };
 
   const [serviceData, setServiceData] =
@@ -39,6 +41,16 @@ export default function NewServicePage() {
     reset(serviceDefaultData);
   };
 
+  const [disclosureStatus, setDisclosureStatus] = useState('PUBLIC');
+  const handleClose = () => {
+    setIsClose(!isClose);
+    if (isClose) {
+      setDisclosureStatus('PRIVATE');
+    } else {
+      setDisclosureStatus('PUBLIC');
+    }
+  };
+
   const { fetch } = useFetch<ResNewService>({
     url: '/client',
     method: 'post',
@@ -54,6 +66,7 @@ export default function NewServicePage() {
       serviceName: inputs.serviceName,
       serviceUri: inputs.serviceUri,
       redirectUri: inputs.redirectUri,
+      serviceScope: disclosureStatus,
     });
 
   return (
@@ -113,11 +126,26 @@ export default function NewServicePage() {
                 },
               })}
             />
+            <span>
+              공개여부:{' '}
+              {isClose ? (
+                <div onClick={handleClose}>
+                  <SVG.AddServicePublic />
+                </div>
+              ) : (
+                <div onClick={handleClose}>
+                  <SVG.AddServicePrivate />
+                </div>
+              )}
+            </span>
           </S.InputContainer>
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
+          <ServiceInfoModal
+            serviceData={serviceData}
+            onClose={onClose}
+          />
         )}
       </S.Wrapper>
     </S.Layout>

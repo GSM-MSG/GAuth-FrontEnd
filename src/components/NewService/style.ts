@@ -74,6 +74,7 @@ export const InputContainer = styled.div`
     align-items: center;
     div {
       margin-left: 4px;
+      cursor: pointer;
     }
   }
 `;

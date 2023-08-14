@@ -71,7 +71,6 @@ export const ServiceLink = styled.a`
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
@@ -91,12 +90,18 @@ export const ListItemLayer = styled.li`
   border-radius: 9px;
   position: relative;
   transition: 0.5s;
+  padding-right: 20px;
+
   &:hover {
     border: 1px solid #5499d9;
     ${Modify} {
       opacity: 1;
     }
+    svg {
+      display: none;
+    }
   }
+
   @media (max-width: 1100px) {
     width: 24vw;
   }
@@ -188,16 +193,34 @@ export const ServiceInfoWrapper = styled.div`
   justify-content: center;
 `;
 
+export const ServiceTitleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: auto;
+  gap: 4px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  path {
+    fill: #3f9aee;
+  }
+`;
+
 export const ServiceTitle = styled.h3`
-  font-size: 13px;
+  width: 100%;
+  font-size: 14px;
   line-height: 16px;
+  margin-top: 4px;
   color: #000000;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 `;
 

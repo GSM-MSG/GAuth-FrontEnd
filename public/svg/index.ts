@@ -30,3 +30,5 @@ export * from './FileIcon';
 export * from './AdminIcon';
 export * from './Arrow';
 export * from './GraduateIcon';
+export * from './ServicePublic';
+export * from './ServicePrivate';

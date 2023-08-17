@@ -2,13 +2,14 @@ import Link from 'next/link';
 import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
 import * as S from './style';
+import * as SVG from '../../../public/svg';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
-  const { id, serviceName, serviceUri } = listData;
+  const { id, serviceName, serviceUri, serviceScope } = listData;
   const [fix, setFix] = useRecoilState(FixService);
   const imgUrl = usePreview(serviceUri);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -71,7 +72,14 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
         </S.PreviewImg>
       </S.PreviweWrapper>
       <S.ServiceInfoWrapper>
-        <S.ServiceTitle>{serviceName}</S.ServiceTitle>
+        <S.ServiceTitleContainer>
+          {serviceScope === 'PUBLIC' ? (
+            <SVG.AddServicePublic />
+          ) : (
+            <SVG.AddServicePrivate />
+          )}
+          <S.ServiceTitle>{serviceName}</S.ServiceTitle>
+        </S.ServiceTitleContainer>
         <S.ServiceLink
           onClick={(e) => {
             e.stopPropagation();

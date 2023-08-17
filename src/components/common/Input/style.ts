@@ -26,7 +26,6 @@ export const Input = styled.input`
   border-bottom: 1px solid #d7d7d7;
   background: transparent;
   font-size: 0.85em;
-  :valid,
   :focus {
     border-bottom: 2px solid #5499d9;
   }

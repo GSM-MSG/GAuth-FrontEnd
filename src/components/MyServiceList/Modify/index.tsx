@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
@@ -11,8 +11,6 @@ import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
 
 export default function ModifyMyService() {
-  const [user, getUser] = useUser(false);
-
   const {
     register,
     watch,
@@ -20,6 +18,9 @@ export default function ModifyMyService() {
     reset,
     handleSubmit,
   } = useForm();
+
+  const [user, getUser] = useUser(true);
+  const [serviceScope, setServiceScope] = useState<string>('');
 
   const [fix, setFix] = useRecoilState(FixService);
 
@@ -30,6 +31,7 @@ export default function ModifyMyService() {
     method: 'get',
     onSuccess: (data) => {
       reset({ ...data });
+      setServiceScope(data.serviceScope);
     },
   });
 
@@ -62,11 +64,16 @@ export default function ModifyMyService() {
       serviceName,
       serviceUri,
       redirectUri,
+      serviceScope,
     });
   };
 
   const CheckError = (data: FieldValues) => {
     toast.error(Object.values(data)[0].message);
+  };
+
+  const ChangeSeviceScope = () => {
+    setServiceScope((prev) => (prev === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC'));
   };
 
   return (
@@ -139,9 +146,21 @@ export default function ModifyMyService() {
               </p>
               <h4>{watch('clientSecret')}</h4>
             </S.CopyTitle>
+            <S.CopyTitle>
+              <S.Scope>
+                <p>공개 여부 :</p>
+                <div onClick={ChangeSeviceScope}>
+                  {serviceScope === 'PUBLIC' ? (
+                    <SVG.AddServicePublic />
+                  ) : (
+                    <SVG.AddServicePrivate />
+                  )}
+                </div>
+              </S.Scope>
+            </S.CopyTitle>
           </S.CopyWrapper>
         </div>
-        <button type="submit">확인</button>
+        <button type="submit">수정</button>
       </form>
     </S.Wrapper>
   );

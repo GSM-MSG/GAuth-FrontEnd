@@ -47,10 +47,10 @@ export const Wrapper = styled.div`
 `;
 
 export const CopyWrapper = styled.div`
-  margin-top: 3vw;
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
-  gap: 3vw;
+  gap: 2vw;
 `;
 
 export const CopyTitle = styled.div`
@@ -84,5 +84,14 @@ export const CopyTitle = styled.div`
     ::-webkit-scrollbar {
       display: none;
     }
+  }
+`;
+
+export const Scope = styled.div`
+  display: flex;
+  gap: 4px;
+
+  svg {
+    cursor: pointer;
   }
 `;

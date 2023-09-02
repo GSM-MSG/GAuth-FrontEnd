@@ -23,12 +23,12 @@ export default function ServiceInfoModal({
 
   const [publicStatus, setPublicStatus] = useState('');
   useEffect(() => {
-    if(serviceScope === 'PRIVATE') {
+    if (serviceScope === 'PRIVATE') {
       setPublicStatus('비공개');
     } else if (serviceScope === 'PUBLIC') {
       setPublicStatus('공개');
     }
-  } ,[]);
+  }, []);
 
   return (
     <Portal onClose={onClose}>

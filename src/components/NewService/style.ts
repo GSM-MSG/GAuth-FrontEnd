@@ -58,6 +58,44 @@ export const Form = styled.form`
   }
 `;
 
+export const ImgContainer = styled.div`
+  width: 100%;
+  height: 176px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e8e8e8;
+
+  label {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 8px;
+
+    div {
+      font-weight: 400;
+      font-size: 0.65em;
+      color: #929292;
+    }
+  }
+
+  #file {
+    display: none;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 0.65em;
+    color: #929292;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;

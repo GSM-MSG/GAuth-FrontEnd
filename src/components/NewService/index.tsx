@@ -4,7 +4,6 @@ import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
-import Portal from '../common/Portal';
 import ServiceInfoModal from './InfoModal';
 import * as S from './style';
 
@@ -126,15 +125,23 @@ export default function NewServicePage() {
                 },
               })}
             />
+            <S.ImgContainer>
+              <label htmlFor="file">
+                <SVG.AddServiceImg />
+                <div>이미지 업로드</div>
+              </label>
+              <input type="file" name="file" id="file" />
+              <p>이미지 용량 제한은 5MB입니다.</p>
+            </S.ImgContainer>
             <span>
               공개여부:{' '}
               {isClose ? (
                 <div onClick={handleClose}>
-                  <SVG.AddServicePublic />
+                  <SVG.ServicePublic />
                 </div>
               ) : (
                 <div onClick={handleClose}>
-                  <SVG.AddServicePrivate />
+                  <SVG.ServicePrivate />
                 </div>
               )}
             </span>
@@ -142,10 +149,7 @@ export default function NewServicePage() {
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <ServiceInfoModal
-            serviceData={serviceData}
-            onClose={onClose}
-          />
+          <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
         )}
       </S.Wrapper>
     </S.Layout>

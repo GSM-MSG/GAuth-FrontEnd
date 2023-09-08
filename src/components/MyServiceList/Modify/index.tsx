@@ -151,9 +151,9 @@ export default function ModifyMyService() {
                 <p>공개 여부 :</p>
                 <div onClick={ChangeSeviceScope}>
                   {serviceScope === 'PUBLIC' ? (
-                    <SVG.AddServicePublic />
+                    <SVG.ServicePublic />
                   ) : (
-                    <SVG.AddServicePrivate />
+                    <SVG.ServicePrivate />
                   )}
                 </div>
               </S.Scope>

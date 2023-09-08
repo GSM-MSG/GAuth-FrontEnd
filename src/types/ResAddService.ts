@@ -3,6 +3,7 @@ export interface NewServiceForm {
   serviceName: string;
   serviceUri: string;
   serviceScope: 'PUBLIC' | 'PRIVATE';
+  serviceImgUrl: string;
 }
 
 export interface ResNewService extends NewServiceForm {

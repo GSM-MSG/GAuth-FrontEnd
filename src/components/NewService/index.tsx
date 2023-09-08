@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as SVG from '../../../public/svg';
@@ -20,6 +21,7 @@ export default function NewServicePage() {
     serviceName: '',
     serviceUri: '',
     serviceScope: 'PUBLIC',
+    serviceImgUrl: '',
   };
 
   const [serviceData, setServiceData] =
@@ -37,6 +39,10 @@ export default function NewServicePage() {
   const onClose = () => {
     setModal(false);
     reset(serviceDefaultData);
+    setServiceData({
+      ...serviceData,
+      serviceImgUrl: '',
+    });
     setServiceScope('PUBLIC');
   };
 
@@ -56,12 +62,40 @@ export default function NewServicePage() {
     },
   });
 
+  const { fetch: uploadImage } = useFetch<{ imageURL: string }>({
+    url: '/image',
+    method: 'post',
+    onSuccess: async (data) => {
+      if (data) {
+        await setServiceData({
+          ...serviceData,
+          serviceImgUrl: data.imageURL,
+        });
+      }
+    },
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  const handleFileUpload = async (file: File) => {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    const fileExtension = file.name.split('.').pop();
+
+    if (allowedExtensions.exec('.' + fileExtension)) {
+      const formData = new FormData();
+      formData.append('image', file);
+      uploadImage(formData);
+    }
+  };
+
   const onSubmit = async (inputs: NewServiceForm) =>
     fetch({
       serviceName: inputs.serviceName,
       serviceUri: inputs.serviceUri,
       redirectUri: inputs.redirectUri,
       serviceScope: serviceScope,
+      serviceImgUrl: serviceData.serviceImgUrl,
     });
 
   return (
@@ -123,10 +157,33 @@ export default function NewServicePage() {
             />
             <S.ImgContainer>
               <label htmlFor="file">
-                <SVG.AddServiceImg />
-                <div>이미지 업로드</div>
+                {serviceData.serviceImgUrl ? (
+                  <S.UploadContainer>
+                    <Image
+                      src={serviceData.serviceImgUrl}
+                      alt="업로드한 이미지"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </S.UploadContainer>
+                ) : (
+                  <>
+                    <SVG.AddServiceImg />
+                    <div>이미지 업로드</div>
+                  </>
+                )}
               </label>
-              <input type="file" name="file" id="file" />
+              <input
+                type="file"
+                name="image"
+                id="file"
+                onChange={(e) => {
+                  const selectedFile = e.target.files?.[0];
+                  if (selectedFile) {
+                    handleFileUpload(selectedFile);
+                  }
+                }}
+              />
               <p>이미지 용량 제한은 5MB입니다.</p>
             </S.ImgContainer>
             <span>

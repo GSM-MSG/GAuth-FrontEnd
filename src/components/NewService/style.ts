@@ -64,6 +64,7 @@ export const ImgContainer = styled.div`
   background: #fff;
   border-radius: 8px;
   border: 1px solid #e8e8e8;
+  overflow: hidden;
 
   label {
     width: 100%;
@@ -94,6 +95,12 @@ export const ImgContainer = styled.div`
     align-items: center;
     margin-top: 4px;
   }
+`;
+
+export const UploadContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
 `;
 
 export const InputContainer = styled.div`

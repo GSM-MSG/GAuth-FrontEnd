@@ -8,6 +8,7 @@ interface Props<T> {
   onFinaly?: () => void;
   successMessage?: string;
   errorMessage?: { [status: number]: string };
+  headers?: { [key: string]: string };
 }
 
 export default Props;

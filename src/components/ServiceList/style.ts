@@ -53,7 +53,6 @@ export const ListTableWrapper = styled.ul`
     justify-content: space-around;
     gap: 0 10px;
   }
-  
 `;
 
 export const ListItemLayer = styled.div`

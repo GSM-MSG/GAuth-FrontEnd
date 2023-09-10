@@ -65,9 +65,9 @@ export default function NewServicePage() {
   const { fetch: uploadImage } = useFetch<{ imageURL: string }>({
     url: '/image',
     method: 'post',
-    onSuccess: async (data) => {
+    onSuccess: (data) => {
       if (data) {
-        await setServiceData({
+        setServiceData({
           ...serviceData,
           serviceImgUrl: data.imageURL,
         });
@@ -97,6 +97,16 @@ export default function NewServicePage() {
       serviceScope: serviceScope,
       serviceImgUrl: serviceData.serviceImgUrl,
     });
+
+  const { fetch: deleteImage } = useFetch({
+    url: `/image?url=${serviceData.serviceImgUrl}`,
+    method: 'delete',
+    onSuccess: () =>
+      setServiceData({
+        ...serviceData,
+        serviceImgUrl: '',
+      }),
+  });
 
   return (
     <S.Layout>
@@ -159,6 +169,14 @@ export default function NewServicePage() {
               <label htmlFor="file">
                 {serviceData.serviceImgUrl ? (
                   <S.UploadContainer>
+                    <S.DeleteServiceWrapper
+                      onClick={(e) => {
+                        e.preventDefault();
+                        deleteImage();
+                      }}
+                    >
+                      <SVG.DeleteServiceImg />
+                    </S.DeleteServiceWrapper>
                     <Image
                       src={serviceData.serviceImgUrl}
                       alt="업로드한 이미지"

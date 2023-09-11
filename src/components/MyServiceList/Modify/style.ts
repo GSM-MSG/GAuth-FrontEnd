@@ -14,6 +14,15 @@ export const Wrapper = styled.div`
   flex-direction: row;
   gap: 40px;
 
+  @media (max-width: 830px) {
+    width: 90vw;
+  }
+
+  @media (max-width: 580px) {
+    width: 84vw;
+    font-size: 2.4vw;
+  }
+
   @media (max-width: 550px) {
     width: 78vw;
     font-size: 3.6364vw;
@@ -62,6 +71,14 @@ export const ContentSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  input {
+    color: #929292;
+
+    &:focus {
+      color: #000;
+    }
+  }
 `;
 
 export const ImgContainer = styled.div`

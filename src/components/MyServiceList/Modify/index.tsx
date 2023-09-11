@@ -9,6 +9,7 @@ import Input from '../../common/Input';
 import * as S from './style';
 import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
+import Image from 'next/image';
 
 export default function ModifyMyService() {
   const {
@@ -26,12 +27,15 @@ export default function ModifyMyService() {
 
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
 
+  const [serviceImgUrl, setServiceImgUrl] = useState('');
+
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${fix.id}`,
     method: 'get',
     onSuccess: (data) => {
       reset({ ...data });
       setServiceScope(data.serviceScope);
+      setServiceImgUrl(data.serviceImgUrl);
     },
   });
 
@@ -65,6 +69,7 @@ export default function ModifyMyService() {
       serviceUri,
       redirectUri,
       serviceScope,
+      serviceImgUrl: serviceImgUrl,
     });
   };
 
@@ -75,6 +80,33 @@ export default function ModifyMyService() {
   const ChangeSeviceScope = () => {
     setServiceScope((prev) => (prev === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC'));
   };
+
+  const { fetch: uploadImage } = useFetch<{ imageURL: string }>({
+    url: '/image',
+    method: 'post',
+    onSuccess: (data) => {
+      if (data) {
+        setServiceImgUrl(data.imageURL);
+      }
+    },
+  });
+
+  const handleFileUpload = async (file: File) => {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    const fileExtension = file.name.split('.').pop();
+
+    if (allowedExtensions.exec('.' + fileExtension)) {
+      const formData = new FormData();
+      formData.append('image', file);
+      uploadImage(formData);
+    }
+  };
+
+  const { fetch: deleteImage } = useFetch({
+    url: `/image?url=${serviceImgUrl}`,
+    method: 'delete',
+    onSuccess: () => setServiceImgUrl(''),
+  });
 
   return (
     <S.Wrapper>
@@ -137,10 +169,41 @@ export default function ModifyMyService() {
       <S.Section>
         <S.ImgContainer>
           <label htmlFor="file">
-            <SVG.AddServiceImg />
-            <div>이미지 업로드</div>
+            {serviceImgUrl ? (
+              <S.UploadContainer>
+                <S.DeleteServiceWrapper
+                  onClick={(e) => {
+                    e.preventDefault();
+                    deleteImage();
+                  }}
+                >
+                  <SVG.DeleteServiceImg />
+                </S.DeleteServiceWrapper>
+                <Image
+                  src={serviceImgUrl}
+                  alt="업로드한 이미지"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </S.UploadContainer>
+            ) : (
+              <>
+                <SVG.AddServiceImg />
+                <div>이미지 업로드</div>
+              </>
+            )}
           </label>
-          <input type="file" name="image" id="file" />
+          <input
+            type="file"
+            name="image"
+            id="file"
+            onChange={(e) => {
+              const selectedFile = e.target.files?.[0];
+              if (selectedFile) {
+                handleFileUpload(selectedFile);
+              }
+            }}
+          />
         </S.ImgContainer>
         <S.CopyWrapper>
           <S.CopyTitle>

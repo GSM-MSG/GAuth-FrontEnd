@@ -73,9 +73,6 @@ export default function NewServicePage() {
         });
       }
     },
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
   });
 
   const handleFileUpload = async (file: File) => {

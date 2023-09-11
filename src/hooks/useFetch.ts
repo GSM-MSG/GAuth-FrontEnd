@@ -12,7 +12,6 @@ const useFetch = <T>({
   onFinaly,
   successMessage,
   errorMessage,
-  headers,
 }: Props<T>) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);

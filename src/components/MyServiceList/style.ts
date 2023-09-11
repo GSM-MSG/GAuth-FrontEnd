@@ -227,7 +227,6 @@ export const ServiceTitle = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  font-weight: 600;
 `;
 
 export const EmptyLisyLayer = styled.div`

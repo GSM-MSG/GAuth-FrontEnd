@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Section = styled.div`
-  width: 48%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;

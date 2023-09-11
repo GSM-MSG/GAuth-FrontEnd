@@ -3,6 +3,13 @@ import { Global, css } from '@emotion/react';
 import 'react-toastify/dist/ReactToastify.css';
 
 const style = css`
+  @font-face {
+    font-family: 'Pretendard';
+    src: url('/font/Pretendard-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
     margin: 0;
     padding: 0;

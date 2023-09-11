@@ -13,7 +13,7 @@ const style = css`
     font-size: 16px;
   }
   body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     background: #f7f8fc;
   }
 

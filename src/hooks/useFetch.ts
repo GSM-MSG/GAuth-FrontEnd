@@ -25,7 +25,6 @@ const useFetch = <T>({
           url: url,
           method: method,
           data: body,
-          headers: headers,
         });
         setData(data);
 

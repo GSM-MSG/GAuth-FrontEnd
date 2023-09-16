@@ -2,7 +2,8 @@ export interface NewServiceForm {
   redirectUri: string;
   serviceName: string;
   serviceUri: string;
-  serviceScope: string;
+  serviceScope: 'PUBLIC' | 'PRIVATE';
+  serviceImgUrl: string;
 }
 
 export interface ResNewService extends NewServiceForm {

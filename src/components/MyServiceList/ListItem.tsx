@@ -1,17 +1,15 @@
-import Link from 'next/link';
-import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
 import * as S from './style';
 import * as SVG from '../../../public/svg';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
+import DefalutImg from '../../../public/png/DefalutImg.png';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
-  const { id, serviceName, serviceUri, serviceScope } = listData;
+  const { id, serviceName, serviceUri, serviceScope, serviceImgUrl } = listData;
   const [fix, setFix] = useRecoilState(FixService);
-  const imgUrl = usePreview(serviceUri);
   const modalRef = useRef<HTMLDivElement>(null);
   const fixIconRef = useRef<HTMLElement>(null);
   const deleteState = useRecoilValue(isDelete);
@@ -60,23 +58,34 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
       onClick={ListItemClick}
     >
       {!deleteState && <S.Modify>서비스 수정하기</S.Modify>}
-      <S.PreviweWrapper>
-        <S.PreviewImg>
-          <Image
-            alt="NoImage"
-            priority={true}
-            src={imgUrl || `/png/NoImage.png`}
-            layout="fill"
-            sizes="100%"
-          />
-        </S.PreviewImg>
-      </S.PreviweWrapper>
+      <S.ServiceImgWrapper>
+        {serviceImgUrl ? (
+          <S.ServiceImg>
+            <Image
+              alt="ServiceImage"
+              priority={true}
+              src={serviceImgUrl}
+              layout="fill"
+              objectFit="cover"
+            />
+          </S.ServiceImg>
+        ) : (
+          <S.DefalutImg>
+            <Image
+              alt="NoImage"
+              priority={true}
+              src={DefalutImg}
+              layout="fill"
+            />
+          </S.DefalutImg>
+        )}
+      </S.ServiceImgWrapper>
       <S.ServiceInfoWrapper>
         <S.ServiceTitleContainer>
           {serviceScope === 'PUBLIC' ? (
-            <SVG.AddServicePublic />
+            <SVG.ServicePublic />
           ) : (
-            <SVG.AddServicePrivate />
+            <SVG.ServicePrivate />
           )}
           <S.ServiceTitle>{serviceName}</S.ServiceTitle>
         </S.ServiceTitleContainer>

@@ -1,4 +1,4 @@
-export function AddServicePrivate() {
+export function ServicePrivate() {
   return (
     <svg
       width="24"

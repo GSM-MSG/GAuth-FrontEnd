@@ -1,23 +1,30 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePreview } from '../../hooks/usePreview';
 import { ClientListType } from '../../types';
 import * as S from './style';
+import DefalutImg from '../../../public/png/DefalutImg.png';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
-  const { serviceName, serviceUri } = listData;
-  const imgUrl = usePreview(serviceUri);
+  const { serviceName, serviceUri, serviceImgUrl } = listData;
 
   return (
     <S.ListItemLayer>
       <S.PreviewImg>
-        {imgUrl && (
+        {serviceImgUrl ? (
+          <Image
+            alt="ServiceImg"
+            priority={true}
+            src={serviceImgUrl}
+            layout="fill"
+            objectFit="cover"
+          />
+        ) : (
           <Image
             alt="NoImage"
             priority={true}
-            src={imgUrl}
+            src={DefalutImg}
             layout="fill"
-            sizes="100%"
+            objectFit="cover"
           />
         )}
       </S.PreviewImg>

@@ -5,9 +5,65 @@ import 'react-toastify/dist/ReactToastify.css';
 const style = css`
   @font-face {
     font-family: 'Pretendard';
+    font-weight: 900;
+    font-display: swap;
+    src: url('/font/Pretendard-Black.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    font-display: swap;
+    src: url('/font/Pretendard-ExtraBold.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-display: swap;
+    src: url('/font/Pretendard-Bold.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-display: swap;
+    src: url('/font/Pretendard-SemiBold.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-display: swap;
+    src: url('/font/Pretendard-Medium.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-display: swap;
     src: url('/font/Pretendard-Regular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 300;
+    font-display: swap;
+    src: url('/font/Pretendard-Light.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 200;
+    font-display: swap;
+    src: url('/font/Pretendard-ExtraLight.otf') format('opentype');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 100;
+    font-display: swap;
+    src: url('/font/Pretendard-Thin.otf') format('opentype');
   }
 
   * {

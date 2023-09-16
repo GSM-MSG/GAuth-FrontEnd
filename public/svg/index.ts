@@ -32,3 +32,5 @@ export * from './Arrow';
 export * from './GraduateIcon';
 export * from './ServicePublic';
 export * from './ServicePrivate';
+export * from './AddServiceImg';
+export * from './DeleteServiceImg';

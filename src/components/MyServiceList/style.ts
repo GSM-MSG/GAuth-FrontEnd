@@ -90,7 +90,7 @@ export const ListItemLayer = styled.li`
   border-radius: 9px;
   position: relative;
   transition: 0.5s;
-  padding-right: 20px;
+  overflow: hidden;
 
   &:hover {
     border: 1px solid #5499d9;
@@ -159,7 +159,7 @@ export const DeleteSelect = styled.input`
   }
 `;
 
-export const PreviweWrapper = styled.div`
+export const ServiceImgWrapper = styled.div`
   width: 100%;
   aspect-ratio: auto 1 / 1;
   display: flex;
@@ -178,16 +178,21 @@ export const PreviweWrapper = styled.div`
   }
 `;
 
-export const PreviewImg = styled.div`
+export const ServiceImg = styled.div`
   position: relative;
-  width: 124px;
-  aspect-ratio: auto 1 / 0.355;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+`;
+
+export const DefalutImg = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: auto 1 / 0.5;
 `;
 
 export const ServiceInfoWrapper = styled.div`
   width: 100%;
-  aspect-ratio: auto 1 / 1;
+  padding: 0 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;

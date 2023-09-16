@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { NewServiceForm, ResNewService } from '../../types/ResAddService';
 import Input from '../common/Input';
-import Portal from '../common/Portal';
 import ServiceInfoModal from './InfoModal';
 import * as S from './style';
 
@@ -13,7 +13,6 @@ export default function NewServicePage() {
     /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}([\/a-z0-9-%#?&=\w])+(\.[a-z0-9]{2,4}(\?[\/a-z0-9-%#?&=\w]+)*)*/gi;
 
   const [modal, setModal] = useState<boolean>(false);
-  const [isClose, setIsClose] = useState<boolean>(true);
 
   const serviceDefaultData: ResNewService = {
     clientId: '',
@@ -21,7 +20,8 @@ export default function NewServicePage() {
     redirectUri: '',
     serviceName: '',
     serviceUri: '',
-    serviceScope: '',
+    serviceScope: 'PUBLIC',
+    serviceImgUrl: '',
   };
 
   const [serviceData, setServiceData] =
@@ -39,16 +39,17 @@ export default function NewServicePage() {
   const onClose = () => {
     setModal(false);
     reset(serviceDefaultData);
+    setServiceData({
+      ...serviceData,
+      serviceImgUrl: '',
+    });
+    setServiceScope('PUBLIC');
   };
 
-  const [disclosureStatus, setDisclosureStatus] = useState('PUBLIC');
+  const [serviceScope, setServiceScope] = useState('PUBLIC');
+
   const handleClose = () => {
-    setIsClose(!isClose);
-    if (isClose) {
-      setDisclosureStatus('PRIVATE');
-    } else {
-      setDisclosureStatus('PUBLIC');
-    }
+    setServiceScope((prev) => (prev === 'PUBLIC' ? 'PRIVATE' : 'PUBLIC'));
   };
 
   const { fetch } = useFetch<ResNewService>({
@@ -61,13 +62,48 @@ export default function NewServicePage() {
     },
   });
 
+  const { fetch: uploadImage } = useFetch<{ imageURL: string }>({
+    url: '/image',
+    method: 'post',
+    onSuccess: (data) => {
+      if (data) {
+        setServiceData({
+          ...serviceData,
+          serviceImgUrl: data.imageURL,
+        });
+      }
+    },
+  });
+
+  const handleFileUpload = async (file: File) => {
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    const fileExtension = file.name.split('.').pop();
+
+    if (allowedExtensions.exec('.' + fileExtension)) {
+      const formData = new FormData();
+      formData.append('image', file);
+      uploadImage(formData);
+    }
+  };
+
   const onSubmit = async (inputs: NewServiceForm) =>
     fetch({
       serviceName: inputs.serviceName,
       serviceUri: inputs.serviceUri,
       redirectUri: inputs.redirectUri,
-      serviceScope: disclosureStatus,
+      serviceScope: serviceScope,
+      serviceImgUrl: serviceData.serviceImgUrl,
     });
+
+  const { fetch: deleteImage } = useFetch({
+    url: `/image?url=${serviceData.serviceImgUrl}`,
+    method: 'delete',
+    onSuccess: () =>
+      setServiceData({
+        ...serviceData,
+        serviceImgUrl: '',
+      }),
+  });
 
   return (
     <S.Layout>
@@ -126,15 +162,54 @@ export default function NewServicePage() {
                 },
               })}
             />
+            <S.ImgContainer>
+              <label htmlFor="file">
+                {serviceData.serviceImgUrl ? (
+                  <S.UploadContainer>
+                    <S.DeleteServiceWrapper
+                      onClick={(e) => {
+                        e.preventDefault();
+                        deleteImage();
+                      }}
+                    >
+                      <SVG.DeleteServiceImg />
+                    </S.DeleteServiceWrapper>
+                    <Image
+                      src={serviceData.serviceImgUrl}
+                      alt="업로드한 이미지"
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </S.UploadContainer>
+                ) : (
+                  <>
+                    <SVG.AddServiceImg />
+                    <div>이미지 업로드</div>
+                  </>
+                )}
+              </label>
+              <input
+                type="file"
+                name="image"
+                id="file"
+                onChange={(e) => {
+                  const selectedFile = e.target.files?.[0];
+                  if (selectedFile) {
+                    handleFileUpload(selectedFile);
+                  }
+                }}
+              />
+              <p>이미지 용량 제한은 5MB입니다.</p>
+            </S.ImgContainer>
             <span>
               공개여부:{' '}
-              {isClose ? (
+              {serviceScope === 'PUBLIC' ? (
                 <div onClick={handleClose}>
-                  <SVG.AddServicePublic />
+                  <SVG.ServicePublic />
                 </div>
               ) : (
                 <div onClick={handleClose}>
-                  <SVG.AddServicePrivate />
+                  <SVG.ServicePrivate />
                 </div>
               )}
             </span>
@@ -142,10 +217,7 @@ export default function NewServicePage() {
           <S.Submit type="submit">등록</S.Submit>
         </S.Form>
         {modal && (
-          <ServiceInfoModal
-            serviceData={serviceData}
-            onClose={onClose}
-          />
+          <ServiceInfoModal serviceData={serviceData} onClose={onClose} />
         )}
       </S.Wrapper>
     </S.Layout>

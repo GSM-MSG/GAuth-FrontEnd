@@ -1,4 +1,4 @@
-export function AddServicePublic() {
+export function ServicePublic() {
   return (
     <svg
       width="24"

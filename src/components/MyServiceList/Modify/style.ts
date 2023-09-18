@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: 830px) {
     width: 90vw;
+    padding: 20px 20px;
   }
 
   @media (max-width: 580px) {
@@ -25,7 +26,6 @@ export const Wrapper = styled.div`
 
   @media (max-width: 550px) {
     width: 78vw;
-    font-size: 3.6364vw;
   }
 `;
 
@@ -38,6 +38,14 @@ export const Section = styled.div`
   > h1 {
     font-weight: 600;
     font-size: 1.2em;
+
+    @media (max-width: 580px) {
+      font-size: 3.6364vw;
+    }
+
+    @media (max-width: 462px) {
+      font-size: 3vw;
+    }
   }
 
   > form {
@@ -78,11 +86,16 @@ export const ContentSection = styled.div`
     &:focus {
       color: #000;
     }
+
+    @media (max-width: 580px) {
+      margin: 0;
+    }
   }
 `;
 
 export const ImgContainer = styled.div`
   width: 100%;
+
   label {
     width: 100%;
     height: 180px;
@@ -96,6 +109,10 @@ export const ImgContainer = styled.div`
     overflow: hidden;
     cursor: pointer;
     gap: 8px;
+
+    @media (max-width: 525px) {
+      height: 100px;
+    }
 
     div {
       font-weight: 400;
@@ -199,5 +216,10 @@ export const Scope = styled.div`
 
   svg {
     cursor: pointer;
+
+    @media (max-width: 580px) {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;

@@ -4,7 +4,7 @@ import { ClientListType } from '../../types';
 export const Layer = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 50px;
+  margin-top: 2vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,7 +54,30 @@ export const ListWrapper = styled.ul`
   }
 `;
 
-//ServiceListItem
+export const Modify = styled.div`
+  position: absolute;
+  opacity: 0;
+  font-size: 13px;
+  color: #3f9aee;
+  right: 8px;
+  top: 8px;
+  transition: 0.5s;
+`;
+
+export const ServiceLink = styled.a`
+  color: #929292;
+  font-weight: 500;
+  font-size: 13px;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  :hover {
+    color: #5499d9;
+  }
+`;
 
 export const ListItemLayer = styled.li`
   width: 294px;
@@ -66,6 +89,19 @@ export const ListItemLayer = styled.li`
   cursor: pointer;
   border-radius: 9px;
   position: relative;
+  transition: 0.5s;
+  overflow: hidden;
+
+  &:hover {
+    border: 1px solid #5499d9;
+    ${Modify} {
+      opacity: 1;
+    }
+    svg {
+      display: none;
+    }
+  }
+
   @media (max-width: 1100px) {
     width: 24vw;
   }
@@ -123,7 +159,7 @@ export const DeleteSelect = styled.input`
   }
 `;
 
-export const PreviweWrapper = styled.div`
+export const ServiceImgWrapper = styled.div`
   width: 100%;
   aspect-ratio: auto 1 / 1;
   display: flex;
@@ -142,77 +178,89 @@ export const PreviweWrapper = styled.div`
   }
 `;
 
-export const PreviewImg = styled.div`
+export const ServiceImg = styled.div`
   position: relative;
-  width: 124px;
-  aspect-ratio: auto 1 / 0.355;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+`;
+
+export const DefalutImg = styled.div`
+  position: relative;
+  width: 100%;
+  aspect-ratio: auto 1 / 0.5;
 `;
 
 export const ServiceInfoWrapper = styled.div`
   width: 100%;
-  aspect-ratio: auto 1 / 1;
+  padding: 0 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
 
-  a {
-    color: #929292;
-    font-weight: 500;
-    font-size: 13px;
-    word-break: break-all;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-break: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    :hover {
-      color: #5499d9;
-    }
+export const ServiceTitleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: auto;
+  gap: 4px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  path {
+    fill: #3f9aee;
   }
 `;
 
 export const ServiceTitle = styled.h3`
-  font-size: 13px;
+  width: 100%;
+  font-size: 14px;
   line-height: 16px;
+  margin-top: 4px;
   color: #000000;
   word-break: break-all;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 `;
 
 export const EmptyLisyLayer = styled.div`
-  margin-top: 30px;
+  margin: 1vw 0 2vw 0;
   width: 100%;
-  height: 300px;
-  display: inline-flex;
+  height: 380px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  border-radius: 20px;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
   transition: ease 0.2s;
-  box-shadow: inset 0px 2.5px 5px 0px rgba(0, 0, 0, 0.2);
-  color: #929292;
+  color: #000;
   white-space: nowrap;
   cursor: pointer;
 
   h1 {
-    transition: all 0.2s;
-    font-size: 30px;
-    margin: 0;
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #929292;
   }
 
   :hover {
-    box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.25);
-    color: #111111;
+    border: 1px solid #3f9aee;
 
-    h1 {
-      transform: scale(1.3);
+    p {
+      color: #3f9aee;
     }
   }
 

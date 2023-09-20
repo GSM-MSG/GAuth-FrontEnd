@@ -58,12 +58,86 @@ export const Form = styled.form`
   }
 `;
 
+export const ImgContainer = styled.div`
+  width: 100%;
+  label {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    gap: 8px;
+
+    div {
+      font-weight: 400;
+      font-size: 0.65em;
+      color: #929292;
+    }
+  }
+
+  #file {
+    display: none;
+  }
+  p {
+    font-weight: 400;
+    font-size: 0.65em;
+    color: #929292;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+`;
+
+export const UploadContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
+export const DeleteServiceWrapper = styled.div`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  background: #ff270a;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  svg {
+    margin-left: 1px;
+    margin-bottom: 1px;
+  }
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   margin-top: 53px;
+
+  span {
+    margin-top: 28px;
+    font-weight: 400;
+    font-size: 0.65em;
+    color: #929292;
+    display: flex;
+    align-items: center;
+    div {
+      margin-left: 4px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Submit = styled.button`

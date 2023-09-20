@@ -1,18 +1,51 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-  width: 432px;
-  aspect-ratio: auto 1 / 1.491;
-  padding: 50px 40px 40px;
+  position: relative;
+  width: 772px;
+  aspect-ratio: auto 1/0.6;
+  padding: 50px 40px;
   background: #ffffff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+  @media (max-width: 830px) {
+    width: 90vw;
+    padding: 20px 20px;
+  }
+
+  @media (max-width: 580px) {
+    width: 84vw;
+    font-size: 2.4vw;
+  }
+
+  @media (max-width: 550px) {
+    width: 78vw;
+  }
+`;
+
+export const Section = styled.div`
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   > h1 {
     font-weight: 600;
     font-size: 1.2em;
+
+    @media (max-width: 580px) {
+      font-size: 3.6364vw;
+    }
+
+    @media (max-width: 462px) {
+      font-size: 3vw;
+    }
   }
 
   > form {
@@ -25,7 +58,7 @@ export const Wrapper = styled.div`
 
   button {
     width: 100%;
-    aspect-ratio: auto 1 / 0.125;
+    aspect-ratio: auto 1 / 0.15;
     font-weight: 600;
     font-size: 15px;
     background: #5499d9;
@@ -39,18 +72,90 @@ export const Wrapper = styled.div`
       opacity: 1;
     }
   }
+`;
 
-  @media (max-width: 550px) {
-    width: 78vw;
-    font-size: 3.6364vw;
+export const ContentSection = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  input {
+    color: #929292;
+
+    &:focus {
+      color: #000;
+    }
+
+    @media (max-width: 580px) {
+      margin: 0;
+    }
+  }
+`;
+
+export const ImgContainer = styled.div`
+  width: 100%;
+
+  label {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    gap: 8px;
+
+    @media (max-width: 525px) {
+      height: 100px;
+    }
+
+    div {
+      font-weight: 400;
+      font-size: 0.65em;
+      color: #929292;
+    }
+  }
+
+  #file {
+    display: none;
+  }
+`;
+
+export const UploadContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+`;
+
+export const DeleteServiceWrapper = styled.div`
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  background: #ff270a;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+
+  svg {
+    margin-left: 1px;
+    margin-bottom: 1px;
   }
 `;
 
 export const CopyWrapper = styled.div`
-  margin-top: 3vw;
+  margin-top: 1.5vw;
   display: flex;
   flex-direction: column;
-  gap: 3vw;
+  gap: 2vw;
 `;
 
 export const CopyTitle = styled.div`
@@ -83,6 +188,38 @@ export const CopyTitle = styled.div`
 
     ::-webkit-scrollbar {
       display: none;
+    }
+  }
+`;
+
+export const Scope = styled.div`
+  p {
+    font-weight: 500;
+    font-size: 0.63em;
+    color: #929292;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    i {
+      cursor: pointer;
+
+      :hover {
+        path {
+          fill: #5499d9;
+        }
+      }
+    }
+  }
+  display: flex;
+  gap: 4px;
+
+  svg {
+    cursor: pointer;
+
+    @media (max-width: 580px) {
+      width: 18px;
+      height: 18px;
     }
   }
 `;

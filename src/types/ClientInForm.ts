@@ -13,4 +13,6 @@ export interface ClientListType {
   clientId: string;
   serviceName: string;
   serviceUri: string;
+  serviceScope: 'PUBLIC' | 'PRIVATE';
+  serviceImgUrl: string;
 }

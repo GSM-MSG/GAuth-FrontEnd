@@ -64,7 +64,7 @@ export default function NewSignInPage() {
     },
   });
 
-  const { fetch: authLogin } = useFetch<OauthCode>({
+  const { fetch: authLogin, isLoading: authLoginLoding } = useFetch<OauthCode>({
     url: '/oauth/code',
     method: 'post',
     onSuccess: (data) => {
@@ -76,15 +76,15 @@ export default function NewSignInPage() {
       if (e.response?.status === 404) setError('해당 유저를 찾을 수 없습니다.');
       if (e.response?.status === 403)
         setError('15분 동안 정지되었거나, 가입 승인이 필요한 계정입니다.');
+      if (e.response?.status === 403) setError('관리자의 승인이 필요합니다.');
     },
   });
 
-  const { fetch: login } = useFetch<TokenType>({
+  const { fetch: login, isLoading: loginLoding } = useFetch<TokenType>({
     url: '/auth',
     method: 'post',
     onSuccess: (data) => {
       const tokenManager = new TokenManager();
-
       tokenManager.setToken(data);
       router.replace('/');
     },
@@ -108,11 +108,12 @@ export default function NewSignInPage() {
   }, [checkAuto, isQuery, router]);
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
+    if (loginLoding || authLoginLoding) return;
+
     const data = {
       email: inputs.email + '@gsm.hs.kr',
       password: inputs.password,
     };
-
     isQuery ? authLogin(data) : login(data);
   };
 

@@ -23,7 +23,9 @@ export default function Header() {
         <h1>사용자 관리</h1>
       </div>
       <Link href={'?type=applicant'}>
-        <SVG.Alarm />
+        <div>
+          <SVG.Alarm />
+        </div>
       </Link>
     </S.Header>
   );

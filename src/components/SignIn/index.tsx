@@ -74,7 +74,8 @@ export default function NewSignInPage() {
       if (e.response?.status === 400)
         setError('이메일 또는 비밀번호가 일치하지 않습니다..');
       if (e.response?.status === 404) setError('해당 유저를 찾을 수 없습니다.');
-      if (e.response?.status === 403) setError('관리자의 승인이 필요합니다');
+      if (e.response?.status === 403)
+        setError('15분 동안 정지되었거나, 가입 승인이 필요한 계정입니다.');
     },
   });
 

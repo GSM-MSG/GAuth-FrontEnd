@@ -124,9 +124,13 @@ export default function ModifyMyService() {
                     value: /\S+/,
                     message: '서비스명을 입력하지 않았습니다.',
                   },
-                  maxLength: 29,
+                  maxLength: {
+                    value: 29,
+                    message: '서비스명은 30자 미만이어야 합니다.',
+                  },
                 })}
               />
+
               <Input
                 label={'리다이렉트 URI'}
                 errors={!!errors.error}

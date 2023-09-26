@@ -135,24 +135,30 @@ export default function ModifyMyService() {
                 label={'리다이렉트 URI'}
                 errors={!!errors.error}
                 register={register('redirectUri', {
-                  required: '사이트 URI를 입력하지 않았습니다.',
+                  required: '리다이렉트 URI를 입력하지 않았습니다.',
                   pattern: {
                     value: regUri,
                     message: '리다이렉트 URI를 형식에 맞게 입력해주세요',
                   },
-                  maxLength: 254,
+                  maxLength: {
+                    value: 254,
+                    message: '리다이렉트 URI는 254자 미만이어야 합니다.',
+                  },
                 })}
               />
               <Input
                 label={'서비스 URI'}
                 errors={!!errors.error}
                 register={register('serviceUri', {
-                  required: '사이트 URI를 입력하지 않았습니다.',
+                  required: '서비스 URI를 입력하지 않았습니다.',
                   pattern: {
                     value: regUri,
-                    message: '사이트 URI를 형식에 맞게 입력해주세요',
+                    message: '서비스 URI를 형식에 맞게 입력해주세요',
                   },
-                  maxLength: 254,
+                  maxLength: {
+                    value: 254,
+                    message: '서비스 URI는 254자 미만이어야 합니다.',
+                  },
                 })}
               />
             </div>

@@ -53,7 +53,7 @@ export default function SearchEmail({ title }: Props) {
       <CreateTitle
         title={title}
         logo={true}
-        subTitle={'가입하신 이메일을 입력해주세요.'}
+        subTitle={'가입하실 이메일을 입력해주세요.'}
       />
       <Form onSubmit={handleSubmit(searchEmail)}>
         {isLoading ? (

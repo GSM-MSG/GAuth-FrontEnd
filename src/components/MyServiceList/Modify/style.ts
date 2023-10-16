@@ -1,52 +1,111 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.div`
-  position: relative;
-  width: 772px;
-  aspect-ratio: auto 1/0.6;
-  padding: 50px 40px;
-  background: #ffffff;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
-  display: flex;
-  flex-direction: row;
-  gap: 40px;
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  padding-left: 100px;
+  padding: 100px 0 100px 100px;
 
-  @media (max-width: 830px) {
-    width: 90vw;
-    padding: 20px 20px;
-  }
-
-  @media (max-width: 580px) {
-    width: 84vw;
-    font-size: 2.4vw;
-  }
-
-  @media (max-width: 550px) {
-    width: 78vw;
+  @media (max-width: 800px) {
+    padding: 100px 0;
   }
 `;
 
+export const Wrapper = styled.div`
+  width: 100%;
+  padding: 0 400px;
+  display: flex;
+  font-size: 20px;
+  flex-direction: column;
+  gap: 20px;
+  @media (max-width: 1450px) {
+    padding: 0 300px;
+  }
+
+  @media (max-width: 1380px) {
+    padding: 0 250px;
+  }
+
+  @media (max-width: 1250px) {
+    padding: 0 200px;
+  }
+
+  @media (max-width: 1110px) {
+    padding: 0 150px;
+  }
+
+  @media (max-width: 840px) {
+    padding: 0 100px;
+  }
+
+  @media (max-width: 700px) {
+    padding: 0 50px;
+  }
+`;
+
+export const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  h2 {
+    font-weight: 600;
+    font-size: 16px;
+  }
+`;
+
+export const MemberAddWrapper = styled.div`
+  display: flex;
+  gap: 4px;
+  cursor: pointer;
+  align-items: center;
+
+  span {
+    font-size: 16px;
+    color: #8c8c8c;
+  }
+`;
+
+export const Title = styled.div`
+  h1 {
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  span {
+    font-size: 12px;
+    color: #8c8c8c;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+
+  button {
+    background: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  button:nth-of-type(1) {
+    color: #3f99ee;
+  }
+`;
+
+export const SectionWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Section = styled.div`
-  width: 45%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  > h1 {
-    font-weight: 600;
-    font-size: 1.2em;
-
-    @media (max-width: 580px) {
-      font-size: 3.6364vw;
-    }
-
-    @media (max-width: 462px) {
-      font-size: 3vw;
-    }
-  }
 
   > form {
     width: 100%;
@@ -86,10 +145,6 @@ export const ContentSection = styled.div`
     &:focus {
       color: #000;
     }
-
-    @media (max-width: 580px) {
-      margin: 0;
-    }
   }
 `;
 
@@ -98,7 +153,7 @@ export const ImgContainer = styled.div`
 
   label {
     width: 100%;
-    height: 180px;
+    height: 150px;
     display: flex;
     background: #fff;
     border-radius: 8px;
@@ -109,10 +164,6 @@ export const ImgContainer = styled.div`
     overflow: hidden;
     cursor: pointer;
     gap: 8px;
-
-    @media (max-width: 525px) {
-      height: 100px;
-    }
 
     div {
       font-weight: 400;
@@ -192,6 +243,11 @@ export const CopyTitle = styled.div`
   }
 `;
 
+export const Border = styled.div`
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+`;
+
 export const Scope = styled.div`
   p {
     font-weight: 500;
@@ -213,13 +269,58 @@ export const Scope = styled.div`
   }
   display: flex;
   gap: 4px;
+  margin-top: 20px;
 
   svg {
     cursor: pointer;
+  }
+`;
 
-    @media (max-width: 580px) {
-      width: 18px;
-      height: 18px;
+export const MemberWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+export const MemberItem = styled.div`
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  align-items: center;
+`;
+
+export const MemberProfile = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  > div {
+    width: 24px;
+    height: 24px;
+
+    img {
+      border-radius: 50%;
     }
+  }
+
+  > span {
+    font-size: 16px;
+  }
+`;
+
+export const MemberRole = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+
+  path {
+    stroke: #8c8c8c;
+  }
+
+  > span {
+    font-size: 16px;
+    color: #8c8c8c;
   }
 `;

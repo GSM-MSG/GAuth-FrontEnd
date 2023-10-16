@@ -93,3 +93,8 @@ export const ServiceCheckList = atom<ClientListType[]>({
   key: 'serviceCheckList',
   default: [],
 });
+
+export const ChangeRoleModal = atom<boolean>({
+  key: 'ChangeRoleModal',
+  default: false,
+});

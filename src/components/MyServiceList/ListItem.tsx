@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { FixService, isDelete, ServiceCheckList } from '../../Atom/Atoms';
 import DefalutImg from '../../../public/png/DefalutImg.png';
+import { useRouter } from 'next/router';
 
 export default function ListItem({ listData }: { listData: ClientListType }) {
   const { id, serviceName, serviceUri, serviceScope, serviceImgUrl } = listData;
@@ -15,6 +16,7 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
   const deleteState = useRecoilValue(isDelete);
   const [serviceCheckList, setServiceCheckList] =
     useRecoilState(ServiceCheckList);
+  const router = useRouter();
 
   useEffect(() => {
     const checkOutSide = (e: MouseEvent) => {
@@ -36,20 +38,27 @@ export default function ListItem({ listData }: { listData: ClientListType }) {
     };
   }, [fix, setFix]);
 
-  const setTypeHandle = (type: string) => {
+  const setModifyHandle = () => {
     setFix((prev) => {
-      return { ...prev, id, type: type };
+      return { ...prev, id };
     });
   };
 
+  const onModify = () => {
+    if (id) {
+      router.push(`/service-modify/${id}`);
+    }
+  };
+
   const ListItemClick = () => {
-    deleteState
-      ? setServiceCheckList((prev) =>
-          prev.find((data) => data.id === id)
-            ? prev.filter((data) => data.id !== id)
-            : [...prev, listData]
-        )
-      : setTypeHandle('modify');
+    if (deleteState)
+      return setServiceCheckList((prev) =>
+        prev.find((data) => data.id === id)
+          ? prev.filter((data) => data.id !== id)
+          : [...prev, listData]
+      );
+    setModifyHandle();
+    onModify();
   };
 
   return (

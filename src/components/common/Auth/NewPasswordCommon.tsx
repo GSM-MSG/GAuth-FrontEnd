@@ -65,6 +65,7 @@ export default function NewPasswordCommon({
       <Form onSubmit={handleSubmit(setPassword)}>
         <InputWrapper>
           <Input
+            maxLength={55}
             type={checkPassword ? undefined : 'password'}
             label={`${newPassword ? '새' : ''} 비밀번호`}
             errors={!!errors.password}

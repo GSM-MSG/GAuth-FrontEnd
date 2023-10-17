@@ -15,8 +15,6 @@ export const Wrapper = styled.div`
   height: 554px;
   font-size: 20px;
   background: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 10px;
   padding: 60px 40px 50px;
   @media (max-width: 550px) {
     width: 78vw;

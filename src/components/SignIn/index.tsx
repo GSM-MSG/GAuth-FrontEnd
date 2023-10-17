@@ -130,15 +130,16 @@ export default function NewSignInPage() {
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputWrapper>
             <Input
+              maxLength={6}
               label="이메일"
               fixed="@gsm.hs.kr"
               errors={!!errors.email}
               message={errors.email?.message}
               register={register('email', {
-                required: '이메일을 입력하지 않았습니다',
+                required: '이메일을 입력하지 않았습니다.',
                 pattern: {
                   value: /^[a-zA-Z0-9]*$/g,
-                  message: 'GSM메일 형식에 맞게 입력해주세요',
+                  messege: 'GSM메일 형식에 맞게 6글자로 입력해주세요.',
                 },
               })}
             />
@@ -146,14 +147,14 @@ export default function NewSignInPage() {
               label="비밀번호"
               errors={!!errors.password}
               message={errors.password?.message}
+              maxLength={55}
               register={register('password', {
-                required: '비밀번호를 입력하지 않았습니다',
+                required: '비밀번호를 입력하지 않았습니다.',
                 pattern: {
                   value: passwordRegex,
                   message:
                     '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
-                maxLength: 72,
                 onChange() {
                   setCheckPassword(false);
                 },

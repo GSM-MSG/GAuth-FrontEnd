@@ -5,7 +5,6 @@ export const Layout = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-
   @media (min-width: 801px) {
     padding-left: 100px;
   }
@@ -25,7 +24,7 @@ export const Wrapper = styled.div`
 
 export const TitleSection = styled.div`
   width: 100%;
-  margin-top: 2vw;
+  margin-top: 6vw;
   display: flex;
   flex-direction: column;
   gap: 16px;

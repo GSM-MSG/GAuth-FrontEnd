@@ -130,6 +130,7 @@ export default function NewSignInPage() {
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputWrapper>
             <Input
+              maxLength={30}
               label="이메일"
               fixed="@gsm.hs.kr"
               errors={!!errors.email}
@@ -143,6 +144,7 @@ export default function NewSignInPage() {
               })}
             />
             <Input
+              maxLength={72}
               label="비밀번호"
               errors={!!errors.password}
               message={errors.password?.message}
@@ -153,7 +155,6 @@ export default function NewSignInPage() {
                   message:
                     '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
                 },
-                maxLength: 72,
                 onChange() {
                   setCheckPassword(false);
                 },

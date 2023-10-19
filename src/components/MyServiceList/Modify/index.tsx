@@ -124,11 +124,8 @@ export default function ModifyMyService() {
                     value: /\S+/,
                     message: '서비스명을 입력하지 않았습니다.',
                   },
-                  maxLength: {
-                    value: 29,
-                    message: '서비스명은 30자 미만이어야 합니다.',
-                  },
                 })}
+                maxLength={20}
               />
 
               <Input
@@ -140,11 +137,8 @@ export default function ModifyMyService() {
                     value: regUri,
                     message: '리다이렉트 URI를 형식에 맞게 입력해주세요',
                   },
-                  maxLength: {
-                    value: 254,
-                    message: '리다이렉트 URI는 254자 미만이어야 합니다.',
-                  },
                 })}
+                maxLength={0}
               />
               <Input
                 label={'서비스 URI'}
@@ -160,6 +154,7 @@ export default function ModifyMyService() {
                     message: '서비스 URI는 254자 미만이어야 합니다.',
                   },
                 })}
+                maxLength={0}
               />
             </div>
             <S.Scope>

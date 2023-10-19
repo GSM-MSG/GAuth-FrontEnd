@@ -52,6 +52,7 @@ export default function InsertTeacherInfo({ onClose, onAccept }: Props) {
             register={register('name', {
               required: '성함을 입력하지 않았습니다',
             })}
+            maxLength={5}
           />
           <S.SelectBox>
             <p>성별</p>

@@ -59,6 +59,7 @@ export default function InsertStuInfo({ onClose, onAccept }: Props) {
             register={register('name', {
               required: '이름을 입력하지 않았습니다',
             })}
+            maxLength={5}
           />
           <Input
             label="학번"
@@ -72,6 +73,7 @@ export default function InsertStuInfo({ onClose, onAccept }: Props) {
               },
             })}
             fixed="ex)1401"
+            maxLength={5}
           />
           <S.SelectBox>
             <p>성별</p>

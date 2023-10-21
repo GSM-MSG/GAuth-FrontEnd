@@ -63,6 +63,7 @@ export default function SearchEmail({ title }: Props) {
         ) : (
           <InputWrapper>
             <Input
+              maxLength={30}
               label="이메일"
               errors={!!errors.email}
               register={register('email', {

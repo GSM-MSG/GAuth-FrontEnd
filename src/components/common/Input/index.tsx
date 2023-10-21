@@ -9,6 +9,7 @@ interface Props {
   register?: UseFormRegisterReturn;
   type?: string;
   fixed?: string | ReactElement;
+  maxLength: number;
   fixedHandle?: () => void;
 }
 
@@ -20,6 +21,7 @@ export default function Input({
   type = 'text',
   fixed,
   fixedHandle,
+  maxLength,
 }: Props) {
   return (
     <S.Wrapper>
@@ -29,7 +31,12 @@ export default function Input({
         {message && ' - ' + message}
       </S.Label>
       <S.InputWrapper>
-        <S.Input type={type} {...register} autoComplete="on" />
+        <S.Input
+          type={type}
+          {...register}
+          autoComplete="on"
+          maxLength={maxLength}
+        />
         <S.FixedInputValue
           point={!!fixedHandle}
           onClick={() => fixedHandle && fixedHandle()}

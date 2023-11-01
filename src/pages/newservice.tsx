@@ -1,4 +1,4 @@
-import NewServicePage from '../components/NewService/NewServicePage';
+import NewServicePage from '../components/NewService';
 import SEOConfig from '../components/SEO';
 import Sidebar from '../components/Sidebar';
 

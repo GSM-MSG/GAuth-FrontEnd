@@ -124,11 +124,8 @@ export default function NewServicePage() {
                   value: /\S+/,
                   message: '서비스명을 입력하지 않았습니다.',
                 },
-                maxLength: {
-                  value: 20,
-                  message: '최대 20자까지 입력할 수 있습니다',
-                },
               })}
+              maxLength={20}
             />
             <Input
               label="리다이렉트 URL"
@@ -140,11 +137,8 @@ export default function NewServicePage() {
                   value: regUrl,
                   message: '리다이렉트 URL를 형식에 맞게 입력해주세요',
                 },
-                maxLength: {
-                  value: 254,
-                  message: '최대 254자까지 입력할 수 있습니다',
-                },
               })}
+              maxLength={254}
             />
             <Input
               label="사이트 URL"
@@ -156,11 +150,8 @@ export default function NewServicePage() {
                   value: regUrl,
                   message: '서비스 URI를 형식에 맞게 입력해주세요',
                 },
-                maxLength: {
-                  value: 254,
-                  message: '최대 254자까지 입력할 수 있습니다',
-                },
               })}
+              maxLength={254}
             />
             <S.ImgContainer>
               <label htmlFor="file">

@@ -65,6 +65,7 @@ export default function NewPasswordCommon({
       <Form onSubmit={handleSubmit(setPassword)}>
         <InputWrapper>
           <Input
+            maxLength={72}
             type={checkPassword ? undefined : 'password'}
             label={`${newPassword ? '새' : ''} 비밀번호`}
             errors={!!errors.password}
@@ -74,7 +75,7 @@ export default function NewPasswordCommon({
               pattern: {
                 value: passwordRegex,
                 message:
-                  '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 20자 이하 형식을 맞춰주세요',
+                  '영어,숫자,특수문자를 각각 하나 이상 포함한 8자 이상 72자 이하 형식을 맞춰주세요',
               },
               onChange() {
                 setCheckPassword(false);
@@ -102,6 +103,7 @@ export default function NewPasswordCommon({
                 },
               },
             })}
+            maxLength={5}
           />
           {error && <p>{error}</p>}
         </InputWrapper>

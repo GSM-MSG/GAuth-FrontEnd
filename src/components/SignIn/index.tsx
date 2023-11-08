@@ -138,7 +138,7 @@ export default function NewSignInPage() {
               register={register('email', {
                 required: '이메일을 입력하지 않았습니다',
                 pattern: {
-                  value: /^[a-zA-Z0-9]*$/g,
+                  value: /^[a-zA-Z0-9\.]*$/g,
                   message: 'GSM메일 형식에 맞게 입력해주세요',
                 },
               })}

@@ -103,7 +103,7 @@ export default function NewPasswordCommon({
                 },
               },
             })}
-            maxLength={72}비
+            maxLength={72}
           />
           {error && <p>{error}</p>}
         </InputWrapper>

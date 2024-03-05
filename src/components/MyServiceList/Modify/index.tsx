@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
@@ -30,8 +30,8 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     method: 'get',
     onSuccess: (data) => {
       reset({ ...data });
-      setServiceImgUrl(watch('serviceImgUrl'));
-      setServiceScope(watch('serviceScope'));
+      setServiceImgUrl(data.serviceImgUrl);
+      setServiceScope(data.serviceScope);
     },
   });
 

@@ -219,7 +219,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
                   <i
                     onClick={() => {
                       navigator.clipboard.writeText(watch('clientId'));
-                      toast.info('텍스트가 복사 되었습니다.');
+                      toast.info('텍스트가 복사되었습니다.');
                     }}
                   >
                     <SVG.CopyIcon />
@@ -233,7 +233,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
                   <i
                     onClick={() => {
                       navigator.clipboard.writeText(watch('clientSecret'));
-                      toast.info('텍스트가 복사 되었습니다.');
+                      toast.info('텍스트가 복사되었습니다.');
                     }}
                   >
                     <SVG.CopyIcon />

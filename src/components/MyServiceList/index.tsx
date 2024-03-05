@@ -81,10 +81,7 @@ export default function MyServiceList() {
             })
           }
         >
-          <div>
-            {type === 'modify' && <ModifyMyService />}
-            {type === 'delete' && <DeleteService />}
-          </div>
+          <div>{type === 'delete' && <DeleteService />}</div>
         </Portal>
       )}
     </S.Layer>

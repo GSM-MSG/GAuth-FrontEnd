@@ -43,6 +43,10 @@ export const TitleSection = styled.div`
   @media (max-width: 500px) {
     font-size: 4vw;
   }
+
+  @media (max-width: 800px) {
+    margin-top: 8vh;
+  }
 `;
 
 export const ProfileWrapper = styled.div`

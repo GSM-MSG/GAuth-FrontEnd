@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
@@ -21,9 +21,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
 
   const [user, getUser] = useUser(true);
   const [serviceScope, setServiceScope] = useState<string>('');
-
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
-
   const [serviceImgUrl, setServiceImgUrl] = useState('');
   const router = useRouter();
 

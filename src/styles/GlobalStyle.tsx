@@ -77,7 +77,7 @@ const style = css`
   }
   body {
     font-family: 'Pretendard', sans-serif;
-    background: #f7f8fc;
+    background: #fafafa;
   }
 
   select,

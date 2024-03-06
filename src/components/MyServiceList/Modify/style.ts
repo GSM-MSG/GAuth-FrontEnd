@@ -270,3 +270,14 @@ export const Scope = styled.div`
     cursor: pointer;
   }
 `;
+
+export const OwnerButton = styled.button`
+  width: 125px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  color: #8c8c8c;
+  font-size: 16px;
+`;

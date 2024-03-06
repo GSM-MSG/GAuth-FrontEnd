@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
-import { useUser } from '../../../hooks/useUser';
 import Input from '../../common/Input';
 import * as S from './style';
 import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { ServiceOwnerModal } from '../../../Atom/Atoms';
+import { useRecoilState } from 'recoil';
+import ServiceOwnerList from '../../ServiceOwnerList';
+import Delete from '../../ServiceOwnerList/Delete';
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -19,11 +22,12 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     handleSubmit,
   } = useForm();
 
-  const [user, getUser] = useUser(true);
   const [serviceScope, setServiceScope] = useState<string>('');
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
   const [serviceImgUrl, setServiceImgUrl] = useState('');
   const router = useRouter();
+  const [serviceOwnerModal, setServiceOwnerModal] =
+    useRecoilState(ServiceOwnerModal);
 
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${modifyId}`,
@@ -245,6 +249,15 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
           </S.Section>
         </S.SectionWrapper>
         <S.Border />
+        <S.OwnerButton onClick={() => setServiceOwnerModal('list')}>
+          소유자 이전하기
+        </S.OwnerButton>
+        {serviceOwnerModal === 'list' && (
+          <ServiceOwnerList onClose={() => setServiceOwnerModal('')} />
+        )}
+        {serviceOwnerModal === 'delete' && (
+          <Delete onClose={() => setServiceOwnerModal('')} />
+        )}
       </S.Wrapper>
     </S.Container>
   );

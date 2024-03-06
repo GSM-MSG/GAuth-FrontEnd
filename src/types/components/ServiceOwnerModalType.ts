@@ -1,1 +1,1 @@
-export type ServiceOwnerModalType = '' | 'list' | 'delete';
+export type ServiceOwnerModalType = '' | 'list' | 'assignment';

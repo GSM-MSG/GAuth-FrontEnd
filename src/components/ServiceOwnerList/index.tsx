@@ -42,7 +42,7 @@ export default function ServiceOwnerList({ onClose }: Props) {
                   <td>
                     <button
                       onClick={() => {
-                        setServiceOwnerModal('delete');
+                        setServiceOwnerModal('assignment');
                       }}
                     >
                       권한 양도

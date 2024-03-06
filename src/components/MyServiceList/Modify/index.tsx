@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { ServiceOwnerModal } from '../../../Atom/Atoms';
 import { useRecoilState } from 'recoil';
 import ServiceOwnerList from '../../ServiceOwnerList';
-import Delete from '../../ServiceOwnerList/Delete';
+import Delete from '../../ServiceOwnerList/Assignment';
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -255,7 +255,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
         {serviceOwnerModal === 'list' && (
           <ServiceOwnerList onClose={() => setServiceOwnerModal('')} />
         )}
-        {serviceOwnerModal === 'delete' && (
+        {serviceOwnerModal === 'assignment' && (
           <Delete onClose={() => setServiceOwnerModal('')} />
         )}
       </S.Wrapper>

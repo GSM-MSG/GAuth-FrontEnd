@@ -8,10 +8,10 @@ import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { ServiceOwnerModal } from '../../../Atom/Atoms';
-import { useRecoilState } from 'recoil';
+import { Search, ServiceOwnerModal } from '../../../Atom/Atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import ServiceOwnerList from '../../ServiceOwnerList';
-import Delete from '../../ServiceOwnerList/Assignment';
+import Assignment from '../../ServiceOwnerList/Assignment';
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -28,6 +28,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const router = useRouter();
   const [serviceOwnerModal, setServiceOwnerModal] =
     useRecoilState(ServiceOwnerModal);
+  const setSearch = useSetRecoilState(Search);
 
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${modifyId}`,
@@ -253,10 +254,21 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
           소유자 이전하기
         </S.OwnerButton>
         {serviceOwnerModal === 'list' && (
-          <ServiceOwnerList onClose={() => setServiceOwnerModal('')} />
+          <ServiceOwnerList
+            onClose={() => {
+              setServiceOwnerModal('');
+              setSearch('');
+            }}
+          />
         )}
         {serviceOwnerModal === 'assignment' && (
-          <Delete onClose={() => setServiceOwnerModal('')} />
+          <Assignment
+            onClose={() => {
+              setServiceOwnerModal('');
+              setSearch('');
+            }}
+            modifyId={modifyId}
+          />
         )}
       </S.Wrapper>
     </S.Container>

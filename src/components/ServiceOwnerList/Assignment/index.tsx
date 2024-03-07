@@ -1,12 +1,31 @@
+import { useRouter } from 'next/router';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { ErrorIcon } from '../../../../public/svg';
+import { ServiceOwnerUserId } from '../../../Atom/Atoms';
+import useFetch from '../../../hooks/useFetch';
 import Portal from '../../common/Portal';
 import * as S from './style';
 
 interface Props {
   onClose: () => void;
+  modifyId: string;
 }
 
-export default function Assignment({ onClose }: Props) {
+export default function Assignment({ onClose, modifyId }: Props) {
+  const [serviceOwnerUserId, setServiceOwnerUserId] =
+    useRecoilState(ServiceOwnerUserId);
+  const router = useRouter();
+
+  const { fetch } = useFetch({
+    url: `client/${modifyId}/owner?userId=${serviceOwnerUserId}`,
+    method: 'patch',
+    onSuccess: () => {
+      setServiceOwnerUserId(0);
+      onClose();
+      router.push('/myprofile');
+    },
+  });
+
   return (
     <Portal onClose={onClose}>
       <S.Wrapper>
@@ -20,7 +39,9 @@ export default function Assignment({ onClose }: Props) {
             </div>
           </S.Title>
           <S.ButtonWrapper>
-            <S.Button modeType>양도</S.Button>
+            <S.Button modeType onClick={() => fetch()}>
+              양도
+            </S.Button>
             <S.Button modeType={false} onClick={onClose}>
               취소
             </S.Button>

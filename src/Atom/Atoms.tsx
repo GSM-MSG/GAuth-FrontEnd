@@ -99,3 +99,8 @@ export const ServiceOwnerModal = atom<ServiceOwnerModalType>({
   key: 'ServiceOwnerModal',
   default: '',
 });
+
+export const ServiceOwnerUserId = atom<number>({
+  key: 'serviceOwnerUserId',
+  default: 0,
+});

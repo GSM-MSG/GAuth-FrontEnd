@@ -1,6 +1,13 @@
-import { useSetRecoilState } from 'recoil';
+import { useEffect } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import XIcon from '../../../public/svg/XIcon';
-import { ServiceOwnerModal } from '../../Atom/Atoms';
+import {
+  Search,
+  ServiceOwnerUserId,
+  ServiceOwnerModal,
+  StuList,
+} from '../../Atom/Atoms';
+import { useUserList } from '../../hooks/useUserList';
 import Portal from '../common/Portal';
 import SearchBar from '../common/SearchBar';
 import * as S from './style';
@@ -11,6 +18,17 @@ interface Props {
 
 export default function ServiceOwnerList({ onClose }: Props) {
   const setServiceOwnerModal = useSetRecoilState(ServiceOwnerModal);
+  const search = useRecoilValue(Search);
+  const stuList = useRecoilValue(StuList);
+  const setServiceOwnerUserId = useSetRecoilState(ServiceOwnerUserId);
+
+  const { getUserList } = useUserList({
+    defaultUri: `/user/user-list?grade=0&classNum=0&keyword=&role=ROLE_STUDENT`,
+  });
+
+  useEffect(() => {
+    getUserList();
+  }, []);
 
   return (
     <Portal onClose={onClose}>
@@ -33,23 +51,26 @@ export default function ServiceOwnerList({ onClose }: Props) {
               </tr>
             </thead>
             <tbody>
-              {Array.from({ length: 20 }).map((idx: any) => (
-                <tr key={idx}>
-                  <td>서주미</td>
-                  <td>3</td>
-                  <td>2</td>
-                  <td>6</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setServiceOwnerModal('assignment');
-                      }}
-                    >
-                      권한 양도
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {stuList
+                .filter((e) => e.name?.includes(search))
+                .map((e, idx) => (
+                  <tr key={idx}>
+                    <td>{e.name}</td>
+                    <td>{e.grade}</td>
+                    <td>{e.classNum}</td>
+                    <td>{e.num}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          setServiceOwnerModal('assignment');
+                          setServiceOwnerUserId(e.id);
+                        }}
+                      >
+                        권한 양도
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </S.Table>
         </S.TableWrapper>

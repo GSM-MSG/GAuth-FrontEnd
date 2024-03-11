@@ -103,6 +103,20 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     onSuccess: () => setServiceImgUrl(''),
   });
 
+  const closeModal = () => {
+    setServiceOwnerModal('');
+    setSearch('');
+  };
+
+  const renderModalContent = () => {
+    switch (serviceOwnerModal) {
+      case 'list':
+        return <ServiceOwnerList userId={user.userId} onClose={closeModal} />;
+      case 'assignment':
+        return <Assignment onClose={closeModal} modifyId={modifyId} />;
+    }
+  };
+
   return (
     <S.Container>
       <S.Wrapper>
@@ -255,24 +269,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
         <S.OwnerButton onClick={() => setServiceOwnerModal('list')}>
           소유자 이전하기
         </S.OwnerButton>
-        {serviceOwnerModal === 'list' && (
-          <ServiceOwnerList
-            userId={user.userId}
-            onClose={() => {
-              setServiceOwnerModal('');
-              setSearch('');
-            }}
-          />
-        )}
-        {serviceOwnerModal === 'assignment' && (
-          <Assignment
-            onClose={() => {
-              setServiceOwnerModal('');
-              setSearch('');
-            }}
-            modifyId={modifyId}
-          />
-        )}
+        {serviceOwnerModal && renderModalContent()}
       </S.Wrapper>
     </S.Container>
   );

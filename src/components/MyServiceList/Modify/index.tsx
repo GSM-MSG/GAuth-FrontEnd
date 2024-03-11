@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
-import { useUser } from '../../../hooks/useUser';
 import Input from '../../common/Input';
 import * as S from './style';
 import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { Search, ServiceOwnerModal } from '../../../Atom/Atoms';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import ServiceOwnerList from '../../ServiceOwnerList';
+import Assignment from '../../ServiceOwnerList/Assignment';
+import { useUser } from '../../../hooks/useUser';
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -19,11 +23,14 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     handleSubmit,
   } = useForm();
 
-  const [user, getUser] = useUser(true);
   const [serviceScope, setServiceScope] = useState<string>('');
   const regUri = /^(http(s)?:\/\/|www.)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi;
   const [serviceImgUrl, setServiceImgUrl] = useState('');
   const router = useRouter();
+  const [serviceOwnerModal, setServiceOwnerModal] =
+    useRecoilState(ServiceOwnerModal);
+  const setSearch = useSetRecoilState(Search);
+  const [user, getUser] = useUser();
 
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${modifyId}`,
@@ -95,6 +102,20 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     method: 'delete',
     onSuccess: () => setServiceImgUrl(''),
   });
+
+  const closeModal = () => {
+    setServiceOwnerModal('');
+    setSearch('');
+  };
+
+  const renderModalContent = () => {
+    switch (serviceOwnerModal) {
+      case 'list':
+        return <ServiceOwnerList userId={user.userId} onClose={closeModal} />;
+      case 'assignment':
+        return <Assignment onClose={closeModal} modifyId={modifyId} />;
+    }
+  };
 
   return (
     <S.Container>
@@ -245,6 +266,10 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
           </S.Section>
         </S.SectionWrapper>
         <S.Border />
+        <S.OwnerButton onClick={() => setServiceOwnerModal('list')}>
+          소유자 이전하기
+        </S.OwnerButton>
+        {serviceOwnerModal && renderModalContent()}
       </S.Wrapper>
     </S.Container>
   );

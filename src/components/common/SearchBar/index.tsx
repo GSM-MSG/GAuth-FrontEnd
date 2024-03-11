@@ -4,7 +4,11 @@ import { useSetRecoilState } from 'recoil';
 import { Search } from '../../../Atom/Atoms';
 import { ChangeEvent } from 'react';
 
-export default function SearchBar() {
+interface Props {
+  placeholder: string;
+}
+
+export default function SearchBar({ placeholder }: Props) {
   const setSearch = useSetRecoilState(Search);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -12,11 +16,7 @@ export default function SearchBar() {
 
   return (
     <S.Wrapper>
-      <input
-        type="text"
-        placeholder="검색어를 입력해주세요."
-        onChange={onChange}
-      />
+      <input type="text" placeholder={placeholder} onChange={onChange} />
       <i>
         <SVG.SearchIcon />
       </i>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { accessToken } from '../lib/Token';
 import { ClientInform } from '../types';
 import { toast } from 'react-toastify';

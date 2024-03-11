@@ -1,4 +1,5 @@
 export type ClientInform = {
+  userId: number;
   email: string;
   name: string;
   grade: number | null;

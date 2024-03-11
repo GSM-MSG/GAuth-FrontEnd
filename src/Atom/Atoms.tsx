@@ -17,6 +17,7 @@ export const ViewWidth = atom<number>({
 export const User = atom<ClientInform>({
   key: 'user',
   default: {
+    userId: 0,
     email: '',
     name: '',
     grade: 0,

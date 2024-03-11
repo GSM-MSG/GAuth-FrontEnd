@@ -14,9 +14,10 @@ import * as S from './style';
 
 interface Props {
   onClose: () => void;
+  userId: number;
 }
 
-export default function ServiceOwnerList({ onClose }: Props) {
+export default function ServiceOwnerList({ onClose, userId }: Props) {
   const setServiceOwnerModal = useSetRecoilState(ServiceOwnerModal);
   const search = useRecoilValue(Search);
   const stuList = useRecoilValue(StuList);
@@ -52,7 +53,7 @@ export default function ServiceOwnerList({ onClose }: Props) {
             </thead>
             <tbody>
               {stuList
-                .filter((e) => e.name?.includes(search))
+                .filter((e) => e.name?.includes(search) && e.id !== userId)
                 .map((e, idx) => (
                   <tr key={idx}>
                     <td>{e.name}</td>

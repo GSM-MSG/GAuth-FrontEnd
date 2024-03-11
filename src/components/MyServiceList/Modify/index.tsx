@@ -12,6 +12,7 @@ import { Search, ServiceOwnerModal } from '../../../Atom/Atoms';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import ServiceOwnerList from '../../ServiceOwnerList';
 import Assignment from '../../ServiceOwnerList/Assignment';
+import { useUser } from '../../../hooks/useUser';
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -29,6 +30,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const [serviceOwnerModal, setServiceOwnerModal] =
     useRecoilState(ServiceOwnerModal);
   const setSearch = useSetRecoilState(Search);
+  const [user, getUser] = useUser();
 
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${modifyId}`,
@@ -255,6 +257,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
         </S.OwnerButton>
         {serviceOwnerModal === 'list' && (
           <ServiceOwnerList
+            userId={user.userId}
             onClose={() => {
               setServiceOwnerModal('');
               setSearch('');

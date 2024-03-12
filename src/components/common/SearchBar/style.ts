@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   overflow: hidden;
   position: relative;
   padding: 0 20px;
+  flex-shrink: 0;
 
   input {
     width: 100%;

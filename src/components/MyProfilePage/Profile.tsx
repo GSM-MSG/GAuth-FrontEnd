@@ -79,7 +79,9 @@ export default function Profile() {
       <S.PrivacySection>
         <h1>{user.name}</h1>
         <p>
-          {user.grade + '학년 ' + user.classNum + '반 ' + user.number + '번'}
+          {!user.grade && !user.classNum && !user.number
+            ? '졸업생'
+            : `${user.grade}학년 ${user.classNum}반 ${user.number}번`}
         </p>
         <h3>{user.email}</h3>
       </S.PrivacySection>

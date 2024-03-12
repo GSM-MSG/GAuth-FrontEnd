@@ -32,7 +32,7 @@ export default function StuListPage({ mode }: { mode: boolean }) {
         <S.Section>
           <div>
             {mode ? <ApplicantHeader /> : <Header />}
-            <SearchBar />
+            <SearchBar placeholder="검색어를 입력해주세요." />
           </div>
           <List type={mode} />
         </S.Section>

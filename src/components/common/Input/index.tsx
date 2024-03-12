@@ -9,7 +9,7 @@ interface Props {
   register?: UseFormRegisterReturn;
   type?: string;
   fixed?: string | ReactElement;
-  maxLength: number;
+  maxLength?: number;
   fixedHandle?: () => void;
 }
 

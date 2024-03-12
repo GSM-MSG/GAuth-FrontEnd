@@ -7,6 +7,7 @@ import {
 } from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
+import { ServiceOwnerModalType } from '../types/components/ServiceOwnerModalType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -16,6 +17,7 @@ export const ViewWidth = atom<number>({
 export const User = atom<ClientInform>({
   key: 'user',
   default: {
+    userId: 0,
     email: '',
     name: '',
     grade: 0,
@@ -92,4 +94,14 @@ export const isDelete = atom({ key: 'isDelete', default: false });
 export const ServiceCheckList = atom<ClientListType[]>({
   key: 'serviceCheckList',
   default: [],
+});
+
+export const ServiceOwnerModal = atom<ServiceOwnerModalType>({
+  key: 'ServiceOwnerModal',
+  default: '',
+});
+
+export const ServiceOwnerUserId = atom<number>({
+  key: 'serviceOwnerUserId',
+  default: 0,
 });

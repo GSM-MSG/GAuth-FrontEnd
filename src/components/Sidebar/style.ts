@@ -4,7 +4,7 @@ export const Layout = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100px;
+  width: 6.25rem;
   height: 100%;
   z-index: 100;
 
@@ -12,7 +12,7 @@ export const Layout = styled.div`
     top: auto;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 3.125rem;
   }
 `;
 
@@ -39,7 +39,7 @@ export const SideBarWrapper = styled.div`
 
 export const LogoWrapper = styled.div`
   position: absolute;
-  top: 50px;
+  top: 3.125rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -64,16 +64,16 @@ export const LogoWrapper = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 1.875rem;
     justify-content: space-between;
-    padding: 20px 55px;
+    padding: 1.25rem 3.4375rem;
     background: #ffffff;
   }
 `;
 
 export const LogoutWrapper = styled.div`
   width: 100%;
-  height: 80px;
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,13 +98,13 @@ export const MenuList = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 2.5rem;
 
   @media (max-width: 800px) {
     flex-direction: row;
     justify-content: space-around;
     svg {
-      width: 15px;
+      width: 0.9375rem;
     }
   }
 `;

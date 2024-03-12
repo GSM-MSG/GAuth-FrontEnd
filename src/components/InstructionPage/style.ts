@@ -13,14 +13,14 @@ export const Layout = styled.div`
     opacity: 0;
   }
 
-  @media (min-width: 801px) {
-    padding-left: 100px;
+  @media (min-width: 800px) {
+    padding-left: 6.25rem;
   }
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
-  font-size: 20px;
+  width: 75rem;
+  font-size: 1.25rem;
 
   pre {
     background: transparent;
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 
   @media (max-width: 1400px) {
     width: 100%;
-    margin: 0 50px 50px;
+    margin: 0 3.125rem 3.125rem;
 
     > * {
       font-size: 1.125vw;

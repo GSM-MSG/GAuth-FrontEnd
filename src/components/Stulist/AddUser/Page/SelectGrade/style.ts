@@ -11,7 +11,7 @@ export const SelectBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
 
   p {
     font-weight: 500;
@@ -23,7 +23,7 @@ export const SelectBox = styled.div`
 
   :hover {
     label {
-      border: 2px solid #5499d9;
+      border: 0.125rem solid #5499d9;
       svg {
         transition: all 0.2s;
         transform: scale(1.4);
@@ -43,7 +43,7 @@ export const Input = styled.input`
 
   &:checked + label {
     color: #474747;
-    border: 2px solid #5499d9;
+    border: 0.125rem solid #5499d9;
     svg {
       transform: scale(1.4);
     }
@@ -58,13 +58,13 @@ export const Input = styled.input`
 
 export const Label = styled.label`
   position: relative;
-  width: 350px;
-  height: 80px;
-  padding-left: 35px;
-  margin-bottom: 20px;
+  width: 21.875rem;
+  height: 5rem;
+  padding-left: 2.1875rem;
+  margin-bottom: 1.25rem;
   aspect-ratio: auto 1 / 1;
   background: #ededed;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   display: flex;
   align-items: center;
   cursor: pointer;

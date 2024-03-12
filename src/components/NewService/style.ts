@@ -7,16 +7,16 @@ export const Layout = styled.div`
   justify-content: center;
 
   @media (min-width: 801px) {
-    padding-left: 100px;
+    padding-left: 6.25rem;
   }
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 75rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 20px;
+  font-size: 1.25rem;
 
   @media (max-width: 1500px) {
     align-items: center;
@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
   @media (max-width: 550px) {
     font-size: 3.6364vw;
     width: 100%;
-    margin: 0 50px;
+    margin: 0 3.125rem;
   }
 `;
 
@@ -33,7 +33,7 @@ export const TitleSection = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 
   h1 {
     font-weight: 700;
@@ -51,7 +51,7 @@ export const TitleSection = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 352px;
+  width: 22rem;
 
   @media (max-width: 550px) {
     width: 100%;
@@ -62,17 +62,17 @@ export const ImgContainer = styled.div`
   width: 100%;
   label {
     width: 100%;
-    height: 180px;
+    height: 11.25rem;
     display: flex;
     background: #fff;
-    border-radius: 8px;
-    border: 1px solid #e8e8e8;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #e8e8e8;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     overflow: hidden;
     cursor: pointer;
-    gap: 8px;
+    gap: 0.5rem;
 
     div {
       font-weight: 400;
@@ -90,7 +90,7 @@ export const ImgContainer = styled.div`
     color: #929292;
     display: flex;
     align-items: center;
-    margin-top: 4px;
+    margin-top: 0.25rem;
   }
 `;
 
@@ -102,10 +102,10 @@ export const UploadContainer = styled.div`
 
 export const DeleteServiceWrapper = styled.div`
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background: #ff270a;
   z-index: 99;
   display: flex;
@@ -114,27 +114,27 @@ export const DeleteServiceWrapper = styled.div`
   border-radius: 50%;
 
   svg {
-    margin-left: 1px;
-    margin-bottom: 1px;
+    margin-left: 0.0625rem;
+    margin-bottom: 0.0625rem;
   }
 `;
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
   width: 100%;
-  margin-top: 53px;
+  margin-top: 3.3125rem;
 
   span {
-    margin-top: 28px;
+    margin-top: 1.75rem;
     font-weight: 400;
     font-size: 0.65em;
     color: #929292;
     display: flex;
     align-items: center;
     div {
-      margin-left: 4px;
+      margin-left: 0.25rem;
       cursor: pointer;
     }
   }
@@ -145,9 +145,9 @@ export const Submit = styled.button`
   aspect-ratio: auto 1/0.125;
   color: #fff;
   background: #5499d9;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   font-weight: 600;
   font-size: 0.75em;
-  margin-top: 70px;
+  margin-top: 4.375rem;
   cursor: pointer;
 `;

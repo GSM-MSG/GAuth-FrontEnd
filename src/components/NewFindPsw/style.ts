@@ -7,7 +7,7 @@ export const CheckingMessage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 0.3125rem;
   color: #515151;
   text-align: center;
   h1 {

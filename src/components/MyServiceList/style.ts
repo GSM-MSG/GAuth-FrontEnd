@@ -34,7 +34,7 @@ export const Delete = styled.p`
 
 export const DeleteContainer = styled.div`
   display: flex;
-  gap: 14px;
+  gap: 0.875rem;
 
   p:nth-child(1) {
     color: #f03131;
@@ -43,14 +43,14 @@ export const DeleteContainer = styled.div`
 
 export const ListWrapper = styled.ul`
   width: 100%;
-  margin: 30px 0 60px;
+  margin: 1.875rem 0 3.75rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 14px;
+  gap: 0.625rem 0.875rem;
 
   @media (max-width: 1100px) {
     justify-content: space-around;
-    gap: 10px 1.2727vw;
+    gap: 0.625rem 1.2727vw;
   }
 `;
 
@@ -59,8 +59,8 @@ export const Modify = styled.div`
   opacity: 0;
   font-size: 13px;
   color: #3f9aee;
-  right: 8px;
-  top: 8px;
+  right: 0.5rem;
+  top: 0.5rem;
   transition: 0.5s;
 `;
 
@@ -85,7 +85,7 @@ export const ListItemLayer = styled.li`
   display: flex;
   background: #ffffff;
   border: ${({ check }: { check: ClientListType | undefined }) =>
-    check ? '1px solid #5499D9' : '1px solid #e4e4e4'};
+    check ? '0.0625rem solid #5499D9' : '0.0625rem solid #e4e4e4'};
   cursor: pointer;
   border-radius: 9px;
   position: relative;
@@ -115,26 +115,26 @@ export const ListItemLayer = styled.li`
 
 export const CheckContainer = styled.label`
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0.3125rem;
+  right: 0.3125rem;
   cursor: pointer;
   &:after {
     opacity: 0;
     content: ' ';
     background: url('/png/Check.png');
-    width: 15px;
-    height: 15px;
+    width: 1rem;
+    height: 1rem;
     position: absolute;
-    right: 5px;
-    top: 4px;
+    right: 0.25rem;
+    top: 0.25rem;
   }
 `;
 
 export const Circle = styled.span`
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 1px solid #e4e4e4;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.0625rem solid #e4e4e4;
   box-sizing: border-box;
   border-radius: 50%;
   position: relative;
@@ -144,17 +144,17 @@ export const DeleteSelect = styled.input`
   position: absolute;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
-  height: 1px;
+  height: 0.0625rem;
   overflow: hidden;
   white-space: nowrap;
-  width: 1px;
+  width: 0.0625rem;
 
   &:checked + ${CheckContainer} {
     &:after {
       opacity: 1;
     }
     & span {
-      border: 1px solid #5499d9;
+      border: 0.0625rem solid #5499d9;
     }
   }
 `;
@@ -172,8 +172,8 @@ export const ServiceImgWrapper = styled.div`
 
     svg {
       position: absolute;
-      top: 14px;
-      left: 17px;
+      top: 0.875rem;
+      left: 1.0625rem;
     }
   }
 `;
@@ -192,7 +192,7 @@ export const DefalutImg = styled.div`
 
 export const ServiceInfoWrapper = styled.div`
   width: 100%;
-  padding: 0 18px;
+  padding: 0 1.125rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,11 +203,11 @@ export const ServiceTitleContainer = styled.div`
   display: flex;
   align-items: center;
   height: auto;
-  gap: 4px;
+  gap: 0.25rem;
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   path {
@@ -218,8 +218,8 @@ export const ServiceTitleContainer = styled.div`
 export const ServiceTitle = styled.h3`
   width: 100%;
   font-size: 14px;
-  line-height: 16px;
-  margin-top: 4px;
+  line-height: 1rem;
+  margin-top: 0.25rem;
   color: #000000;
   word-break: break-all;
   text-overflow: ellipsis;
@@ -232,15 +232,15 @@ export const ServiceTitle = styled.h3`
 export const EmptyLisyLayer = styled.div`
   margin: 1vw 0 2vw 0;
   width: 100%;
-  height: 380px;
+  height: 23.75rem;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
-  border-radius: 8px;
-  border: 1px solid #e4e4e4;
+  gap: 1rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #e4e4e4;
   transition: ease 0.2s;
   color: #000;
   white-space: nowrap;
@@ -257,7 +257,7 @@ export const EmptyLisyLayer = styled.div`
   }
 
   :hover {
-    border: 1px solid #3f9aee;
+    border: 0.0625rem solid #3f9aee;
 
     p {
       color: #3f9aee;
@@ -265,7 +265,7 @@ export const EmptyLisyLayer = styled.div`
   }
 
   @media (max-width: 550px) {
-    margin-bottom: 60px;
+    margin-bottom: 3.75rem;
     h1 {
       font-size: 5.4545vw;
     }

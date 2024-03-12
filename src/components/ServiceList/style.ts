@@ -6,18 +6,18 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   @media (min-width: 801px) {
-    padding-left: 100px;
+    padding-left: 6.25rem;
   }
 `;
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 75rem;
   display: flex;
   flex-direction: column;
   font-size: 20px;
   @media (max-width: 1400px) {
     width: 100%;
-    margin: 0 50px;
+    margin: 0 3.125rem;
   }
   @media (max-width: 600px) {
     font-size: 3.3333vw;
@@ -26,10 +26,10 @@ export const Wrapper = styled.div`
 
 export const TitleSection = styled.div`
   width: 100%;
-  margin-top: 120px;
+  margin-top: 7.5rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 
   h1 {
     font-weight: 700;
@@ -45,18 +45,18 @@ export const TitleSection = styled.div`
 
 export const ListTableWrapper = styled.ul`
   width: 100%;
-  margin-top: 30px;
+  margin-top: 1.875rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0 20px;
+  gap: 0 1.25rem;
   @media (max-width: 1400px) {
     justify-content: space-around;
-    gap: 0 10px;
+    gap: 0 0.625rem;
   }
 `;
 
 export const ListItemLayer = styled.div`
-  width: 285px;
+  width: 17.8125rem;
   aspect-ratio: auto 1 / 0.888;
   display: flex;
   flex-direction: column;
@@ -77,8 +77,8 @@ export const ListItemLayer = styled.div`
 export const PreviewImg = styled.div`
   width: 100%;
   aspect-ratio: auto 1 / 0.481;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
+  border: 0.0625rem solid #dddddd;
+  border-radius: 0.5rem;
   position: relative;
   overflow: hidden;
   z-index: -1;
@@ -86,7 +86,7 @@ export const PreviewImg = styled.div`
 
 export const ServiceTitle = styled.div`
   h3 {
-    margin-top: 16px;
+    margin-top: 1rem;
     font-weight: 500;
     font-size: 15px;
     color: #000000;
@@ -99,7 +99,7 @@ export const ServiceTitle = styled.div`
     -webkit-box-orient: vertical;
   }
   a {
-    margin-top: 8px;
+    margin-top: 0.5rem;
     display: inline-block;
     font-weight: 500;
     font-size: 13px;

@@ -7,16 +7,16 @@ type RoleWrapperType = {
 
 export const SideBar = styled.div`
   position: sticky;
-  width: 120px;
+  width: 7.5rem;
   height: max-content;
-  top: 15px;
+  top: 0.9375rem;
   background: #ffffff;
-  border: 1px solid #e4e4e4;
-  border-radius: 10px;
-  padding: 25px 15px 25px 40px;
+  border: 0.0625rem solid #e4e4e4;
+  border-radius: 0.625rem;
+  padding: 1.5625rem 0.9375rem 1.5625rem 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `;
 
 export const SideInput = styled.input`
@@ -29,7 +29,7 @@ export const SideInput = styled.input`
 
 export const SideTap = styled.label`
   font-weight: 600;
-  font-size: 15px;
+  font-size: 0.9375rem;
   cursor: pointer;
   color: #a2a2a2;
 `;
@@ -37,7 +37,7 @@ export const SideTap = styled.label`
 export const FilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 export const RoleWrapper = styled.div<RoleWrapperType>`
@@ -48,7 +48,7 @@ export const RoleWrapper = styled.div<RoleWrapperType>`
   h3 {
     color: ${(props) => (props.select ? '#1c1c1c' : '#a2a2a2')};
     font-weight: 600;
-    font-size: 15px;
+    font-size: 1rem;
     cursor: pointer;
   }
   svg {
@@ -60,10 +60,10 @@ export const RoleWrapper = styled.div<RoleWrapperType>`
 export const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 14px;
-  gap: 12px;
+  margin-left: 0.875rem;
+  gap: 0.75rem;
 
   label:nth-of-type(3) {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 `;

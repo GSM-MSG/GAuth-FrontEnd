@@ -20,16 +20,16 @@ export const Layer = styled.div`
 export const Wrapper = styled.div<WrapperType>`
   width: ${(e) => (e.check ? '42vw' : '65vw')};
   aspect-ratio: auto 1/0.605;
-  min-width: 220px;
-  padding: 20px;
+  min-width: 13.75rem;
+  padding: 1.25rem;
   background: #fafafa;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
   z-index: 200;
-  border-radius: 20px;
-  box-shadow: 0px 4px 110px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 1.25rem;
+  box-shadow: 0rem 0.25rem 6.875rem 0.3125rem rgba(0, 0, 0, 0.25);
 
   h2 {
     font-size: 36px;
@@ -47,14 +47,14 @@ export const Wrapper = styled.div<WrapperType>`
   }
   button {
     border: none;
-    width: 163px;
-    height: 60px;
-    border-radius: 40px;
+    width: 10.1875rem;
+    height: 3.75rem;
+    border-radius: 2.5rem;
     background: #2e80cc;
     color: #ffffff;
     text-align: center;
-    margin: 40px;
-    font-size: 27px;
+    margin: 2.5rem;
+    font-size: 1.6875rem;
     cursor: pointer;
   }
   @media (max-width: 850px) {
@@ -71,8 +71,8 @@ export const Wrapper = styled.div<WrapperType>`
       }
     }
     button {
-      width: 143px;
-      height: 40px;
+      width: 8.9375rem;
+      height: 2.5rem;
       font-size: 20px;
     }
   }
@@ -102,8 +102,8 @@ export const Wrapper = styled.div<WrapperType>`
 
 export const Profile = styled.img`
   margin: 0;
-  width: 200px;
-  height: 200px;
+  width: 12.5rem;
+  height: 12.5rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;

@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
 export const PrivacyConsent = styled.div`
-  padding-top: 70px;
+  padding-top: 4.375rem;
   width: 100%;
   height: 100%;
   font-weight: 400;
   font-size: 0.7em;
   @media (max-width: 550px) {
-    padding-top: 35px;
+    padding-top: 2.1875rem;
   }
   span {
     display: flex;
@@ -16,7 +16,7 @@ export const PrivacyConsent = styled.div`
   }
   label {
     display: flex;
-    gap: 8px;
+    gap: 0.5rem;
     cursor: pointer;
     @media (max-width: 550px) {
       gap: 1.5vw;
@@ -24,7 +24,7 @@ export const PrivacyConsent = styled.div`
   }
   input[type='checkbox'] {
     cursor: pointer;
-    width: 18px;
+    width: 1.125rem;
     -webkit-appearance: none;
     outline: none;
     display: flex;
@@ -34,10 +34,10 @@ export const PrivacyConsent = styled.div`
     ::before {
       content: '';
       position: absolute;
-      width: 18px;
-      height: 18px;
-      border: 1px solid #b4b4b4;
-      border-radius: 3px;
+      width: 1.125rem;
+      height: 1.125rem;
+      border: 0.0625rem solid #b4b4b4;
+      border-radius: 0.1875rem;
       @media (max-width: 550px) {
         width: 3.27vw;
         height: 3.27vw;
@@ -45,16 +45,16 @@ export const PrivacyConsent = styled.div`
     }
     :checked {
       ::before {
-        border: 1px solid #2e80cc;
+        border: 0.0625rem solid #2e80cc;
       }
       ::after {
         content: '';
         position: absolute;
         transform: rotate(-40deg) translate(1px, -1px);
-        width: 9px;
-        height: 5px;
-        border-left: 1px solid #2e80cc;
-        border-bottom: 1px solid #2e80cc;
+        width: 0.5625rem;
+        height: 0.3125rem;
+        border-left: 0.0625rem solid #2e80cc;
+        border-bottom: 0.0625rem solid #2e80cc;
       }
     }
   }
@@ -77,18 +77,18 @@ export const NotionWrapper = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.3125rem;
     color: #000000;
     font-weight: 400;
     font-size: 15px;
   }
   div {
-    margin: 17px 0px;
+    margin: 1rem 0rem;
     width: 100%;
     aspect-ratio: auto 1/1;
-    padding: 22px;
+    padding: 1.375rem;
     background: #f4f4f4;
-    border-radius: 7px;
+    border-radius: 0.5rem;
     overflow: scroll;
 
     div {
@@ -102,7 +102,7 @@ export const NotionWrapper = styled.div`
 `;
 
 export const ProfileTitle = styled.p`
-  margin-top: 20px;
+  margin-top: 1.25rem;
   font-weight: 600;
   font-size: 0.85em;
   color: #515151;
@@ -128,8 +128,8 @@ export const ProfileSVGWrapper = styled.div`
 `;
 
 export const Profile = styled.img`
-  width: 135px;
-  height: 135px;
+  width: 8.4375rem;
+  height: 8.4375rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -146,7 +146,7 @@ export const SuccessWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  gap: 10px;
+  gap: 0.625rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;

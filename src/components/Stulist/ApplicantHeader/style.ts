@@ -3,11 +3,11 @@ export * from '../style';
 
 export const Header = styled.header`
   width: 100%;
-  height: 65px;
+  height: 4.0625rem;
   background: #ffffff;
-  border: 1px solid #e4e4e4;
-  border-radius: 10px;
-  padding: 0px 25px;
+  border: 0.0625rem solid #e4e4e4;
+  border-radius: 0.625rem;
+  padding: 0rem 1.5625rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@ export const Header = styled.header`
 export const Title = styled.div`
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0.875rem;
 
   > p {
     font-weight: 600;
@@ -28,7 +28,7 @@ export const Title = styled.div`
 export const SelectBtnWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 0.9375rem;
 
   > p {
     font-weight: 500;

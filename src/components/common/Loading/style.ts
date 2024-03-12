@@ -7,7 +7,7 @@ type placedprop = {
 
 export const cube = styled.div`
   position: relative;
-  width: 50px;
+  width: 3.125rem;
   aspect-ratio: auto 1/1;
   transform-style: preserve-3d;
   animation: animate 2s linear infinite;
@@ -46,7 +46,7 @@ export const span = styled.span<placedprop>`
   }
 `;
 export const top = styled.div`
-  width: 50px;
+  width: 3.125rem;
   aspect-ratio: auto 1/1;
   background-color: rgba(100, 100, 255);
   transform: rotateX(90deg) translateZ(25px);

@@ -3,9 +3,9 @@ import styled from '@emotion/styled';
 export const TableWrapper = styled.div`
   width: 100%;
   background: #ffffff;
-  border: 1px solid #e4e4e4;
-  margin-top: 70px;
-  border-radius: 10px;
+  border: 0.0625rem solid #e4e4e4;
+  margin-top: 4.375rem;
+  border-radius: 0.625rem;
   overflow: hidden;
 `;
 
@@ -18,7 +18,7 @@ export const Table = styled.table`
     text-align: left;
     width: 10%;
     :nth-of-type(1) {
-      padding-left: 20px;
+      padding-left: 1.25rem;
       ${({ modeType }: { modeType: boolean }) => modeType && 'width: 80%'}
     }
 
@@ -27,7 +27,7 @@ export const Table = styled.table`
         modeType ? '10%' : '50%'};
       span {
         display: flex;
-        gap: 12px;
+        gap: 0.75rem;
       }
     }
   }
@@ -41,32 +41,32 @@ export const Table = styled.table`
       font-weight: 500;
       font-size: 13px;
       color: #929292;
-      padding: 27px 0px;
+      padding: 1.6875rem 0rem;
 
       input[type='checkbox'] {
-        width: 16px;
+        width: 1rem;
         ::before {
-          width: 16px;
-          height: 16px;
+          width: 1rem;
+          height: 1rem;
         }
       }
     }
 
     td {
-      padding: 33px 0px;
+      padding: 2.0625rem 0rem;
     }
   }
 
   tbody {
     tr {
-      border-top: 1px solid #e4e4e4;
+      border-top: 0.0625rem solid #e4e4e4;
     }
   }
 `;
 
 export const SelecTypeBtn = styled.button`
   font-weight: 500;
-  font-size: 14px;
+  font-size: 0.875rem;
   background: none;
   color: ${({ colorType }: { colorType: boolean }) =>
     colorType ? '#5499D9' : '#BABABA'};

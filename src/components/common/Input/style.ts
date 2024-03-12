@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 import { ErrorType } from '../../../types';
 
 export const Wrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 1.25rem;
   position: relative;
   @media (max-width: 550px) {
-    margin-top: 2px;
+    margin-top: 0.125rem;
   }
 `;
 
@@ -22,12 +22,12 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #d7d7d7;
+  height: 2.5rem;
+  border-bottom: 0.0625rem solid #d7d7d7;
   background: transparent;
   font-size: 0.85em;
   :focus {
-    border-bottom: 2px solid #5499d9;
+    border-bottom: 0.125rem solid #5499d9;
   }
   @media (max-width: 550px) {
     height: 7.27vw;

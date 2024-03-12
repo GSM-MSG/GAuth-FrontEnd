@@ -7,9 +7,9 @@ export const Title = styled.h2`
 `;
 
 export const Logo = styled.div`
-  margin-top: 10px;
+  margin-top: 0.625rem;
   @media (max-width: 550px) {
-    margin-top: 5px;
+    margin-top: 0.3125rem;
     svg {
       width: 19vw;
     }
@@ -17,16 +17,16 @@ export const Logo = styled.div`
 `;
 
 export const SubTitle = styled.h4`
-  margin-top: 19px;
+  margin-top: 1.25rem;
   font-weight: 400;
   font-size: 0.75em;
   color: #515151;
   span {
     color: #2f86d7;
-    margin-left: 2px;
+    margin-left: 0.125rem;
     cursor: pointer;
   }
   @media (max-width: 550px) {
-    margin-top: 2px;
+    margin-top: 0.125rem;
   }
 `;

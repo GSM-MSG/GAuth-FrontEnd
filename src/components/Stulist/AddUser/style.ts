@@ -3,13 +3,13 @@ import styled from '@emotion/styled';
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 432px;
-  height: 554px;
+  width: 27rem;
+  height: 34.625rem;
   font-size: 20px;
   background: #ffffff;
-  border: 1px solid #d0d0d0;
-  border-radius: 10px;
-  padding: 60px 40px 50px;
+  border: 0.0625rem solid #d0d0d0;
+  border-radius: 0.625rem;
+  padding: 3.75rem 2.5rem 3.125rem;
   @media (max-width: 550px) {
     width: 78vw;
     height: 101vw;
@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 export const Form = styled.form`
   width: 100%;
   height: 100%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

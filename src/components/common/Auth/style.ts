@@ -11,10 +11,10 @@ export const Layout = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 432px;
-  height: 554px;
+  width: 27rem;
+  height: 34.625rem;
   font-size: 20px;
-  padding: 60px 40px 50px;
+  padding: 3.75rem 2.5rem 3.125rem;
   @media (max-width: 550px) {
     width: 78vw;
     height: 100vh;
@@ -27,12 +27,12 @@ export const SubmitWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
   button {
     width: 100%;
-    height: 44px;
+    height: 2.75rem;
     background: #5499d9;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     font-weight: 400;
     font-size: 0.85em;
     color: #ffffff;
@@ -57,7 +57,7 @@ export const SubmitWrapper = styled.div`
 export const Form = styled.form`
   width: 100%;
   height: 100%;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -66,7 +66,7 @@ export const Form = styled.form`
 export const InputWrapper = styled.div`
   width: 100%;
   p {
-    margin-top: 12px;
+    margin-top: 0.75rem;
     font-weight: 400;
     font-size: 0.75em;
     color: #f03131;
@@ -80,7 +80,7 @@ export const CheckingMessage = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 0.3125rem;
   color: #515151;
   text-align: center;
   h1 {

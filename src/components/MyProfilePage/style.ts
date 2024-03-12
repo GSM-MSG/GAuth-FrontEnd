@@ -6,19 +6,19 @@ export const Layout = styled.div`
   display: flex;
   justify-content: center;
   @media (min-width: 801px) {
-    padding-left: 100px;
+    padding-left: 6.25rem;
   }
 `;
 
 export const Wrapper = styled.div`
-  width: 910px;
+  width: 56.875rem;
   display: flex;
   flex-direction: column;
-  font-size: 20px;
+  font-size: 1.25rem;
 
   @media (max-width: 1100px) {
     width: 100%;
-    padding: 0 50px;
+    padding: 0 3.125rem;
   }
 `;
 
@@ -27,7 +27,7 @@ export const TitleSection = styled.div`
   margin-top: 6vw;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 
   h1 {
     font-weight: 700;
@@ -50,11 +50,11 @@ export const TitleSection = styled.div`
 `;
 
 export const ProfileWrapper = styled.div`
-  width: 372px;
-  height: 167px;
+  width: 23.25rem;
+  height: 10.5rem;
   background: #ffffff;
-  border: 1px solid #e4e4e4;
-  border-radius: 10px;
+  border: 0.0625rem solid #e4e4e4;
+  border-radius: 0.625rem;
   margin-top: 2vw;
   display: flex;
 
@@ -66,7 +66,7 @@ export const ProfileWrapper = styled.div`
     height: auto;
     flex-direction: column;
     text-align: center;
-    padding-bottom: 10px;
+    padding-bottom: 0.625rem;
   }
 `;
 
@@ -75,11 +75,11 @@ export const ProfileSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 33px 24px;
+  padding: 2.125rem 1.5rem;
 
   > svg {
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
   }
 
   label {
@@ -104,8 +104,8 @@ export const ProfileSection = styled.div`
 
 export const Profile = styled.div`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -124,7 +124,7 @@ export const PrivacySection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 13px;
+  margin-left: 0.8125rem;
   color: #000000;
 
   h1 {
@@ -133,13 +133,13 @@ export const PrivacySection = styled.div`
   }
 
   p {
-    margin-top: 4px;
+    margin-top: 0.25rem;
     font-weight: 600;
     font-size: 13px;
   }
 
   h3 {
-    margin-top: 8px;
+    margin-top: 0.5rem;
     font-weight: 300;
     font-size: 15px;
     color: #929292;
@@ -151,7 +151,7 @@ export const PrivacySection = styled.div`
 `;
 
 export const Hr = styled.hr`
-  margin-top: 41px;
+  margin-top: 2.5rem;
   background: #e6e6e6;
-  border-radius: 2px;
+  border-radius: 0.125rem;
 `;

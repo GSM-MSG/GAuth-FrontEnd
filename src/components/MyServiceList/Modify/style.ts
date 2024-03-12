@@ -3,37 +3,36 @@ import styled from '@emotion/styled';
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  padding-left: 100px;
-  padding: 100px 0 100px 100px;
+  padding: 6.25rem 0 6.25rem 6.25rem;
   @media (max-width: 800px) {
-    padding: 100px 0;
+    padding: 6.25rem 0;
   }
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
-  padding: 0 400px;
+  padding: 0 25rem;
   display: flex;
   font-size: 20px;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
   @media (max-width: 1450px) {
-    padding: 0 300px;
+    padding: 0 18.75rem;
   }
   @media (max-width: 1380px) {
-    padding: 0 250px;
+    padding: 0 15.625rem;
   }
   @media (max-width: 1250px) {
-    padding: 0 200px;
+    padding: 0 12.5rem;
   }
   @media (max-width: 1110px) {
-    padding: 0 150px;
+    padding: 0 9.375rem;
   }
   @media (max-width: 840px) {
-    padding: 0 100px;
+    padding: 0 6.25rem;
   }
   @media (max-width: 700px) {
-    padding: 0 50px;
+    padding: 0 3.125rem;
   }
 `;
 
@@ -50,7 +49,7 @@ export const TitleWrapper = styled.div`
 
 export const MemberAddWrapper = styled.div`
   display: flex;
-  gap: 4px;
+  gap: 0.25rem;
   cursor: pointer;
   align-items: center;
   span {
@@ -68,7 +67,7 @@ export const Title = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
   button {
     background: none;
     font-weight: 600;
@@ -145,20 +144,20 @@ export const ImgContainer = styled.div`
 
   label {
     width: 100%;
-    height: 150px;
+    height: 9.375rem;
     display: flex;
     background: #fff;
-    border-radius: 8px;
-    border: 1px solid #e8e8e8;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #e8e8e8;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     overflow: hidden;
     cursor: pointer;
-    gap: 8px;
+    gap: 0.5rem;
 
     @media (max-width: 525px) {
-      height: 100px;
+      height: 6.25rem;
     }
 
     div {
@@ -181,10 +180,10 @@ export const UploadContainer = styled.div`
 
 export const DeleteServiceWrapper = styled.div`
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 24px;
-  height: 24px;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background: #ff270a;
   z-index: 99;
   display: flex;
@@ -193,8 +192,8 @@ export const DeleteServiceWrapper = styled.div`
   border-radius: 50%;
 
   svg {
-    margin-left: 1px;
-    margin-bottom: 1px;
+    margin-left: 0.0625rem;
+    margin-bottom: 0.0625rem;
   }
 `;
 
@@ -211,7 +210,7 @@ export const CopyTitle = styled.div`
     font-size: 0.63em;
     color: #929292;
     display: flex;
-    gap: 5px;
+    gap: 0.3125rem;
     align-items: center;
 
     i {
@@ -241,7 +240,7 @@ export const CopyTitle = styled.div`
 
 export const Border = styled.div`
   width: 100%;
-  border-top: 1px solid #e0e0e0;
+  border-top: 0.0625rem solid #e0e0e0;
 `;
 
 export const Scope = styled.div`
@@ -250,7 +249,7 @@ export const Scope = styled.div`
     font-size: 0.63em;
     color: #929292;
     display: flex;
-    gap: 5px;
+    gap: 0.3125rem;
     align-items: center;
 
     i {
@@ -264,20 +263,20 @@ export const Scope = styled.div`
     }
   }
   display: flex;
-  gap: 4px;
-  margin-top: 20px;
+  gap: 0.25rem;
+  margin-top: 1.25rem;
   svg {
     cursor: pointer;
   }
 `;
 
 export const OwnerButton = styled.button`
-  width: 125px;
-  height: 40px;
+  width: 7.8125rem;
+  height: 2.5rem;
   cursor: pointer;
   background: none;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 0.625rem;
   color: #8c8c8c;
   font-size: 16px;
 `;

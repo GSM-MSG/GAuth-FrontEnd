@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const Layout = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 98vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   padding: 60px 40px 50px;
   @media (max-width: 550px) {
     width: 78vw;
-    height: 101vw;
+    height: 100vh;
     padding: 11vw 7vw 9vw;
     font-size: 3.6364vw;
   }

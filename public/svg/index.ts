@@ -35,3 +35,5 @@ export * from './ServicePrivate';
 export * from './AddServiceImg';
 export * from './DeleteServiceImg';
 export * from './XIcon';
+export * from './Discord';
+export * from './Mail2';

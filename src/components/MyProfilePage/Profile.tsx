@@ -4,11 +4,13 @@ import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { useUser } from '../../hooks/useUser';
 import * as S from './style';
+import { useEffect, useState } from 'react';
 
 export default function Profile() {
   const [user, getUser] = useUser();
+  const [profileImgUrl, setProfileImgUrl] = useState('');
   const { fetch } = useFetch({
-    url: '/user/image',
+    url: `/user/profile?image_url=${profileImgUrl}`,
     method: 'patch',
     onSuccess: () => {
       getUser();
@@ -17,25 +19,50 @@ export default function Profile() {
       toast.error('이미지 업로드를 실패하였습니다.');
     },
   });
-  const updateMyProfileImg = async (files: FileList) => {
-    const formData = new FormData();
-    if (files) formData.append('image', files[0]);
-    fetch(formData);
-  };
 
-  const handleFiles = (files: FileList) => {
-    if (!files[0] || !files[0].type.startsWith('image/')) return;
-    updateMyProfileImg(files);
+  const { fetch: uploadImage } = useFetch<{ imageURL: string }>({
+    url: '/image',
+    method: 'post',
+    onSuccess: (data) => {
+      if (data) {
+        setProfileImgUrl(data.imageURL);
+      } else {
+        toast.error('이미지 업로드를 실패하였습니다.');
+      }
+    },
+    onFailure: () => {
+      toast.error('이미지 업로드를 실패하였습니다.');
+    },
+  });
+
+  useEffect(() => {
+    const fn = async () => {
+      await fetch();
+    };
+    fn();
+  }, [profileImgUrl]);
+
+  const handleFileUpload = async (file: File) => {
+    if (file === undefined || !file.type.startsWith('image/')) return;
+
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    const fileExtension = file.name.split('.').pop();
+
+    if (allowedExtensions.exec('.' + fileExtension)) {
+      const formData = new FormData();
+      formData.append('image', file);
+      uploadImage(formData);
+    }
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) handleFiles(event.target.files);
+    if (event.target.files) handleFileUpload(event.target.files[0]);
   };
 
   const dropHandler = (event: React.DragEvent<HTMLLabelElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    handleFiles(event.dataTransfer.files);
+    handleFileUpload(event.dataTransfer.files[0]);
   };
 
   const dragOverHandler = (event: React.DragEvent<HTMLLabelElement>) => {

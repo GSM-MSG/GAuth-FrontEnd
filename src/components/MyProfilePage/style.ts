@@ -145,6 +145,14 @@ export const PrivacySection = styled.div`
     color: #929292;
   }
 
+  h4 {
+    cursor:pointer;
+    margin-top: 6px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #929292;
+  }
+
   @media (max-width: 420px) {
     margin: 0;
   }

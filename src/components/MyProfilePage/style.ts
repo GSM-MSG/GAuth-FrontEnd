@@ -109,38 +109,21 @@ export const Profile = styled.div`
   }
 `;
 
-export const Circle = styled.div`
+export const Circle = styled.div<{ modifyState: boolean }>`
+  display: ${({ modifyState }) => (modifyState ? 'none' : 'block')};
   position: absolute;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
+  cursor: pointer;
 
-  div {
-    display: flex;
-    width: 6.25rem;
-    height: 3.125rem;
-    border: 0;
-    border-radius: 150px 150px 0 0;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 0.75rem;
-    font-weight: 700;
-    backdrop-filter: blur(2px);
-
-    :hover {
-      background-color: rgba(255, 255, 255, 0.25);
-    }
-  }
-
+  div,
   label {
     display: flex;
     width: 6.25rem;
     height: 3.125rem;
-    border: 0;
-    border-radius: 0 0 150px 150px;
     align-items: center;
     justify-content: center;
     color: #fff;
@@ -149,10 +132,18 @@ export const Circle = styled.div`
     font-size: 0.75rem;
     font-weight: 700;
     backdrop-filter: blur(2px);
-
     :hover {
       background-color: rgba(255, 255, 255, 0.25);
     }
+    border: 0;
+  }
+
+  div {
+    border-radius: 150px 150px 0 0;
+  }
+
+  label {
+    border-radius: 0 0 150px 150px;
   }
 `;
 

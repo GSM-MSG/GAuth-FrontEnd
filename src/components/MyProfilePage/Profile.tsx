@@ -93,9 +93,14 @@ export default function Profile() {
         <S.Circle
           modifyState={modifyState}
           onMouseOut={() => setModifyState(!modifyState)}
-          onClick={() => setCanUpload(true)}
         >
-          <div onClick={deleteHandler}>사진 삭제</div>
+          <div
+            onClick={() => {
+              setProfileImgUrl('');
+            }}
+          >
+            사진 삭제
+          </div>
           <label
             htmlFor="profile"
             onDrop={dropHandler}

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 export default function Profile() {
   const [user, getUser] = useUser();
   const [profileImgUrl, setProfileImgUrl] = useState('');
+  const [modifyState, setModifyState] = useState(true);
   const { fetch } = useFetch({
     url: `/user/profile?image_url=${profileImgUrl}`,
     method: 'patch',
@@ -69,15 +70,10 @@ export default function Profile() {
     event.preventDefault();
     event.stopPropagation();
   };
-
   return (
     <S.ProfileWrapper>
       <S.ProfileSection>
-        <label
-          htmlFor="profile"
-          onDrop={dropHandler}
-          onDragOver={dragOverHandler}
-        >
+        <div onMouseOver={() => setModifyState(!modifyState)}>
           {user.profileUrl ? (
             <S.Profile>
               <Image
@@ -89,20 +85,39 @@ export default function Profile() {
               />
             </S.Profile>
           ) : (
-            <SVG.ProfileSmallFace />
+            <S.Profile>
+              <SVG.ProfileSmallFace />
+            </S.Profile>
           )}
-          <i>
-            <SVG.ModifyProfile />
-          </i>
-        </label>
+        </div>
+        <S.Circle
+          modifyState={modifyState}
+          onMouseOut={() => setModifyState(!modifyState)}
+        >
+          <div
+            onClick={() => {
+              setProfileImgUrl('');
+            }}
+          >
+            사진 삭제
+          </div>
+          <label
+            htmlFor="profile"
+            onDrop={dropHandler}
+            onDragOver={dragOverHandler}
+          >
+            사진 변경
+          </label>
+        </S.Circle>
         <input
           type="file"
-          accept="image/*"
+          name="image"
           id="profile"
           style={{ display: 'none' }}
           onChange={changeHandler}
         />
       </S.ProfileSection>
+
       <S.PrivacySection>
         <h1>{user.name}</h1>
         <p>

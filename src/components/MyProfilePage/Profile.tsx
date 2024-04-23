@@ -5,8 +5,10 @@ import useFetch from '../../hooks/useFetch';
 import { useUser } from '../../hooks/useUser';
 import * as S from './style';
 import { useEffect, useState } from 'react';
+import { useResetModal } from '../../hooks/useResetModal';
 
 export default function Profile() {
+  const { changeModalType } = useResetModal();
   const [user, getUser] = useUser();
   const [profileImgUrl, setProfileImgUrl] = useState('');
   const [modifyState, setModifyState] = useState(true);
@@ -126,6 +128,7 @@ export default function Profile() {
             : `${user.grade}학년 ${user.classNum}반 ${user.number}번`}
         </p>
         <h3>{user.email}</h3>
+        <h4 onClick={() => changeModalType('/changepsw')}>비밀번호 변경</h4>
       </S.PrivacySection>
     </S.ProfileWrapper>
   );

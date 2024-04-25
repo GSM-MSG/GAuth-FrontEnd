@@ -12,6 +12,7 @@ export default function Profile() {
   const [user, getUser] = useUser();
   const [profileImgUrl, setProfileImgUrl] = useState('');
   const [modifyState, setModifyState] = useState(true);
+  const [canUpload, setCanUpload] = useState(false);
   const { fetch } = useFetch({
     url: `/user/profile?image_url=${profileImgUrl}`,
     method: 'patch',
@@ -38,11 +39,14 @@ export default function Profile() {
     },
   });
 
+  const changeProfile = async () => {
+    await fetch();
+  };
+
   useEffect(() => {
-    const fn = async () => {
-      await fetch();
-    };
-    fn();
+    if (canUpload) {
+      changeProfile();
+    }
   }, [profileImgUrl]);
 
   const handleFileUpload = async (file: File) => {
@@ -54,6 +58,7 @@ export default function Profile() {
     if (allowedExtensions.exec('.' + fileExtension)) {
       const formData = new FormData();
       formData.append('image', file);
+      toast.success("이미지 변경을 성공하였습니다.");
       uploadImage(formData);
     }
   };
@@ -72,6 +77,16 @@ export default function Profile() {
     event.preventDefault();
     event.stopPropagation();
   };
+
+  const deleteHandler = () => {
+    setCanUpload(true);
+    if(user.profileUrl !== ''){
+      toast.success("이미지 제거를 성공하였습니다.");
+      setProfileImgUrl('');
+    }
+    changeProfile();
+  };
+
   return (
     <S.ProfileWrapper>
       <S.ProfileSection>
@@ -95,14 +110,9 @@ export default function Profile() {
         <S.Circle
           modifyState={modifyState}
           onMouseOut={() => setModifyState(!modifyState)}
+          onClick={() => setCanUpload(true)}
         >
-          <div
-            onClick={() => {
-              setProfileImgUrl('');
-            }}
-          >
-            사진 삭제
-          </div>
+          <div onClick={deleteHandler}>사진 삭제</div>
           <label
             htmlFor="profile"
             onDrop={dropHandler}

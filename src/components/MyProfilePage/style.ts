@@ -5,6 +5,7 @@ export const Layout = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
+
   @media (min-width: 801px) {
     padding-left: 100px;
   }
@@ -85,20 +86,10 @@ export const ProfileSection = styled.div`
   label {
     position: relative;
     cursor: pointer;
+  }
 
-    i {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-    }
-
-    :hover {
-      i {
-        path {
-          fill: #868e96;
-        }
-      }
-    }
+  div {
+    cursor: pointer;
   }
 `;
 
@@ -115,6 +106,44 @@ export const Profile = styled.div`
 
   img {
     object-fit: cover;
+  }
+`;
+
+export const Circle = styled.div<{ modifyState: boolean }>`
+  display: ${({ modifyState }) => (modifyState ? 'none' : 'block')};
+  position: absolute;
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+
+  div,
+  label {
+    display: flex;
+    width: 6.25rem;
+    height: 3.125rem;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: blur(2px);
+    :hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+    border: 0;
+  }
+
+  div {
+    border-radius: 150px 150px 0 0;
+  }
+
+  label {
+    border-radius: 0 0 150px 150px;
   }
 `;
 
@@ -142,6 +171,14 @@ export const PrivacySection = styled.div`
     margin-top: 8px;
     font-weight: 300;
     font-size: 15px;
+    color: #929292;
+  }
+
+  h4 {
+    cursor:pointer;
+    margin-top: 6px;
+    font-weight: 300;
+    font-size: 12px;
     color: #929292;
   }
 

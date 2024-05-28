@@ -4,9 +4,13 @@ import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { useUser } from '../../hooks/useUser';
 import * as S from './style';
+import { useRecoilValue } from 'recoil';
+import { Role } from '../../Atom/Atoms';
 
 export default function Profile() {
   const [user, getUser] = useUser();
+  const userRole = useRecoilValue(Role);
+
   const { fetch } = useFetch({
     url: '/user/image',
     method: 'patch',
@@ -17,6 +21,7 @@ export default function Profile() {
       toast.error('이미지 업로드를 실패하였습니다.');
     },
   });
+
   const updateMyProfileImg = async (files: FileList) => {
     const formData = new FormData();
     if (files) formData.append('image', files[0]);
@@ -79,7 +84,9 @@ export default function Profile() {
       <S.PrivacySection>
         <h1>{user.name}</h1>
         <p>
-          {!user.grade && !user.classNum && !user.number
+          {userRole[0] === 'ROLE_TEACHER'
+            ? '선생님'
+            : !user.grade && !user.classNum && !user.number
             ? '졸업생'
             : `${user.grade}학년 ${user.classNum}반 ${user.number}번`}
         </p>

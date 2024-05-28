@@ -118,6 +118,10 @@ export const Profile = styled.div`
   }
 `;
 
+export const Delete = styled.h1`
+  color: red;
+`;
+
 export const PrivacySection = styled.div`
   width: 100%;
   height: 100%;

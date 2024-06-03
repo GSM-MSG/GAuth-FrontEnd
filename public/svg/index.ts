@@ -38,6 +38,6 @@ export * from './XIcon';
 export * from './Discord';
 export * from './Mail2';
 export * from './AddBtn';
-export * from './AddcompleteBtn';
+export * from './AddCompleteBtn';
 export * from './AddMangerBlue';
 export * from './ChevronRight';

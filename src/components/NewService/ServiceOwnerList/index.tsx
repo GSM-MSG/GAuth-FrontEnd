@@ -13,7 +13,7 @@ import Portal from '../../common/Portal';
 import SearchBar from '../../common/SearchBar';
 import * as S from './style';
 import { AddBtn } from '../../../../public/svg/AddBtn';
-import { AddcompleteBtn } from '../../../../public/svg/AddcompleteBtn';
+import { AddCompleteBtn } from '../../../../public/svg/AddCompleteBtn';
 
 interface Props {
   onClose: () => void;
@@ -93,7 +93,7 @@ export default function ServiceOwnerList({ onClose, userId, isAdd }: Props) {
                       {isAdd ? (
                         isUserSelected(e.id) ? (
                           <>
-                            <AddcompleteBtn />
+                            <AddCompleteBtn />
                             추가완료
                           </>
                         ) : (

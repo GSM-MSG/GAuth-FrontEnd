@@ -6,13 +6,17 @@ import { useUser } from '../../hooks/useUser';
 import * as S from './style';
 import { useEffect, useState } from 'react';
 import { useResetModal } from '../../hooks/useResetModal';
+import { Role } from '../../Atom/Atoms';
+import { useRecoilValue } from 'recoil';
 
 export default function Profile() {
   const { changeModalType } = useResetModal();
-  const [user, getUser] = useUser();
   const [profileImgUrl, setProfileImgUrl] = useState('');
   const [modifyState, setModifyState] = useState(true);
   const [canUpload, setCanUpload] = useState(false);
+  const [user, getUser] = useUser();
+  const userRole = useRecoilValue(Role);
+
   const { fetch } = useFetch({
     url: `/user/profile?image_url=${profileImgUrl}`,
     method: 'patch',
@@ -58,7 +62,7 @@ export default function Profile() {
     if (allowedExtensions.exec('.' + fileExtension)) {
       const formData = new FormData();
       formData.append('image', file);
-      toast.success("이미지 변경을 성공하였습니다.");
+      toast.success('이미지 변경을 성공하였습니다.');
       uploadImage(formData);
     }
   };
@@ -80,8 +84,8 @@ export default function Profile() {
 
   const deleteHandler = () => {
     setCanUpload(true);
-    if(user.profileUrl !== ''){
-      toast.success("이미지 제거를 성공하였습니다.");
+    if (user.profileUrl !== '') {
+      toast.success('이미지 제거를 성공하였습니다.');
       setProfileImgUrl('');
     }
     changeProfile();
@@ -133,7 +137,9 @@ export default function Profile() {
       <S.PrivacySection>
         <h1>{user.name}</h1>
         <p>
-          {!user.grade && !user.classNum && !user.number
+          {userRole[0] === 'ROLE_TEACHER'
+            ? '선생님'
+            : !user.grade && !user.classNum && !user.number
             ? '졸업생'
             : `${user.grade}학년 ${user.classNum}반 ${user.number}번`}
         </p>

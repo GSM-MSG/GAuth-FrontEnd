@@ -64,6 +64,14 @@ export const Title = styled.div`
     font-weight: 600;
     font-size: 1.2em;
   }
+  h2 {
+    color: #292929;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`
@@ -281,3 +289,89 @@ export const OwnerButton = styled.button`
   color: #8c8c8c;
   font-size: 16px;
 `;
+
+export const ManagerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+`;
+
+export const Add = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+  color: #8c8c8c;
+  text-align: right;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+`;
+
+export const MemberWrapper = styled.div`
+  display: flex;
+  gap: 16px 40px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+`;
+
+export const Member = styled.div`
+  display: flex;
+  width: 45%;
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+  font-size: 14px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  img{
+    border-radius: 100%;
+    object-fit: cover;
+  }
+  svg{
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const Circle = styled.div<{ background?:string }>`
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  background: background;
+`;
+
+export const ShowList = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  color: #8c8c8c;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #e0e0e0;
+`;
+
+export const Select = styled.select`
+  width: 80px;
+`

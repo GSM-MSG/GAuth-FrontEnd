@@ -8,7 +8,7 @@ import {
 } from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
-import { ServiceOwnerModalType } from '../types/components/ServiceOwnerModalType';
+import { ServiceOwnerModalType, ServiceDeleteModalType, ServiceRetrieveModalType } from '../types/ServiceOwnerModalType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -110,4 +110,14 @@ export const ServiceOwnerUserId = atom<number>({
 export const selectedUsersState = atom<SelectedUserType[]>({
   key: 'selectedUsersState',
   default: [],
+});
+
+export const ServiceDeleteModal = atom<ServiceDeleteModalType>({
+  key: 'ServiceDeleteModal',
+  default: '',
+});
+
+export const ServiceRetrieveModal = atom<ServiceRetrieveModalType>({
+  key: 'ServiceRetrieveModal',
+  default: '',
 });

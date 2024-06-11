@@ -4,6 +4,7 @@ import {
   ClientInform,
   FixModalType,
   ClientListType,
+  SelectedUserType,
 } from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
@@ -104,4 +105,9 @@ export const ServiceOwnerModal = atom<ServiceOwnerModalType>({
 export const ServiceOwnerUserId = atom<number>({
   key: 'serviceOwnerUserId',
   default: 0,
+});
+
+export const selectedUsersState = atom<SelectedUserType[]>({
+  key: 'selectedUsersState',
+  default: [],
 });

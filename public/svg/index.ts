@@ -4,6 +4,7 @@ export * from './AddManager';
 export * from './AddMangerBlue';
 export * from './AddService';
 export * from './AddServiceImg';
+export * from './AddPerson';
 export * from './AdminIcon';
 export * from './Alarm';
 export * from './Arrow';

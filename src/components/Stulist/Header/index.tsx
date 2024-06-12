@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as S from './style';
-import * as SVG from '../../../../public/svg/index';
+import * as SVG from '../../../../public/svg';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Filter } from '../../../Atom/Atoms';

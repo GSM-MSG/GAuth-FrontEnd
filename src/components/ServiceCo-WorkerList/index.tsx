@@ -9,7 +9,7 @@ import { useUserList } from '../../hooks/useUserList';
 import Portal from '../common/Portal';
 import SearchBar from '../common/SearchBar';
 import * as S from './style';
-import * as SVG from '../../../public/svg/AddPerson';
+import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { toast } from 'react-toastify';
 

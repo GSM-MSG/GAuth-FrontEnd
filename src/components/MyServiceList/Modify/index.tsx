@@ -369,27 +369,25 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
         </S.ManagerWrapper>
 
         <S.MemberWrapper>
-          {
-            <S.Member>
-              <S.Profile>
-                {user.profileUrl ? (
-                  <S.Circle>
-                    <Image
-                      src={user.profileUrl}
-                      alt="프로필 이미지"
-                      width={24}
-                      height={24}
-                      objectFit="cover"
-                    />
-                  </S.Circle>
-                ) : (
-                  <SVG.ProfileSmallFace />
-                )}
-                {user.name}
-              </S.Profile>
-              소유자
-            </S.Member>
-          }
+          <S.Member>
+            <S.Profile>
+              {user.profileUrl ? (
+                <S.Circle>
+                  <Image
+                    src={user.profileUrl}
+                    alt="프로필 이미지"
+                    width={24}
+                    height={24}
+                    objectFit="cover"
+                  />
+                </S.Circle>
+              ) : (
+                <SVG.ProfileSmallFace />
+              )}
+              {user.name}
+            </S.Profile>
+            소유자
+          </S.Member>
           {worker.slice(0, 7).map((member) => (
             <S.Member key={member.id}>
               <S.Profile>

@@ -28,11 +28,11 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
   const search = useRecoilValue(Search);
   const stuList = useRecoilValue(StuList);
   const [workers, setWorkers] = useState<Worker[]>([]);
-  const [, setServiceOwnerModal] =
+  const [serviceOwnerModal, setServiceOwnerModal] =
     useRecoilState(ServiceOwnerModal);
-  const [, setServiceDeleteModal] =
+  const [serviceDeleteModal, setServiceDeleteModal] =
     useRecoilState(ServiceDeleteModal);
-  const [, setServiceRetrieveModal] =
+  const [serviceRetrieveModal, setServiceRetrieveModal] =
     useRecoilState(ServiceRetrieveModal);
 
   const { fetch: getCoWorkers } = useFetch({

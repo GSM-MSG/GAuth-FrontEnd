@@ -35,7 +35,7 @@ export default function AddUser({ onClose }: Props) {
   });
 
   const acceptUserHandle = (body: AcceptUserType) => {
-    fetch({ userRole: modalType, ...body });
+    fetch({ userRoleType: modalType, ...body });
   };
 
   return (

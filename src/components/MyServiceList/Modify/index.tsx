@@ -363,7 +363,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
               setServiceOwnerModal('list');
             }}
           >
-            <SVG.AddManger />
+            <SVG.AddMangerBtn />
             추가
           </S.Add>
         </S.ManagerWrapper>

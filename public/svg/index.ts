@@ -41,3 +41,4 @@ export * from './AddBtn';
 export * from './AddCompleteBtn';
 export * from './AddMangerBlue';
 export * from './ChevronRight';
+export * from './AddManager';

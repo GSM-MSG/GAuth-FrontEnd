@@ -18,6 +18,7 @@ export async function getServerSideProps() {
   try {
     const { data } = await axios.get(
       `https://notion-api.splitbee.io/v1/page/${process.env.NEXT_PUBLIC_NOTION_INSTRUCTIOM_PAGE_ID}`
+      
     );
     return { props: { notion: data } };
   } catch (e) {

@@ -128,7 +128,7 @@ export default function NewSignInPage() {
   };
 
   return (
-    <S.Layout>
+    <S.Layout style={{height:"97vh"}}>
       <S.Wrapper>
         <CreateTitle
           title={serviceName ? serviceName + '에 로그인' : '뭐든 단 한번으로'}

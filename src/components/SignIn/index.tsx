@@ -27,6 +27,8 @@ export default function NewSignInPage() {
   const [checkPassword, setCheckPassword] = useState(false);
   const [error, setError] = useState('');
   const { checkAuto } = useAutoLogin(false);
+  const [debounce, setDebounce] = useState(false);
+
 
   const {
     watch,
@@ -108,13 +110,21 @@ export default function NewSignInPage() {
   }, [checkAuto, isQuery, router]);
 
   const onSubmit = async (inputs: Type.LoginFormProps) => {
-    if (loginLoding || authLoginLoding) return;
-
+    if (debounce || loginLoding || authLoginLoding) return;
+    setDebounce(true);
     const data = {
       email: inputs.email + '@gsm.hs.kr',
       password: inputs.password,
     };
-    isQuery ? authLogin(data) : login(data);
+    try {
+      if (isQuery) {
+        await authLogin(data);
+      } else {
+        await login(data);
+      }
+    } finally {
+      setTimeout(() => setDebounce(false), 500);
+    }
   };
 
   return (

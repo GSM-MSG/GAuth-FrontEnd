@@ -67,50 +67,50 @@ export const Table = styled.table`
       }
     }
   }
+`;
 
-  tr {
-    font-size: 14px;
-    line-height: 17px;
-    color: #1c1c1c;
+export const TR = styled.tr`
+  font-size: 14px;
+  line-height: 17px;
+  color: #1c1c1c;
 
-    th {
-      font-weight: 500;
-      font-size: 13px;
-      color: #929292;
-      padding: 20px 0;
-    }
-
-    td {
-      padding: 24px 0px;
-
-      button {
-        display:flex;
-        color: #3f99ee;
-        padding: 8px 8px;
-        background: none;
-        cursor: pointer;
-        align-items:center;
-        gap: 4px;
-
-        @media (max-width: 510px) {
-          font-size: 12px;
-        }
-
-        @media (max-width: 480px) {
-          word-break: keep-all;
-          padding: 8px;
-        }
-      }
-    }
+  th {
+    font-weight: 500;
+    font-size: 13px;
+    color: #929292;
+    padding: 20px 0;
   }
 
-  tbody {
-    tr {
-      border-top: 1px solid #e4e4e4;
+  td {
+    padding: 24px 0px;
+
+    button {
+      display: flex;
+      color: #3f99ee;
+      padding: 8px 8px;
+      background: none;
+      cursor: pointer;
+      align-items: center;
+      gap: 4px;
+
+      @media (max-width: 510px) {
+        font-size: 12px;
+      }
+
+      @media (max-width: 480px) {
+        word-break: keep-all;
+        padding: 8px;
+      }
     }
   }
 `;
 
-export const Select = styled.select`
-  width: 80px;
-`
+export const TBody = styled.tbody`
+  tr {
+    border-top: 1px solid #e4e4e4;
+  }
+
+  select {
+    width: 80px;
+  }
+`;

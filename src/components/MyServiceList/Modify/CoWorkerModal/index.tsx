@@ -88,14 +88,14 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
         <S.TableWrapper>
           <S.Table>
             <thead>
-              <tr>
+              <S.TR>
                 <th>이름</th>
                 <th>학년</th>
                 <th>반</th>
                 <th>번호</th>
-              </tr>
+              </S.TR>
             </thead>
-            <tbody>
+            <S.TBody>
               {stuList
                 .filter((e) => e.name?.includes(search))
                 .filter((e) => workers.some((person) => e.id === person.userId))
@@ -106,7 +106,7 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
                     <td>{e.classNum}</td>
                     <td>{e.num}</td>
                     <td>
-                      <S.Select
+                      <select
                         id="role"
                         onChange={(event) => {
                           roleSwitcher(event, e.id);
@@ -116,11 +116,11 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
                         <option value="owner">소유자</option>
                         <option value="coworker">공동작업자</option>
                         <option value="delete">삭제</option>
-                      </S.Select>
+                      </select>
                     </td>
                   </tr>
                 ))}
-            </tbody>
+            </S.TBody>
           </S.Table>
         </S.TableWrapper>
       </S.Container>

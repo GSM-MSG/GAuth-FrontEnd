@@ -66,7 +66,7 @@ export const ButtonWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ modeType: boolean }>`
   width: 100%;
   font-weight: 500;
   font-size: 0.65em;
@@ -75,12 +75,10 @@ export const Button = styled.button`
   opacity: 0.8;
   transition: 0.4s;
 
-  background: ${({ modeType }: { modeType: boolean }) =>
-    modeType ? '#DE4949' : '#D1D1D1'};
-  color: ${({ modeType }: { modeType: boolean }) =>
-    modeType ? '#FFFFFF' : '#888888'};
+  background: ${({ modeType }) => (modeType ? '#DE4949' : '#D1D1D1')};
+  color: ${({ modeType }) => (modeType ? '#FFFFFF' : '#888888')};
 
-  :hover {
+  & :hover {
     opacity: 1;
   }
 `;

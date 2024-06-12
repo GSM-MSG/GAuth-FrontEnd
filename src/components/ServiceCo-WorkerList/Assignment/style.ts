@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
 
   @media (max-width: 550px) {
     width: 78vw;
-    font-size: 3.6364vw;
-    padding: 9vw 40px 40px;
+    font-size: 4.3637rem;
+    padding: 10.8rem 40px 40px;
   }
 `;
 
@@ -66,7 +66,7 @@ export const ButtonWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ modeType: boolean }>`
   width: 100%;
   font-weight: 500;
   font-size: 0.65em;
@@ -75,10 +75,8 @@ export const Button = styled.button`
   opacity: 0.8;
   transition: 0.4s;
 
-  background: ${({ modeType }: { modeType: boolean }) =>
-    modeType ? '#DE4949' : '#D1D1D1'};
-  color: ${({ modeType }: { modeType: boolean }) =>
-    modeType ? '#FFFFFF' : '#888888'};
+  background: ${({ modeType }) => (modeType ? '#DE4949' : '#D1D1D1')};
+  color: ${({ modeType }) => (modeType ? '#FFFFFF' : '#888888')};
 
   :hover {
     opacity: 1;

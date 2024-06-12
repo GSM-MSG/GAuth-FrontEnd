@@ -56,14 +56,14 @@ export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
         <S.TableWrapper>
           <S.Table>
             <thead>
-              <tr>
+              <S.TR>
                 <th>이름</th>
                 <th>학년</th>
                 <th>반</th>
                 <th>번호</th>
-              </tr>
+              </S.TR>
             </thead>
-            <tbody>
+            <S.TBody>
               {stuList
                 .filter((e) => e.name?.includes(search) && e.id !== userId)
                 .map((e, idx) => (
@@ -84,7 +84,7 @@ export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
                     </td>
                   </tr>
                 ))}
-            </tbody>
+            </S.TBody>
           </S.Table>
         </S.TableWrapper>
       </S.Container>

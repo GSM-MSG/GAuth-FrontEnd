@@ -66,9 +66,7 @@ export const Title = styled.div`
   }
   h2 {
     color: #292929;
-    font-family: Pretendard;
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
     line-height: 20px;
   }
@@ -304,9 +302,7 @@ export const Add = styled.div`
   gap: 4px;
   color: #8c8c8c;
   text-align: right;
-  font-family: Pretendard;
   font-size: 16px;
-  font-style: normal;
   font-weight: 600;
   line-height: 20px;
 `;
@@ -361,9 +357,7 @@ export const ShowList = styled.div`
   padding: 16px;
   color: #8c8c8c;
   text-align: center;
-  font-family: Pretendard;
   font-size: 14px;
-  font-style: normal;
   font-weight: 500;
   line-height: normal;
   align-items: flex-start;

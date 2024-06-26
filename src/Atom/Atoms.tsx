@@ -111,3 +111,13 @@ export const selectedUsersState = atom<SelectedUserType[]>({
   key: 'selectedUsersState',
   default: [],
 });
+
+export const Email = atom<string>({
+  key: 'email',
+  default: '',
+});
+
+export const CantFetch = atom<boolean>({
+  key: 'cantFetch',
+  default: true,
+})

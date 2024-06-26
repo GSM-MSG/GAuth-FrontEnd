@@ -24,7 +24,7 @@ interface DetailProps {
 }
 
 Detail.defaultProps = {
-  discord: 'seojumee',
+  discord: 'happytaeyoon',
   email: 'matsougeum@gmail.com',
 };
 

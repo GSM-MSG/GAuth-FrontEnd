@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import * as SVG from '../../../../public/svg';
 import { toast } from 'react-toastify';
@@ -8,11 +8,24 @@ import useFetch from '../../../hooks/useFetch';
 import { ResNewService } from '../../../types/ResAddService';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Search, ServiceOwnerModal } from '../../../Atom/Atoms';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import ServiceOwnerList from '../../ServiceOwnerList';
-import Assignment from '../../ServiceOwnerList/Assignment';
+import {
+  Search,
+  ServiceOwnerModal,
+  ServiceDeleteModal,
+  ServiceRetrieveModal,
+  StuList,
+} from '../../../Atom/Atoms';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import ServiceOwnerList from '../../ServiceCo-WorkerList';
+import ServiceCoWorkersList from './CoWorkerModal/index';
+import Assignment from './Assignment';
+import DeleteAssignment from './DeleteAssignment';
 import { useUser } from '../../../hooks/useUser';
+import { useUserList } from '../../../hooks/useUserList';
+
+interface Worker {
+  userId: number;
+}
 
 export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const {
@@ -29,8 +42,16 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
   const router = useRouter();
   const [serviceOwnerModal, setServiceOwnerModal] =
     useRecoilState(ServiceOwnerModal);
+  const [serviceDeleteModal, setServiceDeleteModal] =
+    useRecoilState(ServiceDeleteModal);
+  const [serviceRetrieveModal, setServiceRetrieveModal] =
+    useRecoilState(ServiceRetrieveModal);
   const setSearch = useSetRecoilState(Search);
-  const [user, getUser] = useUser();
+  const [user] = useUser();
+  const { getUserList } = useUserList({
+    defaultUri: `/user/user-list?grade=0&classNum=0&keyword=&role=ROLE_STUDENT`,
+  });
+  const [stuId, setStuId] = useState(0);
 
   const { fetch: getService } = useFetch<ResNewService>({
     url: `/client/${modifyId}`,
@@ -53,9 +74,33 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     },
   });
 
+  const stuList = useRecoilValue(StuList);
+
+  const { fetch: getCoWorkers } = useFetch({
+    url: `/client/${modifyId}/co-worker`,
+    method: 'get',
+    onSuccess: (data: Worker[]) => {
+      setWorkers(data);
+    },
+    onFailure: () => {
+      toast.error('공동작업자를 정상적으로 불러오지 못했습니다.');
+    },
+  });
+
+  const [workers, setWorkers] = useState<Worker[]>([]);
+  const worker = stuList.filter((e) => {
+    for (let i = 0; i < workers.length; i++) {
+      if (e.id !== undefined && e.id === workers[i].userId) {
+        return e;
+      }
+    }
+  });
+
   useEffect(() => {
     getService();
-  }, []);
+    getCoWorkers();
+    getUserList();
+  }, [stuId]);
 
   const ModifyService = async (value: FieldValues) => {
     const { serviceName, serviceUri, redirectUri } = value;
@@ -105,15 +150,57 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
 
   const closeModal = () => {
     setServiceOwnerModal('');
+    setServiceDeleteModal('');
+    setServiceRetrieveModal('');
     setSearch('');
+  };
+
+  const roleSwitcher = (
+    event: ChangeEvent<HTMLSelectElement>,
+    userId: number
+  ) => {
+    const select = event.target.value;
+    setStuId(userId);
+
+    if (select === 'delete') {
+      setServiceDeleteModal('assignment');
+    } else if (select === 'owner') {
+      setServiceOwnerModal('assignment');
+    }
   };
 
   const renderModalContent = () => {
     switch (serviceOwnerModal) {
       case 'list':
-        return <ServiceOwnerList userId={user.userId} onClose={closeModal} />;
+        return (
+          <ServiceOwnerList
+            onClose={closeModal}
+            userId={user.userId}
+            modifyId={modifyId}
+          />
+        );
       case 'assignment':
-        return <Assignment onClose={closeModal} modifyId={modifyId} />;
+        return (
+          <Assignment onClose={closeModal} modifyId={modifyId} userId={stuId} />
+        );
+    }
+
+    switch (serviceDeleteModal) {
+      case 'assignment':
+        return (
+          <DeleteAssignment
+            onClose={closeModal}
+            modifyId={modifyId}
+            userId={stuId}
+          />
+        );
+    }
+
+    switch (serviceRetrieveModal) {
+      case 'list':
+        return (
+          <ServiceCoWorkersList onClose={closeModal} modifyId={modifyId} />
+        );
     }
   };
 
@@ -266,10 +353,82 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
           </S.Section>
         </S.SectionWrapper>
         <S.Border />
-        <S.OwnerButton onClick={() => setServiceOwnerModal('list')}>
-          소유자 이전하기
-        </S.OwnerButton>
-        {serviceOwnerModal && renderModalContent()}
+        <S.ManagerWrapper>
+          <S.Title>
+            <h2>공동작업자 관리</h2>
+          </S.Title>
+
+          <S.Add
+            onClick={() => {
+              setServiceOwnerModal('list');
+            }}
+          >
+            <SVG.AddManger />
+            추가
+          </S.Add>
+        </S.ManagerWrapper>
+
+        <S.MemberWrapper>
+          <S.Member>
+            <S.Profile>
+              {user.profileUrl ? (
+                <S.Circle>
+                  <Image
+                    src={user.profileUrl}
+                    alt="프로필 이미지"
+                    width={24}
+                    height={24}
+                    objectFit="cover"
+                  />
+                </S.Circle>
+              ) : (
+                <SVG.ProfileSmallFace />
+              )}
+              {user.name}
+            </S.Profile>
+            소유자
+          </S.Member>
+          {worker.slice(0, 7).map((member) => (
+            <S.Member key={member.id}>
+              <S.Profile>
+                {member.profileUrl ? (
+                  <S.Circle>
+                    <Image
+                      src={member.profileUrl}
+                      alt="프로필 이미지"
+                      width={24}
+                      height={24}
+                      objectFit="cover"
+                    />
+                  </S.Circle>
+                ) : (
+                  <SVG.ProfileSmallFace />
+                )}
+                {member.name}
+              </S.Profile>
+              <S.Select
+                id="role"
+                onChange={(event) => {
+                  roleSwitcher(event, member.id);
+                }}
+                value={'coworker'}
+              >
+                <option value="owner">소유자</option>
+                <option value="coworker">공동작업자</option>
+                <option value="delete">삭제</option>
+              </S.Select>
+            </S.Member>
+          ))}
+
+          {workers.length < 8 ? null : (
+            <S.ShowList onClick={() => setServiceRetrieveModal('list')}>
+              {workers.length - 7}명의 공동작업자 더보기
+              <SVG.RightArrow />
+            </S.ShowList>
+          )}
+        </S.MemberWrapper>
+
+        {renderModalContent()}
       </S.Wrapper>
     </S.Container>
   );

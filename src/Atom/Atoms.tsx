@@ -4,10 +4,11 @@ import {
   ClientInform,
   FixModalType,
   ClientListType,
+  SelectedUserType,
 } from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
-import { ServiceOwnerModalType } from '../types/components/ServiceOwnerModalType';
+import { ServiceOwnerModalType, ServiceDeleteModalType, ServiceRetrieveModalType } from '../types/ServiceOwnerModalType';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -104,4 +105,29 @@ export const ServiceOwnerModal = atom<ServiceOwnerModalType>({
 export const ServiceOwnerUserId = atom<number>({
   key: 'serviceOwnerUserId',
   default: 0,
+});
+
+export const selectedUsersState = atom<SelectedUserType[]>({
+  key: 'selectedUsersState',
+  default: [],
+});
+
+export const ServiceDeleteModal = atom<ServiceDeleteModalType>({
+  key: 'ServiceDeleteModal',
+  default: '',
+});
+
+export const ServiceRetrieveModal = atom<ServiceRetrieveModalType>({
+  key: 'ServiceRetrieveModal',
+  default: '',
+});
+
+export const Email = atom<string>({
+  key: 'email',
+  default: '',
+});
+
+export const CantFetch = atom<boolean>({
+  key: 'cantFetch',
+  default: true,
 });

@@ -7,6 +7,7 @@ export interface NewServiceForm {
 }
 
 export interface ResNewService extends NewServiceForm {
+  id?: number;
   clientId: string;
   clientSecret: string;
 }

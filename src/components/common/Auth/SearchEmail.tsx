@@ -1,13 +1,14 @@
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { EmailInfo, ModalPage } from '../../../Atom/Atoms';
+import { EmailInfo, ModalPage, Email, CantFetch } from '../../../Atom/Atoms';
 import useFetch from '../../../hooks/useFetch';
 import { useResetModal } from '../../../hooks/useResetModal';
 import CreateTitle from '../CreateTitle';
 import Input from '../Input';
 import { LightCube } from '../Loading';
 import { Form, InputWrapper, Loading, SubmitWrapper } from './style';
+import { useEffect } from 'react';
 
 interface Props {
   title?: string;
@@ -17,6 +18,8 @@ export default function SearchEmail({ title }: Props) {
   const { changeModalType } = useResetModal();
   const setModalPage = useSetRecoilState(ModalPage);
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
+  const [email, setEmail] = useRecoilState(Email);
+  const [cantFetch, setCantFetch] = useRecoilState(CantFetch);
 
   const {
     register,
@@ -42,10 +45,25 @@ export default function SearchEmail({ title }: Props) {
     },
   });
 
+  const { fetch: checkEmail } = useFetch({
+    url: `/auth?email=${email}@gsm.hs.kr`,
+    method: 'get',
+    onSuccess: () =>{
+      fetch({ email: email + '@gsm.hs.kr' });
+    },
+    onFailure: ()=>{
+      setCantFetch(false);
+    }
+  })
+
+  useEffect(()=>{
+    if(email !== '') checkEmail();
+  }, [email]);
+
   const searchEmail = async ({ email }: { email: string }) => {
     if (isLoading) return;
+    setEmail(email);
     setEmailInfo({ ...emailInfo, ['email']: email });
-    fetch({ email: email + '@gsm.hs.kr' });
   };
 
   return (
@@ -65,7 +83,7 @@ export default function SearchEmail({ title }: Props) {
             <Input
               maxLength={30}
               label="이메일"
-              errors={!!errors.email}
+              errors={!!errors.email || !cantFetch}
               register={register('email', {
                 required: '이메일을 입력하지 않았습니다',
                 pattern: {
@@ -75,6 +93,7 @@ export default function SearchEmail({ title }: Props) {
               })}
               fixed="@gsm.hs.kr"
             />
+            {cantFetch ? null : <p>이미 존재하는 이메일 입니다.</p>}
           </InputWrapper>
         )}
         <SubmitWrapper>

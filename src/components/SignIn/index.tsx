@@ -16,6 +16,7 @@ import useFetch from '../../hooks/useFetch';
 import { OauthCode } from '../../types/API/OauthCode';
 import { GetService } from '../../types/API/GetService';
 import { TokenType } from '../../types';
+import HealthCheck from './HealthCheck';
 
 export default function NewSignInPage() {
   const router = useRouter();
@@ -28,8 +29,7 @@ export default function NewSignInPage() {
   const [error, setError] = useState('');
   const { checkAuto } = useAutoLogin(false);
   const [debounce, setDebounce] = useState(false);
-
-
+  const [health, setHealth] = useState(true);
   const {
     watch,
     register,
@@ -99,6 +99,15 @@ export default function NewSignInPage() {
     },
   });
 
+  const { fetch: healthcheck } = useFetch({
+    url: '/health',
+    method: 'get',
+    onFailure: (e) => {
+      toast.error('서버가 응답하지 않습니다.');
+      setHealth(false);
+    },
+  });
+
   useEffect(() => {
     if (!router.isReady || checkAuto === undefined) return;
     if (isQuery) {
@@ -127,8 +136,12 @@ export default function NewSignInPage() {
     }
   };
 
-  return (
-    <S.Layout style={{height:"97vh"}}>
+  useEffect(() => {
+    healthcheck();
+  }, []);
+
+  return health ? (
+    <S.Layout style={{ height: '97vh' }}>
       <S.Wrapper>
         <CreateTitle
           title={serviceName ? serviceName + '에 로그인' : '뭐든 단 한번으로'}
@@ -187,5 +200,7 @@ export default function NewSignInPage() {
         </S.Form>
       </S.Wrapper>
     </S.Layout>
+  ) : (
+    <HealthCheck healthcheck={healthcheck} />
   );
 }

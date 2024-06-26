@@ -62,7 +62,6 @@ export default function SearchEmail({ title }: Props) {
 
   const searchEmail = async ({ email }: { email: string }) => {
     if (isLoading) return;
-    console.log(email);
     setEmail(email);
     setEmailInfo({ ...emailInfo, ['email']: email });
   };

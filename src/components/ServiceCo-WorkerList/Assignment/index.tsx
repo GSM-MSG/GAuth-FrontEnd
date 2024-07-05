@@ -35,7 +35,7 @@ export default function Assignment({ onClose, modifyId }: Props) {
             <ErrorIcon />
             <div>
               <h4>정말 공동작업자로 추가하실 건가요?</h4>
-              <p>소유자 권한을 양도하면 모든 권한을 양도하게 됩니다.</p>
+              <p>공동작업자 목록에 추가됩니다.</p>
             </div>
           </S.Title>
           <S.ButtonWrapper>

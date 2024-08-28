@@ -8,7 +8,12 @@ import {
 } from '../types';
 import { StuListType } from '../types/StuListType';
 import { StulistFilterType } from '../types/StulistFilterType';
-import { ServiceOwnerModalType, ServiceDeleteModalType, ServiceRetrieveModalType } from '../types/ServiceOwnerModalType';
+import {
+  ServiceOwnerModalType,
+  ServiceDeleteModalType,
+  ServiceRetrieveModalType,
+} from '../types/ServiceOwnerModalType';
+import { NumberFormProps } from '../types/NumberForm';
 
 export const ViewWidth = atom<number>({
   key: 'viewWidth',
@@ -130,4 +135,18 @@ export const Email = atom<string>({
 export const CantFetch = atom<boolean>({
   key: 'cantFetch',
   default: true,
+});
+
+export const Name = atom<string>({
+  key: 'name',
+  default: '',
+});
+
+export const NumberInfo = atom<NumberFormProps>({
+  key: 'numberInfo',
+  default: {
+    classNum: 0,
+    grade: 0,
+    number: 0,
+  },
 });

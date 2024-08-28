@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { ErrorIcon } from '../../../../../public/svg';
 import useFetch from '../../../../hooks/useFetch';
 import Portal from '../../../common/Portal';
@@ -10,12 +11,14 @@ interface Props {
 }
 
 export default function Assignment({ onClose, modifyId, userId }: Props) {
+  const router = useRouter();
 
   const { fetch } = useFetch({
     url: `client/${modifyId}/owner?userId=${userId}`,
     method: 'patch',
     onSuccess: () => {
       onClose();
+      router.push('/myprofile');
     },
   });
 

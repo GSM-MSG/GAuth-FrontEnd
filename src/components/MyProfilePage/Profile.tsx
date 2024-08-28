@@ -113,7 +113,7 @@ export default function Profile() {
         </div>
         <S.Circle
           modifyState={modifyState}
-          onMouseOut={() => setModifyState(!modifyState)}
+          onMouseOut={() => setModifyState(false)}
           onClick={() => setCanUpload(true)}
         >
           <div onClick={deleteHandler}>사진 삭제</div>

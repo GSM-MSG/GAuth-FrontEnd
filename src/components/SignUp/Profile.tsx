@@ -3,7 +3,13 @@ import * as S from './style';
 import * as SVG from '../../../public/svg';
 import { useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { EmailInfo, ModalPage, PrivacyInfo } from '../../Atom/Atoms';
+import {
+  EmailInfo,
+  ModalPage,
+  Name,
+  NumberInfo,
+  PrivacyInfo,
+} from '../../Atom/Atoms';
 import { useRouter } from 'next/router';
 import { SubmitWrapper } from '../common/Auth/style';
 import useFetch from '../../hooks/useFetch';
@@ -14,6 +20,8 @@ export default function Profile() {
   const [emailInfo, setEmailInfo] = useRecoilState(EmailInfo);
   const setPrivacy = useSetRecoilState(PrivacyInfo);
   const [img, setImg] = useState('');
+  const [name, setName] = useRecoilState(Name);
+  const [numberInfo, setNumberInfo] = useRecoilState(NumberInfo);
 
   const { fetch: getImage } = useFetch<{ imageUrl: string }>({
     url: 'auth/image',
@@ -22,11 +30,11 @@ export default function Profile() {
   });
 
   const { fetch: signUp } = useFetch({
-    url: '/auth/signup',
+    url: '/auth/v2/signup',
     method: 'post',
     onSuccess: () => {
       resetModalType('/signUp');
-      setModalPage(5);
+      setModalPage(7);
     },
     onFailure: () => {
       resetModalType('/login');
@@ -50,6 +58,12 @@ export default function Profile() {
     setEmailInfo({
       email: '',
       password: '',
+    });
+    setName('');
+    setNumberInfo({
+      classNum: 0,
+      grade: 0,
+      number: 0,
     });
     setPrivacy(false);
   };
@@ -79,6 +93,10 @@ export default function Profile() {
       email: emailInfo.email + '@gsm.hs.kr',
       password: emailInfo.password,
       profileUrl: img ?? null,
+      grade: numberInfo.grade,
+      classNum: numberInfo.classNum,
+      num: numberInfo.number,
+      name: name,
     });
 
   return (

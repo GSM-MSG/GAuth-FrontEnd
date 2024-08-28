@@ -180,13 +180,21 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
           />
         );
       case 'assignment':
+        if (serviceRetrieveModal !== 'list') {
+        }
         return (
-          <Assignment onClose={closeModal} modifyId={modifyId} userId={stuId} />
+          <Assignment
+            onClose={closeModal}
+            modifyId={modifyId}
+            userId={stuId}
+          />
         );
     }
 
     switch (serviceDeleteModal) {
       case 'assignment':
+        if (serviceRetrieveModal !== 'list') {
+        }
         return (
           <DeleteAssignment
             onClose={closeModal}
@@ -199,7 +207,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
     switch (serviceRetrieveModal) {
       case 'list':
         return (
-          <ServiceCoWorkersList onClose={closeModal} modifyId={modifyId} />
+          <ServiceCoWorkersList onClose={closeModal} modifyId={modifyId} setStuId={setStuId}/>
         );
     }
   };
@@ -408,7 +416,7 @@ export default function ModifyMyService({ modifyId }: { modifyId: string }) {
               </S.Profile>
               <S.Select
                 id="role"
-                onChange={(event) => {
+                onChange={(event: ChangeEvent<HTMLSelectElement>) => {
                   roleSwitcher(event, member.id);
                 }}
                 value={'coworker'}

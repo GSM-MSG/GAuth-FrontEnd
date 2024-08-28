@@ -7,8 +7,6 @@ import SearchBar from '../../../common/SearchBar';
 import * as S from './style';
 import useFetch from '../../../../hooks/useFetch';
 import { toast } from 'react-toastify';
-import DeleteAssignment from '../DeleteAssignment';
-import Assignment from '../Assignment';
 import {
   ServiceOwnerModal,
   ServiceDeleteModal,
@@ -18,13 +16,14 @@ import {
 interface Props {
   onClose: () => void;
   modifyId: string;
+  setStuId: (id: number) => void;
 }
 
 interface Worker {
   userId: number;
 }
 
-export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
+export default function ServiceCoWorkersList({ onClose, modifyId, setStuId }: Props) {
   const search = useRecoilValue(Search);
   const stuList = useRecoilValue(StuList);
   const [workers, setWorkers] = useState<Worker[]>([]);
@@ -50,28 +49,13 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
     getCoWorkers();
   }, [modifyId]);
 
-  const closeModal = () => {
-    setServiceOwnerModal('');
-    setServiceDeleteModal('');
-    setServiceRetrieveModal('');
-  };
-
   const roleSwitcher = (event: ChangeEvent<HTMLSelectElement>, id: number) => {
     const select = event.target.value;
+    setStuId(id);
     if (select === 'delete') {
       setServiceDeleteModal('assignment');
-      return (
-        <Assignment onClose={closeModal} modifyId={modifyId} userId={id} />
-      );
     } else if (select === 'owner') {
       setServiceOwnerModal('assignment');
-      return (
-        <DeleteAssignment
-          onClose={closeModal}
-          modifyId={modifyId}
-          userId={id}
-        />
-      );
     }
   };
 
@@ -95,12 +79,12 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
                 <th>번호</th>
               </S.TR>
             </thead>
-            <S.TBody>
+            <tbody>
               {stuList
                 .filter((e) => e.name?.includes(search))
                 .filter((e) => workers.some((person) => e.id === person.userId))
                 .map((e) => (
-                  <tr key={e.id}>
+                  <S.TR key={e.id}>
                     <td>{e.name}</td>
                     <td>{e.grade}</td>
                     <td>{e.classNum}</td>
@@ -118,9 +102,9 @@ export default function ServiceCoWorkersList({ onClose, modifyId }: Props) {
                         <option value="delete">삭제</option>
                       </select>
                     </td>
-                  </tr>
+                  </S.TR>
                 ))}
-            </S.TBody>
+            </tbody>
           </S.Table>
         </S.TableWrapper>
       </S.Container>

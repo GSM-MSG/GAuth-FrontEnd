@@ -9,6 +9,8 @@ import Notion from './Notion';
 import Privacy from './Privacy';
 import Profile from './Profile';
 import Success from './Success';
+import StudentName from './StudentName';
+import StudentNumber from './StudentNumber';
 export default function NewSignUpPage() {
   const modalPage = useRecoilValue(ModalPage);
   useAutoLogin();
@@ -20,8 +22,10 @@ export default function NewSignUpPage() {
         {modalPage === 1 && <VerifyEmail title="회원가입" />}
         {modalPage === 2 && <Privacy />}
         {modalPage === 3 && <NewPassword />}
-        {modalPage === 4 && <Profile />}
-        {modalPage === 5 && <Success />}
+        {modalPage === 4 && <StudentName />}
+        {modalPage === 5 && <StudentNumber />}
+        {modalPage === 6 && <Profile />}
+        {modalPage === 7 && <Success />}
         {modalPage === -1 && <Notion />}
       </Wrapper>
     </Layout>

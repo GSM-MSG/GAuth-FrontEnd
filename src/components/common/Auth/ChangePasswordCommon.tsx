@@ -16,10 +16,7 @@ interface Props {
   changeModal?: string;
   onSubmit?: (data: { password: string; rePassword: string }) => void;
 }
-export default function ChangePasswordCommon({
-  title,
-  submitBtn
-}: Props) {
+export default function ChangePasswordCommon({ title, submitBtn }: Props) {
   const [checkPassword, setCheckPassword] = useState(false);
   const [checkrePassword, setCheckrePassword] = useState(false);
 

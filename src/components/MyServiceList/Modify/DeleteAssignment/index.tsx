@@ -3,6 +3,8 @@ import { ErrorIcon } from '../../../../../public/svg';
 import useFetch from '../../../../hooks/useFetch';
 import Portal from '../../../common/Portal';
 import * as S from './style';
+import { StuList } from '../../../../Atom/Atoms';
+import { useRecoilValue } from 'recoil';
 
 interface Props {
   onClose: () => void;
@@ -12,13 +14,14 @@ interface Props {
 
 export default function Assignment({ onClose, modifyId, userId }: Props) {
   const router = useRouter();
-
+  const stuList = useRecoilValue(StuList);
+  const user = stuList.find(item => item.id === userId);
   const { fetch } = useFetch({
     url: `client/${modifyId}/co-worker`,
     method: 'delete',
     onSuccess: () => {
       onClose();
-      router.push(`/${modifyId}`)
+      router.reload();
     },
   });
 
@@ -31,7 +34,7 @@ export default function Assignment({ onClose, modifyId, userId }: Props) {
             <ErrorIcon />
             <div>
               <h4>정말 삭제하실 건가요?</h4>
-              <p>공동작업자 리스트에서 삭제됩니다.</p>
+              <p>{user?.name}이(가) 공동작업자 리스트에서 삭제됩니다.</p>
             </div>
           </S.Title>
           <S.ButtonWrapper>

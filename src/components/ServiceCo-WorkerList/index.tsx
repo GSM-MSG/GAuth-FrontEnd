@@ -12,6 +12,7 @@ import * as S from './style';
 import * as SVG from '../../../public/svg';
 import useFetch from '../../hooks/useFetch';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 interface Props {
   onClose: () => void;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
+  const router = useRouter();
   const search = useRecoilValue(Search);
   const stuList = useRecoilValue(StuList);
 
@@ -27,6 +29,7 @@ export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
     url: `client/${modifyId}/co-worker`,
     method: 'patch',
     onSuccess: () => {
+      router.reload();
       onClose();
     },
     onFailure:(error) => {
@@ -63,11 +66,11 @@ export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
                 <th>번호</th>
               </S.TR>
             </thead>
-            <S.TBody>
+            <tbody>
               {stuList
                 .filter((e) => e.name?.includes(search) && e.id !== userId)
                 .map((e, idx) => (
-                  <tr key={idx}>
+                  <S.TR key={idx}>
                     <td>{e.name}</td>
                     <td>{e.grade}</td>
                     <td>{e.classNum}</td>
@@ -82,9 +85,9 @@ export default function ServiceOwnerList({ onClose, userId, modifyId }: Props) {
                         추가하기
                       </button>
                     </td>
-                  </tr>
+                  </S.TR>
                 ))}
-            </S.TBody>
+            </tbody>
           </S.Table>
         </S.TableWrapper>
       </S.Container>

@@ -73,6 +73,7 @@ export const TR = styled.tr`
   font-size: 14px;
   line-height: 17px;
   color: #1c1c1c;
+  border-top: 1px solid #e4e4e4;
 
   th {
     font-weight: 500;
@@ -102,11 +103,5 @@ export const TR = styled.tr`
         padding: 8px;
       }
     }
-  }
-`;
-
-export const TBody = styled.tbody`
-  tr {
-    border-top: 1px solid #e4e4e4;
   }
 `;

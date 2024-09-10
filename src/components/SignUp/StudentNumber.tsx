@@ -28,6 +28,11 @@ export default function StudentNumber() {
     setModalPage(6);
   };
 
+  const setTeacher = async () => {
+    setNumberInfo({ grade: 0, classNum: 0, number: 0 });
+    setModalPage(6);
+  };
+
   return (
     <>
       <CreateTitle
@@ -73,6 +78,7 @@ export default function StudentNumber() {
         </InputWrapper>
         <SubmitWrapper>
           <button type="submit">다음</button>
+          <p onClick={setTeacher}>혹시 선생님 이신가요?</p>
         </SubmitWrapper>
       </Form>
     </>
